@@ -1,31 +1,17 @@
-int	ft_strcmp(char	*s1, char *s2)
-{
-	int	idx;
-
-	idx = 0;
-	while (s1[idx] != '\0' || s2[idx] != '\0')
-	{
-		if (s1[idx] < s2[idx])
-			return (-1);
-		else if (s1[idx] > s2[idx])
-			return (1);
-		idx++;
-	}
-	return (0);
-}
-
 char    *ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 {
-    int     idx;
-    char    *ptr;
+    int     		idx;
+	unsigned int	needle_len;
+    char    		*ptr;
 
     idx = 0;
+	needle_len = ft_strlen(needle);
     ptr = haystack;
     if (!haystack && !needle)
 		return (haystack);
-	while (idx <= len)
+	while (idx <= len - needle_len)
 	{
-		if (ft_strcmp(ptr, needle) == 0)
+		if (ft_strncmp(ptr, needle, needle_len) == 0)
 			return (ptr);
 		idx++;
 		ptr++;

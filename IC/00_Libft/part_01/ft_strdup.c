@@ -1,30 +1,20 @@
 #include <stdlib.h>
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s1)
 {
 	int		src_len;
-	int		i;
+	int		idx;
 	char	*dupstr;
 
-	src_len = ft_strlen(src);
+	src_len = ft_strlen(s1);
 	dupstr = (char *)malloc((src_len + 1) * sizeof(char));
 	if (!(dupstr))
 		return (0);
-	i = 0;
-	while (i < src_len)
+	idx = 0;
+	while (idx < src_len)
 	{
-		dupstr[i] = src[i];
-		i++;
+		dupstr[idx] = s1[idx];
+		idx++;
 	}
 	dupstr[src_len] = '\0';
 	return (dupstr);
