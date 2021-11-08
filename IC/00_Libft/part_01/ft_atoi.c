@@ -1,30 +1,20 @@
 int	ft_isspace(char *str)
 {
-	int	i;
+	int	idx;
 
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
-		i++;
-	return (i);
+	idx = 0;
+	while (str[idx] == ' ' || str[idx] == '\f' || str[idx] == '\n'
+		|| str[idx] == '\r' || str[idx] == '\t' || str[idx] == '\v')
+		idx++;
+	return (idx);
 }
 
-int	ft_is_num(char c)
+int	ft_atoi(const char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else
-		return (10);
-}
-
-int	ft_atoi(char *str)
-{
-	int					i;
 	unsigned int		num;
 	int					sign;
 	char				*ptr;
 
-	i = 0;
 	num = 0;
 	sign = 1;
 	ptr = str;
@@ -35,10 +25,10 @@ int	ft_atoi(char *str)
 			sign *= (-1);
 		ptr++;
 	}
-	while (ft_is_num(*ptr) != 10 && *ptr != '\0')
+	while (ft_isdigit(*ptr) == 1 && *ptr != '\0')
 	{
-		num += ft_is_num(*ptr);
-		if (ft_is_num(*(ptr + 1)) != 10 && *(ptr + 1) != '\0')
+		num += (*ptr) - '0';
+		if (ft_isdigit(*(ptr + 1)) == 1 && *(ptr + 1) != '\0')
 			num *= 10;
 		ptr++;
 	}

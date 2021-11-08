@@ -1,4 +1,4 @@
-char    *strchr(const char *s, int c)
+char    *ft_strchr(const char *s, int c)
 {
     int     idx;
     int     s_len;
