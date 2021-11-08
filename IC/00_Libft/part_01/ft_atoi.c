@@ -1,3 +1,5 @@
+#include "libft.h"
+
 int	ft_isspace(char *str)
 {
 	int	idx;

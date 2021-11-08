@@ -1,6 +1,12 @@
-void    ft_bzero(void *s, unsigned int n)
+#include "libft.h"
+
+void    ft_bzero(void *s, size_t n)
 {
-    if (n == 0)
-        return ;
-    
+    char    *ptr;
+    size_t  idx;
+
+    ptr = s;
+    idx = 0;
+    while (idx < n)
+        ptr[idx++] = 0;
 }

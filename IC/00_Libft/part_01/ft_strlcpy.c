@@ -1,4 +1,6 @@
-unsigned int	ft_strlcpy(char *restrict dst, char *restrict src, unsigned int dstsize)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *restrict dst, char *restrict src, size_t dstsize)
 {
 	unsigned int	src_len;
 	unsigned int	idx;

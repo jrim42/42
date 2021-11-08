@@ -1,4 +1,6 @@
-unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, unsigned int dstsize)
+#include "libft.h"
+
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
 	unsigned int	dst_len;
 	unsigned int	src_len;
