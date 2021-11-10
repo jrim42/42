@@ -20,6 +20,8 @@ char    *ft_itoa(int n)
     char    *str;
     int     idx;
 
+    if (n == -2147483648)
+        return ("-2147483648");
     if (n < 0)
         sign = 1;
     else
