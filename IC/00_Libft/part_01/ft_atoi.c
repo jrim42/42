@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	ft_isspace(char *str)
+int	ft_isspace_or_issign(const char *str, int *sign)
 {
 	int	idx;
 
@@ -8,6 +8,12 @@ int	ft_isspace(char *str)
 	while (str[idx] == ' ' || str[idx] == '\f' || str[idx] == '\n'
 		|| str[idx] == '\r' || str[idx] == '\t' || str[idx] == '\v')
 		idx++;
+	if (str[idx] == '+' ||  str[idx] == '-')
+	{
+		if (str[idx] == '-')
+			(*sign) *= (-1);
+		idx++;
+	}
 	return (idx);
 }
 
@@ -19,14 +25,8 @@ int	ft_atoi(const char *str)
 
 	num = 0;
 	sign = 1;
-	ptr = str;
-	ptr += ft_isspace(str);
-	while (*ptr == '+' || *ptr == '-')
-	{
-		if (*ptr == '-')
-			sign *= (-1);
-		ptr++;
-	}
+	ptr = (char *)str;
+	ptr += ft_isspace_or_issign(str, &sign);
 	while (ft_isdigit(*ptr) == 1 && *ptr != '\0')
 	{
 		num += (*ptr) - '0';
@@ -35,4 +35,16 @@ int	ft_atoi(const char *str)
 		ptr++;
 	}
 	return ((int)num * sign);
+}
+
+int	main(void)
+{
+	printf("%d\n", ft_atoi("-2147483648"));
+	printf("%d\n", atoi("-2147483648"));	
+	printf("%d\n", ft_atoi("\n\f    -234"));
+	printf("%d\n", atoi("\n\f    -234"));		
+	printf("%d\n", ft_atoi("+ 123"));
+	printf("%d\n", atoi("+ 123"));	
+	printf("%d\n", ft_atoi("-a1"));
+	printf("%d\n", atoi("-a1"));	
 }

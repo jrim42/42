@@ -12,20 +12,16 @@ void    *ft_memmove(void *dst, const void *src, size_t len)
     src_ptr = (char *)src;
     idx = 0;
     if (dst < src)
-    {
         while (idx < len)
         {
             dst_ptr[idx] = src_ptr[idx];
             idx++;
         }
-    }
     else
-    {
         while (idx < len)
         {
             dst_ptr[idx] = src_ptr[len - 1 - idx];
             idx++;
         }   
-    }
     return (dst);
 }
