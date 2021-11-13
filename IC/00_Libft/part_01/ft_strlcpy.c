@@ -1,7 +1,7 @@
 #include "libft.h"
 #include <string.h>
 
-size_t	ft_strlcpy(char *restrict dst, char *restrict src, size_t dstsize)
+size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 {
 	unsigned int	src_len;
 	unsigned int	idx;
