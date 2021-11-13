@@ -2,15 +2,27 @@
 
 void    *ft_calloc(size_t count, size_t size)
 {
-    char    *tmp;
-    int     idx;
+    char            *ptr;
+    unsigned int    idx;
 
-    tmp = (char *)malloc(count * size);
-    if (!tmp)
+    ptr = (char *)malloc(count * size);
+    if (!ptr)
         return (0);
     idx = 0;
-    // ft_memset(tmp, 0, count * size); ?
     while (idx < count)
-        tmp[idx++] = 0; 
-    return (tmp);
+        ptr[idx++] = 0; 
+    return (ptr);
 }
+
+/*
+void    *ft_calloc(size_t count, size_t size)
+{
+    char    *ptr;
+
+    ptr = (char *)malloc(count * size);
+    if (!ptr)
+        return (0);
+    ft_memset(ptr, 0, count * size);
+    return (ptr);
+}
+*/
