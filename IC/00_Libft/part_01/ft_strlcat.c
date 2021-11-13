@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <string.h>
 
 size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
@@ -18,4 +19,25 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	}
 	dst[dst_len + i] = '\0';
 	return (dst_len + src_len);
+}
+
+int	main(void)
+{
+	char	dst_1[20] = "123";
+	char	dst_2[5] = "pqr";
+
+	printf("%zu\n", ft_strlcat(dst_1, "abc", 10));
+	printf("%s\n", dst_1);
+	printf("%lu\n", strlcat(dst_1, "abc", 10));
+	printf("%s\n", dst_1);
+	printf("%zu\n", ft_strlcat("ABCD", "abcd", 3));
+	printf("%lu\n", strlcat("ABCD", "abcd", 3));
+	printf("%zu\n", ft_strlcat(dst_2, "abcd", 3));
+	printf("%s\n", dst_2);
+	printf("%lu\n", strlcat(dst_2, "abcd", 3));
+	printf("%s\n", dst_2);
+	printf("%zu\n", ft_strlcat(dst_2, "abcdef", 5));
+	printf("%s\n", dst_2);
+	printf("%lu\n", strlcat(dst_2, "abcdef", 5));
+	printf("%s\n", dst_2);
 }

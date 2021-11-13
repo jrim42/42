@@ -2,19 +2,28 @@
 
 char    *ft_strrchr(const char *s, int c)
 {
-    int     idx;
-    int     s_len;
-    char    *ptr;
+    unsigned int    idx;
+    unsigned int    s_len;
+    char            *ptr;
 
     idx = 0;
-    s_len = ft_strlen(s);
-    ptr = s;
+    s_len = ft_strlen(s) + 1;
+    ptr = 0;
     while (idx < s_len)
     {
-        if (*ptr == c)
-            return (ptr);
+        if (s[idx] == (char)c)
+            ptr = (char *)s + idx;
         idx++;
-        ptr++; 
     }
-    return (0);    
+    return (ptr);    
+}
+
+int main(void)
+{
+    printf("%s\n", ft_strrchr("abcabc", 97));
+    printf("%p\n", ft_strrchr("abcabc", 97));
+    printf("%s\n", ft_strrchr("abcabc", 0));
+    printf("%p\n", ft_strrchr("abcabc", 0));
+    printf("%s\n", ft_strrchr("abcabc", 100));
+    printf("%p\n", ft_strrchr("abcabc", 100));
 }

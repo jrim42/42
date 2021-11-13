@@ -2,9 +2,9 @@
 
 char	*ft_strdup(const char *s1)
 {
-	int		src_len;
-	int		idx;
-	char	*dupstr;
+    unsigned int    idx;
+    unsigned int    src_len;
+	char			*dupstr;
 
 	src_len = ft_strlen(s1);
 	dupstr = (char *)malloc((src_len + 1) * sizeof(char));
@@ -16,6 +16,6 @@ char	*ft_strdup(const char *s1)
 		dupstr[idx] = s1[idx];
 		idx++;
 	}
-	dupstr[src_len] = '\0';
+	dupstr[idx] = '\0';
 	return (dupstr);
 }
