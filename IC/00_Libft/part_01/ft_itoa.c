@@ -4,7 +4,13 @@ int numlen(int n)
 {
     int len;
 
-    len = 0;
+    if (n < 0)
+    {
+        len = 1;
+        n *= -1;
+    }
+    else
+        len = 0;
     while (n > 0)
     {
         len++;
@@ -15,31 +21,38 @@ int numlen(int n)
 
 char    *ft_itoa(int n)
 {
-    int     sign;
     int     total_len;
     char    *str;
     int     idx;
 
     if (n == -2147483648)
         return ("-2147483648");
-    if (n < 0)
-        sign = 1;
+    else if (n == 0)
+        return ("0");
     else
-        sign = 0;
-    total_len = sign + numlen(n) + 1;
-    str = (char *)malloc(total_len * sizeof(char));
-    if (!(str))
-        return (0);
-    idx = total_len - 1;
+    {
+        str = (char *)malloc((numlen(n) + 1) * sizeof(char));
+        if (!(str))
+            return (0);
+    }
     if (n < 0)
     {
         str[0] = '-';
         n *= -1;
     }
+    idx = total_len - 1;
     while (n > 0)
     {
-        str[idx--] = n % 10;
+        str[--idx] = n % 10 + '0';
         n /= 10;
     }
     return (str);
+}
+
+int	main(void)
+{
+	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(-0));
+	printf("%s\n", ft_itoa(123));
+    printf("%s\n", ft_itoa(-123));
 }
