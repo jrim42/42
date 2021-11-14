@@ -19,6 +19,7 @@ char    *ft_strchr(const char *s, int c)
     return (0);
 }
 
+/*
 int main(void)
 {
     printf("%s\n", ft_strchr("abc", 97));
@@ -28,3 +29,4 @@ int main(void)
     printf("%s\n", ft_strchr("abc", 100));
     printf("%p\n", ft_strchr("abc", 100));
 }
+*/

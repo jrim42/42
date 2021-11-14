@@ -7,7 +7,7 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
     char            *substr;
 
     s_len = ft_strlen(s);
-    if (start > s_len )
+    if (s_len == 0 || start > s_len || start < 0)
         return (0);
     sub_idx = 0;
     if (s_len - start >= len)
@@ -15,18 +15,24 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
         substr = (char *)malloc((len + 1) * sizeof(char));
         if (!(substr))
             return (0);
-        while (len-- > 0)
-            substr[sub_idx++] = s[start++];
-        substr[sub_idx] = '\0';
     }
     else
     {
         substr = (char *)malloc((s_len - start + 1) * sizeof(char));
         if (!(substr))
-            return (0);
-        while (s[start] != '\0')
-            substr[sub_idx++] = s[start++];
-        substr[sub_idx] = '\0';     
+            return (0);   
     }
+    while (s[start] != '\0' && sub_idx < len)
+        substr[sub_idx++] = s[start++];
+    substr[sub_idx] = '\0'; 
     return (substr);
+}
+
+int main(void)
+{
+    printf("%s\n", ft_substr("abcdefg", 0, 3));
+    printf("%s\n", ft_substr("abcdefg", 0, 10));
+    printf("%s\n", ft_substr("abcdefg", 5, 1));
+    printf("%s\n", ft_substr("abcdefg", 5, 5));
+    printf("%s\n", ft_substr("abcdefg", 10, 3));
 }
