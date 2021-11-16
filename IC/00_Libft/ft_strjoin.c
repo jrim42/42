@@ -45,11 +45,3 @@ char	*ft_strcat(char *dst, char *src)
 	dst[dst_idx] = '\0';
 	return (dst);
 }
-
-int	main(void)
-{
-	printf("%p : %s\n", ft_strjoin("", ""), ft_strjoin("", ""));
-	printf("%p : %s\n", ft_strjoin("", "def"), ft_strjoin("", "def"));
-	printf("%p : %s\n", ft_strjoin("abc", ""), ft_strjoin("abc", ""));
-	printf("%p : %s\n", ft_strjoin("abc", "def"), ft_strjoin("abc", "def"));
-}

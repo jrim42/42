@@ -86,15 +86,3 @@ void	make_strs(char **strs, int idx, char **ptr, char c)
 	}
 	strs[idx][len] = '\0';
 }
-
-int	main(void)
-{
-	char	**strs;
-	int		idx;
-
-	strs = ft_split("1  2 34 56 78 ", ' ');
-	idx = 0;
-	while (strs[idx])
-		printf("%s\n", strs[idx++]);
-	return (0);
-}

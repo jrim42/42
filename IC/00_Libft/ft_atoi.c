@@ -31,9 +31,9 @@ int	ft_isspace_or_issign(const char *str, int *sign)
 
 int	ft_atoi(const char *str)
 {
-	unsigned int		num;
-	int					sign;
-	char				*ptr;
+	long long	num;
+	int			sign;
+	char		*ptr;
 
 	num = 0;
 	sign = 1;
@@ -47,16 +47,4 @@ int	ft_atoi(const char *str)
 		ptr++;
 	}
 	return ((int)num * sign);
-}
-
-int	main(void)
-{
-	printf("%d\n", ft_atoi("-2147483648"));
-	printf("%d\n", atoi("-2147483648"));
-	printf("%d\n", ft_atoi("\n\f    -234"));
-	printf("%d\n", atoi("\n\f    -234"));
-	printf("%d\n", ft_atoi("+ 123"));
-	printf("%d\n", atoi("+ 123"));
-	printf("%d\n", ft_atoi("-a1"));
-	printf("%d\n", atoi("-a1"));
 }

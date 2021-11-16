@@ -12,50 +12,42 @@
 
 #include "libft.h"
 
-int	trimmed_len(char *ptr, char const *set)
+int	trimmed_len(char **ptr, char const *set)
 {
-	int	idx;
-	int	new_len;
+	int	start;
+	int	end;
+	int	ptr_idx;
 
-	idx = 0;
-	new_len = 0;
-	while (ptr[idx] != '\0')
-	{
-		if (ft_strchr(set, ptr[idx]) == 0)
-			new_len++;
-		idx++;
-	}
-	return (new_len);
+	ptr_idx = 0;
+	while (ft_strchr(set, (*ptr)[ptr_idx]) != 0)
+		ptr_idx++;
+	start = ptr_idx;
+	while (ft_strchr(set, (*ptr)[ptr_idx]) == 0)
+		ptr_idx++;
+	end = ptr_idx;
+	(*ptr) += start;
+	return (end - start);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ptr;
 	char	*new_str;
+	int		new_len;
 	int		idx;
 
-	if (!s1 || !set)
-		return ((char *)s1);
 	ptr = (char *)s1;
-	new_str = (char *)malloc((trimmed_len(ptr, set) + 1) * sizeof(char));
+	new_len = trimmed_len(&ptr, set);
+	new_str = (char *)malloc((new_len + 1) * sizeof(char));
 	if (!(new_str))
 		return (0);
 	idx = 0;
-	while ((*ptr) != '\0')
+	while (new_len--)
 	{
-		if (ft_strchr(set, *ptr) == 0)
-			new_str[idx++] = *ptr;
+		new_str[idx] = *ptr;
+		idx++;
 		ptr++;
 	}
 	new_str[idx] = '\0';
 	return (new_str);
-}
-
-int	main(void)
-{
-	printf("%s\n", ft_strtrim("0abcde1", "0123"));
-	printf("%s\n", ft_strtrim("0a1b2c3d4", "01234"));
-	printf("%s\n", ft_strtrim("0abcde1", ""));
-	printf("%s\n", ft_strtrim("", "0123"));
-	printf("%s\n", ft_strtrim("", ""));
 }

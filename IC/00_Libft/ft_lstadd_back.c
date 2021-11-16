@@ -6,13 +6,16 @@
 /*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 00:27:42 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/15 00:27:43 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/16 13:41:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-    
+	if (*lst == NULL)
+		(*lst) = new;
+	else
+		ft_lstlast(*lst)->next = new;
 }

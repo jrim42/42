@@ -14,9 +14,9 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	s_len;
-	unsigned int	sub_idx;
-	char			*substr;
+	size_t	s_len;
+	size_t	sub_idx;
+	char	*substr;
 
 	s_len = ft_strlen(s);
 	if (s_len == 0 || start > s_len || start < 0)
@@ -38,13 +38,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		substr[sub_idx++] = s[start++];
 	substr[sub_idx] = '\0';
 	return (substr);
-}
-
-int	main(void)
-{
-	printf("%s\n", ft_substr("abcdefg", 0, 3));
-	printf("%s\n", ft_substr("abcdefg", 0, 10));
-	printf("%s\n", ft_substr("abcdefg", 5, 1));
-	printf("%s\n", ft_substr("abcdefg", 5, 5));
-	printf("%s\n", ft_substr("abcdefg", 10, 3));
 }
