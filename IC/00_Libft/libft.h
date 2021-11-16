@@ -6,11 +6,11 @@
 /*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:09:27 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/16 18:22:04 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/16 20:59:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <unistd.h>
