@@ -20,8 +20,8 @@ BONUS_OBJ = $(BONUS:.c=.o)
 
 all: $(TARGET)
 
-$(TARGET): *.o
-	ar rc $(TARGET) *.o
+$(TARGET): $(OBJ)
+	ar rc $(TARGET) $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(BONUS_OBJ)

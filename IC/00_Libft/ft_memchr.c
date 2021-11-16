@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (idx < n)
 	{
 		if (ptr[idx] == (unsigned char)c)
-			return (&s[idx]);
+			return (&s[idx]); // data type casting
 		idx++;
 	}
 	return (0);

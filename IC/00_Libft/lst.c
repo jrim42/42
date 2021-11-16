@@ -12,17 +12,6 @@ t_list  *ft_lstnew(void *content)
     return (new);
 }
 
-void    ft_lstadd_front(t_list **lst, t_list *new)
-{
-    if (*lst == NULL)
-        (*lst)->next = new;
-    else
-    {
-        new->next = (*lst)->next;
-        (*lst)->next = new;
-    }
-}
-
 int     ft_lstsize(t_list *lst)
 {
     int     size;
@@ -45,19 +34,23 @@ t_list  *ft_lstlast(t_list *lst)
     return (lst);
 }
 
-void    ft_lstadd_back(t_list **lst, t_list *new)
+void    ft_lstadd_front(t_list **lst, t_list *new)
 {
-    t_list  *tmp;
-    
     if (*lst == NULL)
         (*lst)->next = new;
     else
     {
-        tmp = *lst;
-        while (tmp->next != NULL)
-            tmp = tmp->next;
-        tmp->next = new; // 뭔가 더 해줘야할 것 같은데?
+        new->next = (*lst)->next;
+        (*lst)->next = new;
     }
+}
+
+void    ft_lstadd_back(t_list **lst, t_list *new)
+{
+    if (*lst == NULL)
+        (*lst)->next = new;
+    else
+        ft_lstlast(*lst)->next = new;
 }
 
 void    ft_lstdelone(t_list *lst, void (*del)(void*))
