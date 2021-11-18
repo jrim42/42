@@ -14,18 +14,17 @@
 
 int	trimmed_len(char **ptr, char const *set)
 {
-	int	start;
-	int	end;
-	int	ptr_idx;
+	size_t	start;
+	size_t	end;
 
-	ptr_idx = 0;
-	while (ft_strchr(set, (*ptr)[ptr_idx]) != 0)
-		ptr_idx++;
-	start = ptr_idx;
-	ptr_idx = ft_strlen(*ptr) - 1;
-	while (ft_strchr(set, (*ptr)[ptr_idx]) != 0)
-		ptr_idx--;
-	end = ptr_idx;
+	start = 0;
+	end = ft_strlen(*ptr) - 1;
+	while (ft_strchr(set, (*ptr)[start]) != 0)
+		start++;
+	if (start > end)
+		return (0);
+	while (ft_strchr(set, (*ptr)[end]) != 0)
+		end--;
 	(*ptr) += start;
 	return (end - start + 1);
 }
@@ -34,8 +33,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ptr;
 	char	*new_str;
-	int		new_len;
-	int		idx;
+	size_t	new_len;
+	size_t	idx;
 
 	ptr = (char *)s1;
 	new_len = trimmed_len(&ptr, set);

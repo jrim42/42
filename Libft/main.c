@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include "libft.h"
+#include <stdio.h>
 
 //ft_atoi.c
 // int main(void)
@@ -20,11 +20,12 @@
 // int	main(void)
 // {
 // 	printf("%s\n", ft_itoa(-2147483648));
-//  printf("%s\n", ft_itoa(2147483647));
+//     printf("%s\n", ft_itoa(2147483647));
 // 	printf("%s\n", ft_itoa(-0));
 // 	printf("%s\n", ft_itoa(123));
+//     printf("%s\n", ft_itoa(987654321));
 // 	printf("%s\n", ft_itoa(-123));
-//  printf("%s\n", ft_itoa('a'));
+//     printf("%s\n", ft_itoa('a'));
 // }
 
 //ft_split.c
@@ -66,19 +67,22 @@
 // int	main(void)
 // {
 // 	printf("%s\n", ft_strtrim("0123abcde1", "0123"));
+// 	printf("%s\n", ft_strtrim("01231", "0123"));
 // 	printf("%s\n", ft_strtrim("012a345", "012345"));
 // 	printf("%s\n", ft_strtrim("0abcde1", ""));
-//  printf("%s\n", ft_strtrim("     0    abcde1", " "));
+//  	printf("%s\n", ft_strtrim("     0    abcde1", " "));
 // 	printf("%s\n", ft_strtrim("", "0123"));
 // 	printf("%s\n", ft_strtrim("", ""));
 // }
 
 //ft_substr.c
-// int	main(void)
-// {
-// 	printf("%s\n", ft_substr("abcdefg", 0, 3));
-// 	printf("%s\n", ft_substr("abcdefg", 0, 10));
-// 	printf("%s\n", ft_substr("abcdefg", 5, 1));
-// 	printf("%s\n", ft_substr("abcdefg", 5, 5));
-// 	printf("%s\n", ft_substr("abcdefg", 10, 3));
-// }
+int	main(void)
+{
+	printf("%s\n", ft_substr("abcdefg", 0, 3));
+	printf("%s\n", ft_substr("abcdefg", 0, 10));
+	printf("%s\n", ft_substr("abcdefg", 5, 1));
+	printf("%s\n", ft_substr("abcdefg", 5, 5));
+	printf("%s\n", ft_substr("abcdefg", 10, 3));
+	printf("%s\n", ft_substr("", 0, 1));
+	printf("%s\n", ft_substr("test", 10, 1));
+}

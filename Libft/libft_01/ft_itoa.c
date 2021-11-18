@@ -16,13 +16,14 @@ int	numlen(long long num)
 {
 	int	len;
 
+	len = 0;
+	if (num == 0)
+		return (1);
 	if (num < 0)
 	{
-		len = 1;
+		len++;
 		num *= -1;
 	}
-	else
-		len = 0;
 	while (num > 0)
 	{
 		len++;
@@ -37,13 +38,12 @@ char	*ft_itoa(int n)
 	char		*str;
 	int			idx;
 
-	if (n == 0)
-		return ("0");
 	num = (long long)n;
 	idx = numlen(num);
 	str = (char *)malloc((idx + 1) * sizeof(char));
 	if (!(str))
 		return (0);
+	str[0] = '0';
 	str[idx--] = '\0';
 	if (num < 0)
 	{

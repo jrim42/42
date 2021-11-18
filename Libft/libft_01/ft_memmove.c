@@ -28,6 +28,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 			dst_ptr[idx] = src_ptr[idx];
 	else
 		while (++idx < len)
-			dst_ptr[idx] = src_ptr[len - 1 - idx];
+			dst_ptr[len - 1 - idx] = src_ptr[len - 1 - idx];
 	return (dst);
 }
