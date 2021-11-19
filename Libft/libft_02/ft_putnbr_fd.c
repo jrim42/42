@@ -12,15 +12,15 @@
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	print_nbr(int n, int fd)
 {
 	char	c;
 
 	if (n == 0)
 		return ;
+	print_nbr(n / 10, fd);
 	c = n % 10 + '0';
-	ft_putnbr(n / 10);
-	write(1, &c, 1);
+	write(fd, &c, 1);
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -34,8 +34,8 @@ void	ft_putnbr_fd(int n, int fd)
 	else if (n < 0)
 	{
 		write(fd, "-", 1);
-		ft_putnbr(n * -1);
+		print_nbr(n * -1, fd);
 	}
 	else
-		ft_putnbr(n);
+		print_nbr(n, fd);
 }
