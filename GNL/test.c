@@ -7,7 +7,7 @@
 
 int	main(void)
 {
-	char	buf[BUFFER_SIZE];
+	char	buf[BUFFER_SIZE + 1];
 	int		fd;
 	int		byte;
 
