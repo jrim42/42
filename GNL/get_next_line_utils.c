@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:25 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/21 00:13:26 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/22 23:34:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str = (char *)malloc(total_len * sizeof(char));
 	if (!new_str)
 		return (0);
+	printf("MALLOC SUCCESS\n");
 	new_str[0] = '\0';
 	ft_strlcat(new_str, (char *)s1, ft_strlen(s1) + 1);
+	printf("%s\n", new_str);
 	ft_strlcat(new_str, (char *)s2, total_len);
+	printf("%s\n", new_str);
 	return (new_str);
 }
 
@@ -35,6 +38,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	while (s[len] != '\0')
 		len++;
@@ -52,11 +57,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	idx = 0;
 	if (dst_len + 1 > dstsize)
 		return (src_len + dstsize);
+	printf("strlcat in\n");
 	while (src[idx] != '\0' && dst_len + idx + 1 < dstsize)
 	{
 		dst[dst_len + idx] = src[idx];
 		idx++;
 	}
+	printf("strlcat in 2\n");
 	dst[dst_len + idx] = '\0';
 	return (dst_len + src_len);
 }
