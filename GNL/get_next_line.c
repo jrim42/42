@@ -28,3 +28,10 @@ char    *get_next_line(int fd)
     }
     //return ();
 }
+
+int main(void)
+{
+    int fd;
+
+    if 
+}

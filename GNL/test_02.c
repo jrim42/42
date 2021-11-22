@@ -6,7 +6,7 @@ char    *cut_eol(const char *str);
 
 int	main(void)
 {
-    static char *depot[OPEN_MAX];
+    static char *depot;
 	char	    buf[BUFFER_SIZE + 1];
     int		    byte;
     int         fd;
@@ -15,17 +15,38 @@ int	main(void)
 	if (fd < 0 || BUFFER_SIZE <= 0)
         return (-1);
     byte = read(fd, buf, BUFFER_SIZE);
-    while (ft_strchr(buf, '\n') == 0)
-    {
-        buf[BUFFER_SIZE] = '\0';   
-        depot[fd] = ft_strjoin(depot[fd], buf);
-        byte = read(fd, buf, BUFFER_SIZE);
-    }
-    if (ft_strchr(buf, '\n') != 0)
-        depot[fd] = cut_eol(buf);
-        //depot[fd] = ft_strjoin(depot[fd], cut_eol(buf));
+    buf[byte] = '\0';
+    printf("in\n");
+    printf("%s", buf);
+    //if (ft_strchr(buf, '\n') == 0)
+    //    depot = ft_strjoin(depot, buf);
+    byte = read(fd, buf, BUFFER_SIZE);
+    buf[byte] = '\0';
+    printf("%s", buf);
+    byte = read(fd, buf, BUFFER_SIZE);
+    buf[byte] = '\0';
+    printf("%s", buf);
+    byte = read(fd, buf, BUFFER_SIZE);
+    buf[byte] = '\0';
+    printf("%s", buf);
+    // while ((byte = read(fd, buf, BUFFER_SIZE)) > 0)
+    // {
+    //     printf("%s", buf);
+    //     buf[byte] = '\0';
+    //     printf("%s", buf);
+    //     depot = ft_strjoin(depot, buf);
+    //     //if ()
+    // }
+    // while (ft_strchr(buf, '\n') == 0)
+    // {
+    //     buf[BUFFER_SIZE] = '\0';   
+    //     depot[fd] = ft_strjoin(depot[fd], buf);
+    //     byte = read(fd, buf, BUFFER_SIZE);
+    // }
+    // if (ft_strchr(buf, '\n') != 0)
+    //     depot[fd] = cut_eol(buf);
+    //depot[fd] = ft_strjoin(depot[fd], cut_eol(buf));
     // if (byte < BUFFER_SIZE)
-    printf("%s", depot[fd]);
     return (0);
 }
 
