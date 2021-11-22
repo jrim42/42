@@ -6,7 +6,7 @@ char    *cut_eol(const char *str);
 
 int	main(void)
 {
-    static char *depot;
+    // static char *depot;
 	char	    buf[BUFFER_SIZE + 1];
     int		    byte;
     int         fd;
@@ -16,10 +16,12 @@ int	main(void)
         return (-1);
     byte = read(fd, buf, BUFFER_SIZE);
     buf[byte] = '\0';
-    printf("in\n");
     printf("%s", buf);
-    //if (ft_strchr(buf, '\n') == 0)
-    //    depot = ft_strjoin(depot, buf);
+    // if (ft_strchr(buf, '\n') == 0)
+    //     depot = ft_strjoin(depot, buf);
+    byte = read(fd, buf, BUFFER_SIZE);
+    buf[byte] = '\0';
+    printf("%s", buf);
     byte = read(fd, buf, BUFFER_SIZE);
     buf[byte] = '\0';
     printf("%s", buf);

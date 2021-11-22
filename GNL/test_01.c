@@ -12,7 +12,8 @@ int	main(void)
 	byte = read(fd, buf, BUFFER_SIZE);
 	while (byte > 0)
 	{
-		printf("%s", buf);
+		buf[byte] = '\0';
+		printf("%d : %s\n", byte, buf);
 		byte = read(fd, buf, BUFFER_SIZE);
 	}
 }

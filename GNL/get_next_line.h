@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE 5
 # endif
 
-int    get_next_line(int fd, char **line);
+char    *get_next_line(int fd);
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
