@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "gnl_00/get_next_line.h"
 
 char	*ft_get_line(char *save)
 {
@@ -109,6 +109,7 @@ int	main(void)
         printf("-------------\n");
         idx++;
 		free(tmp);
+		system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
     }
     close(fd);
     return (0);
