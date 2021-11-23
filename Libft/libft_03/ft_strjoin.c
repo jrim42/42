@@ -26,6 +26,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!new_str)
 		return (0);
 	new_str[0] = '\0';
+	if (total_len == 1)
+		return (new_str);
 	ft_strlcat(new_str, (char *)s1, ft_strlen(s1) + 1);
 	ft_strlcat(new_str, (char *)s2, total_len);
 	return (new_str);
