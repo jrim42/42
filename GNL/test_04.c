@@ -7,12 +7,14 @@ char    *cut_eol_back(const char *buf);
 int	main(void)
 {
     int     fd;
-    char    *tmp;
+    //char    *tmp;
 
     fd = open("test", O_RDONLY);
-    printf ("fd : %d\n", fd);
-    while ((tmp = gnl(fd)) != 0)
-        printf("^%s", tmp);
+    //printf ("fd : %d\n", fd);
+    // while ((tmp = gnl(fd)) > 0)
+    //     printf("^%s", tmp);
+    printf("|%s", gnl(fd));
+    printf("|%s", gnl(fd));
     close(fd);
     return (0);
 }
@@ -21,30 +23,31 @@ char    *gnl(int fd)
 {
     int         byte;
     char        buf[BUFFER_SIZE + 1];
-    static char *depot[10];
-    int         idx;
+    static char *depot[OPEN_MAX];
 
-    printf("GNL CALLED\n");
+    //printf("GNL CALLED\n");
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (0);
     byte = read(fd, buf, BUFFER_SIZE);
     buf[byte] = '\0';
-    printf ("buf : %s\n", buf);
-    idx = 0;
+    //printf ("buf : %s\n", buf);
     while (ft_strchr(buf, '\n') == 0 && byte > 0)
     {
-        printf("while in\n");
-        depot[idx] = ft_strjoin(depot[idx], buf);
-        printf ("depot[%d] : %s\n", idx, depot[idx]);
+        //printf("while in\n");
+        depot[fd] = ft_strjoin(depot[fd], buf);
+        printf ("depot[%d] : (%s)\n", fd, depot[fd]);
         byte = read(fd, buf, BUFFER_SIZE);
+        //printf ("buf : %s\n", buf);
     }
     if (ft_strchr(buf, '\n') != 0)
     {
-        printf("if in\n");
-        depot[idx] = ft_strjoin(depot[idx], cut_eol_front(buf));
-        depot[idx + 1] = ft_strjoin(depot[idx + 1], cut_eol_back(buf));
+        //printf("if in\n");
+        depot[fd] = ft_strjoin(depot[fd], cut_eol_front(buf));
+        printf ("depot[%d] : (%s)\n", fd, depot[fd]);
+        //depot[fd + 1] = ft_strjoin(depot[fd + 1], cut_eol_back(buf));
+        //printf ("depot[%d] : (%s)\n", fd + 1, depot[fd + 1]);
     }
-    return (depot[idx++]);
+    return (depot[fd++]);
 }
 
 char    *cut_eol_front(const char *buf)

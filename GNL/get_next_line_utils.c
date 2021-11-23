@@ -25,12 +25,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str = (char *)malloc(total_len * sizeof(char));
 	if (!new_str)
 		return (0);
-	printf("MALLOC SUCCESS\n");
 	new_str[0] = '\0';
+	if (total_len == 1)
+		return (new_str);
 	ft_strlcat(new_str, (char *)s1, ft_strlen(s1) + 1);
-	printf("%s\n", new_str);
 	ft_strlcat(new_str, (char *)s2, total_len);
-	printf("%s\n", new_str);
 	return (new_str);
 }
 
@@ -57,13 +56,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	idx = 0;
 	if (dst_len + 1 > dstsize)
 		return (src_len + dstsize);
-	printf("strlcat in\n");
-	while (src[idx] != '\0' && dst_len + idx + 1 < dstsize)
+	//printf("strlcat in\n");
+	while (src != 0 && src[idx] != '\0' && dst_len + idx + 1 < dstsize)
 	{
 		dst[dst_len + idx] = src[idx];
 		idx++;
 	}
-	printf("strlcat in 2\n");
+	//printf("strlcat in 2\n");
 	dst[dst_len + idx] = '\0';
 	return (dst_len + src_len);
 }
@@ -74,6 +73,8 @@ char	*ft_strchr(const char *s, int c)
 	size_t	s_len;
 	char	*ptr;
 
+	if (!s)
+		return (0);
 	idx = 0;
 	s_len = ft_strlen(s) + 1;
 	ptr = (char *)s;
@@ -87,18 +88,21 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strndup(const char *s1, size_t n)
 {
 	unsigned int	idx;
 	unsigned int	src_len;
 	char			*dupstr;
 
 	src_len = ft_strlen(s1);
-	dupstr = (char *)malloc((src_len + 1) * sizeof(char));
+	if (src_len < n)	
+		dupstr = (char *)malloc((src_len + 1) * sizeof(char));
+	else
+		dupstr = (char *)malloc((n + 1) * sizeof(char));
 	if (!(dupstr))
 		return (0);
 	idx = 0;
-	while (idx < src_len)
+	while (idx < src_len && idx < n)
 	{
 		dupstr[idx] = s1[idx];
 		idx++;
