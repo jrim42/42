@@ -20,11 +20,18 @@ int	main(void)
 {
     int     fd;
     char    *tmp;
+    int     idx;
 
     fd = open("test", O_RDONLY);
-    printf ("fd : %d\n", fd);
+    idx = 1;
     while ((tmp = get_next_line(fd)) != 0)
-        printf("_%s", tmp);
+    {
+        printf("----- %d -----\n", idx);
+        printf("%s", tmp);
+        printf("-------------\n");
+        idx++;
+        free(tmp);
+    }
     close(fd);
     return (0);
 }
@@ -37,20 +44,28 @@ char    *get_next_line(int fd)
     int		    byte;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
+        return (0);
     buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+    if (!buf)
+		return (0);
     byte = 1;
-    while (byte > 0 && ft_strchr(buf, '\n') == 0)
+    while (byte > 0 && ft_strchr(depot, '\n') == 0)
     {
         byte = read(fd, buf, BUFFER_SIZE);
+        if (byte == -1)
+        {
+            free(buf);
+            return (0);
+        }
         buf[byte] = '\0';
         depot = ft_strjoin(depot, buf);
     }
     free(buf);
     if (!(depot))
-        return (NULL);
+        return (0);
     line = eol_trim(depot);
     depot = depot_trim(depot);
+    system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
     return (line);
 }
 
@@ -58,6 +73,10 @@ char    *eol_trim(char *depot)
 {
     int eol_idx;
 
+    if (depot[0] == '\0')
+        return (0);
+    if (ft_strchr(depot, '\n') == 0)
+        return (depot);
     eol_idx = (int)(ft_strchr(depot, '\n') - depot);
     return (ft_strndup(depot, eol_idx + 1));
 }
@@ -68,6 +87,9 @@ char    *depot_trim(char *depot)
     int     trimmed_len;
     char    *new_depot;
 
+
+    if (ft_strchr(depot, '\n') == 0)
+        return (0);
     eol_idx = (int)(ft_strchr(depot, '\n') - depot);
     trimmed_len = ft_strlen(depot) - (eol_idx + 1);
     new_depot = ft_strndup(depot + eol_idx + 1, trimmed_len);
