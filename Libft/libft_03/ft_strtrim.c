@@ -36,6 +36,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	new_len;
 	size_t	idx;
 
+	if (s1[0] == '\0')
+		return ((char *)s1);
 	ptr = (char *)s1;
 	new_len = trimmed_len(&ptr, set);
 	new_str = (char *)malloc((new_len + 1) * sizeof(char));
