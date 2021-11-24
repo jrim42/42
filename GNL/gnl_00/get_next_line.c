@@ -24,9 +24,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	depot = fill_depot(fd, depot);
-	if (!depot)
-		return (0);
-	if (!(*depot))
+	if (!depot || !(*depot))
 	{
 		free(depot);
 		return (0);
