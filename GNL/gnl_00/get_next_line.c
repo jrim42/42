@@ -44,6 +44,7 @@ char	*get_next_line(int fd)
 		return (0);
 	line = eol_trim(depot);
 	depot = depot_trim(depot);
+	system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
 	return (line);
 }
 
