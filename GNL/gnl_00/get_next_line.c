@@ -12,18 +12,35 @@
 
 #include "get_next_line.h"
 
-char	*eol_trim(char *depot);
-char	*depot_trim(char *depot);
+char	*fill_depot(int fd, char *depot);
+char	*trim_eol(char *depot);
+char	*trim_depot(char *depot);
 
 char	*get_next_line(int fd)
 {
 	static char	*depot;
-	char		*buf;
-	char		*line;
-	int			byte;
+	char		*one_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
+	depot = fill_depot(fd, depot);
+	if (!depot)
+		return (0);
+	if (!(*depot))
+	{
+		free(depot);
+		return (0);
+	}
+	one_line = trim_eol(depot);
+	depot = trim_depot(depot);
+	return (one_line);
+}
+
+char	*fill_depot(int fd, char *depot)
+{
+	char	*buf;
+	int		byte;
+
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (0);
@@ -40,15 +57,10 @@ char	*get_next_line(int fd)
 		depot = ft_strjoin(depot, buf);
 	}
 	free(buf);
-	if (!(depot))
-		return (0);
-	line = eol_trim(depot);
-	depot = depot_trim(depot);
-	system("leaks a.out > leaks_result; cat leaks_result | grep leaked && rm -rf leaks_result");
-	return (line);
+	return (depot);
 }
 
-char	*eol_trim(char *depot)
+char	*trim_eol(char *depot)
 {
 	int	eol_idx;
 
@@ -60,7 +72,7 @@ char	*eol_trim(char *depot)
 	return (ft_strndup(depot, eol_idx + 1));
 }
 
-char	*depot_trim(char *depot)
+char	*trim_depot(char *depot)
 {
 	int		eol_idx;
 	int		trimmed_len;
@@ -69,6 +81,11 @@ char	*depot_trim(char *depot)
 	if (ft_strchr(depot, '\n') == 0)
 		return (0);
 	eol_idx = (int)(ft_strchr(depot, '\n') - depot);
+	if (depot[eol_idx + 1] == '\0')
+	{
+		free(depot);
+		return (0);
+	}
 	trimmed_len = ft_strlen(depot) - (eol_idx + 1);
 	new_depot = ft_strndup(depot + eol_idx + 1, trimmed_len);
 	free(depot);

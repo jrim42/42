@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	idx;
 	size_t	total_len;
@@ -30,6 +30,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (new_str);
 	ft_strlcat(new_str, (char *)s1, ft_strlen(s1) + 1);
 	ft_strlcat(new_str, (char *)s2, total_len);
+	if (s1)
+		free(s1);
 	return (new_str);
 }
 

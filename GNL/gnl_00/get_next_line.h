@@ -15,20 +15,18 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+#  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
-char	*eol_trim(char *depot);
-char	*depot_trim(char *depot);
+char	*fill_depot(int fd, char *depot);
+char	*trim_eol(char *depot);
+char	*trim_depot(char *depot);
 
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strndup(const char *s1, size_t n);
