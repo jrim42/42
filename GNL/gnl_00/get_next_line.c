@@ -62,8 +62,6 @@ char	*trim_eol(char *depot)
 {
 	int	eol_idx;
 
-	if (depot[0] == '\0')
-		return (0);
 	if (ft_strchr(depot, '\n') == 0)
 		return (depot);
 	eol_idx = (int)(ft_strchr(depot, '\n') - depot);
