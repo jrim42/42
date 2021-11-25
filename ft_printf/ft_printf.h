@@ -13,4 +13,8 @@
 #ifndef FT_PRINT_F_H
 # define FT_PRINT_F_H
 
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
+
 #endif
