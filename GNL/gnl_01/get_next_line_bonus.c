@@ -26,7 +26,8 @@ char	*get_next_line(int fd)
 	depot[fd] = fill_depot(fd, depot[fd]);
 	if (!depot[fd] || !(*(depot[fd])))
 	{
-		free(depot[fd]);
+		if (depot[fd])
+			free(depot[fd]);
 		return (0);
 	}
 	one_line = trim_eol(depot[fd]);
