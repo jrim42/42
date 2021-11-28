@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 20:52:36 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/14 21:34:16 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/28 16:20:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 int	ft_isspace_or_issign(const char *str, int *sign)
 {
@@ -31,9 +32,9 @@ int	ft_isspace_or_issign(const char *str, int *sign)
 
 int	ft_atoi(const char *str)
 {
-	long long	num;
-	int			sign;
-	char		*ptr;
+	unsigned long long	num;
+	int					sign;
+	char				*ptr;
 
 	num = 0;
 	sign = 1;
@@ -46,5 +47,9 @@ int	ft_atoi(const char *str)
 			num *= 10;
 		ptr++;
 	}
+	if ((long long)(num * sign) >= LONG_MAX)
+		return (-1);
+	else if ((long long)(num * sign) <= LONG_MIN)
+		return (0);
 	return ((int)num * sign);
 }
