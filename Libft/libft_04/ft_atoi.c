@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <limits.h>
+#include <stdio.h>
 
 int	ft_isspace_or_issign(const char *str, int *sign)
 {
@@ -32,9 +33,9 @@ int	ft_isspace_or_issign(const char *str, int *sign)
 
 int	ft_atoi(const char *str)
 {
-	unsigned long long	num;
-	int					sign;
-	char				*ptr;
+	unsigned long	num;
+	int				sign;
+	char			*ptr;
 
 	num = 0;
 	sign = 1;
@@ -47,9 +48,12 @@ int	ft_atoi(const char *str)
 			num *= 10;
 		ptr++;
 	}
-	if ((long long)(num * sign) >= LONG_MAX)
-		return (-1);
-	else if ((long long)(num * sign) <= LONG_MIN)
-		return (0);
+	if (num > LONG_MAX)
+	{
+		if (sign == 1)
+			return (-1);
+		else
+			return (0);
+	}
 	return ((int)num * sign);
 }
