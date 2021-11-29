@@ -18,17 +18,17 @@ int print_per(const char **str);
 
 int print_char(const char **str, va_list arg_ptr)
 {
-	int		num;
+	int		ch;
 
-    num = va_arg(arg_ptr, int);
-    write(1, &num, 1);
+    ch = va_arg(arg_ptr, int);
+    write(1, &ch, 1);
     (*str)++;
     return (1);
 }
 
 int print_str(const char **str, va_list arg_ptr)
 {
-
+    return (0);
 }
 
 int print_per(const char **str)

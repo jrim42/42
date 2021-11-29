@@ -12,49 +12,55 @@
 
 #include "ft_printf.h"
 
-int	specify_forms(const char **str, va_list ap);
+int ft_printf(const char *form, ...);
+int	check_format(char *form, va_list ap);
+int	detect_type(char *form, va_list ap);
 
-int ft_printf(const char *str, ...)
+int ft_printf(const char *form, ...)
 {
-    va_list arg_ptr;
+	va_list arg_ptr;
 	int		len;
 
-	va_start(arg_ptr, str);
-	len = ft_strlen(str);
-	while (*str)
-	{
-		if (*str == '%')
-		{
-			str++;
-            len -= 2;
-			len += specify_forms(&str, arg_ptr);
-		}
-		else
-		{
-			write(1, str, 1);
-			str++;
-		}
-	}
+	va_start(arg_ptr, form);
+	len = check_format((char *)form, arg_ptr);
 	va_end(arg_ptr);
 	return (len);
 }
 
-int	specify_forms(const char **str, va_list arg_ptr)
+int	check_format(char *form, va_list ap)
 {
-    char    *str_ptr;
+	int		return_len;
+	int		idx;
+	char	*detail;
 
-    str_ptr = (char *)*str;
-	while (**str)
+	return_len = 0;
+	while (form[idx] != '\0')
 	{
-		if (*str_ptr == 'c')
+		while (form[idx] != '%' && form[idx] != '\0')
+		{
+			return_len++;
+			write(1, &form[idx++], 1);
+		}
+		while (form[idx] != '\0' && ft_strchr(TYPE, form[idx]) != 0)
+		{
+			 
+		}
+	}
+}
+
+int	detect_type(char *str, va_list arg_ptr)
+{
+	while (*str)
+	{
+		if (*str == 'c')
 			return (print_char(str, arg_ptr));
-		else if (*str_ptr == 's')
+		else if (*str == 's')
 			return (print_str(str, arg_ptr));
-		else if (*str_ptr == 'x' || *str_ptr == 'X' || *str_ptr == 'p')
+		else if (*str == 'x' || *str == 'X' || *str == 'p')
 			return (print_hex(str, arg_ptr));
-		else if (*str_ptr == 'd' || *str_ptr == 'i' || *str_ptr == 'u')
+		else if (*str == 'd' || *str == 'i' || *str == 'u')
 			return (print_int(str, arg_ptr));
-		else if (*str_ptr == 'u')
+		else if (*str == 'u')
 			return (print_uns(str, arg_ptr));
 		else
 			return (print_per(str));

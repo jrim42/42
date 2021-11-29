@@ -22,7 +22,10 @@ float average(int num, ...)
     total = 0;
     va_start(arg_ptr, num); // arg_ptr의 시작지접은 num
     for (cnt = 0; cnt < num; cnt++)
+    {
+        printf("va_arg : %d\n", va_arg(arg_ptr, int));
         total += va_arg(arg_ptr, int); // va_arg로 인수들을 읽어들이면서 (int형으로) total에 더해주기
+    }
     va_end(arg_ptr); // 정리 동작
     return ((float)total / num);
 }
