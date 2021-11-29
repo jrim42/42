@@ -16,6 +16,16 @@
 // 	printf("%d\n", atoi("2147483649"));
 // }
 
+// int	main(void)
+// {
+// 	printf("%ld\n", LONG_MAX);
+// 	printf("%ld\n", LONG_MIN);
+// 	printf("%d\n", ft_atoi("9223372036854775809"));
+// 	printf("%d\n", atoi("9223372036854775809"));
+// 	printf("%d\n", ft_atoi("-9223372036854775808"));
+// 	printf("%d\n", atoi("-9223372036854775808"));
+// }
+
 //ft_itoa.c
 // int	main(void)
 // {
