@@ -1,12 +1,14 @@
-TARGET = libft.a
+TARGET = libftprintf.a
 
 CC = gcc -Wall -Wextra -Werror -c -o
 
-SRC = 
+SRC = ft_printf.c
+	  ft_printf_num.c
+	  ft_printf_str.c
+	  ft_printf_utils.c
 OBJ = $(SRC:.c=.o)
 
 BONUS = 
-
 BONUS_OBJ = $(BONUS:.c=.o)
 
 all: $(TARGET)
