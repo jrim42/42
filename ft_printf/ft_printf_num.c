@@ -12,20 +12,20 @@
 
 #include "ft_printf.h"
 
-int print_hex(const char **str, va_list ap);
-int print_int(const char **str, va_list ap);
-int print_uns(const char **str, va_list ap);
+int print_hex(const char **str, va_list arg_ptr);
+int print_int(const char **str, va_list arg_ptr);
+int print_uns(const char **str, va_list arg_ptr);
 
-int print_hex(const char **str, va_list ap)
+int print_hex(const char **str, va_list arg_ptr)
 {
 }
 
-int print_int(const char **str, va_list ap)
+int print_int(const char **str, va_list arg_ptr)
 {
 
 }
 
-int print_uns(const char **str, va_list ap)
+int print_uns(const char **str, va_list arg_ptr)
 {
     
 }
