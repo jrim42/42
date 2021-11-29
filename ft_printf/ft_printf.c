@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/25 16:08:43 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/30 01:52:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int ft_printf(const char *form, ...);
-int	check_format(char *form, va_list ap);
-int	detect_type(char *form, va_list ap);
+int	parse_form(char *form, va_list ap);
+int	detect_type(t_detail *detail, va_list ap);
 
 int ft_printf(const char *form, ...)
 {
-	va_list arg_ptr;
-	int		len;
+	va_list ap;
+	int		printed_len;
 
-	va_start(arg_ptr, form);
-	len = check_format((char *)form, arg_ptr);
-	va_end(arg_ptr);
-	return (len);
+	va_start(ap, form);
+	printed_len = check_format((char *)form, ap);
+	va_end(ap);
+	return (printed_len);
 }
 
-int	check_format(char *form, va_list ap)
+int	parse_form(char *form, va_list ap)
 {
 	int		return_len;
 	int		idx;
@@ -48,22 +48,24 @@ int	check_format(char *form, va_list ap)
 	}
 }
 
-int	detect_type(char *str, va_list arg_ptr)
+int	detect_type(t_detail *detail, va_list ap)
 {
-	while (*str)
-	{
-		if (*str == 'c')
-			return (print_char(str, arg_ptr));
-		else if (*str == 's')
-			return (print_str(str, arg_ptr));
-		else if (*str == 'x' || *str == 'X' || *str == 'p')
-			return (print_hex(str, arg_ptr));
-		else if (*str == 'd' || *str == 'i' || *str == 'u')
-			return (print_int(str, arg_ptr));
-		else if (*str == 'u')
-			return (print_uns(str, arg_ptr));
-		else
-			return (print_per(str));
-	}
-	return (0);
+	int		len_sum;
+    char    type;
+    
+    len_sum = 0;
+    type = detail->type;
+    if (type == '%')
+        len_sum += print_per(detail);
+    else if (type == 'c')
+        len_sum += print_char(detail, ap);
+    else if (type == 's')
+        len_sum += print_str(detail, ap);
+    else if (type == 'x' || type == 'X' || type == 'p')
+        len_sum += print_hex(detail, ap);
+    else if (type == 'd' || type == 'i' || type == 'u')
+        len_sum += print_int(detail, ap);
+    else if (type == 'u')
+        len_sum += print_uns(detail, ap);
+	return (len_sum);
 }
