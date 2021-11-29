@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include <limits.h>
-#include <stdio.h>
 
 int	ft_isspace_or_issign(const char *str, int *sign)
 {
