@@ -1,5 +1,6 @@
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 //ft_atoi.c
 // int main(void)
@@ -86,13 +87,21 @@
 // }
 
 //ft_substr.c
+// int	main(void)
+// {
+// 	printf("%s\n", ft_substr("abcdefg", 0, 3));
+// 	printf("%s\n", ft_substr("abcdefg", 0, 10));
+// 	printf("%s\n", ft_substr("abcdefg", 5, 1));
+// 	printf("%s\n", ft_substr("abcdefg", 5, 5));
+// 	printf("%s\n", ft_substr("abcdefg", 10, 3));
+// 	printf("%s\n", ft_substr("", 0, 1));
+// 	printf("%s\n", ft_substr("test", 10, 1));
+// }
+
+
+//ft_strnstr.c
 int	main(void)
 {
-	printf("%s\n", ft_substr("abcdefg", 0, 3));
-	printf("%s\n", ft_substr("abcdefg", 0, 10));
-	printf("%s\n", ft_substr("abcdefg", 5, 1));
-	printf("%s\n", ft_substr("abcdefg", 5, 5));
-	printf("%s\n", ft_substr("abcdefg", 10, 3));
-	printf("%s\n", ft_substr("", 0, 1));
-	printf("%s\n", ft_substr("test", 10, 1));
+	printf("%p\n", ft_strnstr("", "", 0));
+	printf("%p\n", strnstr("", "", 0));
 }
