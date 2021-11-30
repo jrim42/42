@@ -17,33 +17,26 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
-# define FLAG "-+0.* #" 
-
-typedef struct s_detail
-{
-    char    type;
-    int     align;
-    int     padding;
-    int     width;
-    int     prec;
-    int     sp;
-    int     base;
-    int     sign;
-}	        t_detail;
+# define HEX_U "0123456890ABCDEF"
+# define HEX_L "0123456890abcdef"
+//# define FLAG "-+0.* #" 
 
 int     ft_printf(const char *form_str, ...);
 int	    parse_form(char *form, va_list ap);
-int	    detect_type(t_detail *detail, va_list ap);
+int	    detect_type(char type, va_list ap);
 
-int     print_char(const char **str, va_list arg_ptr);
-int     print_str(const char **str, va_list arg_ptr);
-int     print_per(const char **str);
+int     print_char(va_list arg_ptr);
+int     print_str(va_list arg_ptr);
+int     print_per(void);
 
-int     print_hex(const char **str, va_list arg_ptr);
-int     print_int(const char **str, va_list arg_ptr);
-int     print_uns(const char **str, va_list arg_ptr);
+int     print_int(va_list arg_ptr);
+int     print_uns(va_list arg_ptr);
+int     print_hex(char type, va_list arg_ptr);
+char    *ft_itoa_base(long long num, char *base);
+size_t  numlen_base(long long num, size_t base_len);
 
 #endif

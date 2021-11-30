@@ -12,26 +12,25 @@
 
 #include "ft_printf.h"
 
-int print_char(const char **str, va_list arg_ptr);
-int print_str(const char **str, va_list arg_ptr);
-int print_per(const char **str);
+int print_char(va_list arg_ptr);
+int print_str(va_list arg_ptr);
+int print_per(void);
 
-int print_char(const char **str, va_list arg_ptr)
+int print_char(va_list arg_ptr)
 {
 	int		ch;
 
     ch = va_arg(arg_ptr, int);
     write(1, &ch, 1);
-    (*str)++;
     return (1);
 }
 
-int print_str(const char **str, va_list arg_ptr)
+int print_str(va_list arg_ptr)
 {
     return (0);
 }
 
-int print_per(const char **str)
+int print_per(void)
 {
     write(1, "%", 1);
     return (1);

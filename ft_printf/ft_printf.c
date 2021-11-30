@@ -14,62 +14,58 @@
 
 int ft_printf(const char *form, ...);
 int	parse_form(char *form, va_list ap);
-int	detect_type(t_detail *detail, va_list ap);
+int	detect_type(char type, va_list ap);
 
 int ft_printf(const char *form, ...)
 {
 	va_list ap;
-	int		printed_len;
+	int		len;
 
 	va_start(ap, form);
-	printed_len = check_format((char *)form, ap);
+	len = check_format((char *)form, ap);
 	va_end(ap);
-	return (printed_len);
+	return (len);
 }
 
 int	parse_form(char *form, va_list ap)
 {
-	int		return_len;
-	int		idx;
-	char	*detail;
+	int			len;
+	int			idx;
 
-	return_len = 0;
+	len = 0;
+	idx = 0;
 	while (form[idx] != '\0')
 	{
 		while (form[idx] != '%' && form[idx] != '\0')
 		{
-			return_len++;
+			len++;
 			write(1, &form[idx++], 1);
 		}
-		while (form[idx] != '\0' && ft_strchr(FLAG, form[idx]) != 0)
-		{
-			 
-		}
+		if (form[idx] == '%')
+			idx++;
 		while (form[idx] != '\0' && ft_strchr(TYPE, form[idx]) != 0)
-		{
-			 
-		}
+			len += detect_type(form[idx], ap);
+		idx++;
 	}
+	return (len);
 }
 
-int	detect_type(t_detail *detail, va_list ap)
+int	detect_type(char type, va_list ap)
 {
-	int		len_sum;
-    char    type;
+	int		len;
     
-    len_sum = 0;
-    type = detail->type;
+    len = 0;
     if (type == '%')
-        len_sum += print_per(detail);
+        len += print_per();
     else if (type == 'c')
-        len_sum += print_char(detail, ap);
+        len += print_char(ap);
     else if (type == 's')
-        len_sum += print_str(detail, ap);
+        len += print_str(ap);
     else if (type == 'x' || type == 'X' || type == 'p')
-        len_sum += print_hex(detail, ap);
-    else if (type == 'd' || type == 'i' || type == 'u')
-        len_sum += print_int(detail, ap);
+        len += print_hex(type, ap);
+    else if (type == 'd' || type == 'i')
+        len += print_int(ap);
     else if (type == 'u')
-        len_sum += print_uns(detail, ap);
-	return (len_sum);
+        len += print_uns(ap);
+	return (len);
 }
