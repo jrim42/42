@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/30 01:52:43 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/30 13:53:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	parse_form(char *form, va_list ap)
 		{
 			return_len++;
 			write(1, &form[idx++], 1);
+		}
+		while (form[idx] != '\0' && ft_strchr(FLAG, form[idx]) != 0)
+		{
+			 
 		}
 		while (form[idx] != '\0' && ft_strchr(TYPE, form[idx]) != 0)
 		{

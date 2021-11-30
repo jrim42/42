@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/29 22:52:11 by jrim             ###   ########.fr       */
+/*   Updated: 2021/11/30 13:53:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
+# define FLAG "-+0.* #" 
 
 typedef struct s_detail
 {
@@ -34,6 +35,7 @@ typedef struct s_detail
 }	        t_detail;
 
 int     ft_printf(const char *form_str, ...);
+int	    parse_form(char *form, va_list ap);
 int	    detect_type(t_detail *detail, va_list ap);
 
 int     print_char(const char **str, va_list arg_ptr);
