@@ -66,7 +66,7 @@ int print_hex(char type, va_list ap)
         return (0);
     else if (num < 0)
         num = num + UINT_MAX + 1;
-    if (type == 'x')
+    if (type == 'x' || type == 'p')
         str = ft_itoa_base(num, HEX_L);
     else if (type == 'X')
         str = ft_itoa_base(num, HEX_U);
