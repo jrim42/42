@@ -16,7 +16,7 @@ int main(void)
     printf("num : %d\n\n", num);
     num = printf("%10.d\n", 123);
     printf("num : %d\n", num);
-    num = printf("%d\n", 2147483648);
+    num = printf("%d\n", 2147483647);
     printf("num : %d\n", num);
     num = printf("%d\n", 123);
     printf("num : %d\n", num);

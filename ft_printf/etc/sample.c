@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int ft_printf(const char *form, ...);
 int print_int(va_list ap);

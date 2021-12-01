@@ -1,30 +1,44 @@
-TARGET = libftprintf.a
+NAME		= libftprintf.a
+LIBFTDIR	= ./libft
+LIBFTFILE	= libft.a
 
-CC = gcc -Wall -Wextra -Werror -c -o
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+AR		= ar rcs
+RM		= rm -f
 
-SRC = ft_printf.c
-	  ft_printf_num.c
-	  ft_printf_str.c
-	  ft_printf_utils.c
-OBJ = $(SRC:.c=.o)
+SRCS	= ft_printf.c \
+			ft_printf_str.c \
+			ft_printf_num.c \
+			ft_printf_utils.c \
 
-BONUS = 
-BONUS_OBJ = $(BONUS:.c=.o)
+BSRCS	=
 
-all: $(TARGET)
+OBJS	= $(SRCS:.c=.o)
+BOBJS	= $(BSRCS:.c=.o)
 
-$(TARGET): $(OBJ)
-	ar rc $(TARGET) $(OBJ)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -I.
 
-clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+$(NAME) : $(OBJS)
+	make -C $(LIBFTDIR)
+	cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
+	$(AR) $@ $?
 
-fclean: clean
-	rm -f $(TARGET)
+bonus :
 
-re: fclean all
+all : $(NAME)
 
-bonus: $(OBJ) $(BONUS_OBJ)
-	ar rc $(TARGET) $(OBJ) $(BONUS_OBJ)
+clean :
+	make -C $(LIBFTDIR) clean
+	$(RM) $(OBJS) $(BOBJS)
 
-.PHONY: all clean fclean re bonus
+fclean : clean
+	make -C $(LIBFTDIR) fclean
+	$(RM) $(NAME)
+
+re : clean all
+
+.PHONY : all clean fclean re bonus
+
+

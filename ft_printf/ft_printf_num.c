@@ -61,7 +61,7 @@ int print_hex(char type, va_list ap)
     if (type == 'p')
         num = (unsigned long)va_arg(ap, void *);
     else
-        num = va_arg(ap, unsigned int);
+        num = va_arg(ap, int);
     if (num > INT_MAX)
         return (0);
     else if (num < 0)
