@@ -21,8 +21,8 @@
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
-# define HEX_U "0123456890ABCDEF"
-# define HEX_L "0123456890abcdef"
+# define HEX_U "0123456789ABCDEF"
+# define HEX_L "0123456789abcdef"
 //# define FLAG "-+0.* #" 
 
 int     ft_printf(const char *form_str, ...);

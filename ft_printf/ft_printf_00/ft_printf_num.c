@@ -40,7 +40,8 @@ int print_uns(va_list ap)
     int         len;
     char        *str;
 
-    num = va_arg(ap, unsigned int);
+    num = va_arg(ap, int);
+    // printf("num = %lld\n", num);
     if (num > INT_MAX || num < INT_MIN)
         return (0);
     else if (num < 0)
@@ -83,14 +84,14 @@ char    *ft_itoa_base(long long num, char *base)
     char    *str;
 
     base_len = ft_strlen(base);
-    idx = numlen_base(num, base_len);
-    str = (char *)malloc((idx + 1) * sizeof(char));
+    idx = numlen_base(num, base_len) + 1;
+    str = (char *)malloc(idx * sizeof(char));
     if (!str)
         return (0);
-    str[idx--] = '\0';
-    while (num > 0)
+    str[--idx] = '\0';
+    while (idx-- > 0)
     {
-        str[idx--] = base[num % base_len];
+        str[idx] = base[num % base_len];
         num /= base_len;
     }
     return (str);

@@ -12,10 +12,7 @@ SRCS	= ft_printf.c \
 			ft_printf_num.c \
 			ft_printf_utils.c \
 
-BSRCS	=
-
 OBJS	= $(SRCS:.c=.o)
-BOBJS	= $(BSRCS:.c=.o)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -I.
@@ -25,13 +22,11 @@ $(NAME) : $(OBJS)
 	cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
 	$(AR) $@ $?
 
-bonus :
-
 all : $(NAME)
 
 clean :
 	make -C $(LIBFTDIR) clean
-	$(RM) $(OBJS) $(BOBJS)
+	$(RM) $(OBJS)
 
 fclean : clean
 	make -C $(LIBFTDIR) fclean
@@ -39,6 +34,4 @@ fclean : clean
 
 re : clean all
 
-.PHONY : all clean fclean re bonus
-
-
+.PHONY : all clean fclean re
