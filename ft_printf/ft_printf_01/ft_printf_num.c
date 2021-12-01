@@ -14,8 +14,8 @@
 
 int		print_int(va_list ap);
 int		print_uns(va_list ap);
-int		print_hex(char type, va_list ap);
-char	*ft_itoa_base(char type, unsigned long num, char *base);
+int		print_hex(t_detail *detail, va_list ap);
+char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 
 int	print_int(va_list ap)
@@ -52,14 +52,17 @@ int	print_uns(va_list ap)
 	return (len);
 }
 
-int	print_hex(char type, va_list ap)
+int	print_hex(t_detail *detail, va_list ap)
 {
 	long long	num;
 	int			len;
 	char		*str;
 
-	if (type == 'p')
+	if (detail->type == 'p')
+	{
+		detail->alt = 2;
 		num = (unsigned long)va_arg(ap, void *);
+	}
 	else
 	{
 		num = va_arg(ap, int);
@@ -68,33 +71,31 @@ int	print_hex(char type, va_list ap)
 		else if (num < 0)
 			num = (unsigned int)num;
 	}
-	if (type == 'X')
-		str = ft_itoa_base(type, num, HEX_U);
+	if (detail->type == 'X')
+		str = ft_itoa_base(detail, num, HEX_U);
 	else
-		str = ft_itoa_base(type, num, HEX_L);
+		str = ft_itoa_base(detail, num, HEX_L);
 	len = ft_strlen(str);
 	write(1, str, len);
 	free(str);
 	return (len);
 }
 
-char	*ft_itoa_base(char type, unsigned long num, char *base)
+char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 {
 	size_t	base_len;
 	size_t	idx;
 	char	*str;
 
-	base_len = ft_strlen(base);
-	idx = numlen_base(num, base_len) + 1;
-	if (type == 'p')
-		idx += 2;
+	base_len = detail->base;
+	idx = numlen_base(num, base_len) + 1 + (detail->alt);
 	str = (char *)malloc(idx * sizeof(char));
 	if (!str)
 		return (0);
 	str[1] = 'x';
 	str[0] = '0';
 	str[--idx] = '\0';
-	if (type == 'p')
+	if (detail->type == 'p')
 		str[2] = '0';
 	while (idx-- > 0 && num > 0)
 	{

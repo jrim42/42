@@ -23,11 +23,25 @@
 # define TYPE "cspdiuxX%"
 # define HEX_U "0123456789ABCDEF"
 # define HEX_L "0123456789abcdef"
-//# define FLAG "-+0.* #" 
+
+typedef struct s_detail
+{
+    char    type;
+    int     adj;    // -
+    int     pad;    // 0
+    int     prec;   // .
+    int     sp;     // space
+    int     wid;    // width
+    int     alt;    // #
+    int     sign;   // sign
+    int     base;   
+}           t_detail;
+
+# define OFF 0;
 
 int     ft_printf(const char *form_str, ...);
 int	    parse_form(char *form, va_list ap);
-int	    detect_type(char type, va_list ap);
+int	    detect_type(t_detail *detail, va_list ap);
 
 int     print_char(va_list arg_ptr);
 int     print_str(va_list arg_ptr);
@@ -35,8 +49,10 @@ int     print_per(void);
 
 int     print_int(va_list arg_ptr);
 int     print_uns(va_list arg_ptr);
-int     print_hex(char type, va_list arg_ptr);
-char    *ft_itoa_base(char type, unsigned long num, char *base);
+int     print_hex(t_detail *detail, va_list arg_ptr);
+char    *ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t  numlen_base(unsigned long num, size_t base_len);
+
+void    init_detail(t_detail *detail);
 
 #endif

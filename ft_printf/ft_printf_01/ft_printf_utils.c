@@ -11,3 +11,16 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void    init_detail(t_detail *detail)
+{
+    detail->type = 0;
+    detail->adj = OFF;
+    detail->pad = OFF;
+    detail->prec = OFF;
+    detail->sp = OFF;
+    detail->wid = OFF;
+    detail->alt = OFF;
+    detail->sign = 1;
+    detail->base = 10; 
+}
