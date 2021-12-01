@@ -36,7 +36,7 @@ int     print_per(void);
 int     print_int(va_list arg_ptr);
 int     print_uns(va_list arg_ptr);
 int     print_hex(char type, va_list arg_ptr);
-char    *ft_itoa_base(long long num, char *base);
-size_t  numlen_base(long long num, size_t base_len);
+char    *ft_itoa_base(char type, unsigned long num, char *base);
+size_t  numlen_base(unsigned long num, size_t base_len);
 
 #endif

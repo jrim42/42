@@ -15,8 +15,8 @@
 int     print_int(va_list ap);
 int     print_uns(va_list ap);
 int     print_hex(char type, va_list ap);
-char    *ft_itoa_base(long long num, char *base);
-size_t  numlen_base(long long num, size_t base_len);
+char    *ft_itoa_base(char type, unsigned long num, char *base);
+size_t  numlen_base(unsigned long num, size_t base_len);
 
 int print_int(va_list ap)
 {
@@ -41,11 +41,10 @@ int print_uns(va_list ap)
     char        *str;
 
     num = va_arg(ap, int);
-    // printf("num = %lld\n", num);
     if (num > INT_MAX || num < INT_MIN)
         return (0);
     else if (num < 0)
-        num = num + UINT_MAX + 1;
+        num = (unsigned int)num;
     str = ft_itoa(num);
     len = ft_strlen(str);
     write(1, str, len);
@@ -62,22 +61,24 @@ int print_hex(char type, va_list ap)
     if (type == 'p')
         num = (unsigned long)va_arg(ap, void *);
     else
+    {
         num = va_arg(ap, int);
-    if (num > INT_MAX)
-        return (0);
-    else if (num < 0)
-        num = num + UINT_MAX + 1;
+        if (num > INT_MAX)
+            return (0);
+        else if (num < 0)
+            num = (unsigned int)num;
+    }
     if (type == 'X')
-        str = ft_itoa_base(num, HEX_U);
+        str = ft_itoa_base(type, num, HEX_U);
     else
-        str = ft_itoa_base(num, HEX_L);
+        str = ft_itoa_base(type, num, HEX_L);
     len = ft_strlen(str);
     write(1, str, len);
     free(str);
     return (len);
 }
 
-char    *ft_itoa_base(long long num, char *base)
+char    *ft_itoa_base(char type, unsigned long num, char *base)
 {
     size_t	base_len;
     size_t  idx;
@@ -85,11 +86,19 @@ char    *ft_itoa_base(long long num, char *base)
 
     base_len = ft_strlen(base);
     idx = numlen_base(num, base_len) + 1;
+    if (type == 'p')
+        idx += 2;
     str = (char *)malloc(idx * sizeof(char));
     if (!str)
         return (0);
     str[--idx] = '\0';
-    while (idx-- > 0)
+    str[0] = '0';
+    if (type == 'p')
+    {
+        str[1] = 'x';
+        str[2] = '0';
+    }
+    while (idx-- > 0 && num > 0)
     {
         str[idx] = base[num % base_len];
         num /= base_len;
@@ -97,7 +106,7 @@ char    *ft_itoa_base(long long num, char *base)
     return (str);
 }
 
-size_t	numlen_base(long long num, size_t base_len)
+size_t	numlen_base(unsigned long num, size_t base_len)
 {
 	int	len;
 
