@@ -17,10 +17,49 @@ void	init_detail(t_detail *detail)
 	detail->type = 0;
 	detail->adj = OFF;
 	detail->pad = OFF;
-	detail->prec = OFF;
 	detail->sp = OFF;
+	detail->prec = OFF;
 	detail->wid = OFF;
 	detail->alt = OFF;
 	detail->sign = 1;
 	detail->base = 10;
 }
+
+// void	init_diu(t_detail *detail)
+// {
+// 	detail->type = 0;
+// 	detail->adj = OFF;
+// 	detail->pad = OFF;
+// 	detail->sp = OFF;
+// 	detail->prec = OFF;
+// 	detail->wid = OFF;
+// 	detail->alt = OFF;
+// 	detail->sign = 1;
+// 	detail->base = 10;
+// }
+
+// void	init_cs(t_detail *detail)
+// {
+// 	detail->type = 0;
+// 	detail->adj = OFF;
+// 	detail->pad = IGNORED;
+// 	detail->sp = OFF;
+// 	detail->prec = OFF;
+// 	detail->wid = OFF;
+// 	detail->alt = IGNORED;
+// 	detail->sign = IGNORED;
+// 	detail->base = IGNORED;
+// }
+
+// void	init_xXp(t_detail *detail)
+// {
+// 	detail->type = 0;
+// 	detail->adj = OFF;
+// 	detail->pad = OFF;
+// 	detail->sp = OFF;
+// 	detail->prec = OFF;
+// 	detail->wid = OFF;
+// 	detail->alt = OFF;
+// 	detail->sign = 1;
+// 	detail->base = 16;
+// }

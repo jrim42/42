@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-int	print_char(va_list ap);
-int	print_str(va_list ap);
+int	print_char(t_detail *detail, va_list ap);
+int	print_str(t_detail *detail, va_list ap);
 int	print_per(void);
 
-int	print_char(va_list ap)
+int	print_char(t_detail *detail, va_list ap)
 {
 	int	ch;
 
@@ -25,7 +25,7 @@ int	print_char(va_list ap)
 	return (1);
 }
 
-int	print_str(va_list ap)
+int	print_str(t_detail *detail, va_list ap)
 {
 	const char	*str;
 	size_t		len;
