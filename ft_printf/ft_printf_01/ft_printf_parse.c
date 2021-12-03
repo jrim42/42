@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/01 19:19:20 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 00:42:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_form(char *form, va_list ap);
 // int	parse_flag(char *form, t_detail *detail);
-int	parse_wid(char *form, t_detail *detail);
+int	parse_width(char *form, t_detail *detail);
 // int	parse_prec(char *form, t_detail *detail);
 int	detect_type(t_detail *detail, va_list ap);
 
@@ -39,7 +39,7 @@ int	parse_form(char *form, va_list ap)
 		{
 			form++;
 			while (ft_strchr(TYPE, *form) == 0)
-				form += parse_wid(form, detail);
+				form += parse_width(form, detail);
 			if (ft_strchr(TYPE, *form) != 0)
 			{
 				detail->type = *form;
@@ -52,15 +52,32 @@ int	parse_form(char *form, va_list ap)
 	return (len);
 }
 
-int	parse_wid(char *form, t_detail *detail)
+int	parse_width(char *form, t_detail *detail)
 {
 	int	flag_len;
 
 	flag_len = 0;
-	if (ft_isdigit(*form) == 1)
+	if (*form == '0')
+	{
+		detail->wid = ft_atoi(++form);
+		detail->align = RIGHT;
+		detail->pad = ON;
+		flag_len++;
+	}
+	// flag '0' is ignored when flag '-' is present
+	else if (ft_isdigit(*form) == 1 || *form == '-')
+	{
 		detail->wid = ft_atoi(form);
-	flag_len = numlen_base(detail->wid, 10);
-	return(flag_len);
+		detail->align = RIGHT;
+	}
+	if (detail->wid < 0)
+	{
+		detail->wid *= -1;
+		detail->align = LEFT;
+		flag_len++;
+	}
+	flag_len += numlen_base(detail->wid, 10);
+	return (flag_len);
 }
 
 int	detect_type(t_detail *detail, va_list ap)
@@ -79,8 +96,8 @@ int	detect_type(t_detail *detail, va_list ap)
 	else if (type == 'x' || type == 'X' || type == 'p')
 		len += print_hex(detail, ap);
 	else if (type == 'd' || type == 'i')
-		len += print_int(ap);
+		len += print_int(detail, ap);
 	else if (type == 'u')
-		len += print_uns(ap);
+		len += print_uns(detail, ap);
 	return (len);
 }

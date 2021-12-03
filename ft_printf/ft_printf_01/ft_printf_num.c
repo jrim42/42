@@ -6,19 +6,19 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/01 18:19:16 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 00:39:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_int(va_list ap);
-int		print_uns(va_list ap);
+int		print_int(t_detail *detail, va_list ap);
+int		print_uns(t_detail *detail, va_list ap);
 int		print_hex(t_detail *detail, va_list ap);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 
-int	print_int(va_list ap)
+int	print_int(t_detail *detail, va_list ap)
 {
 	long long	num;
 	int			len;
@@ -29,12 +29,23 @@ int	print_int(va_list ap)
 		return (0);
 	str = ft_itoa(num);
 	len = ft_strlen(str);
-	write(1, str, len);
+	if (len < detail->wid)
+		len = detail->wid;
+	if (detail->align == RIGHT)
+	{
+		print_width(detail, ft_strlen(str));
+		write(1, str, ft_strlen(str));
+	}
+	else
+	{
+		write(1, str, ft_strlen(str));
+		print_width(detail, ft_strlen(str));
+	}
 	free(str);
 	return (len);
 }
 
-int	print_uns(va_list ap)
+int	print_uns(t_detail *detail, va_list ap)
 {
 	long long	num;
 	int			len;
@@ -46,8 +57,18 @@ int	print_uns(va_list ap)
 	else if (num < 0)
 		num = (unsigned int)num;
 	str = ft_itoa(num);
-	len = ft_strlen(str);
-	write(1, str, len);
+	if (len < detail->wid)
+		len = detail->wid;
+	if (detail->align == RIGHT)
+	{
+		print_width(detail, ft_strlen(str));
+		write(1, str, ft_strlen(str));
+	}
+	else
+	{
+		write(1, str, ft_strlen(str));
+		print_width(detail, ft_strlen(str));
+	}
 	free(str);
 	return (len);
 }
