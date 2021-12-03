@@ -10,6 +10,7 @@ RM		= rm -f
 SRCS	= ft_printf.c \
 			ft_printf_str.c \
 			ft_printf_num.c \
+			ft_printf_parse.c \
 			ft_printf_utils.c \
 
 OBJS	= $(SRCS:.c=.o)

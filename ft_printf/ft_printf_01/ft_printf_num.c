@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 00:39:15 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 00:55:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	print_uns(t_detail *detail, va_list ap)
 	else if (num < 0)
 		num = (unsigned int)num;
 	str = ft_itoa(num);
+	len = ft_strlen(str);
 	if (len < detail->wid)
 		len = detail->wid;
 	if (detail->align == RIGHT)
@@ -79,6 +80,7 @@ int	print_hex(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
+	detail->base = 16;
 	if (detail->type == 'p')
 	{
 		detail->alt = 2;
