@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 00:55:53 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 16:02:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,11 @@ int	print_int(t_detail *detail, va_list ap)
 	len = ft_strlen(str);
 	if (len < detail->wid)
 		len = detail->wid;
+	if (detail->align == LEFT)
+		write(1, str, ft_strlen(str));
+	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
-	{
-		print_width(detail, ft_strlen(str));
 		write(1, str, ft_strlen(str));
-	}
-	else
-	{
-		write(1, str, ft_strlen(str));
-		print_width(detail, ft_strlen(str));
-	}
 	free(str);
 	return (len);
 }
@@ -60,16 +55,11 @@ int	print_uns(t_detail *detail, va_list ap)
 	len = ft_strlen(str);
 	if (len < detail->wid)
 		len = detail->wid;
+	if (detail->align == LEFT)
+		write(1, str, ft_strlen(str));
+	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
-	{
-		print_width(detail, ft_strlen(str));
 		write(1, str, ft_strlen(str));
-	}
-	else
-	{
-		write(1, str, ft_strlen(str));
-		print_width(detail, ft_strlen(str));
-	}
 	free(str);
 	return (len);
 }
@@ -82,10 +72,7 @@ int	print_hex(t_detail *detail, va_list ap)
 
 	detail->base = 16;
 	if (detail->type == 'p')
-	{
-		detail->alt = 2;
 		num = (unsigned long)va_arg(ap, void *);
-	}
 	else
 	{
 		num = va_arg(ap, int);
@@ -94,13 +81,17 @@ int	print_hex(t_detail *detail, va_list ap)
 		else if (num < 0)
 			num = (unsigned int)num;
 	}
-	if (detail->type == 'X')
-		str = ft_itoa_base(detail, num, HEX_U);
-	else
-		str = ft_itoa_base(detail, num, HEX_L);
-	len = ft_strlen(str);
-	write(1, str, len);
+	str = ft_itoa_base(detail, num, HEX);
+	len = ft_strlen(str) + detail->alt;
+	if (detail->pad == OFF)
+		print_width(detail, len);
+	print_alt(detail);
+	if (detail->pad == ON)
+		print_width(detail, len);
+	write(1, str, ft_strlen(str));
 	free(str);
+	if (len < detail->wid)
+		len = detail->wid;
 	return (len);
 }
 
@@ -111,20 +102,20 @@ char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 	char	*str;
 
 	base_len = detail->base;
-	idx = numlen_base(num, base_len) + 1 + (detail->alt);
+	idx = numlen_base(num, base_len) + 1;
 	str = (char *)malloc(idx * sizeof(char));
 	if (!str)
 		return (0);
-	str[1] = 'x';
 	str[0] = '0';
 	str[--idx] = '\0';
-	if (detail->type == 'p')
-		str[2] = '0';
 	while (idx-- > 0 && num > 0)
 	{
 		str[idx] = base[num % base_len];
 		num /= base_len;
 	}
+	if (detail->type == 'X')
+		while (str[++idx])
+			str[idx] -= 32;
 	return (str);
 }
 
