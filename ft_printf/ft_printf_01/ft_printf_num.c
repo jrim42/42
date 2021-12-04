@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 16:02:26 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 16:12:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	print_hex(t_detail *detail, va_list ap)
 
 	detail->base = 16;
 	if (detail->type == 'p')
+	{
 		num = (unsigned long)va_arg(ap, void *);
+		detail->alt = 2;
+	}	
 	else
 	{
 		num = va_arg(ap, int);
@@ -115,7 +118,7 @@ char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 	}
 	if (detail->type == 'X')
 		while (str[++idx])
-			str[idx] -= 32;
+			str[idx] = ft_toupper(str[idx]);
 	return (str);
 }
 
