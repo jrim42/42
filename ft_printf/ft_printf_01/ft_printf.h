@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 15:40:55 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 17:37:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_detail
 }			t_detail;
 
 # define OFF 0
-# define ON 1
 # define LEFT 0
+# define ON 1
 # define RIGHT 1
 
 int		ft_printf(const char *form_str, ...);

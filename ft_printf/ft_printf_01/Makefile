@@ -13,7 +13,10 @@ SRCS	= ft_printf.c \
 			ft_printf_parse.c \
 			ft_printf_utils.c \
 
+BONUS 	=
+
 OBJS	= $(SRCS:.c=.o)
+B_OBJS	= $(BONUS:.c=.o)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -I.
@@ -25,9 +28,11 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
+bonus : 
+
 clean :
 	make -C $(LIBFTDIR) clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(B_OBJS)
 
 fclean : clean
 	make -C $(LIBFTDIR) fclean
