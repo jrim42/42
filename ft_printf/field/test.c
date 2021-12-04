@@ -43,28 +43,25 @@ int main(void)
 
 //--------------------------------------------//
 
-    // printf("-------- precision --------\n");
-    // printf("%5s\n", "abcd");
-    // printf("%3s\n", "abcd");
-    // printf("%3c\n", 'a');
-    // printf("%03.d\n", 10);
-	// printf("%03.i\n", 10);
-	// printf("%03.u\n", 10);
-    // printf("%03.d\n", -10);
-	// printf("%03.i\n", -10);
-	// printf("%03.u\n", -10);
-	// printf("%#03.x\n", 10);
-	// printf("%#03.X\n", 10);
-    // printf("---------------------------\n");
-
-
-    printf("-------- char/str ---------\n");
-    printf("%10s\n", "abcd");
-    printf("%3s\n", "abcd");
-    printf("%-10s\n", "abcd");
-    printf("%-3s\n", "abcd");
-    printf("%.10s\n", "abcd");
-    printf("%.3s\n", "abcd");
-    printf("%.3s\n", "abcd");
+    printf("-------- precision --------\n");
+    printf("%5.d\n", 10);
+	printf("%5.i\n", 10);
+	printf("%5.u\n", 10);
+    printf("%5.d\n", -10);
+	printf("%5.i\n", -10);
+	printf("%5.u\n", -10);
+	printf("%#05x\n", 10);
+	printf("%#05X\n", 10);
     printf("---------------------------\n");
+
+
+    // printf("-------- char/str ---------\n");
+    // printf("%10s\n", "abcd");
+    // printf("%3s\n", "abcd");
+    // printf("%-10s\n", "abcd");
+    // printf("%-3s\n", "abcd");
+    // printf("%.10s\n", "abcd");
+    // printf("%.3s\n", "abcd");
+    // printf("%.3s\n", "abcd");
+    // printf("---------------------------\n");
 }
