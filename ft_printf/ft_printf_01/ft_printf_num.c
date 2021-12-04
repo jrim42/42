@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 16:12:46 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/04 17:19:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	print_hex(t_detail *detail, va_list ap)
 			return (0);
 		else if (num < 0)
 			num = (unsigned int)num;
+		if (num == 0)
+			detail->alt = OFF;
 	}
 	str = ft_itoa_base(detail, num, HEX);
 	len = ft_strlen(str) + detail->alt;
