@@ -25,7 +25,7 @@ void	init_detail(t_detail *detail)
 	detail->prec = OFF;
 	detail->wid = OFF;
 	detail->alt = OFF;
-	detail->sign = 1;
+	detail->sign = OFF;
 	detail->base = 10;
 }
 

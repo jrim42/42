@@ -95,6 +95,11 @@ int	parse_width(char *form, t_detail *detail)
 	return (flag_len);
 }
 
+// int	parse_prec(char *form, t_detail *detail)
+// {
+
+// }
+
 int	detect_type(t_detail *detail, va_list ap)
 {
 	int		len;

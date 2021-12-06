@@ -25,15 +25,20 @@ int	print_int(t_detail *detail, va_list ap)
 	char		*str;
 
 	num = va_arg(ap, int);
-	if (num > INT_MAX || num < INT_MIN)
-		return (0);
+	if (num < 0)
+	{
+		detail->sign = ON;
+		num *= -1;
+	}
 	str = ft_itoa(num);
-	len = ft_strlen(str);
+	len = ft_strlen(str) + detail->sign;
 	if (len < detail->wid)
 		len = detail->wid;
+	if (detail->sign == ON)
+		write(1, "-", 1);
 	if (detail->align == LEFT)
 		write(1, str, ft_strlen(str));
-	print_width(detail, ft_strlen(str));
+	print_width(detail, ft_strlen(str) + detail->sign);
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
 	free(str);
@@ -46,11 +51,7 @@ int	print_uns(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
-	num = va_arg(ap, int);
-	if (num > INT_MAX || num < INT_MIN)
-		return (0);
-	else if (num < 0)
-		num = (unsigned int)num;
+	num = va_arg(ap, unsigned int);
 	str = ft_itoa(num);
 	len = ft_strlen(str);
 	if (len < detail->wid)
@@ -78,11 +79,7 @@ int	print_hex(t_detail *detail, va_list ap)
 	}	
 	else
 	{
-		num = va_arg(ap, int);
-		if (num > INT_MAX)
-			return (0);
-		else if (num < 0)
-			num = (unsigned int)num;
+		num = va_arg(ap, unsigned int);
 		if (num == 0)
 			detail->alt = OFF;
 	}

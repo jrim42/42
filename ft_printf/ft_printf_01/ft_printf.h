@@ -21,7 +21,6 @@
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
-# define FLAG "-0 *#+"
 # define HEX "0123456789abcdef"
 
 typedef struct s_detail
@@ -38,8 +37,8 @@ typedef struct s_detail
 }			t_detail;
 
 # define OFF 0
-# define LEFT 0
 # define ON 1
+# define LEFT 0
 # define RIGHT 1
 
 int		ft_printf(const char *form_str, ...);
