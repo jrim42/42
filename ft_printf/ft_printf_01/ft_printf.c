@@ -12,6 +12,9 @@
 
 #include "ft_printf.h"
 
+int		ft_printf(const char *form, ...);
+void	init_detail(t_detail *detail);
+
 int	ft_printf(const char *form, ...)
 {
 	va_list	ap;
@@ -21,4 +24,18 @@ int	ft_printf(const char *form, ...)
 	len = parse_form((char *)form, ap);
 	va_end(ap);
 	return (len);
+}
+
+void	init_detail(t_detail *detail)
+{
+	detail->type = 0;
+	detail->align = LEFT;
+	detail->pad = OFF;
+	detail->sp = OFF;
+	detail->prec = OFF;
+	detail->wid = OFF;
+	detail->alt = OFF;
+	detail->minus = OFF;
+	detail->plus = OFF;
+	detail->base = 10;
 }

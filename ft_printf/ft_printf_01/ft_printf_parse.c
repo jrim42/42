@@ -15,7 +15,7 @@
 int	parse_form(char *form, va_list ap);
 int	parse_flag(char *form, t_detail *detail);
 int	parse_width(char *form, t_detail *detail);
-// int	parse_prec(char *form, t_detail *detail);
+int	parse_prec(char *form, t_detail *detail);
 int	detect_type(t_detail *detail, va_list ap);
 
 int	parse_form(char *form, va_list ap)
@@ -62,6 +62,16 @@ int	parse_flag(char *form, t_detail *detail)
 		form_len++;
 		detail->alt = 2;
 	}
+	else if (*form == '+')
+	{
+		form_len++;
+		detail->plus = ON;
+	}
+	else if (*form == ' ')
+	{
+		form_len++;
+		detail->sp = ON;
+	}
 	else	
 		form_len += parse_width(form, detail);
 	return (form_len);
@@ -79,7 +89,6 @@ int	parse_width(char *form, t_detail *detail)
 		detail->pad = ON;
 		flag_len++;
 	}
-	// flag '0' is ignored when flag '-' is present
 	else if (ft_isdigit(*form) == 1 || *form == '-')
 	{
 		detail->wid = ft_atoi(form);
@@ -92,13 +101,18 @@ int	parse_width(char *form, t_detail *detail)
 		flag_len++;
 	}
 	flag_len += numlen_base(detail->wid, 10);
+	if (*form == '-' && *(form + 1) == '0')
+		flag_len++;
 	return (flag_len);
 }
 
-// int	parse_prec(char *form, t_detail *detail)
-// {
-
-// }
+int	parse_prec(char *form, t_detail *detail)
+{
+	detail->prec = 0;
+	if (form)
+		return (0);
+	return (0);
+}
 
 int	detect_type(t_detail *detail, va_list ap)
 {

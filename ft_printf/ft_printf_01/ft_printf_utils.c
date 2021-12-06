@@ -12,22 +12,9 @@
 
 #include "ft_printf.h"
 
-void	init_detail(t_detail *detail);
 void	print_width(t_detail *detail, int len);
 void	print_alt(t_detail *detail);
-
-void	init_detail(t_detail *detail)
-{
-	detail->type = 0;
-	detail->align = LEFT;
-	detail->pad = OFF;
-	detail->sp = OFF;
-	detail->prec = OFF;
-	detail->wid = OFF;
-	detail->alt = OFF;
-	detail->sign = OFF;
-	detail->base = 10;
-}
+int		parse_len(t_detail *detail, int	str_len);
 
 void	print_width(t_detail *detail, int len)
 {
@@ -51,4 +38,18 @@ void	print_alt(t_detail *detail)
 		else if (detail->type == 'x' || detail->type == 'p')
 			write(1, "0x", 2);
 	}
+}
+
+int		parse_len(t_detail *detail, int	str_len)
+{
+	int	len;
+
+	if (detail->type != 'x' || detail->type != 'X' || detail->type != 'p')
+		detail->alt = OFF;
+	len = str_len + detail->sp + detail->plus - detail->minus + detail->alt;
+	if (!detail->sp && detail->minus)
+		len++;
+	if (len < detail->wid)
+		len = detail->wid;
+	return (len);
 }

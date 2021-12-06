@@ -32,7 +32,8 @@ typedef struct s_detail
 	int		sp;
 	int		wid;
 	int		alt;
-	int		sign;
+	int		minus;
+	int		plus;
 	int		base;
 }			t_detail;
 
@@ -42,6 +43,7 @@ typedef struct s_detail
 # define RIGHT 1
 
 int		ft_printf(const char *form_str, ...);
+void	init_detail(t_detail *detail);
 
 int		parse_form(char *form, va_list ap);
 int		parse_flag(char *form, t_detail *detail);
@@ -59,8 +61,8 @@ int		print_hex(t_detail *detail, va_list ap);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 
-void	init_detail(t_detail *detail);
 void	print_width(t_detail *detail, int len);
 void	print_alt(t_detail *detail);
+int		parse_len(t_detail *detail, int	str_len);
 
 #endif

@@ -26,20 +26,25 @@ int	print_int(t_detail *detail, va_list ap)
 
 	num = va_arg(ap, int);
 	if (num < 0)
-		detail->sign = ON;
+	{
+		detail->minus = ON;
+		detail->plus = OFF;
+	}
 	str = ft_itoa(num);
 	if (str[0] == '0')
-		detail->sign = OFF;
-	len = ft_strlen(str);
-	if (len < detail->wid)
-		len = detail->wid;
-	if (detail->sign == ON && num != 0)
+		detail->minus = OFF;
+	len = parse_len(detail, ft_strlen(str));
+	if (detail->sp == ON && num >= 0)
+		write(1, " ", 1);
+	if (detail->minus == ON && num != 0)
 		write(1, "-", 1);
+	else if (detail->plus == ON)
+		write(1, "+", 1);
 	if (detail->align == LEFT)
-		write(1, str + detail->sign, ft_strlen(str) - detail->sign);
+		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
 	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
-		write(1, str + detail->sign, ft_strlen(str) - detail->sign);
+		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
 	free(str);
 	return (len);
 }
@@ -84,12 +89,14 @@ int	print_hex(t_detail *detail, va_list ap)
 	}
 	str = ft_itoa_base(detail, num, HEX);
 	len = ft_strlen(str) + detail->alt;
-	if (detail->pad == OFF)
+	if (detail->align == RIGHT && detail->pad == OFF)
 		print_width(detail, len);
 	print_alt(detail);
 	if (detail->pad == ON)
 		print_width(detail, len);
 	write(1, str, ft_strlen(str));
+	if (detail->align == LEFT && detail->pad == OFF)
+		print_width(detail, len);
 	free(str);
 	if (len < detail->wid)
 		len = detail->wid;
