@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 15:59:36 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/06 20:43:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	parse_flag(char *form, t_detail *detail)
 		form_len++;
 		detail->sp = ON;
 	}
-	else	
+	else 
 		form_len += parse_width(form, detail);
 	return (form_len);
 }
