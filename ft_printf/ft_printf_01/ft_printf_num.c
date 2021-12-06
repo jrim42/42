@@ -26,21 +26,20 @@ int	print_int(t_detail *detail, va_list ap)
 
 	num = va_arg(ap, int);
 	if (num < 0)
-	{
 		detail->sign = ON;
-		num *= -1;
-	}
 	str = ft_itoa(num);
-	len = ft_strlen(str) + detail->sign;
+	if (str[0] == '0')
+		detail->sign = OFF;
+	len = ft_strlen(str);
 	if (len < detail->wid)
 		len = detail->wid;
-	if (detail->sign == ON)
+	if (detail->sign == ON && num != 0)
 		write(1, "-", 1);
 	if (detail->align == LEFT)
-		write(1, str, ft_strlen(str));
-	print_width(detail, ft_strlen(str) + detail->sign);
+		write(1, str + detail->sign, ft_strlen(str) - detail->sign);
+	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
-		write(1, str, ft_strlen(str));
+		write(1, str + detail->sign, ft_strlen(str) - detail->sign);
 	free(str);
 	return (len);
 }
