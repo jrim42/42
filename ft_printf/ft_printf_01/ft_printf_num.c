@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/08 22:12:14 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 22:28:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	print_int(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
-	// printf("prec : %d\n", detail->prec);
-	// printf("width : %d\n", detail->wid);
 	num = va_arg(ap, int);
 	if (num < 0)
 	{
@@ -57,8 +55,6 @@ int	print_uns(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
-	// printf("prec : %d\n", detail->prec);
-	// printf("width : %d\n", detail->wid);
 	num = va_arg(ap, unsigned int);
 	str = ft_itoa(num);
 	if (detail->align == LEFT)

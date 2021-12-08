@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/08 21:27:57 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 22:29:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	parse_form(char *form, va_list ap)
 			while (ft_strchr(TYPE, *form) == 0)
 			{
 				form += parse_flag(form, detail, ap);
-				// printf("%s\n", form);
 			}
 			if (ft_strchr(TYPE, *form) != 0)
 			{
@@ -72,7 +71,7 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		detail->align = LEFT;
 	else if (*form == '.')
 		form_len += parse_prec(form, detail);
-	else 
+	else
 		form_len += parse_width(form, detail, ap) - 1;
 	return (form_len);
 }
@@ -87,13 +86,12 @@ int	parse_prec(char *form, t_detail *detail)
 	detail->align = RIGHT;
 	if (detail->prec < 0)
 	{
-		detail->prec *= -1;	
+		detail->prec *= -1;
 		detail->align = LEFT;
 		flag_len++;
 	}
 	flag_len += numlen_base(detail->prec, 10);
 	return (flag_len);
-
 }
 
 int	parse_width(char *form, t_detail *detail, va_list ap)
@@ -111,8 +109,6 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 		detail->wid *= -1;
 		detail->align = LEFT;
 		detail->pad = OFF;
-		// if (*form != '*')
-		// 	flag_len++;
 	}
 	flag_len += numlen_base(detail->wid, 10);
 	return (flag_len);
