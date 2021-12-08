@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/30 13:53:23 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 17:11:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define TYPE "cspdiuxX%"
 # define HEX_U "0123456789ABCDEF"
 # define HEX_L "0123456789abcdef"
-//# define FLAG "-+0.* #" 
 
 int     ft_printf(const char *form_str, ...);
 int	    parse_form(char *form, va_list ap);
