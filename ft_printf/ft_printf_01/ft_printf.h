@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/04 17:37:45 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 19:44:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int		ft_printf(const char *form_str, ...);
 void	init_detail(t_detail *detail);
 
 int		parse_form(char *form, va_list ap);
-int		parse_flag(char *form, t_detail *detail);
-int		parse_width(char *form, t_detail *detail);
-// int		parse_prec(char *form, t_detail *detail);
+int		parse_flag(char *form, t_detail *detail, va_list ap);
+int		parse_prec(char *form, t_detail *detail);
+int		parse_width(char *form, t_detail *detail, va_list ap);
 int		detect_type(t_detail *detail, va_list ap);
 
 int		print_char(t_detail *detail, va_list ap);

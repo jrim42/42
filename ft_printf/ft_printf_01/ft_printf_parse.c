@@ -6,16 +6,16 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/06 20:43:28 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 19:50:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 int	parse_form(char *form, va_list ap);
-int	parse_flag(char *form, t_detail *detail);
-int	parse_width(char *form, t_detail *detail);
+int	parse_flag(char *form, t_detail *detail, va_list ap);
 int	parse_prec(char *form, t_detail *detail);
+int	parse_width(char *form, t_detail *detail, va_list ap);
 int	detect_type(t_detail *detail, va_list ap);
 
 int	parse_form(char *form, va_list ap)
@@ -39,7 +39,7 @@ int	parse_form(char *form, va_list ap)
 		{
 			form++;
 			while (ft_strchr(TYPE, *form) == 0)
-				form += parse_flag(form, detail);
+				form += parse_flag(form, detail, ap);
 			if (ft_strchr(TYPE, *form) != 0)
 			{
 				detail->type = *form;
@@ -52,66 +52,74 @@ int	parse_form(char *form, va_list ap)
 	return (len);
 }
 
-int	parse_flag(char *form, t_detail *detail)
+int	parse_flag(char *form, t_detail *detail, va_list ap)
 {
 	int	form_len;
 
-	form_len = 0;
+	form_len = 1;
 	if (*form == '#')
-	{
-		form_len++;
 		detail->alt = 2;
-	}
 	else if (*form == '+')
-	{
-		form_len++;
 		detail->plus = ON;
-	}
 	else if (*form == ' ')
-	{
-		form_len++;
 		detail->sp = ON;
-	}
+	else if (*form == '0')
+		detail->pad = ON;
+	else if (*form == '-')
+		detail->align = LEFT;
+	else if (*form == '.')
+		form_len += parse_prec(form, detail) - 1;
 	else 
-		form_len += parse_width(form, detail);
+		form_len += parse_width(form, detail, ap) - 1;
 	return (form_len);
 }
 
-int	parse_width(char *form, t_detail *detail)
+int	parse_prec(char *form, t_detail *detail)
 {
 	int	flag_len;
 
 	flag_len = 0;
-	if (*form == '0')
+	detail->prec = ON;
+	detail->wid = ft_atoi(++form);
+	detail->align = RIGHT;
+	detail->pad = ON;
+	flag_len++;
+	if (detail->wid < 0)
 	{
-		detail->wid = ft_atoi(++form);
-		detail->align = RIGHT;
-		detail->pad = ON;
-		flag_len++;
+		detail->wid *= -1;
+		detail->align = LEFT;
 	}
-	else if (ft_isdigit(*form) == 1 || *form == '-')
+	flag_len += numlen_base(detail->wid, 10);
+	return (flag_len);
+
+}
+
+int	parse_width(char *form, t_detail *detail, va_list ap)
+{
+	int	flag_len;
+
+	flag_len = 0;
+	if (ft_isdigit(*form) == 1)
 	{
 		detail->wid = ft_atoi(form);
+		detail->align = RIGHT;
+	}
+	else if (*form == '*')
+	{
+		detail->wid = va_arg(ap, int);
 		detail->align = RIGHT;
 	}
 	if (detail->wid < 0)
 	{
 		detail->wid *= -1;
 		detail->align = LEFT;
-		flag_len++;
+		if (*form != '*')
+			flag_len++;
 	}
 	flag_len += numlen_base(detail->wid, 10);
 	if (*form == '-' && *(form + 1) == '0')
 		flag_len++;
 	return (flag_len);
-}
-
-int	parse_prec(char *form, t_detail *detail)
-{
-	detail->prec = 0;
-	if (form)
-		return (0);
-	return (0);
 }
 
 int	detect_type(t_detail *detail, va_list ap)
