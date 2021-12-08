@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/08 19:50:16 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 21:27:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	parse_form(char *form, va_list ap)
 		{
 			form++;
 			while (ft_strchr(TYPE, *form) == 0)
+			{
 				form += parse_flag(form, detail, ap);
+				// printf("%s\n", form);
+			}
 			if (ft_strchr(TYPE, *form) != 0)
 			{
 				detail->type = *form;
@@ -68,7 +71,7 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 	else if (*form == '-')
 		detail->align = LEFT;
 	else if (*form == '.')
-		form_len += parse_prec(form, detail) - 1;
+		form_len += parse_prec(form, detail);
 	else 
 		form_len += parse_width(form, detail, ap) - 1;
 	return (form_len);
@@ -79,17 +82,16 @@ int	parse_prec(char *form, t_detail *detail)
 	int	flag_len;
 
 	flag_len = 0;
-	detail->prec = ON;
-	detail->wid = ft_atoi(++form);
-	detail->align = RIGHT;
+	detail->prec = ft_atoi(++form);
 	detail->pad = ON;
-	flag_len++;
-	if (detail->wid < 0)
+	detail->align = RIGHT;
+	if (detail->prec < 0)
 	{
-		detail->wid *= -1;
+		detail->prec *= -1;	
 		detail->align = LEFT;
+		flag_len++;
 	}
-	flag_len += numlen_base(detail->wid, 10);
+	flag_len += numlen_base(detail->prec, 10);
 	return (flag_len);
 
 }
@@ -99,26 +101,20 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 	int	flag_len;
 
 	flag_len = 0;
+	detail->align = RIGHT;
 	if (ft_isdigit(*form) == 1)
-	{
 		detail->wid = ft_atoi(form);
-		detail->align = RIGHT;
-	}
 	else if (*form == '*')
-	{
 		detail->wid = va_arg(ap, int);
-		detail->align = RIGHT;
-	}
 	if (detail->wid < 0)
 	{
 		detail->wid *= -1;
 		detail->align = LEFT;
-		if (*form != '*')
-			flag_len++;
+		detail->pad = OFF;
+		// if (*form != '*')
+		// 	flag_len++;
 	}
 	flag_len += numlen_base(detail->wid, 10);
-	if (*form == '-' && *(form + 1) == '0')
-		flag_len++;
 	return (flag_len);
 }
 

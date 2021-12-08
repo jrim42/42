@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/06 20:42:39 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/08 22:12:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	print_int(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
+	// printf("prec : %d\n", detail->prec);
+	// printf("width : %d\n", detail->wid);
 	num = va_arg(ap, int);
 	if (num < 0)
 	{
@@ -33,7 +35,6 @@ int	print_int(t_detail *detail, va_list ap)
 	str = ft_itoa(num);
 	if (str[0] == '0')
 		detail->minus = OFF;
-	len = parse_len(detail, ft_strlen(str));
 	if (detail->sp == ON && num >= 0)
 		write(1, " ", 1);
 	if (detail->minus == ON && num != 0)
@@ -45,6 +46,7 @@ int	print_int(t_detail *detail, va_list ap)
 	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
 		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
+	len = parse_len(detail, ft_strlen(str));
 	free(str);
 	return (len);
 }
@@ -55,16 +57,16 @@ int	print_uns(t_detail *detail, va_list ap)
 	int			len;
 	char		*str;
 
+	// printf("prec : %d\n", detail->prec);
+	// printf("width : %d\n", detail->wid);
 	num = va_arg(ap, unsigned int);
 	str = ft_itoa(num);
-	len = ft_strlen(str);
-	if (len < detail->wid)
-		len = detail->wid;
 	if (detail->align == LEFT)
 		write(1, str, ft_strlen(str));
 	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
+	len = parse_len(detail, ft_strlen(str));
 	free(str);
 	return (len);
 }
@@ -98,8 +100,7 @@ int	print_hex(t_detail *detail, va_list ap)
 	if (detail->align == LEFT && detail->pad == OFF)
 		print_width(detail, len);
 	free(str);
-	if (len < detail->wid)
-		len = detail->wid;
+	len = parse_len(detail, len);
 	return (len);
 }
 
