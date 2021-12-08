@@ -28,30 +28,29 @@ int main(void)
 
 //--------------------------------------------//
 
-    // printf("---------- width ----------\n");
-    // printf("%*d\n", 5, 42);
-    // printf("%*d\n", -5, 42);
-    // printf("%-*d\n", 5, 42);
-    // printf("%*d\n", 5, 42);
-    // printf("%5d\n", 42);
-    // printf("%-5d\n", 42);
-    // printf("%0*d\n", -5, 42);
-    // printf("%0*d\n", 5, 42);
-    // printf("%03d\n", 1);
-    // printf("%-3d\n", 1);
-    // printf("---------------------------\n");
+    printf("---------- width ----------\n");
+    printf("%*d\n", 5, 42);
+    printf("%*d\n", -5, 42);
+    printf("%-*d\n", 5, 42);
+    printf("%*d\n", 5, 42);
+    printf("%5d\n", 42);
+    printf("%-5d\n", 42);
+    printf("%0*d\n", -5, 42);
+    printf("%0*d\n", 5, 42);
+    printf("%03d\n", 1);
+    printf("%-3d\n", 1);
+    printf("---------------------------\n");
 
 //--------------------------------------------//
 
     printf("-------- precision --------\n");
-    printf("%5.d\n", 10);
-	printf("%5.i\n", 10);
-	printf("%5.u\n", 10);
-    printf("%5.d\n", -10);
-	printf("%5.i\n", -10);
-	printf("%5.u\n", -10);
-	printf("%#05x\n", 10);
-	printf("%#05X\n", 10);
+    printf("%.c\n", 'a');
+	printf("%.5c\n", 'a');
+	printf("%.p\n", 10);
+    printf("%.5p\n", 10);
+	printf("%.s\n", "abc");
+    printf("%.2s\n", "abc");
+	printf("%.5s\n", "abc");
     printf("---------------------------\n");
 
 
