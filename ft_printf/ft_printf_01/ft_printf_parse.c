@@ -97,17 +97,12 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 	int	flag_len;
 
 	flag_len = 0;
-	detail->align = RIGHT;
 	if (ft_isdigit(*form) == 1)
 		detail->wid = ft_atoi(form);
 	else if (*form == '*')
 		detail->wid = va_arg(ap, int);
-	if (detail->wid < 0)
-	{
-		detail->wid *= -1;
-		detail->align = LEFT;
-		detail->pad = OFF;
-	}
+	if (detail->pad == ON)
+		detail->align = RIGHT;
 	flag_len += numlen_base(detail->wid, 10);
 	return (flag_len);
 }
