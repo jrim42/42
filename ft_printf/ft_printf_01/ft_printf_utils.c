@@ -26,7 +26,7 @@ void	print_width(t_detail *detail, int len)
 	else
 		line_wid = detail->prec + detail->minus;
 	cnt = line_wid - len;
-	if (detail->pad == OFF)
+	if (detail->pad == OFF || detail->type == 's')
 		while (cnt-- > 0)
 			write(1, " ", 1);
 	else if (detail->align != LEFT)

@@ -17,12 +17,18 @@ void	init_detail(t_detail *detail);
 
 int	ft_printf(const char *form, ...)
 {
-	va_list	ap;
-	int		len;
+	va_list		ap;
+	int			len;
+	t_detail	*detail;
 
 	va_start(ap, form);
-	len = parse_form((char *)form, ap);
+	detail = (t_detail *)malloc(1 * sizeof(t_detail));
+	if (!detail)
+		return (0);
+	init_detail(detail);
+	len = parse_form((char *)form, detail, ap);
 	va_end(ap);
+	free(detail);
 	return (len);
 }
 
@@ -32,7 +38,7 @@ void	init_detail(t_detail *detail)
 	detail->align = LEFT;
 	detail->pad = OFF;
 	detail->sp = OFF;
-	detail->prec = OFF;
+	detail->prec = -1;
 	detail->wid = OFF;
 	detail->alt = OFF;
 	detail->minus = OFF;

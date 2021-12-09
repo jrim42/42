@@ -45,7 +45,7 @@ typedef struct s_detail
 int		ft_printf(const char *form_str, ...);
 void	init_detail(t_detail *detail);
 
-int		parse_form(char *form, va_list ap);
+int		parse_form(char *form, t_detail *detail, va_list ap);
 int		parse_flag(char *form, t_detail *detail, va_list ap);
 int		parse_prec(char *form, t_detail *detail);
 int		parse_width(char *form, t_detail *detail, va_list ap);

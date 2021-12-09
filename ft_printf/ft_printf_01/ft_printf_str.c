@@ -42,13 +42,16 @@ int	print_str(t_detail *detail, va_list ap)
 	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);
+	if (detail->prec != -1 && detail->prec < len)
+		len = detail->prec;
+	if (detail->align == LEFT)
+		write(1, str, len);
+	if (detail->prec < detail->wid)
+		print_width(detail, len);
+	if (detail->align == RIGHT)
+		write(1, str, len);
 	if (len < detail->wid)
 		len = detail->wid;
-	if (detail->align == LEFT)
-		write(1, str, ft_strlen(str));
-	print_width(detail, ft_strlen(str));
-	if (detail->align == RIGHT)
-		write(1, str, ft_strlen(str));
 	return (len);
 }
 

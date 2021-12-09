@@ -12,22 +12,17 @@
 
 #include "ft_printf.h"
 
-int	parse_form(char *form, va_list ap);
+int	parse_form(char *form, t_detail *detail, va_list ap);
 int	parse_flag(char *form, t_detail *detail, va_list ap);
 int	parse_prec(char *form, t_detail *detail);
 int	parse_width(char *form, t_detail *detail, va_list ap);
 int	detect_type(t_detail *detail, va_list ap);
 
-int	parse_form(char *form, va_list ap)
+int	parse_form(char *form, t_detail *detail, va_list ap)
 {
 	int			len;
-	t_detail	*detail;
 
 	len = 0;
-	detail = (t_detail *)malloc(1 * sizeof(t_detail));
-	if (!detail)
-		return (0);
-	init_detail(detail);
 	while (*form != '\0')
 	{
 		if (*form != '%')
@@ -39,9 +34,8 @@ int	parse_form(char *form, va_list ap)
 		{
 			form++;
 			while (ft_strchr(TYPE, *form) == 0)
-			{
 				form += parse_flag(form, detail, ap);
-			}
+			// printf("form : %s\n", form);
 			if (ft_strchr(TYPE, *form) != 0)
 			{
 				detail->type = *form;
@@ -50,7 +44,6 @@ int	parse_form(char *form, va_list ap)
 		}
 		form++;
 	}
-	free(detail);
 	return (len);
 }
 
@@ -70,7 +63,7 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 	else if (*form == '-')
 		detail->align = LEFT;
 	else if (*form == '.')
-		form_len += parse_prec(form, detail);
+		form_len += parse_prec(++form, detail);
 	else
 		form_len += parse_width(form, detail, ap) - 1;
 	return (form_len);
@@ -81,7 +74,12 @@ int	parse_prec(char *form, t_detail *detail)
 	int	flag_len;
 
 	flag_len = 0;
-	detail->prec = ft_atoi(++form);
+	if (ft_isdigit(*form) == 0)
+	{
+		detail->prec = 0;
+		return (flag_len);
+	}
+	detail->prec = ft_atoi(form);
 	detail->pad = ON;
 	detail->align = RIGHT;
 	if (detail->prec < 0)
