@@ -294,6 +294,16 @@ int main(void)
 	// ft_printf("|%-1c %-2c %-3c|\n", '2', '1', 0);
 	// ft_printf("|%01c %02c %03c|\n", 0, '1', '2');
 
-    printf("|%p %p|\n", (void *)0, (void *)0);
-    ft_printf("|%p %p|\n", 0, 0);
+    // printf("|%p %p|\n", (void *)0, (void *)0);
+    // ft_printf("|%p %p|\n", 0, 0);
+    printf("%+d\n", 10);
+    printf("% +d\n", 10);
+    printf("%+ d\n", 10);
+    printf("% d\n", -10);
+    printf("%+d\n", -10);
+    ft_printf("%+d\n", 10);
+    ft_printf("% +d\n", 10);
+    ft_printf("%+ d\n", 10);
+    ft_printf("% d\n", -10);
+    ft_printf("%+d\n", -10);
 }
