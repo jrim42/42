@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/08 22:29:32 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/09 14:55:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 			form++;
 			while (ft_strchr(TYPE, *form) == 0)
 				form += parse_flag(form, detail, ap);
-			// printf("form : %s\n", form);
 			if (ft_strchr(TYPE, *form) != 0)
 			{
 				detail->type = *form;
