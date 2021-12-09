@@ -23,13 +23,13 @@ int	print_char(t_detail *detail, va_list ap)
 
 	ch = va_arg(ap, int);
 	len = 1;
-	if (1 < detail->wid)
-		len = detail->wid;
 	if (detail->align == LEFT)
 		write(1, &ch, 1);
 	print_width(detail, 1);
 	if (detail->align == RIGHT)
 		write(1, &ch, 1);
+	if (1 < detail->wid)
+		len = detail->wid;
 	return (len);
 }
 

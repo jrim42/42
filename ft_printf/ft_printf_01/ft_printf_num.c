@@ -39,16 +39,16 @@ int	print_int(t_detail *detail, va_list ap)
 	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
 		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
-	len = parse_len(detail, ft_strlen(str));
+	len = parse_numlen(detail, ft_strlen(str));
 	free(str);
 	return (len);
 }
 
 int	print_uns(t_detail *detail, va_list ap)
 {
-	long long	num;
-	int			len;
-	char		*str;
+	unsigned int	num;
+	int				len;
+	char			*str;
 
 	num = va_arg(ap, unsigned int);
 	str = ft_itoa(num);
@@ -57,7 +57,7 @@ int	print_uns(t_detail *detail, va_list ap)
 	print_width(detail, ft_strlen(str));
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
-	len = parse_len(detail, ft_strlen(str));
+	len = parse_numlen(detail, ft_strlen(str));
 	free(str);
 	return (len);
 }
@@ -84,7 +84,7 @@ int	print_hex(t_detail *detail, va_list ap)
 	if (detail->align == LEFT && detail->pad == OFF)
 		print_width(detail, len);
 	free(str);
-	len = parse_len(detail, len);
+	len = parse_numlen(detail, len);
 	return (len);
 }
 

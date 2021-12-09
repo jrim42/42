@@ -15,7 +15,7 @@
 void	print_width(t_detail *detail, int len);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
-int		parse_len(t_detail *detail, int str_len);
+int		parse_numlen(t_detail *detail, int str_len);
 
 void	print_width(t_detail *detail, int len)
 {
@@ -48,18 +48,18 @@ void	print_alt(t_detail *detail)
 
 void	print_sign(t_detail *detail)
 {
-	if (detail->sp == ON && detail->minus == OFF)
-		write(1, " ", 1);
-	else if (detail->minus == ON)
+	if (detail->minus == ON)
 		write(1, "-", 1);
 	else if (detail->plus == ON)
 		write(1, "+", 1);
+	else if (detail->sp == ON)
+		write(1, " ", 1);
 }
 
-int	parse_len(t_detail *detail, int str_len)
+int	parse_numlen(t_detail *detail, int str_len)
 {
-	int	len;
-	int	line_wid;
+	int		len;
+	int		line_wid;
 
 	line_wid = 0;
 	len = str_len + detail->sp + detail->plus - detail->minus;
