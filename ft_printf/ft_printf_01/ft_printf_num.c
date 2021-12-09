@@ -25,20 +25,15 @@ int	print_int(t_detail *detail, va_list ap)
 	char		*str;
 
 	num = va_arg(ap, int);
-	if (num < 0)
+	if (num == 0)
+		detail->minus = OFF;
+	else if (num < 0)
 	{
 		detail->minus = ON;
 		detail->plus = OFF;
 	}
 	str = ft_itoa(num);
-	if (str[0] == '0')
-		detail->minus = OFF;
-	if (detail->sp == ON && num >= 0)
-		write(1, " ", 1);
-	if (detail->minus == ON && num != 0)
-		write(1, "-", 1);
-	else if (detail->plus == ON)
-		write(1, "+", 1);
+	print_sign(detail);
 	if (detail->align == LEFT)
 		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
 	print_width(detail, ft_strlen(str));
@@ -75,16 +70,9 @@ int	print_hex(t_detail *detail, va_list ap)
 
 	detail->base = 16;
 	if (detail->type == 'p')
-	{
 		num = (unsigned long)va_arg(ap, void *);
-		detail->alt = 2;
-	}	
 	else
-	{
 		num = va_arg(ap, unsigned int);
-		if (num == 0)
-			detail->alt = OFF;
-	}
 	str = ft_itoa_base(detail, num, HEX);
 	len = ft_strlen(str) + detail->alt;
 	if (detail->align == RIGHT && detail->pad == OFF)
@@ -106,6 +94,8 @@ char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 	size_t	idx;
 	char	*str;
 
+	if (detail->type != 'p' && num == 0)
+		detail->alt = OFF;
 	base_len = detail->base;
 	idx = numlen_base(num, base_len) + 1;
 	str = (char *)malloc(idx * sizeof(char));

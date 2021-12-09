@@ -63,6 +63,7 @@ size_t	numlen_base(unsigned long num, size_t base_len);
 
 void	print_width(t_detail *detail, int len);
 void	print_alt(t_detail *detail);
+void	print_sign(t_detail *detail);
 int		parse_len(t_detail *detail, int str_len);
 
 #endif

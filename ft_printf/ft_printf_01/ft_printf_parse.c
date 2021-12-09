@@ -119,8 +119,13 @@ int	detect_type(t_detail *detail, va_list ap)
 		len += print_char(detail, ap);
 	else if (type == 's')
 		len += print_str(detail, ap);
-	else if (type == 'x' || type == 'X' || type == 'p')
+	else if (type == 'x' || type == 'X')
 		len += print_hex(detail, ap);
+	else if (type == 'p')
+	{
+		detail->alt = 2;
+		len += print_hex(detail, ap);
+	}
 	else if (type == 'd' || type == 'i')
 		len += print_int(detail, ap);
 	else if (type == 'u')
