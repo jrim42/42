@@ -4,35 +4,35 @@ int main(void)
 {
     int len;
     
-    // printf("------------\n");
-    // printf("|%10s|\n", "abcd");
-    // printf("|%3s|\n", "abcd");
-    // printf("|%10c|\n", 'a');
-    // printf("|%3c|\n", 'a');
-    // printf("------------\n");
-    // len = ft_printf("|%10s|\n", "abcd");
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%3s|\n", "abcd");
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%10c|\n", 'a');
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%3c|\n", 'a');
-    // // printf("len : %d\n", len);
+    printf("------------\n");
+    printf("|%10s|\n", "abcd");
+    printf("|%3s|\n", "abcd");
+    printf("|%10c|\n", 'a');
+    printf("|%3c|\n", 'a');
+    printf("------------\n");
+    len = ft_printf("|%10s|\n", "abcd") - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%3s|\n", "abcd") - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%10c|\n", 'a') - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%3c|\n", 'a') - 3;
+    //printf("len : %d\n", len);
     
-    // printf("------------\n");
-    // printf("|%-10s|\n", "abcd");
-    // printf("|%-3s|\n", "abcd");
-    // printf("|%-10c|\n", 'a');
-    // printf("|%-3c|\n", 'a');
-    // printf("------------\n");
-    // len = ft_printf("|%-10s|\n", "abcd");
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%-3s|\n", "abcd");
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%-10c|\n", 'a');
-    // // printf("len : %d\n", len);
-    // len = ft_printf("|%-3c|\n", 'a');
-    // // printf("len : %d\n", len);
+    printf("------------\n");
+    printf("|%-10s|\n", "abcd");
+    printf("|%-3s|\n", "abcd");
+    printf("|%-10c|\n", 'a');
+    printf("|%-3c|\n", 'a');
+    printf("------------\n");
+    len = ft_printf("|%-10s|\n", "abcd") - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%-3s|\n", "abcd") - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%-10c|\n", 'a') - 3;
+    //printf("len : %d\n", len);
+    len = ft_printf("|%-3c|\n", 'a') - 3;
+    //printf("len : %d\n", len);
 
     // printf("------------\n");
     // len = printf("|%-10d|\n", 1234);
@@ -296,14 +296,14 @@ int main(void)
 
     // printf("|%p %p|\n", (void *)0, (void *)0);
     // ft_printf("|%p %p|\n", 0, 0);
-    printf("%+d\n", 10);
-    printf("% +d\n", 10);
-    printf("%+ d\n", 10);
-    printf("% d\n", -10);
-    printf("%+d\n", -10);
-    ft_printf("%+d\n", 10);
-    ft_printf("% +d\n", 10);
-    ft_printf("%+ d\n", 10);
-    ft_printf("% d\n", -10);
-    ft_printf("%+d\n", -10);
+    // printf("%+d\n", 10);
+    // printf("% +d\n", 10);
+    // printf("%+ d\n", 10);
+    // printf("% d\n", -10);
+    // printf("%+d\n", -10);
+    // ft_printf("%+d\n", 10);
+    // ft_printf("% +d\n", 10);
+    // ft_printf("%+ d\n", 10);
+    // ft_printf("% d\n", -10);
+    // ft_printf("%+d\n", -10);
 }
