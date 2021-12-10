@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:17:04 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 13:41:41 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 17:12:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_char(t_detail *detail, va_list ap)
 	ch = va_arg(ap, int);
 	str_len = 1;
 	ret_len = parse_strlen(detail, &str_len);
-	if (detail->align == LEFT)
+	if (detail->align != RIGHT)
 		write(1, &ch, 1);
 	print_width(detail, 1, ret_len);
 	if (detail->align == RIGHT)
@@ -44,7 +44,7 @@ int	print_str(t_detail *detail, va_list ap)
 		str = "(null)";
 	str_len = ft_strlen(str);
 	ret_len = parse_strlen(detail, &str_len);
-	if (detail->align == LEFT)
+	if (detail->align != RIGHT)
 		write(1, str, str_len);
 	print_width(detail, str_len, ret_len);
 	if (detail->align == RIGHT)

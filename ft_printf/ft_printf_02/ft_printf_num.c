@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 13:35:53 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 18:33:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@ int	print_int(t_detail *detail, va_list ap)
 	int			ret_len;
 
 	num = va_arg(ap, int);
-	if (num == 0)
-		detail->minus = OFF;
-	else if (num < 0)
+	if (num < 0)
 	{
-		detail->minus = ON;
-		detail->plus = OFF;
+		detail->sign = '-';
+		num *= -1;
 	}
-	str = ft_itoa(num);
+	str = ft_itoa_base(detail, num, DEC);
 	str_len = ft_strlen(str);
-	ret_len = parse_numlen(detail, ft_strlen(str));
-	print_sign(detail);
-	if (detail->align == LEFT)
-		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
-	print_width(detail, ft_strlen(str), ret_len);
+	ret_len = parse_numlen(detail, &str_len);
+	if (detail->align != RIGHT)
+	{
+		print_sign(detail);
+		write(1, str , ft_strlen(str));
+	}
+	if (detail->pad == ON)
+		print_sign(detail);
+	print_width(detail, str_len, ret_len);
 	if (detail->align == RIGHT)
-		write(1, str + detail->minus, ft_strlen(str) - detail->minus);
+		write(1, str , ft_strlen(str));
 	free(str);
 	return (ret_len);
 }
@@ -49,15 +51,17 @@ int	print_int(t_detail *detail, va_list ap)
 int	print_uns(t_detail *detail, va_list ap)
 {
 	unsigned int	num;
-	int				ret_len;
 	char			*str;
+	int				str_len;
+	int				ret_len;
 
 	num = va_arg(ap, unsigned int);
-	str = ft_itoa(num);
-	ret_len = parse_numlen(detail, ft_strlen(str));
-	if (detail->align == LEFT)
+	str = ft_itoa_base(detail, num, DEC);
+	str_len = ft_strlen(str);
+	ret_len = parse_numlen(detail, &str_len);
+	if (detail->align != RIGHT)
 		write(1, str, ft_strlen(str));
-	print_width(detail, ft_strlen(str), ret_len);
+	print_width(detail, str_len, ret_len);
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
 	free(str);
@@ -78,14 +82,14 @@ int	print_hex(t_detail *detail, va_list ap)
 		num = va_arg(ap, unsigned int);
 	str = ft_itoa_base(detail, num, HEX);
 	str_len = ft_strlen(str) + detail->alt;
-	ret_len = parse_numlen(detail, str_len);
+	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT && detail->pad == OFF)
 		print_width(detail, str_len, ret_len);
 	print_alt(detail);
 	if (detail->pad == ON)
 		print_width(detail, str_len, ret_len);
 	write(1, str, ft_strlen(str));
-	if (detail->align == LEFT && detail->pad == OFF)
+	if (detail->align != RIGHT && detail->pad == OFF)
 		print_width(detail, str_len, ret_len);
 	free(str);
 	return (ret_len);

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 13:48:50 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 18:33:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_width(t_detail *detail, int str_len, int ret_len);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
-int		parse_numlen(t_detail *detail, int str_len);
+int		parse_numlen(t_detail *detail, int *str_len);
 int		parse_strlen(t_detail *detail, int *str_len);
 
 void	print_width(t_detail *detail, int str_len, int ret_len)
@@ -44,30 +44,34 @@ void	print_alt(t_detail *detail)
 
 void	print_sign(t_detail *detail)
 {
-	if (detail->minus == ON)
-		write(1, "-", 1);
-	else if (detail->plus == ON)
-		write(1, "+", 1);
-	else if (detail->sp == ON)
-		write(1, " ", 1);
+	if (detail->sign != OFF)
+	{
+		write(1, &detail->sign, 1);
+		detail->sp = OFF;
+	}
+	else if (detail->sp != OFF)
+		write(1, &detail->sp, 1);
 }
 
-int	parse_numlen(t_detail *detail, int str_len)
+int	parse_numlen(t_detail *detail, int *str_len)
 {
-	int		len;
+	int		ret_len;
 	int		line_wid;
 
 	line_wid = 0;
-	len = str_len + detail->sp + detail->plus - detail->minus;
-	if (!detail->sp && detail->minus)
-		len++;
+	if (detail->type == 'd' || detail->type == 'i')
+		if (detail->sign != OFF || detail->sp != OFF)
+			*str_len += 1;
+	ret_len = *str_len;
 	if (detail->wid > detail->prec)
 		line_wid = detail->wid;
+	else if (detail->sign != OFF)
+		line_wid = detail->prec + 1;
 	else
-		line_wid = detail->prec + detail->minus;
-	if (len < line_wid)
-		len = line_wid;
-	return (len);
+		line_wid = detail->prec;
+	if (ret_len < line_wid)
+		ret_len = line_wid;
+	return (ret_len);
 }
 
 int		parse_strlen(t_detail *detail, int *str_len)

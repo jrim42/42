@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/06 20:42:50 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 18:28:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ void	init_detail(t_detail *detail)
 	detail->type = 0;
 	detail->align = LEFT;
 	detail->pad = OFF;
-	detail->sp = OFF;
 	detail->prec = -1;
 	detail->wid = OFF;
 	detail->alt = OFF;
-	detail->minus = OFF;
-	detail->plus = OFF;
+	detail->sp = OFF;
+	detail->sign = OFF;
 	detail->base = 10;
 }
