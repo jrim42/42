@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 19:05:11 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/11 00:36:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 				len += detect_type(detail, ap);
 			}
 		}
+		init_detail(detail);
 		form++;
 	}
 	return (len);
