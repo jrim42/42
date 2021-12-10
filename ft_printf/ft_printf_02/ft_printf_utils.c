@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 18:33:15 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:04:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parse_numlen(t_detail *detail, int *str_len)
 	return (ret_len);
 }
 
-int		parse_strlen(t_detail *detail, int *str_len)
+int	parse_strlen(t_detail *detail, int *str_len)
 {
 	int	ret_len;
 

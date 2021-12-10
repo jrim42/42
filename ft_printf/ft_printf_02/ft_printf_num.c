@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 18:33:08 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:05:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	print_int(t_detail *detail, va_list ap)
 	if (detail->align != RIGHT)
 	{
 		print_sign(detail);
-		write(1, str , ft_strlen(str));
+		write(1, str, ft_strlen(str));
 	}
 	if (detail->pad == ON)
 		print_sign(detail);
 	print_width(detail, str_len, ret_len);
 	if (detail->align == RIGHT)
-		write(1, str , ft_strlen(str));
+		write(1, str, ft_strlen(str));
 	free(str);
 	return (ret_len);
 }

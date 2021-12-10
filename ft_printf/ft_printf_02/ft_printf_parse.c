@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 18:33:27 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/10 19:05:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 	if (ft_isdigit(*form) == 1)
 		detail->wid = ft_atoi(form);
 	else if (*form == '*')
-	 	detail->wid = va_arg(ap, int);
+		detail->wid = va_arg(ap, int);
 	if (detail->align == OFF || detail->pad == ON)
 		detail->align = RIGHT;
 	flag_len += numlen_base(detail->wid, 10);
