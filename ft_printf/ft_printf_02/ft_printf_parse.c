@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/11 00:36:16 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/12 16:35:34 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,21 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 	return (form_len);
 }
 
+int	parse_width(char *form, t_detail *detail, va_list ap)
+{
+	int	flag_len;
+
+	flag_len = 0;
+	if (ft_isdigit(*form) == 1)
+		detail->wid = ft_atoi(form);
+	else if (*form == '*')
+		detail->wid = va_arg(ap, int);
+	if (detail->align == OFF || detail->pad == ON)
+		detail->align = RIGHT;
+	flag_len += numlen_base(detail->wid, 10);
+	return (flag_len);
+}
+
 int	parse_prec(char *form, t_detail *detail)
 {
 	int	flag_len;
@@ -89,21 +104,6 @@ int	parse_prec(char *form, t_detail *detail)
 		flag_len++;
 	}
 	flag_len += numlen_base(detail->prec, 10);
-	return (flag_len);
-}
-
-int	parse_width(char *form, t_detail *detail, va_list ap)
-{
-	int	flag_len;
-
-	flag_len = 0;
-	if (ft_isdigit(*form) == 1)
-		detail->wid = ft_atoi(form);
-	else if (*form == '*')
-		detail->wid = va_arg(ap, int);
-	if (detail->align == OFF || detail->pad == ON)
-		detail->align = RIGHT;
-	flag_len += numlen_base(detail->wid, 10);
 	return (flag_len);
 }
 
