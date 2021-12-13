@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/12 16:35:34 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:54:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		detail->sign = '+';
 	else if (*form == ' ')
 		detail->sp = ' ';
-	else if (*form == '0')
+	else if (*form == '0' && detail->align != LEFT)
 		detail->pad = ON;
 	else if (*form == '-')
+	{
 		detail->align = LEFT;
+		detail->pad = OFF;
+	}
 	else if (*form == '.')
 		form_len += parse_prec(++form, detail);
 	else

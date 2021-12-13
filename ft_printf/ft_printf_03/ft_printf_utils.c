@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 00:20:09 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:49:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int		parse_strlen(t_detail *detail, int *str_len);
 
 void	fill_str(t_detail *detail, int str_len, int ret_len)
 {
+	// 여기를 수정해야만 한다...
 	int	cnt;
 
 	cnt = ret_len - str_len;
-	if (detail->type == 'c' || detail->type == 's')
+	if (detail->align == LEFT || detail->type == 'c' || detail->type == 's')
 		detail->pad = OFF;
 	if (detail->pad == OFF)
 		while (cnt-- > 0)
