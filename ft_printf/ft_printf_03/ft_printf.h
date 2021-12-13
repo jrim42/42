@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/12 16:35:04 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:05:18 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		print_hex(t_detail *detail, va_list ap);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 
-void	print_width(t_detail *detail, int str_len, int ret_len);
+void	fill_str(t_detail *detail, int str_len, int ret_len);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
 int		parse_numlen(t_detail *detail, int *str_len);

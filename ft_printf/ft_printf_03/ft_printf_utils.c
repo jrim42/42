@@ -6,19 +6,19 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/10 19:04:41 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:20:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_width(t_detail *detail, int str_len, int ret_len);
+void	fill_str(t_detail *detail, int str_len, int ret_len);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
 int		parse_numlen(t_detail *detail, int *str_len);
 int		parse_strlen(t_detail *detail, int *str_len);
 
-void	print_width(t_detail *detail, int str_len, int ret_len)
+void	fill_str(t_detail *detail, int str_len, int ret_len)
 {
 	int	cnt;
 
@@ -58,24 +58,23 @@ void	print_sign(t_detail *detail)
 int	parse_numlen(t_detail *detail, int *str_len)
 {
 	int		ret_len;
-	int		line_wid;
 
-	line_wid = 0;
-	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
-		if (detail->prec == -1)
-			*str_len += detail->alt;
-	if (detail->type == 'd' || detail->type == 'i')
-		if (detail->sign != OFF || detail->sp != OFF)
-			*str_len += 1;
 	ret_len = *str_len;
-	if (detail->wid > detail->prec)
-		line_wid = detail->wid;
-	else if (detail->sign != OFF)
-		line_wid = detail->prec + 1;
-	else
-		line_wid = detail->prec;
-	if (ret_len < line_wid)
-		ret_len = line_wid;
+	if (detail->prec != -1 && detail->prec > *str_len)
+		ret_len = detail->prec;
+	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
+	{
+		ret_len += detail->alt;
+		*str_len += detail->alt;
+	}
+	else if (detail->type == 'd' || detail->type == 'i')
+		if (detail->sign != OFF || detail->sp != OFF)
+		{
+			ret_len += 1;
+			*str_len += 1;
+		}
+	if (ret_len < detail->wid)
+		ret_len = detail->wid;
 	return (ret_len);
 }
 

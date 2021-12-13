@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/11 00:50:30 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 00:05:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	print_int(t_detail *detail, va_list ap)
 	}
 	if (detail->pad == ON)
 		print_sign(detail);
-	print_width(detail, str_len, ret_len);
+	fill_str(detail, str_len, ret_len);
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
 	free(str);
@@ -59,7 +59,7 @@ int	print_uns(t_detail *detail, va_list ap)
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align != RIGHT)
 		write(1, str, ft_strlen(str));
-	print_width(detail, str_len, ret_len);
+	fill_str(detail, str_len, ret_len);
 	if (detail->align == RIGHT)
 		write(1, str, ft_strlen(str));
 	free(str);
@@ -82,13 +82,13 @@ int	print_hex(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT && detail->pad == OFF)
-		print_width(detail, str_len, ret_len);
+		fill_str(detail, str_len, ret_len);
 	print_alt(detail);
 	if (detail->pad == ON)
-		print_width(detail, str_len, ret_len);
+		fill_str(detail, str_len, ret_len);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT && detail->pad == OFF)
-		print_width(detail, str_len, ret_len);
+		fill_str(detail, str_len, ret_len);
 	free(str);
 	return (ret_len);
 }
