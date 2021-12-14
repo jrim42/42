@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 17:45:50 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:34:07 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		form_len += parse_prec(++form, detail);
 	else
 		form_len += parse_width(form, detail, ap) - 1;
-	// if (detail->align == LEFT)
-	//  	printf("LEFT\n");
-	// else
-	// 	printf("NOT LEFT\n");
 	return (form_len);
 }
 
@@ -111,13 +107,8 @@ int	parse_prec(char *form, t_detail *detail)
 	}
 	detail->prec = ft_atoi(form);
 	detail->pad = ON;
-	// detail->align = RIGHT;
-	// if (detail->prec < 0)
-	// {
-	// 	detail->prec *= -1;
-	// 	detail->align = LEFT;
-	// 	flag_len++;
-	// }
+	if (detail->align != LEFT)
+		detail->align = RIGHT;
 	flag_len += numlen_base(detail->prec, 10);
 	return (flag_len);
 }

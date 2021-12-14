@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:17:04 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 17:41:44 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 17:50:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	print_char(t_detail *detail, va_list ap)
 	str_len = 1;
 	ret_len = parse_strlen(detail, &str_len);
 	if (detail->align == RIGHT)
-		fill_str(detail, ret_len - 1, 0);
+		fill_str(ret_len - 1, 0);
 	write(1, &ch, 1);
 	if (detail->align != RIGHT)
-		fill_str(detail, ret_len - 1, 0);
+		fill_str(ret_len - 1, 0);
 	return (ret_len);
 }
 
@@ -48,10 +48,10 @@ int	print_str(t_detail *detail, va_list ap)
 	// printf("prec : %d\n", detail->prec);
 	// printf("str : %d\n", str_len);
 	if (detail->align == RIGHT)
-		fill_str(detail, ret_len - str_len, 0);
+		fill_str(ret_len - str_len, 0);
 	write(1, str, str_len);
 	if (detail->align != RIGHT)
-		fill_str(detail, ret_len - str_len, 0);
+		fill_str(ret_len - str_len, 0);
 	return (ret_len);
 }
 

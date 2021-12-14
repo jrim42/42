@@ -6,26 +6,26 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 17:37:12 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:11:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	fill_str(t_detail *detail, int str_len, int ret_len);
+void	fill_str(int cnt, int pad);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
 int		parse_numlen(t_detail *detail, int *str_len);
 int		parse_strlen(t_detail *detail, int *str_len);
 
-void	fill_str(t_detail *detail, int cnt, int pad)
+void	fill_str(int cnt, int pad)
 {
-	if (pad == 0)
-		while (cnt-- > 0)
-			write(1, " ", 1);
-	else
+	if (pad == 1)
 		while (cnt-- > 0)
 			write(1, "0", 1);
+	else
+		while (cnt-- > 0)
+			write(1, " ", 1);
 }
 
 void	print_alt(t_detail *detail)
