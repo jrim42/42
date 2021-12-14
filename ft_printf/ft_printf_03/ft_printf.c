@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/11 00:35:13 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 15:26:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	init_detail(t_detail *detail)
 	detail->prec = -1;
 	detail->wid = OFF;
 	detail->alt = OFF;
-	detail->sp = OFF;
 	detail->sign = OFF;
 	detail->base = 10;
 }

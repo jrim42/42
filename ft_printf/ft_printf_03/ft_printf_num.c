@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 00:05:32 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:02:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,19 @@ int	print_int(t_detail *detail, va_list ap)
 	str = ft_itoa_base(detail, num, DEC);
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
-	if (detail->align != RIGHT)
-	{
-		print_sign(detail);
-		write(1, str, ft_strlen(str));
-	}
-	if (detail->pad == ON)
-		print_sign(detail);
-	fill_str(detail, str_len, ret_len);
+	// printf("wid : %d\n", detail->wid);
+	// printf("prec : %d\n", detail->prec);
+	// printf("str : %d\n", str_len);
 	if (detail->align == RIGHT)
-		write(1, str, ft_strlen(str));
+    	fill_str(detail, ret_len, detail->wid);
+	print_sign(detail);
+	fill_str(detail, ft_strlen(str), detail->prec);
+	write(1, str, ft_strlen(str));
+	if (detail->align != RIGHT && detail->pad == OFF)
+    	fill_str(detail, ret_len, detail->wid);
 	free(str);
+	if (ret_len < detail->wid)
+		ret_len = detail->wid;
 	return (ret_len);
 }
 
@@ -81,14 +83,17 @@ int	print_hex(t_detail *detail, va_list ap)
 	str = ft_itoa_base(detail, num, HEX);
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
-	if (detail->align == RIGHT && detail->pad == OFF)
-		fill_str(detail, str_len, ret_len);
+	// if (detail->align == RIGHT)
+	// 	printf("RIGHT\n");
+	// else if (detail->align == LEFT)
+	// 	printf("LEFT\n");
+	if (detail->align == RIGHT)
+    	fill_str(detail, ret_len, detail->wid);
 	print_alt(detail);
-	if (detail->pad == ON)
-		fill_str(detail, str_len, ret_len);
+	fill_str(detail, ft_strlen(str), detail->prec);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT && detail->pad == OFF)
-		fill_str(detail, str_len, ret_len);
+    	fill_str(detail, ret_len, detail->wid);
 	free(str);
 	return (ret_len);
 }

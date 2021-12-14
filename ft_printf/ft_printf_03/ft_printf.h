@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 00:05:18 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 15:26:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_detail
 	int		prec;
 	int		wid;
 	int		alt;
-	char	sp;
 	char	sign;
 	int		base;
 }			t_detail;
