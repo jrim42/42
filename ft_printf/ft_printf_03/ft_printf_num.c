@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 18:33:01 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 19:13:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	print_int(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT)
-    	fill_str(detail->wid - ret_len, 0);
+    	fill_str(detail, detail->wid - ret_len, 0);
 	print_sign(detail);
-	fill_str(detail->prec - ft_strlen(str), detail->pad);
+	fill_str(detail, detail->prec - ft_strlen(str), detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_str(detail->wid - ret_len, 0);
+    	fill_str(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
@@ -59,10 +59,10 @@ int	print_uns(t_detail *detail, va_list ap)
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
 	if (detail->align == RIGHT)
-		fill_str(ret_len - str_len, detail->pad);
+		fill_str(detail, ret_len - str_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-		fill_str(ret_len - str_len, 0);
+		fill_str(detail, ret_len - str_len, 0);
 	free(str);
 	return (ret_len);
 }
@@ -82,20 +82,13 @@ int	print_hex(t_detail *detail, va_list ap)
 	str = ft_itoa_base(detail, num, HEX);
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
-	// if (detail->align == RIGHT)
-	// 	printf("RIGHT\n");
-	// else if (detail->align == LEFT)
-	// 	printf("LEFT\n");
-	// printf("wid : %d\n", detail->wid);
-	// printf("prec : %d\n", detail->prec);
-	// printf("str : %d\n", str_len);
 	if (detail->align == RIGHT)
-    	fill_str(detail->wid - ret_len, 0);
+    	fill_str(detail, detail->wid - ret_len, 0);
 	print_alt(detail);
-	fill_str(detail->prec - ft_strlen(str), detail->pad);
+	fill_str(detail, detail->prec - ft_strlen(str), detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_str(detail->wid - ret_len, 0);
+    	fill_str(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
