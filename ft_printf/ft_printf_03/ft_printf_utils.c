@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 15:52:37 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 17:37:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,12 @@ void	print_sign(t_detail *detail);
 int		parse_numlen(t_detail *detail, int *str_len);
 int		parse_strlen(t_detail *detail, int *str_len);
 
-void	fill_str(t_detail *detail, int len_1, int len_2)
+void	fill_str(t_detail *detail, int cnt, int pad)
 {
-	// 여기를 수정해야만 한다...
-	int	cnt;
-
-	cnt = len_2 - len_1;
-	if (detail->align == LEFT || detail->type == 'c' || detail->type == 's')
-		detail->pad = OFF;
-	if (detail->pad == OFF)
+	if (pad == 0)
 		while (cnt-- > 0)
 			write(1, " ", 1);
-	if (detail->align != LEFT)
+	else
 		while (cnt-- > 0)
 			write(1, "0", 1);
 }
@@ -82,6 +76,5 @@ int	parse_strlen(t_detail *detail, int *str_len)
 	ret_len = *str_len;
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
-	// printf("wid : %d\n", detail->wid);
 	return (ret_len);
 }

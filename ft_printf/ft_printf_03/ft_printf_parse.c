@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 15:26:18 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/14 17:45:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		detail->sign = '+';
 	else if (*form == ' ' && detail->sign == OFF)
 		detail->sign = ' ';
-	else if (*form == '0' && detail->align != LEFT)
+	else if (*form == '0')
 		detail->pad = ON;
 	else if (*form == '-')
 	{
@@ -69,6 +69,10 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		form_len += parse_prec(++form, detail);
 	else
 		form_len += parse_width(form, detail, ap) - 1;
+	// if (detail->align == LEFT)
+	//  	printf("LEFT\n");
+	// else
+	// 	printf("NOT LEFT\n");
 	return (form_len);
 }
 
@@ -89,7 +93,7 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 		}
 		detail->wid *= (detail->wid > 0) - (detail->wid < 0);
 	}
-	if (detail->align == OFF || detail->pad == ON)
+	if (detail->align == OFF)
 		detail->align = RIGHT;
 	flag_len += numlen_base(detail->wid, 10);
 	return (flag_len);
