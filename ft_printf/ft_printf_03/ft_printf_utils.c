@@ -12,22 +12,35 @@
 
 #include "ft_printf.h"
 
-void	fill_str(t_detail *detail, int cnt, int pad);
+void	fill_width(t_detail *detail, int cnt, int pad);
+void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
-int		parse_numlen(t_detail *detail, int *str_len);
-int		parse_strlen(t_detail *detail, int *str_len);
+char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
+size_t	numlen_base(unsigned long num, size_t base_len);
 
-void	fill_str(t_detail *detail, int cnt, int pad)
+void	fill_width(t_detail *detail, int cnt, int pad)
 {
-	if (detail->pad == ON && detail->prec == -1)
-		pad = 1;
+	if (detail->sign != OFF && detail->prec == -1)
+		return ;
+	else if (detail->type != 'c' && detail->type != 's')
+		if (detail->pad == ON && detail->prec == -1)
+			pad = 1;
 	if (pad == 1)
 		while (cnt-- > 0)
 			write(1, "0", 1);
 	else
 		while (cnt-- > 0)
 			write(1, " ", 1);
+}
+
+void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad)
+{
+	if (detail->sign != OFF && detail->prec == -1)
+		cnt = detail->wid - ret_len;
+	if (pad == 1)
+		while (cnt-- > 0)
+			write(1, "0", 1);
 }
 
 void	print_alt(t_detail *detail)
@@ -41,42 +54,49 @@ void	print_alt(t_detail *detail)
 	}
 }
 
-void	print_sign(t_detail *detail)
-{
-	if (detail->sign != OFF)
-		write(1, &detail->sign, 1);
-}
+// void	print_sign(t_detail *detail)
+// {
+// 	if (detail->sign != OFF)
+// 		write(1, &detail->sign, 1);
+// }
 
-int	parse_numlen(t_detail *detail, int *str_len)
+char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 {
-	int		ret_len;
+	size_t	base_len;
+	size_t	idx;
+	char	*str;
 
-	ret_len = *str_len;
-	if (detail->prec != -1 && detail->prec > *str_len)
-		ret_len = detail->prec;
-	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
+	if (detail->type != 'p' && num == 0)
+		detail->alt = OFF;
+	base_len = detail->base;
+	idx = numlen_base(num, base_len) + 1;
+	str = (char *)malloc(idx * sizeof(char));
+	if (!str)
+		return (0);
+	str[0] = '0';
+	str[--idx] = '\0';
+	while (idx-- > 0 && num > 0)
 	{
-		ret_len += detail->alt;
-		*str_len += detail->alt;
+		str[idx] = base[num % base_len];
+		num /= base_len;
 	}
-	else if (detail->type == 'd' || detail->type == 'i')
-		if (detail->sign != OFF)
-		{
-			ret_len += 1;
-			*str_len += 1;
-		}
-	return (ret_len);
+	if (detail->type == 'X')
+		while (str[++idx])
+			str[idx] = ft_toupper(str[idx]);
+	return (str);
 }
 
-int	parse_strlen(t_detail *detail, int *str_len)
+size_t	numlen_base(unsigned long num, size_t base_len)
 {
-	int	ret_len;
+	int	len;
 
-	if (detail->type == 's')
-		if (detail->prec != -1 && detail->prec < *str_len)
-			*str_len = detail->prec;
-	ret_len = *str_len;
-	if (ret_len < detail->wid)
-		ret_len = detail->wid;
-	return (ret_len);
+	len = 0;
+	if (num == 0)
+		return (1);
+	while (num > 0)
+	{
+		len++;
+		num /= base_len;
+	}
+	return (len);
 }

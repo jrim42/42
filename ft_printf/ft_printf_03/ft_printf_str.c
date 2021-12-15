@@ -12,9 +12,10 @@
 
 #include "ft_printf.h"
 
-int	print_char(t_detail *detail, va_list ap);
-int	print_str(t_detail *detail, va_list ap);
-int	print_per(void);
+int		print_char(t_detail *detail, va_list ap);
+int		print_str(t_detail *detail, va_list ap);
+int		print_per(void);
+int		parse_strlen(t_detail *detail, int *str_len);
 
 int	print_char(t_detail *detail, va_list ap)
 {
@@ -26,10 +27,10 @@ int	print_char(t_detail *detail, va_list ap)
 	str_len = 1;
 	ret_len = parse_strlen(detail, &str_len);
 	if (detail->align == RIGHT)
-		fill_str(detail, ret_len - 1, 0);
+		fill_width(detail, ret_len - 1, detail->pad);
 	write(1, &ch, 1);
 	if (detail->align != RIGHT)
-		fill_str(detail, ret_len - 1, 0);
+		fill_width(detail, ret_len - 1, 0);
 	return (ret_len);
 }
 
@@ -44,14 +45,11 @@ int	print_str(t_detail *detail, va_list ap)
 		str = "(null)";
 	str_len = ft_strlen(str);
 	ret_len = parse_strlen(detail, &str_len);
-	// printf("wid : %d\n", detail->wid);
-	// printf("prec : %d\n", detail->prec);
-	// printf("str : %d\n", str_len);
 	if (detail->align == RIGHT)
-		fill_str(detail, ret_len - str_len, 0);
+		fill_width(detail, ret_len - str_len, detail->pad);
 	write(1, str, str_len);
 	if (detail->align != RIGHT)
-		fill_str(detail, ret_len - str_len, 0);
+		fill_width(detail, ret_len - str_len, 0);
 	return (ret_len);
 }
 
@@ -59,4 +57,17 @@ int	print_per(void)
 {
 	write(1, "%", 1);
 	return (1);
+}
+
+int	parse_strlen(t_detail *detail, int *str_len)
+{
+	int	ret_len;
+
+	if (detail->type == 's')
+		if (detail->prec != -1 && detail->prec < *str_len)
+			*str_len = detail->prec;
+	ret_len = *str_len;
+	if (ret_len < detail->wid)
+		ret_len = detail->wid;
+	return (ret_len);
 }

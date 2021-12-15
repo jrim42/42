@@ -53,17 +53,18 @@ int		detect_type(t_detail *detail, va_list ap);
 int		print_char(t_detail *detail, va_list ap);
 int		print_str(t_detail *detail, va_list ap);
 int		print_per(void);
+int		parse_strlen(t_detail *detail, int *str_len);
 
 int		print_int(t_detail *detail, va_list arg_ptr);
 int		print_uns(t_detail *detail, va_list arg_ptr);
 int		print_hex(t_detail *detail, va_list ap);
-char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
-size_t	numlen_base(unsigned long num, size_t base_len);
+int		parse_numlen(t_detail *detail, int *str_len);
 
-void	fill_str(t_detail *detail, int cnt, int pad);
+void	fill_width(t_detail *detail, int cnt, int pad);
+void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
 void	print_alt(t_detail *detail);
 void	print_sign(t_detail *detail);
-int		parse_numlen(t_detail *detail, int *str_len);
-int		parse_strlen(t_detail *detail, int *str_len);
+char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
+size_t	numlen_base(unsigned long num, size_t base_len);
 
 #endif

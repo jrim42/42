@@ -15,8 +15,7 @@
 int		print_int(t_detail *detail, va_list ap);
 int		print_uns(t_detail *detail, va_list ap);
 int		print_hex(t_detail *detail, va_list ap);
-char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
-size_t	numlen_base(unsigned long num, size_t base_len);
+int		parse_numlen(t_detail *detail, int *str_len);
 
 int	print_int(t_detail *detail, va_list ap)
 {
@@ -33,12 +32,14 @@ int	print_int(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT)
-    	fill_str(detail, detail->wid - ret_len, 0);
-	print_sign(detail);
-	fill_str(detail, detail->prec - ft_strlen(str), detail->pad);
+    	fill_width(detail, detail->wid - ret_len, 0);
+	// print_sign(detail);
+	if (detail->sign != OFF)
+		write(1, &detail->sign, 1);
+	fill_prec(detail, detail->prec - ft_strlen(str), ret_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_str(detail, detail->wid - ret_len, 0);
+    	fill_width(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
@@ -59,10 +60,10 @@ int	print_uns(t_detail *detail, va_list ap)
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
 	if (detail->align == RIGHT)
-		fill_str(detail, ret_len - str_len, detail->pad);
+		fill_width(detail, ret_len - str_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-		fill_str(detail, ret_len - str_len, 0);
+		fill_width(detail, ret_len - str_len, 0);
 	free(str);
 	return (ret_len);
 }
@@ -83,55 +84,35 @@ int	print_hex(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT)
-    	fill_str(detail, detail->wid - ret_len, 0);
+    	fill_width(detail, detail->wid - ret_len, 0);
 	print_alt(detail);
-	fill_str(detail, detail->prec - ft_strlen(str), detail->pad);
+	fill_prec(detail, detail->prec - ft_strlen(str), ret_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_str(detail, detail->wid - ret_len, 0);
+    	fill_width(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
 	return (ret_len);
 }
 
-char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
+int	parse_numlen(t_detail *detail, int *str_len)
 {
-	size_t	base_len;
-	size_t	idx;
-	char	*str;
+	int		ret_len;
 
-	if (detail->type != 'p' && num == 0)
-		detail->alt = OFF;
-	base_len = detail->base;
-	idx = numlen_base(num, base_len) + 1;
-	str = (char *)malloc(idx * sizeof(char));
-	if (!str)
-		return (0);
-	str[0] = '0';
-	str[--idx] = '\0';
-	while (idx-- > 0 && num > 0)
+	ret_len = *str_len;
+	if (detail->prec != -1 && detail->prec > *str_len)
+		ret_len = detail->prec;
+	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
 	{
-		str[idx] = base[num % base_len];
-		num /= base_len;
+		ret_len += detail->alt;
+		*str_len += detail->alt;
 	}
-	if (detail->type == 'X')
-		while (str[++idx])
-			str[idx] = ft_toupper(str[idx]);
-	return (str);
-}
-
-size_t	numlen_base(unsigned long num, size_t base_len)
-{
-	int	len;
-
-	len = 0;
-	if (num == 0)
-		return (1);
-	while (num > 0)
-	{
-		len++;
-		num /= base_len;
-	}
-	return (len);
+	else if (detail->type == 'd' || detail->type == 'i')
+		if (detail->sign != OFF)
+		{
+			ret_len += 1;
+			*str_len += 1;
+		}
+	return (ret_len);
 }
