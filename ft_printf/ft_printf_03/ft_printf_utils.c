@@ -21,11 +21,13 @@ size_t	numlen_base(unsigned long num, size_t base_len);
 
 void	fill_width(t_detail *detail, int cnt, int pad)
 {
-	if (detail->sign != OFF && detail->prec == -1)
-		return ;
-	else if (detail->type != 'c' && detail->type != 's')
-		if (detail->pad == ON && detail->prec == -1)
+	if (detail->type != 'c' && detail->type != 's')
+	{
+		if (detail->align == RIGHT && detail->sign != OFF && detail->prec == -1)
+			return ;
+		else if (detail->pad == ON && detail->prec == -1)
 			pad = 1;
+	}
 	if (pad == 1)
 		while (cnt-- > 0)
 			write(1, "0", 1);
