@@ -14,10 +14,8 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"

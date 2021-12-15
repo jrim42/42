@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 19:13:12 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/15 14:09:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int	print_int(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT)
-    	fill_width(detail, detail->wid - ret_len, 0);
-	// print_sign(detail);
+		fill_width(detail, detail->wid - ret_len, 0);
 	if (detail->sign != OFF)
 		write(1, &detail->sign, 1);
 	fill_prec(detail, detail->prec - ft_strlen(str), ret_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_width(detail, detail->wid - ret_len, 0);
+		fill_width(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
@@ -84,12 +83,12 @@ int	print_hex(t_detail *detail, va_list ap)
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
 	if (detail->align == RIGHT)
-    	fill_width(detail, detail->wid - ret_len, 0);
+		fill_width(detail, detail->wid - ret_len, 0);
 	print_alt(detail);
 	fill_prec(detail, detail->prec - ft_strlen(str), ret_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-    	fill_width(detail, detail->wid - ret_len, 0);
+		fill_width(detail, detail->wid - ret_len, 0);
 	free(str);
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
@@ -109,10 +108,12 @@ int	parse_numlen(t_detail *detail, int *str_len)
 		*str_len += detail->alt;
 	}
 	else if (detail->type == 'd' || detail->type == 'i')
+	{
 		if (detail->sign != OFF)
 		{
 			ret_len += 1;
 			*str_len += 1;
 		}
+	}
 	return (ret_len);
 }

@@ -15,17 +15,18 @@
 void	fill_width(t_detail *detail, int cnt, int pad);
 void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
 void	print_alt(t_detail *detail);
-void	print_sign(t_detail *detail);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 
 void	fill_width(t_detail *detail, int cnt, int pad)
 {
-	if (detail->type != 'c' && detail->type != 's')
+	if (detail->type != 'c' && detail->type != 's' && detail->prec == -1)
 	{
-		if (detail->align == RIGHT && detail->sign != OFF && detail->prec == -1)
+		if (detail->align == RIGHT && detail->sign != OFF)
 			return ;
-		else if (detail->pad == ON && detail->prec == -1)
+		else if (detail->align == RIGHT && detail->alt != OFF && detail->pad == ON)
+			return ;
+		else if (detail->pad == ON)
 			pad = 1;
 	}
 	if (pad == 1)
@@ -38,7 +39,7 @@ void	fill_width(t_detail *detail, int cnt, int pad)
 
 void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad)
 {
-	if (detail->sign != OFF && detail->prec == -1)
+	if ((detail->sign != OFF || detail->alt != OFF) && detail->prec == -1)
 		cnt = detail->wid - ret_len;
 	if (pad == 1)
 		while (cnt-- > 0)
@@ -55,12 +56,6 @@ void	print_alt(t_detail *detail)
 			write(1, "0x", 2);
 	}
 }
-
-// void	print_sign(t_detail *detail)
-// {
-// 	if (detail->sign != OFF)
-// 		write(1, &detail->sign, 1);
-// }
 
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 {
