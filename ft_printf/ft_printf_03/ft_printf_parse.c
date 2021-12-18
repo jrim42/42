@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 18:34:07 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/18 18:29:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_form(char *form, t_detail *detail, va_list ap);
 int	parse_flag(char *form, t_detail *detail, va_list ap);
-int	parse_prec(char *form, t_detail *detail);
+int	parse_prec(char *form, t_detail *detail, va_list ap);
 int	parse_width(char *form, t_detail *detail, va_list ap);
 int	detect_type(t_detail *detail, va_list ap);
 
@@ -66,7 +66,7 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		detail->pad = OFF;
 	}
 	else if (*form == '.')
-		form_len += parse_prec(++form, detail);
+		form_len += parse_prec(++form, detail, ap);
 	else
 		form_len += parse_width(form, detail, ap) - 1;
 	return (form_len);
@@ -78,7 +78,10 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 
 	flag_len = 0;
 	if (ft_isdigit(*form) == 1)
+	{
 		detail->wid = ft_atoi(form);
+		flag_len += numlen_base(detail->wid, 10);
+	}
 	else if (*form == '*')
 	{
 		detail->wid = va_arg(ap, int);
@@ -91,25 +94,35 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 	}
 	if (detail->align == OFF)
 		detail->align = RIGHT;
-	flag_len += numlen_base(detail->wid, 10);
 	return (flag_len);
 }
 
-int	parse_prec(char *form, t_detail *detail)
+int	parse_prec(char *form, t_detail *detail, va_list ap)
 {
 	int	flag_len;
 
 	flag_len = 0;
-	if (ft_isdigit(*form) == 0)
+	if (*form == '*')
 	{
-		detail->prec = 0;
-		return (flag_len);
+		detail->prec = va_arg(ap, int);
+		if (detail->prec < 0)
+		{
+			detail->prec = -1;
+			return (1);
+		}
 	}
-	detail->prec = ft_atoi(form);
-	detail->pad = ON;
-	if (detail->align != LEFT)
+	else if (ft_isdigit(*form) == 0)
+		detail->prec = 0;
+	else
+	{
+		detail->prec = ft_atoi(form);
+		flag_len += numlen_base(detail->prec, 10);
+	}
+	if (detail->align != LEFT && detail->prec > 0)
+	{
+		detail->pad = ON;
 		detail->align = RIGHT;
-	flag_len += numlen_base(detail->prec, 10);
+	}
 	return (flag_len);
 }
 
