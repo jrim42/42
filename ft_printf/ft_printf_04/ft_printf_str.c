@@ -39,6 +39,7 @@ int	print_str(t_detail *detail, va_list ap)
 	const char	*str;
 	int			ret_len;
 
+	//printf("in\n");
 	str = va_arg(ap, char *);
 	if (!str)
 		str = "(null)";
@@ -62,6 +63,7 @@ int	parse_strlen(t_detail *detail)
 {
 	int		ret_len;
 
+	//printf("%d\n", detail->str_len);
 	if (detail->type == 's')
 		if (detail->prec != -1 && detail->prec < detail->str_len)
 			detail->str_len = detail->prec;

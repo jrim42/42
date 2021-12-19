@@ -79,6 +79,8 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 			return (1);
 		}
 	}
+	else if (ft_isdigit(*form) == 0 && *form != '-')
+		detail->prec = 0;
 	else
 	{
 		detail->prec = ft_atoi(form);
