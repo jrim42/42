@@ -15,6 +15,7 @@
 int		ft_printf(const char *form, ...);
 void	init_detail(t_detail *detail);
 int		parse_form(char *form, t_detail *detail, va_list ap);
+int		check_type(char *form, t_detail *detail);
 
 int	ft_printf(const char *form, ...)
 {
@@ -63,14 +64,27 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 			form++;
 			while (ft_strchr(TYPE, *form) == 0 && *form != '\0')
 				form += parse_flag(form, detail, ap);
-			if (ft_strchr(TYPE, *form) != 0 && *form != '\0')
-			{
-				detail->type = *form;
+			if (check_type(form, detail) == 1)
 				len += detect_type(detail, ap);
-			}
+			else
+				len += print_else(detail);
 			init_detail(detail);
 			form++;
 		}
 	}
 	return (len);
+}
+
+int		check_type(char *form, t_detail *detail)
+{
+	while (*form != '\0')
+	{
+		if (ft_strchr(TYPE, *form) != 0)
+		{
+			detail->type = *form;
+			return (1);
+		}
+		form++;
+	}
+	return (0);
 }

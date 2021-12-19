@@ -16,6 +16,7 @@ int		print_char(t_detail *detail, va_list ap);
 int		print_str(t_detail *detail, va_list ap);
 int		print_per(void);
 int		parse_strlen(t_detail *detail);
+int		print_else(t_detail *detail);
 
 int	print_char(t_detail *detail, va_list ap)
 {
@@ -68,4 +69,12 @@ int	parse_strlen(t_detail *detail)
 	if (ret_len < detail->wid)
 		ret_len = detail->wid;
 	return (ret_len);
+}
+
+int		print_else(t_detail *detail)
+{
+	int len;
+
+	len = detail->str_len;
+	return (0);
 }

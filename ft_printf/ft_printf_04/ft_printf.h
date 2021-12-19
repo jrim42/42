@@ -52,15 +52,16 @@ int		parse_width(char *form, t_detail *detail, va_list ap);
 int		parse_prec(char *form, t_detail *detail, va_list ap);
 int		detect_type(t_detail *detail, va_list ap);
 
-int		print_char(t_detail *detail, va_list ap);
-int		print_str(t_detail *detail, va_list ap);
-int		print_per(void);
-int		parse_strlen(t_detail *detail);
-
 int		parse_int(t_detail *detail, va_list ap);
 int		parse_hex(t_detail *detail, va_list ap);
 int		print_num(t_detail *detail, char *str);
 int		parse_numlen(t_detail *detail);
+
+int		print_char(t_detail *detail, va_list ap);
+int		print_str(t_detail *detail, va_list ap);
+int		print_per(void);
+int		parse_strlen(t_detail *detail);
+int		print_else(t_detail *detail);
 
 void	fill_width(t_detail *detail, int cnt, int pad);
 void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);

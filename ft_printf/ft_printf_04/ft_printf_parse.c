@@ -74,15 +74,17 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 		detail->prec = va_arg(ap, int);
 		if (detail->prec < 0)
 		{
+			// *로 음수가 들어왔을 때 다시 확인하기
 			detail->prec = -1;
 			return (1);
 		}
 	}
-	else if (ft_isdigit(*form) == 0)
-		detail->prec = 0;
 	else
 	{
 		detail->prec = ft_atoi(form);
+		if (detail->prec < 0)
+			detail->align = LEFT;
+			// 그리고?
 		flag_len += numlen_base(detail->prec, 10);
 	}
 	if (detail->align != LEFT)
@@ -114,7 +116,5 @@ int	detect_type(t_detail *detail, va_list ap)
 		len += parse_int(detail, ap);
 	else if (type == 'x' || type == 'X' || type == 'p')
 		len += parse_hex(detail, ap);
-	//else
-		// 서식지정자가 아닌 문자가 들어왔을 경우.
 	return (len);
 }
