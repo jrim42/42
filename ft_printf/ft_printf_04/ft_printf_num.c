@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/19 23:42:44 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/20 00:28:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,18 @@ int	print_num(t_detail *detail, char *str)
 
 int	parse_numlen(t_detail *detail)
 {
+	int		sign_len;
 	int		ret_len;
 
+	sign_len = 0;
 	ret_len = detail->str_len;
 	if (detail->prec != -1 && detail->prec > detail->str_len)
 		ret_len = detail->prec;
-	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
-	{
-		ret_len += detail->alt;
-		detail->str_len += detail->alt;
-	}
-	else if (detail->type == 'd' || detail->type == 'i')
-	{
-		if (detail->sign != OFF)
-		{
-			ret_len += 1;
-			detail->str_len += 1;
-		}
-	}
+	if (detail->sign != OFF)
+		sign_len += 1;
+	if (detail->alt != OFF)
+		sign_len += detail->alt;
+	ret_len += sign_len;
+	detail->str_len += sign_len;
 	return (ret_len);
 }

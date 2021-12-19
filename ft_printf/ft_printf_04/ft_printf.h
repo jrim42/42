@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/19 23:47:02 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/20 00:30:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
-# define FLAG "# +-0"
+# define FLAG "#+- 0.*"
 # define DEC "0123456789"
 # define HEX "0123456789abcdef"
 
@@ -60,7 +60,7 @@ int		parse_numlen(t_detail *detail);
 
 int		parse_str(t_detail *detail, va_list ap);
 int		print_str(t_detail *detail, int ch, const char *str);
-int		print_else(t_detail *detail);
+int		print_else(t_detail *detail, int ch);
 int		parse_strlen(t_detail *detail);
 
 void	fill_width(t_detail *detail, int cnt, int pad);

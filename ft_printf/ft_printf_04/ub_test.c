@@ -5,83 +5,83 @@ int main(void)
 {
     int len;
 
-    // len = printf("|%.d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.1d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%10.3d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.5d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%10.7d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
+    len = printf("|%.d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.1d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%10.3d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.5d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%10.7d|\n", -12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("\n");
+    printf("\n");
 
-    // len = printf("|% .d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|% .1d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|% .3d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|% .5d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|% .7d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
+    len = printf("|% .d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|% .1d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|% .3d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|% .5d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|% .7d|\n", 12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("\n");
+    printf("\n");
 
-    // len = printf("|%+.d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%+.1d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%+.3d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%+.5d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%+.7d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
+    len = printf("|%+.d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%+.1d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%+.3d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%+.5d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%+.7d|\n", 12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("\n");
+    printf("\n");
 
-    // len = printf("|%.d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.1d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.3d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.5d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = printf("|%.7d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
+    len = printf("|%.d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.1d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.3d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.5d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = printf("|%.7d|\n", -12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("-----------------------------\n");
+    printf("-----------------------------\n");
 
-    // len = ft_printf("|%.d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|%.1d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|%10.3d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|%.5d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|%10.7d|\n", -12345) - 3;
-    // printf("len : %d\n", len);
+    len = ft_printf("|%.d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|%.1d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|%10.3d|\n", -12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|%.5d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|%10.7d|\n", -12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("\n");
+    printf("\n");
 
-    // len = ft_printf("|% .d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|% .1d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|% .3d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|% .5d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
-    // len = ft_printf("|% .7d|\n", 12345) - 3;
-    // printf("len : %d\n", len);
+    len = ft_printf("|% .d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|% .1d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|% .3d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|% .5d|\n", 12345) - 3;
+    printf("len : %d\n", len);
+    len = ft_printf("|% .7d|\n", 12345) - 3;
+    printf("len : %d\n", len);
 
-    // printf("\n");
+    printf("\n");
 
     // len = ft_printf("|%+.d|\n", 12345) - 3;
     // printf("len : %d\n", len);
@@ -282,26 +282,72 @@ int main(void)
 
     printf("-----------------------------\n");
 
-    // len = printf("|%10k|\n") - 3;
-    // printf("%d\n", len);
-    // printf("|%k10|\n");
-    // printf("|%#.10m|\n");
-
-    // // ft_printf("|%10k|\n");
-    // // // ft_printf("|%#10|\n");
-    // // //  printf("|%#.10m|\n");
-
-    // printf("|%-010c|\n", 0);
-
     len = printf("|%010%|\n");
     printf("%d\n", len);
     len = printf("|%-010%|\n");
     printf("%d\n", len);
-    
-    len = printf("|%10.5d|\n", -256);
+
+    len = ft_printf("|%010%|\n");
     printf("%d\n", len);
-    len = printf("|%010.5d|\n", -256);
+    len = ft_printf("|%-010%|\n");
     printf("%d\n", len);
-    len = printf("|%-010.5d|\n", -256);
+
+    printf("-----------------------------\n");
+
+    len = printf("|%010.-5%|\n");
     printf("%d\n", len);
+    len = printf("|%010.-5c|\n", 'A');
+    printf("%d\n", len);
+    len = printf("|%010.*c|\n", -5, 'A');
+    printf("%d\n", len);
+    len = printf("|%010.*c|\n", 5, 'A');
+    printf("%d\n", len);
+
+    len = ft_printf("|%010.-5%|\n");
+    printf("%d\n", len);
+    len = ft_printf("|%010.-5c|\n", 'A');
+    printf("%d\n", len);
+    len = ft_printf("|%010.*c|\n", -5, 'A');
+    printf("%d\n", len);
+    len = ft_printf("|%010.*c|\n", 5, 'A');
+    printf("%d\n", len);
+
+    printf("-----------------------------\n");
+
+    len = printf("|%010.s|\n", "abc");
+    printf("%d\n", len);
+
+    len = ft_printf("|%010.s|\n", "abc");
+    printf("%d\n", len);
+
+    printf("-----------------------------\n");
+
+    len = printf("|%10.5d|\n", -42);
+    printf("%d\n", len);
+
+    len = ft_printf("|%10.5d|\n", -42);
+    printf("%d\n", len);
+
+    printf("-----------------------------\n");
+
+    len = printf("|%010k|\n") - 3;
+    printf("%d\n", len);
+    len = printf("|%010kmm|\n") - 3;
+    printf("%d\n", len);
+
+    len = ft_printf("|%010k|\n") - 3;
+    printf("%d\n", len);
+    len = ft_printf("|%010kmm|\n") - 3;
+    printf("%d\n", len);
+
+    printf("-----------------------------\n");
+
+
+    len = printf("|%010c|\n", -1) - 3;
+    printf("%d\n", len);
+
+    len = ft_printf("|%010c|\n", -1) - 3;
+    printf("%d\n", len);
+
+    printf("-----------------------------\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/19 23:22:01 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/20 00:14:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 	len = 0;
 	while (*form != '\0')
 	{
-		while (*form != '%' && *form != '\0')
+		while (*form != '%' && *form)
 		{
 			len++;
 			write(1, form++, 1);
@@ -62,12 +62,12 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 		if (*form == '%')
 		{
 			form++;
-			while (ft_strchr(TYPE, *form) == 0 && *form != '\0')
+			while ((ft_strchr(FLAG, *form) || ft_isdigit(*form)) && *form)
 				form += parse_flag(form, detail, ap);
-			if (check_type(form, detail) == 1)
+			if (check_type(form, detail))
 				len += detect_type(detail, ap);
 			else
-				len += print_else(detail);
+				len += print_else(detail, *form);
 			init_detail(detail);
 			form++;
 		}
@@ -77,9 +77,9 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 
 int	check_type(char *form, t_detail *detail)
 {
-	while (*form != '\0')
+	while (*form)
 	{
-		if (ft_strchr(TYPE, *form) != 0)
+		if (ft_strchr(TYPE, *form))
 		{
 			detail->type = *form;
 			return (1);
