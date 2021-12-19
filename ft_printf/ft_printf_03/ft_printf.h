@@ -61,7 +61,6 @@ int		parse_numlen(t_detail *detail, int *str_len);
 void	fill_width(t_detail *detail, int cnt, int pad);
 void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
 void	print_alt(t_detail *detail);
-void	print_sign(t_detail *detail);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
 size_t	numlen_base(unsigned long num, size_t base_len);
 

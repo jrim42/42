@@ -118,11 +118,10 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 		detail->prec = ft_atoi(form);
 		flag_len += numlen_base(detail->prec, 10);
 	}
-	if (detail->align != LEFT && detail->prec > 0)
-	{
-		detail->pad = ON;
+	if (detail->align != LEFT)
 		detail->align = RIGHT;
-	}
+	if (detail->prec > 0)
+		detail->pad = ON;
 	return (flag_len);
 }
 
