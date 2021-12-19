@@ -25,10 +25,10 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 	len = 0;
 	while (*form != '\0')
 	{
-		if (*form != '%')
+		while (*form != '%' && *form != '\0')
 		{
 			len++;
-			write(1, form, 1);
+			write(1, form++, 1);
 		}
 		if (*form == '%')
 		{
@@ -40,9 +40,9 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 				detail->type = *form;
 				len += detect_type(detail, ap);
 			}
+			init_detail(detail);
+			form++;
 		}
-		init_detail(detail);
-		form++;
 	}
 	return (len);
 }

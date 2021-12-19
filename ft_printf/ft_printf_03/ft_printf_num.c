@@ -56,14 +56,15 @@ int	print_uns(t_detail *detail, va_list ap)
 	str = ft_itoa_base(detail, num, DEC);
 	str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail, &str_len);
-	if (ret_len < detail->wid)
-		ret_len = detail->wid;
 	if (detail->align == RIGHT)
-		fill_width(detail, ret_len - str_len, detail->pad);
+		fill_width(detail, detail->wid - ret_len, 0);
+	fill_prec(detail, detail->prec - ft_strlen(str), ret_len, detail->pad);
 	write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
-		fill_width(detail, ret_len - str_len, 0);
+		fill_width(detail, detail->wid - ret_len, 0);
 	free(str);
+	if (ret_len < detail->wid)
+		ret_len = detail->wid;
 	return (ret_len);
 }
 

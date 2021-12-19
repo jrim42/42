@@ -63,7 +63,9 @@ int	parse_strlen(t_detail *detail, int *str_len)
 {
 	int	ret_len;
 
-	if (detail->type == 's')
+	if (detail->type == 'c' && detail->prec != -1)
+		detail->pad = OFF;
+	else if (detail->type == 's')
 		if (detail->prec != -1 && detail->prec < *str_len)
 			*str_len = detail->prec;
 	ret_len = *str_len;

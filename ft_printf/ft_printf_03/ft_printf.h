@@ -19,6 +19,7 @@
 # include "libft/libft.h"
 
 # define TYPE "cspdiuxX%"
+# define FLAG "# +-0"
 # define DEC "0123456789"
 # define HEX "0123456789abcdef"
 
