@@ -24,8 +24,7 @@ void	fill_width(t_detail *detail, int cnt, int pad)
 	{
 		if (detail->align == RIGHT && detail->sign != OFF)
 			return ;
-		else if (detail->align == RIGHT \
-				&& detail->alt != OFF && detail->pad == ON)
+		else if (detail->align == RIGHT && detail->alt != OFF && detail->pad == ON)
 			return ;
 		else if (detail->pad == ON)
 			pad = 1;
@@ -42,7 +41,7 @@ void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad)
 {
 	if ((detail->sign != OFF || detail->alt != OFF) && detail->prec == -1)
 		cnt = detail->wid - ret_len;
-	if (pad == 1)
+	if (pad > 0)
 		while (cnt-- > 0)
 			write(1, "0", 1);
 }

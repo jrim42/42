@@ -15,7 +15,7 @@
 int		parse_int(t_detail *detail, va_list ap);
 int		parse_hex(t_detail *detail, va_list ap);
 int		print_num(t_detail *detail, char *str);
-int		parse_numlen(t_detail *detail, int *str_len);
+int		parse_numlen(t_detail *detail);
 
 int	parse_int(t_detail *detail, va_list ap)
 {
@@ -55,13 +55,14 @@ int	parse_hex(t_detail *detail, va_list ap)
 	if (detail->type == 'x' || detail->type == 'X')
 	{
 		num = va_arg(ap, unsigned int);
+		if (num == 0)
+			detail->alt = OFF;
 		str = ft_itoa_base(detail, num, HEX);
 	}
 	else
 	{
+		detail->alt = 2;
 		num = (unsigned long)va_arg(ap, void *);
-		if (num != 0)
-			detail->alt = 2;
 		str = ft_itoa_base(detail, num, HEX);
 	}
 	len = print_num(detail, str);
@@ -71,11 +72,11 @@ int	parse_hex(t_detail *detail, va_list ap)
 
 int	print_num(t_detail *detail, char *str)
 {
-	int			str_len;
 	int			ret_len;
 
-	str_len = ft_strlen(str);
-	ret_len = parse_numlen(detail, &str_len);
+	//printf("prec : %d\n", detail->prec);
+	detail->str_len = ft_strlen(str);
+	ret_len = parse_numlen(detail);
 	if (detail->align == RIGHT)
 		fill_width(detail, detail->wid - ret_len, 0);
 	print_sign(detail);
@@ -88,24 +89,24 @@ int	print_num(t_detail *detail, char *str)
 	return (ret_len);
 }
 
-int	parse_numlen(t_detail *detail, int *str_len)
+int	parse_numlen(t_detail *detail)
 {
 	int		ret_len;
 
-	ret_len = *str_len;
-	if (detail->prec != -1 && detail->prec > *str_len)
+	ret_len = detail->str_len;
+	if (detail->prec != -1 && detail->prec > detail->str_len)
 		ret_len = detail->prec;
 	if (detail->type == 'p' || detail->type == 'x' || detail->type == 'X')
 	{
 		ret_len += detail->alt;
-		*str_len += detail->alt;
+		detail->str_len += detail->alt;
 	}
 	else if (detail->type == 'd' || detail->type == 'i')
 	{
 		if (detail->sign != OFF)
 		{
 			ret_len += 1;
-			*str_len += 1;
+			detail->str_len += 1;
 		}
 	}
 	return (ret_len);
