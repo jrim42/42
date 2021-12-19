@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/14 15:26:28 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/19 23:22:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 	return (len);
 }
 
-int		check_type(char *form, t_detail *detail)
+int	check_type(char *form, t_detail *detail)
 {
 	while (*form != '\0')
 	{

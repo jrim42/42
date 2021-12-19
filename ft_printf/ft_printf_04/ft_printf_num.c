@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/15 14:09:30 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/19 23:42:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int		parse_numlen(t_detail *detail);
 
 int	parse_int(t_detail *detail, va_list ap)
 {
-	int			len;
 	long long	num;
 	char		*str;
+	int			len;
 
-	len = 0;
 	detail->alt = OFF;
 	if (detail->type == 'd' || detail->type == 'i')
 	{
@@ -74,7 +73,6 @@ int	print_num(t_detail *detail, char *str)
 {
 	int			ret_len;
 
-	//printf("prec : %d\n", detail->prec);
 	detail->str_len = ft_strlen(str);
 	ret_len = parse_numlen(detail);
 	if (detail->align == RIGHT)

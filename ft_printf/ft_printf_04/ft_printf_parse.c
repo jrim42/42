@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/18 18:29:08 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/19 23:30:55 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,8 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 	{
 		detail->prec = va_arg(ap, int);
 		if (detail->prec < 0)
-		{
-			// *로 음수가 들어왔을 때 다시 확인하기
 			detail->prec = -1;
-			return (1);
-		}
+		flag_len++;
 	}
 	else if (ft_isdigit(*form) == 0 && *form != '-')
 		detail->prec = 0;
@@ -85,17 +82,14 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 	{
 		detail->prec = ft_atoi(form);
 		if (detail->prec < 0)
+		{
+			flag_len++;
 			detail->align = LEFT;
-			// 그리고?
+			detail->prec *= (detail->prec > 0) - (detail->prec < 0);
+			detail->wid = detail->prec;
+		}
 		flag_len += numlen_base(detail->prec, 10);
 	}
-	if (detail->align != LEFT)
-		detail->align = RIGHT;
-	// if (detail->prec > 0)
-	// 	detail->pad = ON;
-	// padding이랑 precision에서 0이 출력되는 것을 나눠서 생각해야할 듯
-	// num의 경우 prec가 원래 길이보다 크면 zero padding이 맞지만 char과 str은 그렇지 않다. 
-	// 단 char과 str은 zero-padding 옵션이 별도로 있는 경우에는 0을 출력해주어야 한다.
 	return (flag_len);
 }
 
@@ -108,12 +102,8 @@ int	detect_type(t_detail *detail, va_list ap)
 		detail->pad = OFF;
 	len = 0;
 	type = detail->type;
-	if (type == '%')
-		len += print_per();
-	else if (type == 'c')
-		len += print_char(detail, ap);
-	else if (type == 's')
-		len += print_str(detail, ap);
+	if (type == '%' || type == 'c' || type == 's')
+		len += parse_str(detail, ap);
 	else if (type == 'd' || type == 'i' || type == 'u')
 		len += parse_int(detail, ap);
 	else if (type == 'x' || type == 'X' || type == 'p')

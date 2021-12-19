@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/18 18:17:21 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/19 23:47:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_detail
 int		ft_printf(const char *form_str, ...);
 void	init_detail(t_detail *detail);
 int		parse_form(char *form, t_detail *detail, va_list ap);
+int		check_type(char *form, t_detail *detail);
 
 int		parse_flag(char *form, t_detail *detail, va_list ap);
 int		parse_width(char *form, t_detail *detail, va_list ap);
@@ -57,11 +58,10 @@ int		parse_hex(t_detail *detail, va_list ap);
 int		print_num(t_detail *detail, char *str);
 int		parse_numlen(t_detail *detail);
 
-int		print_char(t_detail *detail, va_list ap);
-int		print_str(t_detail *detail, va_list ap);
-int		print_per(void);
-int		parse_strlen(t_detail *detail);
+int		parse_str(t_detail *detail, va_list ap);
+int		print_str(t_detail *detail, int ch, const char *str);
 int		print_else(t_detail *detail);
+int		parse_strlen(t_detail *detail);
 
 void	fill_width(t_detail *detail, int cnt, int pad);
 void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
