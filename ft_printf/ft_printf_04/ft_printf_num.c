@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/20 00:28:13 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 02:16:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	parse_int(t_detail *detail, va_list ap)
 	}
 	else
 	{
+		detail->sign = OFF;
 		num = va_arg(ap, unsigned int);
 		str = ft_itoa_base(detail, num, DEC);
 	}

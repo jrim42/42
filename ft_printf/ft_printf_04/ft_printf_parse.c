@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/20 23:59:14 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 02:32:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ int	detect_type(t_detail *detail, va_list ap)
 		detail->pad = OFF;
 	len = 0;
 	type = detail->type;
-	if (type == '%' || type == 'c' || type == 's')
+	if (ft_strchr("%cs", type))
 		len += parse_str(detail, ap);
-	else if (type == 'd' || type == 'i' || type == 'u')
+	else if (ft_strchr("diu", type))
 		len += parse_int(detail, ap);
-	else if (type == 'x' || type == 'X' || type == 'p')
+	else if (ft_strchr("xXp", type))
 		len += parse_hex(detail, ap);
 	else
 	{
