@@ -1,30 +1,30 @@
-TARGET	= 	libftprintf.a
-
+NAME	= 	libftprintf.a
 LIB_DIR	= 	./libft
 LIB_A	= 	libft.a
 
-CC		= 	gcc -Wall -Wextra -Werror
+CC		= 	gcc
+CFLAGS	= 	-Wall -Wextra -Werror
 
 SRC		= 	ft_printf.c \
 			ft_printf_str.c \
 			ft_printf_num.c \
 			ft_printf_parse.c \
 			ft_printf_utils.c \
-
+			
 BONUS 	=
 
 OBJ		= 	$(SRC:.c=.o)
 BNS_OBJ	= 	$(BONUS:.c=.o)
 
 .c.o:
-	$(CC) -c $< -I.
+	$(CC) $(CFLAGS) -c $< -I.
 
-$(TARGET) : $(OBJ)
+$(NAME) : $(OBJ)
 	make -C $(LIB_DIR)
-	cp $(LIB_DIR)/$(LIB_A) $(TARGET)
-	ar rc $(TARGET) $(OBJ)
+	cp $(LIB_DIR)/$(LIB_A) $(NAME)
+	ar rc $(NAME) $(OBJ)
 
-all : $(TARGET)
+all : $(NAME)
 
 bonus : 
 
@@ -34,8 +34,8 @@ clean :
 
 fclean : clean
 	make -C $(LIB_DIR) fclean
-	rm -f $(TARGET)
+	rm -f $(NAME)
 
-re : clean all
+re : fclean all
 
 .PHONY : all clean fclean re bonus
