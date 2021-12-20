@@ -111,5 +111,10 @@ int	detect_type(t_detail *detail, va_list ap)
 		len += parse_int(detail, ap);
 	else if (type == 'x' || type == 'X' || type == 'p')
 		len += parse_hex(detail, ap);
+	else
+	{
+		print_str(detail, detail->type, 0);
+		len += detail->ret_len;
+	}
 	return (len);
 }

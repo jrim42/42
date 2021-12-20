@@ -22,7 +22,7 @@ BNS_OBJ	= 	$(BONUS:.c=.o)
 $(TARGET) : $(OBJ)
 	make -C $(LIB_DIR)
 	cp $(LIB_DIR)/$(LIB_A) $(TARGET)
-	ar rc $@ $?
+	ar rc $(TARGET) $(OBJ)
 
 all : $(TARGET)
 

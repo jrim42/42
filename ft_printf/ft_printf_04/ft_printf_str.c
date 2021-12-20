@@ -14,7 +14,6 @@
 
 int		parse_str(t_detail *detail, va_list ap);
 void	print_str(t_detail *detail, int ch, const char *str);
-int		print_else(t_detail *detail, int ch);
 void	parse_strlen(t_detail *detail);
 
 int	parse_str(t_detail *detail, va_list ap)
@@ -34,7 +33,7 @@ int	parse_str(t_detail *detail, va_list ap)
 		ch = '%';
 		detail->str_len = 1;
 	}
-	if (detail->type == 's')
+	else if (detail->type == 's')
 	{
 		str = va_arg(ap, char *);
 		if (!str)
@@ -56,18 +55,6 @@ void	print_str(t_detail *detail, int ch, const char *str)
 		write(1, &ch, 1);
 	if (detail->align != RIGHT)
 		fill_width(detail, detail->ret_len - detail->str_len, 0);
-}
-
-int	print_else(t_detail *detail, int ch)
-{
-	detail->str_len = 1;
-	parse_strlen(detail);
-	if (detail->align == RIGHT)
-		fill_width(detail, detail->ret_len - detail->str_len, detail->pad);
-	write(1, &ch, 1);
-	if (detail->align != RIGHT)
-		fill_width(detail, detail->ret_len - detail->str_len, 0);
-	return (detail->ret_len);
 }
 
 void	parse_strlen(t_detail *detail)

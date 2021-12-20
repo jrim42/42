@@ -13,8 +13,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
-
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -45,9 +43,9 @@ typedef struct s_detail
 # define RIGHT 1
 
 int		ft_printf(const char *form_str, ...);
-void	init_detail(t_detail *detail);
 int		parse_form(char *form, t_detail *detail, va_list ap);
-int		check_type(char *form, t_detail *detail);
+void	init_detail(t_detail *detail);
+void	check_type(char *form, t_detail *detail);
 
 int		parse_flag(char *form, t_detail *detail, va_list ap);
 int		parse_width(char *form, t_detail *detail, va_list ap);
@@ -61,7 +59,6 @@ void	parse_numlen(t_detail *detail);
 
 int		parse_str(t_detail *detail, va_list ap);
 void	print_str(t_detail *detail, int ch, const char *str);
-int		print_else(t_detail *detail, int ch);
 void	parse_strlen(t_detail *detail);
 
 void	fill_width(t_detail *detail, int cnt, int pad);
