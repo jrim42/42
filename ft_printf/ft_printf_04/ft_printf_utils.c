@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/20 00:36:40 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 00:40:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	fill_width(t_detail *detail, int cnt, int pad)
 {
 	if (detail->type != 'c' && detail->type != 's' && detail->prec == -1)
 	{
-		if (detail->align == RIGHT && detail->sign != OFF)
-			return ;
-		else if (detail->align == RIGHT
-			&& detail->alt != OFF && detail->pad == ON)
+		if (detail->align == RIGHT && detail->pad == ON
+			&& (detail->sign != OFF || detail->alt != OFF))
 			return ;
 		else if (detail->pad == ON)
 			pad = 1;
