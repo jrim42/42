@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "ft_printf.h"
 
 int main(void)
 {
@@ -203,6 +204,36 @@ int main(void)
     // printf("    len : %d\n", len);
 
 
-    len = printf("|%10s|\n", 0) - 3;
-    printf("    len : %d\n", len);
+    // len = printf("|%10.0d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = printf("|%010.0d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = printf("|%10.5d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = printf("|%010.5d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+
+    // len = ft_printf("|%10.0d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = ft_printf("|%010.0d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = ft_printf("|%10.5d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+    // len = ft_printf("|%010.5d|\n", 12345) - 3;
+    // printf("len : %d\n", len);
+
+    len = printf("|%|\n");
+    printf("%d\n", len);
+    len = ft_printf("|%|\n");
+    printf("%d\n", len);
+
+    len = printf("|%3|\n");
+    printf("%d\n", len);
+    len = ft_printf("|%3|\n");
+    printf("%d\n", len);
+
+    len = printf("|%3mmm|\n");
+    printf("%d\n", len);
+    len = ft_printf("|%3mmm|\n");
+    printf("%d\n", len);
 }
