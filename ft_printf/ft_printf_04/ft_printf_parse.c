@@ -32,9 +32,11 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 		detail->pad = ON;
 	else if (*form == '-')
 		detail->align = LEFT;
+	else if (*form == '.' && ft_strchr(TYPE, *(form + 1)))
+		detail->prec = 0;
 	else if (*form == '.')
 		form_idx += parse_prec(++form, detail, ap);
-	else if (*form == '*' || ft_isdigit(*form) == 1)
+	else if (*form == '*' || ft_isdigit(*form))
 		form_idx += parse_width(form, detail, ap) - 1;
 	return (form_idx);
 }
@@ -77,10 +79,10 @@ int	parse_prec(char *form, t_detail *detail, va_list ap)
 			detail->prec = -1;
 		flag_len++;
 	}
-	else if (ft_isdigit(*form) == 0 && *form != '-')
-		detail->prec = 0;
 	else
 	{
+		if (*form == '0' && ft_isdigit(*(form + 1)))
+			flag_len++;
 		detail->prec = ft_atoi(form);
 		if (detail->prec < 0)
 		{
