@@ -19,9 +19,9 @@ int	detect_type(t_detail *detail, va_list ap);
 
 int	parse_flag(char *form, t_detail *detail, va_list ap)
 {
-	int	form_len;
+	int	form_idx;
 
-	form_len = 1;
+	form_idx = 1;
 	if (*form == '#')
 		detail->alt = 2;
 	else if (*form == '+')
@@ -33,10 +33,10 @@ int	parse_flag(char *form, t_detail *detail, va_list ap)
 	else if (*form == '-')
 		detail->align = LEFT;
 	else if (*form == '.')
-		form_len += parse_prec(++form, detail, ap);
-	else
-		form_len += parse_width(form, detail, ap) - 1;
-	return (form_len);
+		form_idx += parse_prec(++form, detail, ap);
+	else if (*form == '*' || ft_isdigit(*form) == 1)
+		form_idx += parse_width(form, detail, ap) - 1;
+	return (form_idx);
 }
 
 int	parse_width(char *form, t_detail *detail, va_list ap)
@@ -56,8 +56,9 @@ int	parse_width(char *form, t_detail *detail, va_list ap)
 		{
 			detail->align = LEFT;
 			detail->pad = OFF;
+			detail->wid *= (detail->wid > 0) - (detail->wid < 0);
 		}
-		detail->wid *= (detail->wid > 0) - (detail->wid < 0);
+		flag_len++;
 	}
 	if (detail->align == OFF)
 		detail->align = RIGHT;

@@ -36,6 +36,7 @@ typedef struct s_detail
 	int		prec;
 	int		base;
 	int		str_len;
+	int		ret_len;
 }			t_detail;
 
 # define OFF 0
@@ -55,18 +56,18 @@ int		detect_type(t_detail *detail, va_list ap);
 
 int		parse_int(t_detail *detail, va_list ap);
 int		parse_hex(t_detail *detail, va_list ap);
-int		print_num(t_detail *detail, char *str);
-int		parse_numlen(t_detail *detail);
+void	print_num(t_detail *detail, char *str);
+void	parse_numlen(t_detail *detail);
 
 int		parse_str(t_detail *detail, va_list ap);
-int		print_str(t_detail *detail, int ch, const char *str);
+void	print_str(t_detail *detail, int ch, const char *str);
 int		print_else(t_detail *detail, int ch);
-int		parse_strlen(t_detail *detail);
+void	parse_strlen(t_detail *detail);
 
 void	fill_width(t_detail *detail, int cnt, int pad);
-void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
+void	fill_prec(t_detail *detail, int pad);
 void	print_sign(t_detail *detail);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
-size_t	numlen_base(unsigned long num, size_t base_len);
+int		numlen_base(unsigned long num, int base_len);
 
 #endif

@@ -45,6 +45,7 @@ void	init_detail(t_detail *detail)
 	detail->sign = OFF;
 	detail->base = 10;
 	detail->str_len = 0;
+	detail->ret_len = 0;
 }
 
 int	parse_form(char *form, t_detail *detail, va_list ap)

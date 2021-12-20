@@ -13,15 +13,14 @@
 #include "ft_printf.h"
 
 int		parse_str(t_detail *detail, va_list ap);
-int		print_str(t_detail *detail, int ch, const char *str);
+void	print_str(t_detail *detail, int ch, const char *str);
 int		print_else(t_detail *detail, int ch);
-int		parse_strlen(t_detail *detail);
+void	parse_strlen(t_detail *detail);
 
 int	parse_str(t_detail *detail, va_list ap)
 {
 	int			ch;
 	const char	*str;
-	int			len;
 
 	ch = 0;
 	str = 0;
@@ -42,49 +41,41 @@ int	parse_str(t_detail *detail, va_list ap)
 			str = "(null)";
 		detail->str_len = ft_strlen(str);
 	}
-	len = print_str(detail, ch, str);
-	return (len);
+	print_str(detail, ch, str);
+	return (detail->ret_len);
 }
 
-int	print_str(t_detail *detail, int ch, const char *str)
+void	print_str(t_detail *detail, int ch, const char *str)
 {
-	int			ret_len;
-
-	ret_len = parse_strlen(detail);
+	parse_strlen(detail);
 	if (detail->align == RIGHT)
-		fill_width(detail, ret_len - detail->str_len, detail->pad);
+		fill_width(detail, detail->ret_len - detail->str_len, detail->pad);
 	if (detail->type == 's')
 		write(1, str, detail->str_len);
 	else
 		write(1, &ch, 1);
 	if (detail->align != RIGHT)
-		fill_width(detail, ret_len - detail->str_len, 0);
-	return (ret_len);
+		fill_width(detail, detail->ret_len - detail->str_len, 0);
 }
 
 int	print_else(t_detail *detail, int ch)
 {
-	int	ret_len;
-
 	detail->str_len = 1;
-	ret_len = parse_strlen(detail);
+	parse_strlen(detail);
 	if (detail->align == RIGHT)
-		fill_width(detail, ret_len - detail->str_len, detail->pad);
+		fill_width(detail, detail->ret_len - detail->str_len, detail->pad);
 	write(1, &ch, 1);
 	if (detail->align != RIGHT)
-		fill_width(detail, ret_len - detail->str_len, 0);
-	return (ret_len);
+		fill_width(detail, detail->ret_len - detail->str_len, 0);
+	return (detail->ret_len);
 }
 
-int	parse_strlen(t_detail *detail)
+void	parse_strlen(t_detail *detail)
 {
-	int		ret_len;
-
 	if (detail->type == 's')
 		if (detail->prec != -1 && detail->prec < detail->str_len)
 			detail->str_len = detail->prec;
-	ret_len = detail->str_len;
-	if (ret_len < detail->wid)
-		ret_len = detail->wid;
-	return (ret_len);
+	detail->ret_len = detail->str_len;
+	if (detail->ret_len < detail->wid)
+		detail->ret_len = detail->wid;
 }

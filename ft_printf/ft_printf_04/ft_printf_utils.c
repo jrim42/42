@@ -13,10 +13,10 @@
 #include "ft_printf.h"
 
 void	fill_width(t_detail *detail, int cnt, int pad);
-void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad);
+void	fill_prec(t_detail *detail, int pad);
 void	print_sign(t_detail *detail);
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base);
-size_t	numlen_base(unsigned long num, size_t base_len);
+int		numlen_base(unsigned long num, int base_len);
 
 void	fill_width(t_detail *detail, int cnt, int pad)
 {
@@ -37,12 +37,15 @@ void	fill_width(t_detail *detail, int cnt, int pad)
 			write(1, " ", 1);
 }
 
-void	fill_prec(t_detail *detail, int cnt, int ret_len, int pad)
+void	fill_prec(t_detail *detail, int pad)
 {
-	if (detail->prec != -1)
+	int	cnt;
+
+	cnt = detail->prec - detail->str_len;
+	if ((detail->sign != OFF || detail->alt != OFF) && detail->prec == -1)
+		cnt = detail->wid - detail->ret_len;
+	else if (detail->prec != -1)
 		pad = 1;
-	else if ((detail->sign != OFF || detail->alt != OFF) && detail->prec == -1)
-		cnt = detail->wid - ret_len;
 	if (pad > 0)
 		while (cnt-- > 0)
 			write(1, "0", 1);
@@ -63,8 +66,8 @@ void	print_sign(t_detail *detail)
 
 char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 {
-	size_t	base_len;
-	size_t	idx;
+	int		base_len;
+	int		idx;
 	char	*str;
 
 	base_len = detail->base;
@@ -85,7 +88,7 @@ char	*ft_itoa_base(t_detail *detail, unsigned long num, char *base)
 	return (str);
 }
 
-size_t	numlen_base(unsigned long num, size_t base_len)
+int	numlen_base(unsigned long num, int base_len)
 {
 	int	len;
 
