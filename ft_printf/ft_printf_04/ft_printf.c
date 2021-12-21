@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 20:35:34 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 22:31:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		ft_printf(const char *form, ...);
 int		parse_form(char *form, t_detail *detail, va_list ap);
 void	init_detail(t_detail *detail);
-void	check_type(char *form, t_detail *detail);
 int		check_error(t_detail *detail);
 
 int	ft_printf(const char *form, ...)
@@ -51,10 +50,9 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 			form++;
 			init_detail(detail);
 			parse_flag(&form, detail, ap);
-			check_type(form, detail);
 			if (check_error(detail) != 1)
 				return (check_error(detail));
-			len += detect_type(detail, ap);
+			len += check_type(form, detail, ap);
 			form++;
 		}
 	}
@@ -75,13 +73,6 @@ void	init_detail(t_detail *detail)
 	detail->ret_len = 0;
 }
 
-void	check_type(char *form, t_detail *detail)
-{
-	detail->type = *form;
-	if (!ft_strchr(TYPE, detail->type) && detail->type)
-		detail->str_len = 1;
-}
-
 int	check_error(t_detail *detail)
 {
 	if (detail->wid > 2147483646 || detail->wid < -2147483646)
@@ -91,7 +82,7 @@ int	check_error(t_detail *detail)
 		else
 			return (-1);
 	}
-	if (detail->prec > 2147483646)
+	if (detail->prec > 2147483646 || detail->prec < -1)
 	{
 		if (!detail->type)
 			return (0);

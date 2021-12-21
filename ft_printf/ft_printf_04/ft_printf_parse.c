@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 19:18:26 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 20:50:35 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 22:15:20 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_flag(char **form, t_detail *detail, va_list ap);
 void	parse_width(char **form, t_detail *detail, va_list ap);
 void	parse_prec(char **form, t_detail *detail, va_list ap);
-int		detect_type(t_detail *detail, va_list ap);
+int		check_type(char *form, t_detail *detail, va_list ap);
 
 void	parse_flag(char **form, t_detail *detail, va_list ap)
 {
@@ -81,11 +81,14 @@ void	parse_prec(char **form, t_detail *detail, va_list ap)
 	(*form)--;
 }
 
-int	detect_type(t_detail *detail, va_list ap)
+int	check_type(char *form, t_detail *detail, va_list ap)
 {
 	int		len;
 	char	type;
 
+	detail->type = *form;
+	if (!ft_strchr(TYPE, detail->type) && detail->type)
+		detail->str_len = 1;
 	if (detail->align == LEFT)
 		detail->pad = OFF;
 	len = 0;
