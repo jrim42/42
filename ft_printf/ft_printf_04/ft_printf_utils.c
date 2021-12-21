@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:28:09 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 02:35:49 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 21:21:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	fill_prec(t_detail *detail, int pad)
 	int	cnt;
 
 	cnt = detail->prec - detail->str_len;
-	if (detail->align == RIGHT && detail->pad == ON
+	if (detail->prec != -1)
+		pad = 1;
+	else if (detail->align == RIGHT && detail->pad == ON
 		&& (detail->sign != OFF || detail->alt != OFF))
 		cnt = detail->wid - detail->ret_len;
-	else if (detail->prec != -1)
-		pad = 1;
 	if (pad == 1)
 		while (cnt-- > 0)
 			write(1, "0", 1);

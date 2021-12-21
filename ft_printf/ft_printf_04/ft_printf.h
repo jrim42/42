@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 14:56:02 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 21:06:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	init_detail(t_detail *detail);
 void	check_type(char *form, t_detail *detail);
 int		check_error(t_detail *detail);
 
-int		parse_flag(char *form, t_detail *detail, va_list ap);
-int		parse_width(char *form, t_detail *detail, va_list ap);
-int		parse_prec(char *form, t_detail *detail, va_list ap);
+void	parse_flag(char **form, t_detail *detail, va_list ap);
+void	parse_width(char **form, t_detail *detail, va_list ap);
+void	parse_prec(char **form, t_detail *detail, va_list ap);
 int		detect_type(t_detail *detail, va_list ap);
 
 int		parse_int(t_detail *detail, va_list ap);

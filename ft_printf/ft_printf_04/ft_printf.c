@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 15:00:20 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 20:35:34 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 		{
 			form++;
 			init_detail(detail);
-			while ((ft_strchr(FLAG, *form) || ft_isdigit(*form)) && *form)
-				form += parse_flag(form, detail, ap);
+			parse_flag(&form, detail, ap);
 			check_type(form, detail);
 			if (check_error(detail) != 1)
 				return (check_error(detail));
@@ -79,12 +78,6 @@ void	init_detail(t_detail *detail)
 void	check_type(char *form, t_detail *detail)
 {
 	detail->type = *form;
-	while (*form)
-	{
-		if (ft_strchr(TYPE, detail->type))
-			return ;
-		form++;
-	}
 	if (!ft_strchr(TYPE, detail->type) && detail->type)
 		detail->str_len = 1;
 }
