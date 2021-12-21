@@ -1,37 +1,47 @@
-NAME		= libftprintf.a
-LIBFTDIR	= ./libft
-LIBFTFILE	= libft.a
+TARGET	= 	libftprintf.a
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-AR		= ar rcs
-RM		= rm -f
+LIB_DIR	= 	./libft
+LIB_A	= 	libft.a
 
-SRCS	= ft_printf.c \
+CC		= 	gcc -Wall -Wextra -Werror
+
+SRC		= 	ft_printf.c \
 			ft_printf_str.c \
 			ft_printf_num.c \
-			ft_printf_utils.c \
 
-OBJS	= $(SRCS:.c=.o)
+BONUS 	=	ft_printf_bonus.c \
+			ft_printf_str_bonus.c \
+			ft_printf_num_bonus.c \
+			ft_printf_parse_bonus.c \
+			ft_printf_utils_bonus.c \
+
+OBJ		= 	$(SRC:.c=.o)
+
+BNS_OBJ	= 	$(BONUS:.c=.o)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -I.
+	$(CC) -c $< -I.
 
-$(NAME) : $(OBJS)
-	make -C $(LIBFTDIR)
-	cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $@ $?
+$(TARGET) : $(OBJ)
+	make -C $(LIB_DIR)
+	cp $(LIB_DIR)/$(LIB_A) $(TARGET)
+	ar rc $(TARGET) $(OBJ)
 
-all : $(NAME)
+all : $(TARGET)
+
+bonus : $(OBJ) $(BNS_OBJ)
+	make -C $(LIB_DIR)
+	cp $(LIB_DIR)/$(LIB_A) $(TARGET)
+	ar rc $(TARGET) $(OBJ) $(BNS_OBJ)
 
 clean :
-	make -C $(LIBFTDIR) clean
-	$(RM) $(OBJS)
+	make -C $(LIB_DIR) clean
+	rm -f $(OBJ) $(BNS_OBJ)
 
 fclean : clean
-	make -C $(LIBFTDIR) fclean
-	$(RM) $(NAME)
+	make -C $(LIB_DIR) fclean
+	rm -f $(TARGET)
 
 re : clean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus
