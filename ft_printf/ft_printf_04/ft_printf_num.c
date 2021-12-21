@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:16:49 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/21 18:09:54 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 23:14:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ int	parse_hex(t_detail *detail, va_list ap)
 void	print_num(t_detail *detail, char *str)
 {
 	detail->str_len = ft_strlen(str);
-	parse_numlen(detail);
+	if (*str != '0' || detail->prec != 0)
+		parse_numlen(detail);
 	if (detail->align == RIGHT)
 		fill_width(detail, detail->wid - detail->ret_len, 0);
 	print_sign(detail);
 	fill_prec(detail, detail->pad);
-	write(1, str, ft_strlen(str));
+	if (*str != '0' || detail->prec != 0)
+		write(1, str, ft_strlen(str));
 	if (detail->align != RIGHT)
 		fill_width(detail, detail->wid - detail->ret_len, 0);
 	if (detail->ret_len < detail->wid)
