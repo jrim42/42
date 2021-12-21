@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include "ft_printf.h"
 
 int main(void)
@@ -298,10 +299,10 @@ int main(void)
 //     ft_printf("|%+10d|\n", 255);
 //     ft_printf("|%+010d|\n", 255);
 
-    // printf("% u\n", 10);
-    // printf("% u\n", -1);
-    // ft_printf("% u\n", 10);
-    // ft_printf("% u\n", -1);
+    printf("% u\n", 10);
+    printf("% u\n", -1);
+    ft_printf("% u\n", 10);
+    ft_printf("% u\n", -1);
 
     printf("%10.7d\n", -12345);
     ft_printf("%10.7d\n", -12345);
@@ -309,4 +310,22 @@ int main(void)
     ft_printf("%010.7d\n", -12345);
     printf("%010d\n", -12345);
     ft_printf("%010d\n", -12345);
+    printf("%010d\n", -12345);
+    ft_printf("%010d\n", -12345);
+
+    printf("-----------------------------\n");
+
+    printf("%p\n", ULONG_MAX);
+    ft_printf("%p\n", ULONG_MAX);
+    printf("%p\n", ULLONG_MAX);
+    ft_printf("%p\n", ULLONG_MAX);
+    printf("%p\n", ULLONG_MAX + 1);
+    ft_printf("%p\n", ULLONG_MAX + 1);
+
+    printf("%x\n", ULONG_MAX);
+    ft_printf("%x\n", ULONG_MAX);
+    printf("%x\n", ULLONG_MAX);
+    ft_printf("%x\n", ULLONG_MAX);
+    printf("%x\n", ULLONG_MAX + 1);
+    ft_printf("%x\n", ULLONG_MAX + 1);
 }
