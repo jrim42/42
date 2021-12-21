@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:08:41 by jrim              #+#    #+#             */
-/*   Updated: 2021/12/20 23:06:55 by jrim             ###   ########.fr       */
+/*   Updated: 2021/12/21 15:00:20 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_printf(const char *form, ...);
 int		parse_form(char *form, t_detail *detail, va_list ap);
 void	init_detail(t_detail *detail);
 void	check_type(char *form, t_detail *detail);
+int		check_error(t_detail *detail);
 
 int	ft_printf(const char *form, ...)
 {
@@ -52,6 +53,8 @@ int	parse_form(char *form, t_detail *detail, va_list ap)
 			while ((ft_strchr(FLAG, *form) || ft_isdigit(*form)) && *form)
 				form += parse_flag(form, detail, ap);
 			check_type(form, detail);
+			if (check_error(detail) != 1)
+				return (check_error(detail));
 			len += detect_type(detail, ap);
 			form++;
 		}
@@ -82,6 +85,27 @@ void	check_type(char *form, t_detail *detail)
 			return ;
 		form++;
 	}
-	if (detail->type)
+	if (!ft_strchr(TYPE, detail->type) && detail->type)
 		detail->str_len = 1;
+}
+
+int	check_error(t_detail *detail)
+{
+	if (detail->wid > 2147483646 || detail->wid < -2147483646)
+	{
+		if (!detail->type)
+			return (0);
+		else
+			return (-1);
+	}
+	if (detail->prec > 2147483646)
+	{
+		if (!detail->type)
+			return (0);
+		else if (ft_strchr(TYPE, detail->type))
+			return (-1);
+		else
+			detail->prec = -1;
+	}
+	return (1);
 }
