@@ -1,26 +1,32 @@
 #!/bin/bash
 
-echo -ne "#Architecture: "; uname -a
+arc=$(uname -a)
+cpu_p=$(nproc --all)
+cpu_v=$(cat /proc/cpuinfo | grep processor | wc -l)
+ram_use=$(free -m | grep Mem | awk '{print $3}')
+ram_tot=$(free -m | grep Mem | awk '{print $2}')
+ram_per=$(free | grep Mem | awk '{printf "%.2f%%", ($3)/($2)*100}')
+dsk_use=$(df -ma | grep /dev/mapper/ | awk '{sum+=$3}END{print sum}')
+dsk_tot=$(df -ma | grep /dev/mapper/ | awk '{sum+=$4}END{print sum}')
+dsk_per=$(df -ma | grep /dev/mapper/ | awk '{use+=$3 ; tot+=$4}END{printf "%d%%", use/tot*100}')
+cpu_l=$(mpstat | grep all | awk '{printf "%.2f%%", 100-$13}')
+boot=$(who -b | grep system | awk '{printf "%s %s", $3, $4}')
+lvm_u=$(if [ "$(lsblk | grep "lvm" | wc -l)" -eq 0 ] ; then printf "no" ; else printf "yes" ; fi)
+con_tcp=$(ss | grep tcp | wc -l | tr -d '\n')
+usr_log=$(users | wc -w)
+ip_add=$(hostname -I)
+mac_add=$(ip link | grep link/ether | awk '{print $2}')
+cmd=$(sudo cat /var/log/auth.log | grep sudo: | grep COMMAND= | wc -l)
 
-echo -ne "#CPU physical : "; grep -c ^processor /proc/cpuinfo
-
-echo -ne "#vCPU : "; cat /proc/cpuinfo | grep processor | wc -l
-
-echo -ne "#Memory Usage: "; free -m | awk 'NR==2{printf "%s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
-
-echo -ne "#Disk Usage: "; df -h | awk '$NF=="/"{printf "%d/%dGB (%s)\n", $3,$2,$5}'
-
-echo -ne "#CPU load: "; top -bn1 | grep load | awk '{printf "%.2f%%\n", $(NF-2)}'
-
-echo -ne "#Last boot: "; who | awk '{print $3}' | tr '\n' ' ' && who | awk '{print $4}'
-
-echo -ne "#LVM use: "; if cat /etc/fstab | grep -q "/dev/mapper/"; then echo "yes"; else echo "no"; fi
-
-echo -ne "#Connexions TCP : "; cat /proc/net/tcp | wc -l | awk '{print $1-1}' | tr '\n' ' ' && echo "ESTABLISHED"
-
-echo -ne "#User log : "; w | wc -l | awk '{print$1-2}'
-
-echo -ne "#Network : "; echo -n "IP " && ip route list | grep link | awk '{print $9}' | tr '\n' ' ' && echo -n "(" && ip link show | grep link/ether | awk '{print $2}' | tr '\n' ')' && printf "\n"
-
-echo -ne "#Sudo : "; cat /var/log/sudo.log | wc -l | tr '\n' ' ' && echo "cmd"
-printf "\n"
+wall   "#Architecture: $arc
+#CPU physical: $cpu_p
+#vCPU: $cpu_v
+#Memory Usage: $ram_use/${ram_tot}MB ($ram_per)
+#Disk Usage: $dsk_use/${dsk_tot}Gb ($dsk_per)
+#CPU load: $cpu_l
+#Last boot: $boot
+#LVM use: $lvm_u
+#Connexions TCP: $con_tcp ESTABLISHED
+#User log: $usr_log
+#Network: IP $ip_add ($mac_add)
+#Sudo: $cmd cmd"
