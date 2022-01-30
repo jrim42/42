@@ -29,8 +29,9 @@ t_node  *nd_init(int num)
 
     new_node = (t_node *)malloc(sizeof(t_node));
     new_node->data = num;
-    new_node->next = NULL;
-    new_node->prev = NULL;
+    // 순환구조
+    new_node->next = new_node;
+    new_node->prev = new_node;
     return (new_node);
 }
 
@@ -39,13 +40,17 @@ void    stk_push(t_stack *stk, t_node *new_top)
 {
     t_node  *cur_top;
 
-    if(stk->top == NULL)
+    if(stk->size == 0)
         stk->top = new_top;
     else
     {
         cur_top = stk->top;
-        cur_top->prev = new_top;
+        // 새로운 노드의 앞뒤 연결 
+        new_top->prev = cur_top->prev;
         new_top->next = cur_top;
+        // 기존 노드의 앞뒤 연결 해제
+        cur_top->prev->next = new_top;
+        cur_top->prev = new_top;
         stk->top = new_top; 
     }
     stk->size++;
@@ -63,9 +68,12 @@ t_node  *stk_pop(t_stack *stk)
     else
     {
         new_top = stk->top->next;
-        new_top->prev = NULL;
+        new_top->prev = cur_top->prev;
+        cur_top->prev->next = new_top;
         stk->top = new_top;  
-        cur_top->next = NULL;
+        // 다른 노드와의 연결 끊기
+        cur_top->prev = cur_top;
+        cur_top->next = cur_top;
     }
     stk->size--; 
     return (cur_top);
@@ -85,7 +93,24 @@ void    stk_swap(t_stack *stk)
         cur_top->next->data = tmp;
     }
 }
+
 // rotate
+void    stk_rotate(t_stack *stk)
+{
+    t_node  *cur_top;
+
+    cur_top = stk->top;
+    stk->top = cur_top->next;
+}
+
+// reverse rotate
+void    stk_rev_rotate(t_stack *stk)
+{
+    t_node  *cur_top;
+
+    cur_top = stk->top;
+    stk->top = cur_top->prev;
+}
 
 /*
 void    stk_display(t_stack *stk_a, t_stack *stk_b)
@@ -115,18 +140,22 @@ void    stk_display(t_stack *stk_a, t_stack *stk_b)
 {
     t_node  *tmp_a;
     t_node  *tmp_b;
+    int     size_a;
+    int     size_b;
 
     tmp_a = stk_a->top;
+    size_a = stk_a->size;
     tmp_b = stk_b->top;
+    size_b = stk_b->size;
     printf(" a |");
-    while (tmp_a)
+    while (size_a--)
     {
         printf(" %d |", tmp_a->data);
         tmp_a = tmp_a->next;
     }
     printf("\n");
     printf(" b |");
-    while (tmp_b)
+    while (size_b--)
     {
         printf(" %d |", tmp_b->data);
         tmp_b = tmp_b->next;
@@ -152,6 +181,10 @@ int main(void)
     stk_push(stk_a, stk_pop(stk_b));
     stk_display(stk_a, stk_b);
     stk_push(stk_a, stk_pop(stk_b));
+    stk_display(stk_a, stk_b);
+    stk_rotate(stk_a);
+    stk_display(stk_a, stk_b);
+    stk_rev_rotate(stk_a);
     stk_display(stk_a, stk_b);
     return (0);
 }
