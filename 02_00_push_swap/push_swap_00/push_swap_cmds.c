@@ -1,39 +1,47 @@
 #include "push_swap.h"
 
-void    commands(char *cmd);
-void    push(char *cmd);
-void    swap(char *cmd);
-void    rotate(char *cmd);
-void    rev_rotate(char *cmd);
+void    commands(char *cmd, t_stack *a, t_stack *b);
+void    cmd_push(char *cmd, t_stack *from, t_stack* to);
+void    cmd_swap(char *cmd, t_stack *stk);
+void    cmd_rotate(char *cmd, t_stack *stk);
+void    cmd_rev_rotate(char *cmd, t_stack *stk);
 
-void    commands(char *cmd)
-{
-    if (ft_strcmp(cmd, "pa") == 0 || ft_strcmp(cmd, "pb") == 0)
-        push(cmd);
-    else if (ft_strcmp(cmd, "sa") == 0 || ft_strcmp(cmd, "sb") == 0 || ft_strcmp(cmd, "ss") == 0)
-        push(cmd);
-    else if (ft_strcmp(cmd, "ra") == 0 || ft_strcmp(cmd, "rb") == 0 || ft_strcmp(cmd, "rr") == 0)
-        push(cmd);
-    else if (ft_strcmp(cmd, "rra") == 0 || ft_strcmp(cmd, "rrb") == 0 || ft_strcmp(cmd, "rrr") == 0)
-        push(cmd);
-}
-
-void    push(char *cmd)
+void    commands(char *cmd, t_stack *a, t_stack *b)
 {
 
 }
 
-void    swap(char *cmd)
+void    cmd_push(char *cmd, t_stack *from, t_stack* to)
 {
-
+    stk_push(to, stk_pop(from));
 }
 
-void    rotate(char *cmd)
+void    cmd_swap(char *cmd, t_stack *stk)
 {
+    t_node  *cur_top;
+    int     tmp;
 
+    cur_top = stk->top;
+    if (cur_top && cur_top->next)
+    {
+        tmp = cur_top->data;
+        cur_top->data = cur_top->next->data;
+        cur_top->next->data = tmp;
+    }
 }
 
-void    rev_rotate(char *cmd)
+void    cmd_rotate(char *cmd, t_stack *stk)
 {
+    t_node  *cur_top;
 
+    cur_top = stk->top;
+    stk->top = cur_top->next;
+}
+
+void    cmd_rev_rotate(char *cmd, t_stack *stk)
+{
+    t_node  *cur_top;
+
+    cur_top = stk->top;
+    stk->top = cur_top->prev;
 }

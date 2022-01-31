@@ -1,18 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct      s_node
-{
-    int             data;
-    struct s_node   *prev;
-    struct s_node   *next;
-}                   t_node;
-
-typedef struct  s_stack
-{
-    int         size;
-    t_node      *top;
-}               t_stack;
+#include "dll_stack.h"
 
 // stack init
 void    stk_init(t_stack **stk)
@@ -136,7 +122,7 @@ void    stk_display(t_stack *stk_a, t_stack *stk_b)
 }
 */
 
-void    stk_display(t_stack *stk_a, t_stack *stk_b)
+void    stk_display_all(t_stack *stk_a, t_stack *stk_b)
 {
     t_node  *tmp_a;
     t_node  *tmp_b;
@@ -161,30 +147,4 @@ void    stk_display(t_stack *stk_a, t_stack *stk_b)
         tmp_b = tmp_b->next;
     }
     printf("\n");
-}
-
-int main(void)
-{
-    t_stack *stk_a;
-    t_stack *stk_b;
-
-    stk_init(&stk_a);
-    stk_init(&stk_b);
-    stk_push(stk_a, nd_init(3));
-    stk_push(stk_a, nd_init(4));
-    stk_push(stk_a, nd_init(1));
-    stk_push(stk_a, nd_init(2));
-    stk_push(stk_b, stk_pop(stk_a));
-    stk_push(stk_b, stk_pop(stk_a));
-    stk_swap(stk_a);
-    stk_swap(stk_b);
-    stk_push(stk_a, stk_pop(stk_b));
-    stk_display(stk_a, stk_b);
-    stk_push(stk_a, stk_pop(stk_b));
-    stk_display(stk_a, stk_b);
-    stk_rotate(stk_a);
-    stk_display(stk_a, stk_b);
-    stk_rev_rotate(stk_a);
-    stk_display(stk_a, stk_b);
-    return (0);
 }
