@@ -1,31 +1,94 @@
 #include "push_swap.h"
 
-int     err_check(t_list *lst);
+void    push_swap(int argc, char **argv);
+void    stk_fill(t_stack *stk, int argc, char **argv);
+int     check_num(int argc, char **argv);
+int     check_dup(int *input, int argc);
+void    err_exit(void);
 
-void    push_swap(t_list *lst)
+void    push_swap(int argc, char **argv)
 {
-    //err_check
-    if (err_check(lst) == 0)
-        write(1, "Error\n", 6);
+    t_stack *stk_a;
+    t_stack *stk_b;
+
+    stk_init(&stk_a);
+    stk_init(&stk_b);
+    stk_fill(stk_a, argc, argv);
+    stk_display_all(stk_a, stk_b);
     //sort
     //display
 }
 
-int     err_check(t_list *lst)
+void    stk_fill(t_stack *stk, int argc, char **argv)
 {
-    t_list  *tmp;
+    int    *input;
+    int     idx;
 
-    while (lst)
+    if (check_num(argc, argv) == 0)
+        err_exit();
+    input = (int *)malloc((argc - 1) * sizeof(int));
+    if (!input)
+        return ;
+    idx = 0;
+    while (idx < argc - 1)
     {
-        //정수 범위 확인
-        tmp = lst->next;
-        while (tmp)
-        {
-            tmp = tmp->next;
-            if (lst->content == tmp->content)
-                return (0);
-        }
-        lst = lst->next;
+        input[idx] = ft_atoi(argv[idx + 1]);
+        idx++;
+    }
+    if (check_dup(input, argc) == 0)
+        err_exit();
+    idx = 0;
+    while (idx < argc - 1)
+    {
+        stk_push(stk, nd_init(input[idx]));
+        idx++;
+    }
+    free(input);
+}
+
+int     check_num(int argc, char **argv)
+{
+    int idx_1;
+    int idx_2;
+
+    idx_1 = 1;
+    while (idx_1 < argc)
+    {
+        idx_2 = 0;
+        if (argv[idx_1][idx_2] == '-' || argv[idx_1][idx_2] == '+')
+            idx_2++;
+        while(ft_isdigit(argv[idx_1][idx_2]))
+            idx_2++;
+        if (argv[idx_1][idx_2])
+            return (0);
+        idx_1++;
     }
     return (1);
+}
+
+int     check_dup(int *input, int argc)
+{
+    int idx_1;
+    int idx_2;
+
+    idx_1 = 0;
+    while (idx_1 < argc)
+    {
+        idx_2 = idx_1 + 1;
+        while (idx_2 < argc)
+        {
+            if (input[idx_1] == input[idx_2])
+                return (0);
+            idx_2++;
+        }
+        idx_1++;
+    }
+    return (1);
+}
+
+void    err_exit(void)
+{
+    //free?
+    write(1, "Error\n", 6);
+    exit(1);
 }

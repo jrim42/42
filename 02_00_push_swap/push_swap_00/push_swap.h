@@ -17,9 +17,18 @@ typedef struct  s_stack
     t_node      *top;
 }               t_stack;
 
+// typedef struct       s_stk
+// {
+//     struct s_stack   *a;
+//     struct s_stack   *b;
+// }                    t_stk;
+
 //push_swap.c
-void    push_swap(t_list *lst);
-int     err_check(t_list *lst);
+void    push_swap(int argc, char **argv);
+void    stk_fill(t_stack *stk, int argc, char **argv);
+int     check_num(int argc, char **argv);
+int     check_dup(int *input, int argc);
+void    err_exit(void);
 
 //push_swap_cmds.c
 void    commands(char *cmd, t_stack *a, t_stack *b);
@@ -33,5 +42,8 @@ void    stk_init(t_stack **stk);
 t_node  *nd_init(int num);
 void    stk_push(t_stack *stk, t_node *new_top);
 t_node  *stk_pop(t_stack *stk);
+
+//unnecessary.c
+void    stk_display_all(t_stack *stk_a, t_stack *stk_b);
 
 #endif
