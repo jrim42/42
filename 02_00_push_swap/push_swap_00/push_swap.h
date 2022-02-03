@@ -43,7 +43,13 @@ t_node  *nd_init(int num);
 void    stk_push(t_stack *stk, t_node *new_top);
 t_node  *stk_pop(t_stack *stk);
 
+//push_swap_sort.c
+int     stk_min(t_stack *stk);
+int     stk_max(t_stack *stk);
+void    stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right);
+
 //unnecessary.c
 void    stk_display_all(t_stack *stk_a, t_stack *stk_b);
+void    data_swap(int *a, int *b);
 
 #endif

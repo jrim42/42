@@ -1,6 +1,7 @@
 #include "push_swap.h"
 
 void    stk_display_all(t_stack *stk_a, t_stack *stk_b);
+void    data_swap(int *a, int *b);
 
 void    stk_display_all(t_stack *stk_a, t_stack *stk_b)
 {
@@ -27,4 +28,13 @@ void    stk_display_all(t_stack *stk_a, t_stack *stk_b)
         tmp_b = tmp_b->next;
     }
     printf("\n");
+}
+
+void    data_swap(int *a, int *b)
+{
+    int tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
 }

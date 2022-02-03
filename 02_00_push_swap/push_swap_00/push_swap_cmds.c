@@ -8,7 +8,7 @@ void    cmd_rev_rotate(char *cmd, t_stack *stk);
 
 void    commands(char *cmd, t_stack *a, t_stack *b)
 {
-
+    //print commands
 }
 
 void    cmd_push(char *cmd, t_stack *from, t_stack* to)
