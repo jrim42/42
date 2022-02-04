@@ -25,9 +25,11 @@ typedef struct  s_stack
 
 //push_swap.c
 void    push_swap(int argc, char **argv);
+
+//push_swaP_input.c
 void    stk_fill(t_stack *stk, int argc, char **argv);
-int     check_num(int argc, char **argv);
-int     check_dup(int *input, int argc);
+int     check_num(char **input);
+int     check_dup(t_stack *stk);
 void    err_exit(void);
 
 //push_swap_cmds.c
