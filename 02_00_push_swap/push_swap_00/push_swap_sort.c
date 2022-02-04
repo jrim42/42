@@ -1,8 +1,42 @@
 #include "push_swap.h"
 
+void    stk_a2b(t_stack *a, t_stack *b, int b_piv, int s_piv);
 int     stk_min(t_stack *stk);
 int     stk_max(t_stack *stk);
 void    stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right);
+
+void    stk_a2b(t_stack *a, t_stack *b, int b_piv, int s_piv)
+{
+    int     size;
+    int     ra_cnt;
+    int     rb_cnt;
+    int     pb_cnt;
+    t_node  *tmp;
+
+    size = a->size;
+    ra_cnt = 0;
+    rb_cnt = 0;
+    pb_cnt = 0;
+    while (size--)
+    {
+        tmp = a->top;
+        if (tmp->data >= b_piv)
+        {
+            cmd_rotate("ra", a);
+            ra_cnt++;
+        }
+        else
+        {
+            cmd_push("pb", a, b);
+            pb_cnt++;
+            if (tmp->data < s_piv)
+            {
+                cmd_rotate("rb", b);
+                rb_cnt++;
+            }
+        }
+    }
+}
 
 int stk_min(t_stack *stk)
 {

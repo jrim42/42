@@ -14,7 +14,6 @@ typedef struct      s_node
 typedef struct  s_stack
 {
     int         size;
-    char        name;
     t_node      *top;
 }               t_stack;
 
@@ -47,6 +46,7 @@ void    stk_push(t_stack *stk, t_node *new_top);
 t_node  *stk_pop(t_stack *stk);
 
 //push_swap_sort.c
+void    stk_a2b(t_stack *a, t_stack *b, int b_piv, int s_piv);
 int     stk_min(t_stack *stk);
 int     stk_max(t_stack *stk);
 void    stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right);
