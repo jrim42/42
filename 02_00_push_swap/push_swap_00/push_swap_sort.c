@@ -36,6 +36,16 @@ void    stk_a2b(t_stack *a, t_stack *b, int b_piv, int s_piv)
             }
         }
     }
+    //stk_display_all(a, b);
+    while (ra_cnt-- && rb_cnt--)
+    {
+        cmd_rev_rotate("rrr", a);
+        cmd_rev_rotate(0, b);
+    }
+    while (ra_cnt-- > 0)
+        cmd_rev_rotate("rra", a);
+    while (rb_cnt-- > 0)
+        cmd_rev_rotate("rrb", b);
 }
 
 int stk_min(t_stack *stk)
