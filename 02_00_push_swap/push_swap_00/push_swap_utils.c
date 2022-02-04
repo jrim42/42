@@ -9,6 +9,7 @@ void    stk_init(t_stack **stk)
 {
     *stk = (t_stack *)malloc(sizeof(t_stack));
     (*stk)->top = NULL;
+    (*stk)->name = 0;
     (*stk)->size = 0;
 }
 

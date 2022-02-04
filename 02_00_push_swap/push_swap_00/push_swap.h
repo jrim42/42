@@ -14,6 +14,7 @@ typedef struct      s_node
 typedef struct  s_stack
 {
     int         size;
+    char        name;
     t_node      *top;
 }               t_stack;
 
