@@ -26,11 +26,11 @@ typedef struct  s_stack
 //push_swap.c
 void    push_swap(int argc, char **argv);
 int		select_piv(t_stack *stk);
-int		is_rev_sorted(t_stack *stk);
-void	sort_3(t_stack *stk);
+void	sort_2(t_stack *stk);
 
 //push_swaP_input.c
 void    stk_fill(t_stack *stk, int argc, char **argv);
+void	arr_fill(t_stack *stk, int *arr);
 int     check_num(char **input);
 int     check_dup(t_stack *stk);
 void    err_exit(void);
@@ -53,7 +53,7 @@ void    stk_a2b(t_stack *a, t_stack *b, int size);
 void    stk_b2a(t_stack *a, t_stack *b, int size);
 int     stk_min(t_stack *stk);
 int     stk_max(t_stack *stk);
-void    stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right);
+void	arr_quicksort(int *arr, int start, int end);
 
 //unnecessary.c
 void    stk_display_all(t_stack *stk_a, t_stack *stk_b);

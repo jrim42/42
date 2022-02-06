@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/07 00:56:53 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/07 02:07:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	stk_a2b(t_stack *a, t_stack *b, int size);
 void	stk_b2a(t_stack *a, t_stack *b, int size);
 int		stk_min(t_stack *stk);
 int		stk_max(t_stack *stk);
-void	stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right);
+void	arr_quicksort(int *arr, int start, int end);
 
 void	stk_a2b(t_stack *a, t_stack *b, int size)
 {
@@ -26,13 +26,13 @@ void	stk_a2b(t_stack *a, t_stack *b, int size)
 	int		piv;
 	t_node	*tmp;
 
-	if (size == 3)
-		
+	if (size == 1)
+		return ;
 	ra_cnt = 0;
 	pb_cnt = 0;
 	cnt = 0;
 	piv = select_piv(a);
-	while (size--)
+	while (size-- > 0)
 	{
 		tmp = a->top;
 		if (tmp->data > piv)
@@ -48,6 +48,7 @@ void	stk_a2b(t_stack *a, t_stack *b, int size)
 	}
 	while (cnt++ < ra_cnt)
 		cmd_rev_rotate("rra", a);
+	stk_display_all(a, b);
 	stk_a2b(a, b, ra_cnt);
 	stk_b2a(a, b, pb_cnt);
 }
@@ -60,11 +61,16 @@ void	stk_b2a(t_stack *a, t_stack *b, int size)
 	int		piv;
 	t_node	*tmp;
 
+	if (size == 1)
+	{
+		cmd_push("pa", b, a);
+		return ;
+	}
 	rb_cnt = 0;
 	pa_cnt = 0;
 	cnt = 0;
 	piv = select_piv(b);
-	while (size--)
+	while (size-- > 0)
 	{
 		tmp = b->top;
 		if (tmp->data > piv)
@@ -116,36 +122,29 @@ int	stk_max(t_stack *stk)
 	return (0);
 }
 
-void	stk_quicksort(t_stack *stk, t_node *head, t_node *tail, int left, int right)
+void	arr_quicksort(int *arr, int start, int end)
 {
-	int		l_cnt;
-	int		r_cnt;
-	t_node	*l_node;
-	t_node	*r_node;
+    int piv;
+    int i;
+    int j;
+    int tmp;
 
-	if (left >= right)
-		return ;
-	l_cnt = left;
-	r_cnt = right;
-	l_node = head->next;
-	r_node = tail;
-	while (l_cnt < r_cnt)
-	{
-		while (l_node->data < head->data && l_cnt <= right)
-		{
-			l_node = l_node->next;
-			l_cnt++;
-		}
-		while (r_node->data > head->data && r_cnt > left)
-		{
-			r_node = r_node->prev;
-			r_cnt--;
-		}
-		if (l_cnt < r_cnt)
-			data_swap(&(l_node->data), &(r_node->data));
-		else
-			data_swap(&(head->data), &(r_node->data));
-	}
-	stk_quicksort(stk, head, r_node->prev, left, r_cnt - 1);
-	stk_quicksort(stk, r_node->next, tail, r_cnt + 1, right);
+	piv = start;
+	i = start + 1;
+	j = end;
+	if (start >= end)
+        return ;
+    while (i <= j)
+    {
+        while (arr[i] <= arr[piv]) 
+            i++;
+        while (arr[j] >= arr[piv] && j > start) 
+            j--;
+        if (i > j)
+			data_swap(&arr[j], &arr[piv]);
+        else
+			data_swap(&arr[j], &arr[i]);
+        arr_quicksort(arr, start, j - 1);
+        arr_quicksort(arr, j + 1, end);
+    }
 }
