@@ -15,6 +15,8 @@
 void	push_swap(int argc, char **argv);
 int		select_piv(t_stack *stk);
 void	sort_2(t_stack *stk);
+int		is_rev_sorted(t_stack *stk);
+int		is_sorted(t_stack *stk);
 
 void	push_swap(int argc, char **argv)
 {
@@ -37,20 +39,22 @@ int	select_piv(t_stack *stk)
 	int		*arr;
 	int		piv;
 
-	piv_idx = (stk->size)/2;
+	piv_idx = (stk->size)/2 - 1;
 	arr = (int *)malloc(stk->size * sizeof(int));
 	if (!arr)
 		return (0);
 	arr_fill(stk, arr);
 	arr_quicksort(arr, 0, stk->size - 1);
 	piv = arr[piv_idx];
+	// for (int i = 0; i < stk->size; i++)
+	// 	printf("%d ", arr[i]);
 	free(arr);
 	return (piv);
 }
 
 void	sort_2(t_stack *stk)
 {
-	printf("2 in\n");
+	printf("[sort_2 called!]\n");
 	t_node	*nd_1;
 	t_node	*nd_2;
 	
@@ -58,4 +62,56 @@ void	sort_2(t_stack *stk)
 	nd_2 = nd_1->next;
 	if (nd_1->data > nd_2->data)
 		cmd_swap("sa", stk);
+}
+
+int		is_rev_sorted(t_stack *stk)
+{
+	int		min;
+	int		size;
+	t_node	*tmp;
+
+	//printf("-------sort check-------\n");
+	min = stk_min(stk);
+	//printf("[min : %d]\n", min);
+	size = stk->size;
+	tmp = stk->top->prev;
+	if (tmp->data != min)
+		return (0);
+	//printf("[tmp : %d]\n", tmp->data);
+	while (size--)
+	{
+		if (tmp->data >= min)
+			min = tmp->data;
+		else
+			return (0);
+		tmp = tmp->prev;
+	}
+	//printf("-----check end here-----\n");
+	return (1);
+}
+
+int		is_sorted(t_stack *stk)
+{
+	int		min;
+	int		size;
+	t_node	*tmp;
+
+	//printf("-------sort check-------\n");
+	min = stk_min(stk);
+	//printf("[min : %d]\n", min);
+	size = stk->size;
+	tmp = stk->top;
+	if (tmp->data != min)
+		return (0);
+	//printf("[tmp : %d]\n", tmp->data);
+	while (size--)
+	{
+		if (tmp->data >= min)
+			min = tmp->data;
+		else
+			return (0);
+		tmp = tmp->next;
+	}
+	//printf("-----check end here-----\n");
+	return (1);
 }

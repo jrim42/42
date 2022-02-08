@@ -27,6 +27,8 @@ typedef struct  s_stack
 void    push_swap(int argc, char **argv);
 int		select_piv(t_stack *stk);
 void	sort_2(t_stack *stk);
+int		is_rev_sorted(t_stack *stk);
+int		is_sorted(t_stack *stk);
 
 //push_swaP_input.c
 void    stk_fill(t_stack *stk, int argc, char **argv);
