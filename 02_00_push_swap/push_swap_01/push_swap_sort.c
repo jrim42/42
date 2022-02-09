@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/07 02:07:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:13:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ void	stk_a2b(t_stack *a, t_stack *b, int size)
 
 	printf("-----a2b called!-----\n");
 	printf("[size : %d]\n", size);
-	if (b->size == 0 && is_sorted(a) == 1)
-	{
-		printf("----exit from a2b----\n");
-		exit(0);
-	}
-	else if (size <= 1)
+	// if (b->size == 0 && is_sorted(a) == 1)
+	// {
+	// 	printf("----exit from a2b----\n");
+	// 	exit(0);
+	// }
+	// else 
+	if (size <= 1)
 	{
 		printf("-----return-----\n");
 		return ;
@@ -48,7 +49,7 @@ void	stk_a2b(t_stack *a, t_stack *b, int size)
 	ra_cnt = 0;
 	pb_cnt = 0;
 	cnt = 0;
-	piv = select_piv(a);
+	piv = select_piv(a, size);
 	printf("[piv : %d]\n", piv);
 	while (size-- > 0)
 	{
@@ -69,6 +70,7 @@ void	stk_a2b(t_stack *a, t_stack *b, int size)
 	stk_display_all(a, b);
 	printf("[ra : %d]\n", ra_cnt);
 	printf("[pb : %d]\n", pb_cnt);
+	getchar();
 	stk_a2b(a, b, ra_cnt);
 	stk_b2a(a, b, pb_cnt);
 }
@@ -83,12 +85,13 @@ void	stk_b2a(t_stack *a, t_stack *b, int size)
 
 	printf("-----b2a called!-----\n");
 	printf("[size : %d]\n", size);
-	if (b->size == 0 && is_sorted(a) == 1)
-	{
-		printf("----exit from b2a----\n");
-		exit(0);
-	}
-	else if (size == 0)
+	// if (b->size == 0 && is_sorted(a) == 1)
+	// {
+	// 	printf("----exit from b2a----\n");
+	// 	exit(0);
+	// }
+	// else 
+	if (size == 0)
 	{
 		printf("-----return-----\n");
 		return ;
@@ -100,24 +103,24 @@ void	stk_b2a(t_stack *a, t_stack *b, int size)
 		printf("-----return-----\n");
 		return ;
 	}
-	else if (is_rev_sorted(b) == 1)
-	{
-		size = b->size;
-		while (size--)
-			cmd_push("pa", b, a);
-		stk_display_all(a, b);
-		printf("-----return-----\n");
-		return ;	
-	}
+	// else if (is_rev_sorted(b) == 1)
+	// {
+	// 	size = b->size;
+	// 	while (size--)
+	// 		cmd_push("pa", b, a);
+	// 	stk_display_all(a, b);
+	// 	printf("-----return-----\n");
+	// 	return ;	
+	// }
 	rb_cnt = 0;
 	pa_cnt = 0;
 	cnt = 0;
-	piv = select_piv(b);
+	piv = select_piv(b, size);
 	printf("[piv : %d]\n", piv);
 	while (size-- > 0)
 	{
 		tmp = b->top;
-		if (tmp->data < piv)
+		if (tmp->data <= piv)
 		{
 			cmd_rotate("rb", b);
 			rb_cnt++;
@@ -133,6 +136,7 @@ void	stk_b2a(t_stack *a, t_stack *b, int size)
 	stk_display_all(a, b);
 	printf("[rb : %d]\n", rb_cnt);
 	printf("[pa : %d]\n", pa_cnt);
+	getchar();
 	stk_a2b(a, b, pa_cnt);
 	stk_b2a(a, b, rb_cnt);
 }

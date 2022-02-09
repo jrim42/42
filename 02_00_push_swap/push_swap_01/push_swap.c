@@ -6,14 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/07 01:39:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:14:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	push_swap(int argc, char **argv);
-int		select_piv(t_stack *stk);
+int	select_piv(t_stack *stk, int size);
 void	sort_2(t_stack *stk);
 int		is_rev_sorted(t_stack *stk);
 int		is_sorted(t_stack *stk);
@@ -33,18 +33,18 @@ void	push_swap(int argc, char **argv)
 	//free?
 }
 
-int	select_piv(t_stack *stk)
+int	select_piv(t_stack *stk, int size)
 {
 	int		piv_idx;
 	int		*arr;
 	int		piv;
 
-	piv_idx = (stk->size)/2 - 1;
-	arr = (int *)malloc(stk->size * sizeof(int));
+	piv_idx = size/2 - 1;
+	arr = (int *)malloc(size * sizeof(int));
 	if (!arr)
 		return (0);
-	arr_fill(stk, arr);
-	arr_quicksort(arr, 0, stk->size - 1);
+	arr_fill(stk, arr, size);
+	arr_quicksort(arr, 0, size - 1);
 	piv = arr[piv_idx];
 	// for (int i = 0; i < stk->size; i++)
 	// 	printf("%d ", arr[i]);
