@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:52:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:57:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,27 +98,27 @@ void	stk_b2a(t_stack *a, t_stack *b, int size)
 
 void	arr_quicksort(int *arr, int start, int end)
 {
-    int piv;
-    int i;
-    int j;
-    int tmp;
+	int	piv;
+	int	i;
+	int	j;
+	int	tmp;
 
 	piv = start;
 	i = start + 1;
 	j = end;
 	if (start >= end)
-        return ;
-    while (i <= j)
-    {
-        while (arr[i] <= arr[piv] && i < end + 1) 
-            i++;
-        while (arr[j] >= arr[piv] && j > start) 
-            j--;
-        if (i > j)
+		return ;
+	while (i <= j)
+	{
+		while (arr[i] <= arr[piv] && i < end + 1)
+			i++;
+		while (arr[j] >= arr[piv] && j > start)
+			j--;
+		if (i > j)
 			data_swap(&arr[j], &arr[piv]);
-        else
+		else
 			data_swap(&arr[j], &arr[i]);
-        arr_quicksort(arr, start, j - 1);
-        arr_quicksort(arr, j + 1, end);
-    }
+		arr_quicksort(arr, start, j - 1);
+		arr_quicksort(arr, j + 1, end);
+	}
 }

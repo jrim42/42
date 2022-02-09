@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:25:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:54:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		select_piv(t_stack *stk, int size);
 int		is_sorted(t_stack *stk);
 int		is_rev_sorted(t_stack *stk);
 
-
 void	push_swap(int argc, char **argv)
 {
 	t_stack	*stk_a;
@@ -26,7 +25,6 @@ void	push_swap(int argc, char **argv)
 	stk_init(&stk_a);
 	stk_init(&stk_b);
 	stk_fill(stk_a, argc, argv);
-	
 	stk_display_all(stk_a, stk_b);
 	stk_a2b(stk_a, stk_b, stk_a->size);
 	stk_display_all(stk_a, stk_b);
@@ -39,7 +37,7 @@ int	select_piv(t_stack *stk, int size)
 	int		*arr;
 	int		piv;
 
-	piv_idx = size/2 - 1;
+	piv_idx = size / 2 - 1;
 	arr = (int *)malloc(size * sizeof(int));
 	if (!arr)
 		return (0);
@@ -52,7 +50,7 @@ int	select_piv(t_stack *stk, int size)
 	return (piv);
 }
 
-int		is_sorted(t_stack *stk)
+int	is_sorted(t_stack *stk)
 {
 	int		min;
 	int		size;
@@ -74,7 +72,7 @@ int		is_sorted(t_stack *stk)
 	return (1);
 }
 
-int		is_rev_sorted(t_stack *stk)
+int	is_rev_sorted(t_stack *stk)
 {
 	int		min;
 	int		size;
