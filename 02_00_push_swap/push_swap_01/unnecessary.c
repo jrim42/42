@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unnecessary.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:54:44 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/05 21:55:46 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:46:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	stk_display_all(t_stack *stk_a, t_stack *stk_b)
 	size_a = stk_a->size;
 	tmp_b = stk_b->top;
 	size_b = stk_b->size;
-	printf(" a |");
+	printf("%s a |", YELLOW);
 	while (size_a--)
 	{
 		printf(" %d |", tmp_a->data);
@@ -39,7 +39,7 @@ void	stk_display_all(t_stack *stk_a, t_stack *stk_b)
 		printf(" %d |", tmp_b->data);
 		tmp_b = tmp_b->next;
 	}
-	printf("\n");
+	printf("%s\n", RESET);
 }
 
 void	data_swap(int *a, int *b)

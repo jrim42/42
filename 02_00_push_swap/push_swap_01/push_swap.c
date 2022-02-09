@@ -6,17 +6,17 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:14:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/09 23:25:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	push_swap(int argc, char **argv);
-int	select_piv(t_stack *stk, int size);
-void	sort_2(t_stack *stk);
-int		is_rev_sorted(t_stack *stk);
+int		select_piv(t_stack *stk, int size);
 int		is_sorted(t_stack *stk);
+int		is_rev_sorted(t_stack *stk);
+
 
 void	push_swap(int argc, char **argv)
 {
@@ -52,58 +52,17 @@ int	select_piv(t_stack *stk, int size)
 	return (piv);
 }
 
-void	sort_2(t_stack *stk)
-{
-	printf("[sort_2 called!]\n");
-	t_node	*nd_1;
-	t_node	*nd_2;
-	
-	nd_1 = stk->top;
-	nd_2 = nd_1->next;
-	if (nd_1->data > nd_2->data)
-		cmd_swap("sa", stk);
-}
-
-int		is_rev_sorted(t_stack *stk)
-{
-	int		min;
-	int		size;
-	t_node	*tmp;
-
-	//printf("-------sort check-------\n");
-	min = stk_min(stk);
-	//printf("[min : %d]\n", min);
-	size = stk->size;
-	tmp = stk->top->prev;
-	if (tmp->data != min)
-		return (0);
-	//printf("[tmp : %d]\n", tmp->data);
-	while (size--)
-	{
-		if (tmp->data >= min)
-			min = tmp->data;
-		else
-			return (0);
-		tmp = tmp->prev;
-	}
-	//printf("-----check end here-----\n");
-	return (1);
-}
-
 int		is_sorted(t_stack *stk)
 {
 	int		min;
 	int		size;
 	t_node	*tmp;
 
-	//printf("-------sort check-------\n");
 	min = stk_min(stk);
-	//printf("[min : %d]\n", min);
 	size = stk->size;
 	tmp = stk->top;
 	if (tmp->data != min)
 		return (0);
-	//printf("[tmp : %d]\n", tmp->data);
 	while (size--)
 	{
 		if (tmp->data >= min)
@@ -112,6 +71,27 @@ int		is_sorted(t_stack *stk)
 			return (0);
 		tmp = tmp->next;
 	}
-	//printf("-----check end here-----\n");
+	return (1);
+}
+
+int		is_rev_sorted(t_stack *stk)
+{
+	int		min;
+	int		size;
+	t_node	*tmp;
+
+	min = stk_min(stk);
+	size = stk->size;
+	tmp = stk->top->prev;
+	if (tmp->data != min)
+		return (0);
+	while (size--)
+	{
+		if (tmp->data >= min)
+			min = tmp->data;
+		else
+			return (0);
+		tmp = tmp->prev;
+	}
 	return (1);
 }
