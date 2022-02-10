@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_cmds.c                                   :+:      :+:    :+:   */
+/*   psw_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:40:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:21:58 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/10 23:37:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	cmd_rev_rotate(char *cmd, t_stack *stk)
 
 void	rrr_helper(t_stack *a, t_stack *b, int ra_cnt, int rb_cnt)
 {
-	int cnt;
+	int	cnt;
 
 	cnt = 0;
 	while (cnt < ra_cnt && cnt < rb_cnt)

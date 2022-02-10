@@ -6,7 +6,7 @@
 /*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:35:13 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/10 23:40:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	push_swap(int argc, char **argv)
 {
 	t_stack		*stk_a;
 	t_stack		*stk_b;
-	t_pivot 	*piv;
+	t_pivot		*piv;
 
 	stk_init(&stk_a);
 	stk_init(&stk_b);

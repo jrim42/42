@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   psw_cmds_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/05 21:54:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/10 23:38:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_node	*nd_init(int num)
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = num;
-	// 순환구조
 	new_node->next = new_node;
 	new_node->prev = new_node;
 	return (new_node);
@@ -45,10 +44,8 @@ void	stk_push(t_stack *stk, t_node *new_top)
 	else
 	{
 		cur_top = stk->top;
-		// 새로운 노드의 앞뒤 연결 
 		new_top->prev = cur_top->prev;
 		new_top->next = cur_top;
-		// 기존 노드의 앞뒤 연결 해제
 		cur_top->prev->next = new_top;
 		cur_top->prev = new_top;
 		stk->top = new_top;
@@ -70,7 +67,6 @@ t_node	*stk_pop(t_stack *stk)
 		new_top->prev = cur_top->prev;
 		cur_top->prev->next = new_top;
 		stk->top = new_top;
-		// 다른 노드와의 연결 끊기
 		cur_top->prev = cur_top;
 		cur_top->next = cur_top;
 	}
