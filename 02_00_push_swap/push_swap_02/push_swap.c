@@ -3,51 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:54:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/10 15:54:24 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	push_swap(int argc, char **argv);
-int		select_piv(t_stack *stk, int size);
+void	select_piv(t_stack *stk, int size, t_detail *detail);
 int		is_sorted(t_stack *stk);
 int		is_rev_sorted(t_stack *stk);
 
 void	push_swap(int argc, char **argv)
 {
-	t_stack	*stk_a;
-	t_stack	*stk_b;
+	t_stack		*stk_a;
+	t_stack		*stk_b;
+	t_detail	*info;
 
 	stk_init(&stk_a);
 	stk_init(&stk_b);
 	stk_fill(stk_a, argc, argv);
 	stk_display_all(stk_a, stk_b);
-	stk_a2b(stk_a, stk_b, stk_a->size);
+	info = (t_detail *)malloc(1 * sizeof(t_detail));
+	if (!info)
+		return ;
+	stk_a2b(stk_a, stk_b, info, stk_a->size);
 	stk_display_all(stk_a, stk_b);
+	free(info);
 	//free?
 }
 
-int	select_piv(t_stack *stk, int size)
+void	select_piv(t_stack *stk, int size, t_detail *detail)
 {
-	int		piv_idx;
+	int		s_idx;
+	int		b_idx;
 	int		*arr;
-	int		piv;
 
-	piv_idx = size / 2 - 1;
+	printf("[select_piv called!]\n");
+	s_idx = size / 3;
+	b_idx = s_idx * 2;
 	arr = (int *)malloc(size * sizeof(int));
 	if (!arr)
-		return (0);
+		return ;
 	arr_fill(stk, arr, size);
 	arr_quicksort(arr, 0, size - 1);
-	piv = arr[piv_idx];
-	// for (int i = 0; i < stk->size; i++)
-	// 	printf("%d ", arr[i]);
-	free(arr);
-	return (piv);
+	detail->s_piv = arr[s_idx];
+	detail->b_piv = arr[b_idx];
+	//free(arr);
 }
 
 int	is_sorted(t_stack *stk)

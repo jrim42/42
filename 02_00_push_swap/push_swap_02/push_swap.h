@@ -22,15 +22,19 @@ typedef struct  s_stack
     t_node      *top;
 }               t_stack;
 
-// typedef struct       s_stk
-// {
-//     struct s_stack   *a;
-//     struct s_stack   *b;
-// }                    t_stk;
+typedef struct  s_detail
+{
+    int         ra_cnt;
+    int         pb_cnt;
+    int         rb_cnt;
+    int         pa_cnt;
+    int         b_piv;
+    int         s_piv;
+}               t_detail;
 
 //push_swap.c
 void    push_swap(int argc, char **argv);
-int	    select_piv(t_stack *stk, int size);
+void	select_piv(t_stack *stk, int size, t_detail *detail);
 int		is_rev_sorted(t_stack *stk);
 int		is_sorted(t_stack *stk);
 
@@ -46,6 +50,7 @@ void    cmd_push(char *cmd, t_stack *from, t_stack* to, int *cmd_cnt);
 void    cmd_swap(char *cmd, t_stack *stk, int *cmd_cnt);
 void    cmd_rotate(char *cmd, t_stack *stk, int *cmd_cnt);
 void    cmd_rev_rotate(char *cmd, t_stack *stk);
+void	rrr_helper(t_stack *a, t_stack *b, int ra_cnt, int rb_cnt);
 
 //push_swap_cmds_utils.c
 void    stk_init(t_stack **stk);
@@ -54,11 +59,12 @@ void    stk_push(t_stack *stk, t_node *new_top);
 t_node  *stk_pop(t_stack *stk);
 
 //push_swap_sort.c
-void    stk_a2b(t_stack *a, t_stack *b, int size);
-void    stk_b2a(t_stack *a, t_stack *b, int size);
+void    stk_a2b(t_stack *a, t_stack *b, t_detail* info, int size);
+void    stk_b2a(t_stack *a, t_stack *b, t_detail* info, int size);
 void	arr_quicksort(int *arr, int start, int end);
 
 //push_swap_sort_utils.c
+void	init_detail(t_detail *detail);
 void	sort_2(t_stack *stk);
 int     stk_min(t_stack *stk);
 int     stk_max(t_stack *stk);

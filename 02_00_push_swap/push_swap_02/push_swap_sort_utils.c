@@ -3,18 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_sort_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:55:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:55:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/10 15:50:02 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	init_detail(t_detail *detail);
 void	sort_2(t_stack *stk);
 int		stk_min(t_stack *stk);
 int		stk_max(t_stack *stk);
+
+void	init_detail(t_detail *detail)
+{
+	detail->ra_cnt = 0;
+	detail->pb_cnt = 0;
+	detail->rb_cnt = 0;
+	detail->pa_cnt = 0;
+	detail->b_piv = 0;
+	detail->s_piv = 0;
+}
 
 void	sort_2(t_stack *stk)
 {
