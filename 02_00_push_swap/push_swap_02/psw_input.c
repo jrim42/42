@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/09 23:36:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/10 23:19:51 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	stk_fill(t_stack *stk, int argc, char **argv);
-void	arr_fill(t_stack *stk, int *arr, int size);
 int		check_num(char **input);
 int		check_dup(t_stack *stk);
 void	err_exit(void);
@@ -43,21 +42,6 @@ void	stk_fill(t_stack *stk, int argc, char **argv)
 	}
 	if (check_dup(stk) == 0)
 		err_exit();
-}
-
-void	arr_fill(t_stack *stk, int *arr, int size)
-{
-	int		arr_idx;
-	t_node	*tmp;
-
-	arr_idx = 0;
-	tmp = stk->top;
-	while (size--)
-	{
-		arr[arr_idx] = tmp->data;
-		arr_idx++;
-		tmp = tmp->next;
-	}
 }
 
 int	check_num(char **input)

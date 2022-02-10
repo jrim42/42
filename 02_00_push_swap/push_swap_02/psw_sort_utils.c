@@ -1,42 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_sort_utils.c                             :+:      :+:    :+:   */
+/*   psw_sort_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:55:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 15:50:02 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/10 23:34:09 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_detail(t_detail *detail);
-void	sort_2(t_stack *stk);
+void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3);
+int		is_sorted(t_stack *stk);
+int		is_rev_sorted(t_stack *stk);
 int		stk_min(t_stack *stk);
 int		stk_max(t_stack *stk);
 
-void	init_detail(t_detail *detail)
+void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3)
 {
-	detail->ra_cnt = 0;
-	detail->pb_cnt = 0;
-	detail->rb_cnt = 0;
-	detail->pa_cnt = 0;
-	detail->b_piv = 0;
-	detail->s_piv = 0;
+	piv->b_piv = 0;
+	piv->s_piv = 0;
+	*cnt_1 = 0;
+	*cnt_2 = 0;
+	*cnt_3 = 0;
 }
 
-void	sort_2(t_stack *stk)
+int	is_sorted(t_stack *stk)
 {
-	t_node	*nd_1;
-	t_node	*nd_2;
+	int		min;
+	int		size;
+	t_node	*tmp;
 
-	printf("------- sort_2 called! ------\n");
-	nd_1 = stk->top;
-	nd_2 = nd_1->next;
-	if (nd_1->data > nd_2->data)
-		cmd_swap("sa", stk, NULL);
+	min = stk_min(stk);
+	size = stk->size;
+	tmp = stk->top;
+	if (tmp->data != min)
+		return (0);
+	while (size--)
+	{
+		if (tmp->data >= min)
+			min = tmp->data;
+		else
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	is_rev_sorted(t_stack *stk)
+{
+	int		min;
+	int		size;
+	t_node	*tmp;
+
+	min = stk_min(stk);
+	size = stk->size;
+	tmp = stk->top->prev;
+	if (tmp->data != min)
+		return (0);
+	while (size--)
+	{
+		if (tmp->data >= min)
+			min = tmp->data;
+		else
+			return (0);
+		tmp = tmp->prev;
+	}
+	return (1);
 }
 
 int	stk_min(t_stack *stk)
