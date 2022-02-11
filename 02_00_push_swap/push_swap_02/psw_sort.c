@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/11 23:43:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/12 01:18:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	stk_a2b(t_stack *a, t_stack *b, t_pivot *piv, int size)
 	else if (size == 2)
 	{
 		sort_2(a);
+		return ;
+	}
+	else if (size == 3)
+	{
+		sort_3(a);
 		return ;
 	}
 	init_detail(piv, &ra_cnt, &pb_cnt, &rb_cnt);
@@ -107,8 +112,31 @@ void	sort_3(t_stack *stk)
 	t_node	*nd_1;
 	t_node	*nd_2;
 	t_node	*nd_3;
+	int		min;
+	int		max;
 
+	if (is_sorted(stk, 3) == 1)
+		return ;
 	nd_1 = stk->top;
 	nd_2 = nd_1->next;
 	nd_3 = nd_2->next;
+	min = stk_min(stk, 3);
+	max = stk_max(stk, 3);
+	if (nd_2->data == min && nd_3->data == max)
+		cmd_swap("sa", stk, 0);
+	else if (nd_1->data == max)
+		cmd_swap("sa", stk, 0);
+	if (nd_1->data == min && nd_2->data == max)
+	{
+		cmd_rotate("ra", stk, 0);
+		cmd_swap("sa", stk, 0);
+		cmd_rev_rotate("rra", stk);
+	}
+	else if (nd_2->data == max && nd_3->data == min)
+	{
+		cmd_rotate("ra", stk, 0);
+		cmd_swap("sa", stk, 0);
+		cmd_rev_rotate("rra", stk);
+		cmd_swap("sa", stk, 0);
+	}
 }

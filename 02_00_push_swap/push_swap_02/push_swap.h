@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/11 14:09:35 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/12 00:58:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	sort_3(t_stack *stk);
 
 //psw_sort_utils.c
 void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3);
-int		is_rev_sorted(t_stack *stk);
-int		is_sorted(t_stack *stk);
-int		stk_min(t_stack *stk);
-int		stk_max(t_stack *stk);
+int		is_sorted(t_stack *stk, int size);
+int		is_rev_sorted(t_stack *stk, int size);
+int		stk_min(t_stack *stk, int size);
+int		stk_max(t_stack *stk, int size);
 
 //unnecessary.c
 void	stk_display_all(t_stack *stk_a, t_stack *stk_b);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:40:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/12 01:11:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	push_swap(int argc, char **argv)
 	stk_init(&stk_b);
 	stk_fill(stk_a, argc, argv);
 	stk_display_all(stk_a, stk_b);
+	if (stk_a->size == 3)
+	{
+		sort_3(stk_a);
+		stk_display_all(stk_a, stk_b);
+		return ;
+	}
 	piv = (t_pivot *)malloc(1 * sizeof(t_pivot));
 	if (!piv)
 		return ;
