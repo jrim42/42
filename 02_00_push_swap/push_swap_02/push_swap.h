@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:44:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/11 14:09:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	arr_quicksort(int *arr, int start, int end);
 void	stk_a2b(t_stack *a, t_stack *b, t_pivot *piv, int size);
 void	stk_b2a(t_stack *a, t_stack *b, t_pivot *piv, int size);
 void	sort_2(t_stack *stk);
+void	sort_3(t_stack *stk);
 
 //psw_sort_utils.c
 void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3);

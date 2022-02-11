@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   psw_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:32:45 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/11 23:43:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	stk_a2b(t_stack *a, t_stack *b, t_pivot *piv, int size);
 void	stk_b2a(t_stack *a, t_stack *b, t_pivot *piv, int size);
 void	sort_2(t_stack *stk);
+void	sort_3(t_stack *stk);
 
 void	stk_a2b(t_stack *a, t_stack *b, t_pivot *piv, int size)
 {
@@ -99,4 +100,15 @@ void	sort_2(t_stack *stk)
 	nd_2 = nd_1->next;
 	if (nd_1->data > nd_2->data)
 		cmd_swap("sa", stk, NULL);
+}
+
+void	sort_3(t_stack *stk)
+{
+	t_node	*nd_1;
+	t_node	*nd_2;
+	t_node	*nd_3;
+
+	nd_1 = stk->top;
+	nd_2 = nd_1->next;
+	nd_3 = nd_2->next;
 }
