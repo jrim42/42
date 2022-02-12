@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   psw_pivot.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:39:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:39:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/12 15:03:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	arr_quicksort(int *arr, int start, int end)
 	int	piv;
 	int	i;
 	int	j;
-	int	tmp;
 
 	piv = start;
 	i = start + 1;

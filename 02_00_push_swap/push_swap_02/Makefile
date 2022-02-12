@@ -1,15 +1,18 @@
-NAME	= 	libftprintf.a
+NAME	= 	push_swap.a
 LIB_DIR	= 	./libft
 LIB_A	= 	libft.a
 
 CC		= 	gcc
 CFLAGS	= 	-Wall -Wextra -Werror
 
-SRC		= 	ft_printf.c \
-			ft_printf_str.c \
-			ft_printf_num.c \
-			ft_printf_parse.c \
-			ft_printf_utils.c \
+SRC		= 	push_swap.c\
+			psw_input.c\
+			psw_cmds.c\
+			psw_cmds_utils.c\
+			psw_pivot.c\
+			psw_sort.c\
+			psw_sort_utils.c\
+			unnecessary.c
 			
 BONUS 	=
 
