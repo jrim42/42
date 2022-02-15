@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psw_input.c                                        :+:      :+:    :+:   */
+/*   _input.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/10 23:39:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 23:02:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	stk_fill(t_stack *stk, int argc, char **argv);
+void	stk_fill(t_stk *stk, int argc, char **argv);
 int		check_num(char **input);
-int		check_dup(t_stack *stk);
+int		check_dup(t_stk *stk);
 void	err_exit(void);
 
-void	stk_fill(t_stack *stk, int argc, char **argv)
+void	stk_fill(t_stk *stk, int argc, char **argv)
 {
 	char	**input;
 	int		idx_1;
@@ -65,7 +65,7 @@ int	check_num(char **input)
 	return (1);
 }
 
-int	check_dup(t_stack *stk)
+int	check_dup(t_stk *stk)
 {
 	int		cnt_1;
 	int		cnt_2;

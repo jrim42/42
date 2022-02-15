@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   _stack.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/15 23:05:48 by jrim              #+#    #+#             */
+/*   Updated: 2022/02/15 23:05:55 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	stk_init(t_stack **stk);
+void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
-void	stk_push(t_stack *stk, t_node *new_top);
-t_node	*stk_pop(t_stack *stk);
+void	stk_push(t_stk *stk, t_node *new_top);
+t_node	*stk_pop(t_stk *stk);
 
-void	stk_init(t_stack **stk)
+void	stk_init(t_stk **stk)
 {
-	*stk = (t_stack *)malloc(sizeof(t_stack));
+	*stk = (t_stk *)malloc(sizeof(t_stk));
 	(*stk)->top = NULL;
 	(*stk)->size = 0;
 }
@@ -23,7 +35,7 @@ t_node	*nd_init(int num)
 	return (new_node);
 }
 
-void	stk_push(t_stack *stk, t_node *new_top)
+void	stk_push(t_stk *stk, t_node *new_top)
 {
 	t_node	*cur_top;
 
@@ -41,7 +53,7 @@ void	stk_push(t_stack *stk, t_node *new_top)
 	stk->size++;
 }
 
-t_node	*stk_pop(t_stack *stk)
+t_node	*stk_pop(t_stk *stk)
 {
 	t_node	*cur_top;
 	t_node	*new_top;

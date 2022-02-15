@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psw_sort_utils.c                                   :+:      :+:    :+:   */
+/*   _sort_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:55:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/12 01:15:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 23:05:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3);
-int		is_sorted(t_stack *stk, int size);
-int		is_rev_sorted(t_stack *stk, int size);
-int		stk_min(t_stack *stk, int size);
-int		stk_max(t_stack *stk, int size);
+void	det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
+int		is_sorted(t_stk *stk, int size);
+int		is_rev_sorted(t_stk *stk, int size);
+int		stk_min(t_stk *stk, int size);
+int		stk_max(t_stk *stk, int size);
 
-void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3)
+void	det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3)
 {
 	piv->b_piv = 0;
 	piv->s_piv = 0;
@@ -27,7 +27,7 @@ void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3)
 	*cnt_3 = 0;
 }
 
-int	is_sorted(t_stack *stk, int size)
+int	is_sorted(t_stk *stk, int size)
 {
 	int		min;
 	t_node	*tmp;
@@ -47,7 +47,7 @@ int	is_sorted(t_stack *stk, int size)
 	return (1);
 }
 
-int	is_rev_sorted(t_stack *stk, int size)
+int	is_rev_sorted(t_stk *stk, int size)
 {
 	int		min;
 	t_node	*tmp;
@@ -67,7 +67,7 @@ int	is_rev_sorted(t_stack *stk, int size)
 	return (1);
 }
 
-int	stk_min(t_stack *stk, int size)
+int	stk_min(t_stk *stk, int size)
 {
 	int		min;
 	t_node	*tmp;
@@ -83,7 +83,7 @@ int	stk_min(t_stack *stk, int size)
 	return (min);
 }
 
-int	stk_max(t_stack *stk, int size)
+int	stk_max(t_stk *stk, int size)
 {
 	int		max;
 	t_node	*tmp;

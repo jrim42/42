@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psw_pivot.c                                        :+:      :+:    :+:   */
+/*   _pivot.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:39:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/12 15:03:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 23:03:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	select_piv(t_stack *stk, int size, t_pivot *piv);
-void	arr_fill(t_stack *stk, int *arr, int size);
+void	piv_select(t_stk *stk, int size, t_piv *piv);
+void	arr_fill(t_stk *stk, int *arr, int size);
 void	arr_quicksort(int *arr, int start, int end);
 
-void	select_piv(t_stack *stk, int size, t_pivot *piv)
+void	piv_select(t_stk *stk, int size, t_piv *piv)
 {
 	int		s_idx;
 	int		b_idx;
@@ -34,7 +34,7 @@ void	select_piv(t_stack *stk, int size, t_pivot *piv)
 	free(arr);
 }
 
-void	arr_fill(t_stack *stk, int *arr, int size)
+void	arr_fill(t_stk *stk, int *arr, int size)
 {
 	int		arr_idx;
 	t_node	*tmp;

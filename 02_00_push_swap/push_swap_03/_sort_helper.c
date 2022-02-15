@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   _sort_helper.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
+/*   Updated: 2022/02/15 23:05:41 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int a2b_helper(t_stack *a, t_stack *b, int size);
-int b2a_helper(t_stack *a, t_stack *b, int size);
+int a2b_helper(t_stk *a, t_stk *b, int size);
+int b2a_helper(t_stk *a, t_stk *b, int size);
 
-int a2b_helper(t_stack *a, t_stack *b, int size)
+int a2b_helper(t_stk *a, t_stk *b, int size)
 {
     if (b->size == 0 && is_sorted(a, a->size) == 1)
         exit(0); // 명령어 정리하는 곳으로 가야함.
@@ -22,7 +34,7 @@ int a2b_helper(t_stack *a, t_stack *b, int size)
     return (0);
 }
 
-int b2a_helper(t_stack *a, t_stack *b, int size)
+int b2a_helper(t_stk *a, t_stk *b, int size)
 {
     int cnt;
 
