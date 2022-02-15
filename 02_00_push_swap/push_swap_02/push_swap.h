@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 20:10:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 20:14:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	sort_2(t_stack *stk);
 void	sort_3(t_stack *stk);
 
 // _sort_helper.c
-int 	a2b_helper(t_stack *a, t_stack *b, t_pivot *piv, int size);
-int 	b2a_helper(t_stack *a, t_stack *b, t_pivot *piv, int size);
+int 	a2b_helper(t_stack *a, t_stack *b, int size);
+int 	b2a_helper(t_stack *a, t_stack *b, int size);
 
 // _sort_utils.c
 void	init_detail(t_pivot *piv, int *cnt_1, int *cnt_2, int *cnt_3);

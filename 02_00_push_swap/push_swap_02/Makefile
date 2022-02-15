@@ -6,18 +6,17 @@ CC		= 	gcc
 CFLAGS	= 	-Wall -Wextra -Werror
 
 SRC		= 	push_swap.c\
-			psw_input.c\
-			psw_cmds.c\
-			psw_cmds_utils.c\
-			psw_pivot.c\
-			psw_sort.c\
-			psw_sort_utils.c\
+			_input.c\
+			_stack.c\
+			_cmds.c\
+			_cmds_utils.c\
+			_pivot.c\
+			_sort.c\
+			_sort_helper.c\
+			_sort_utils.c\
 			unnecessary.c
-			
-BONUS 	=
 
 OBJ		= 	$(SRC:.c=.o)
-BNS_OBJ	= 	$(BONUS:.c=.o)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -I.
@@ -28,8 +27,6 @@ $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 all : $(NAME)
-
-bonus : 
 
 clean :
 	make -C $(LIB_DIR) clean

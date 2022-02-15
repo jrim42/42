@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 20:10:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 20:21:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,8 @@ void	stk_a2b(t_stack *a, t_stack *b, t_pivot *piv, int size)
 	int		rb_cnt;
 
 	printf("%s-------- a2b called! --------%s\n", GREEN, RESET);
-	if (size <= 1)
+	if (a2b_helper(a, b, size) == 1)
 		return ;
-	else if (size == 2)
-	{
-		sort_2(a);
-		return ;
-	}
-	else if (size == 3)
-	{
-		sort_3(a);
-		return ;
-	}
 	init_detail(piv, &ra_cnt, &pb_cnt, &rb_cnt);
 	select_piv(a, size, piv);
 	while (size-- > 0)
@@ -67,13 +57,8 @@ void	stk_b2a(t_stack *a, t_stack *b, t_pivot *piv, int size)
 	int		ra_cnt;
 
 	printf("%s-------- b2a called! --------%s\n", BLUE, RESET);
-	if (size == 0)
+	if (b2a_helper(a, b, size) == 1)
 		return ;
-	else if (size == 1)
-	{
-		cmd_push("pa", b, a, NULL);
-		return ;
-	}
 	init_detail(piv, &rb_cnt, &pa_cnt, &ra_cnt);
 	select_piv(b, size, piv);
 	while (size-- > 0)
