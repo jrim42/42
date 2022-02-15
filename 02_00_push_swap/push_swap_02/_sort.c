@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psw_sort.c                                         :+:      :+:    :+:   */
+/*   _sort.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/12 01:18:22 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/15 20:10:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	stk_b2a(t_stack *a, t_stack *b, t_pivot *piv, int size)
 
 void	sort_2(t_stack *stk)
 {
+	printf("------- sort2 called! -------\n");
 	t_node	*nd_1;
 	t_node	*nd_2;
 
@@ -109,6 +110,7 @@ void	sort_2(t_stack *stk)
 
 void	sort_3(t_stack *stk)
 {
+	printf("------- sort3 called! -------\n");
 	t_node	*nd_1;
 	t_node	*nd_2;
 	t_node	*nd_3;
