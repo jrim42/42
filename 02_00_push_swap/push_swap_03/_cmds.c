@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:40:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:37:16 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/16 00:46:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	cmd_rotate(int cmd, t_elm *elm, int *cmd_cnt)
 		cur_top = elm->a->top;
 		elm->a->top = cur_top->next;
 	}
-	if (cmd == 21  || cmd == 22)
+	if (cmd == 21 || cmd == 22)
 	{
 		cur_top = elm->b->top;
 		elm->b->top = cur_top->next;

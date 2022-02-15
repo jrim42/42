@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:41:53 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/16 00:46:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cmd_display_all(t_stk *cmdlst)
 
 void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt)
 {
-	int	cnt;
+	int		cnt;
 	t_stk	*a;
 	t_stk	*b;
 

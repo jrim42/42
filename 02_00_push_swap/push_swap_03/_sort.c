@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:28:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/16 00:47:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	stk_b2a(t_elm *elm, t_piv *piv, int size)
 
 void	sort_2(t_elm *elm, t_stk *stk)
 {
-	printf("------- sort2 called! -------\n");
 	t_node	*nd_1;
 	t_node	*nd_2;
 
+	printf("------- sort2 called! -------\n");
 	nd_1 = stk->top;
 	nd_2 = nd_1->next;
 	if (nd_1->data > nd_2->data)
@@ -95,13 +95,13 @@ void	sort_2(t_elm *elm, t_stk *stk)
 
 void	sort_3(t_elm *elm, t_stk *stk)
 {
-	printf("------- sort3 called! -------\n");
 	t_node	*nd_1;
 	t_node	*nd_2;
 	t_node	*nd_3;
 	int		min;
 	int		max;
 
+	printf("------- sort3 called! -------\n");
 	if (is_sorted(stk, 3) == 1)
 		return ;
 	nd_1 = stk->top;
