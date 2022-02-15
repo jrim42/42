@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 23:00:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/16 00:26:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
 
 // _cmds.c
-void	cmd_push(char *cmd, t_stk *from, t_stk *to, int *cmd_cnt);
-void	cmd_swap(char *cmd, t_stk *stk, int *cmd_cnt);
-void	cmd_rotate(char *cmd, t_stk *stk, int *cmd_cnt);
-void	cmd_rev_rotate(char *cmd, t_stk *stk);
+void	cmd_swap(int cmd, t_elm *elm, int *cmd_cnt);
+void	cmd_push(int cmd, t_elm *elm, int *cmd_cnt);
+void	cmd_rotate(int cmd, t_elm *elm, int *cmd_cnt);
+void	cmd_rev_rotate(int cmd, t_elm *elm);
 
 // _cmds_utils.c
-void	cmd_display(t_stk *cmd_lst);
-void	rrr_helper(t_stk *a, t_stk *b, int ra_cnt, int rb_cnt);
+void	cmd_display_all(t_stk *cmd_lst);
+void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
 
 // _pivot.c
 void	piv_select(t_stk *stk, int size, t_piv *piv);
@@ -81,12 +81,12 @@ void	arr_quicksort(int *arr, int start, int end);
 // _sort.c
 void	stk_a2b(t_elm *elm, t_piv *piv, int size);
 void	stk_b2a(t_elm *elm, t_piv *piv, int size);
-void	sort_2(t_stk *stk);
-void	sort_3(t_stk *stk);
+void	sort_2(t_elm *elm, t_stk *stk);
+void	sort_3(t_elm *elm, t_stk *stk);
 
 // _sort_helper.c
-int 	a2b_helper(t_stk *a, t_stk *b, int size);
-int 	b2a_helper(t_stk *a, t_stk *b, int size);
+int 	a2b_helper(t_elm *elm, int size);
+int 	b2a_helper(t_elm *elm, int size);
 
 // _sort_utils.c
 void	det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
@@ -96,6 +96,7 @@ int		stk_min(t_stk *stk, int size);
 int		stk_max(t_stk *stk, int size);
 
 // unnecessary.c
+void	cmd_display_one(int cmd);
 void	stk_display_all(t_stk *stk_a, t_stk *stk_b);
 void	data_swap(int *a, int *b);
 
