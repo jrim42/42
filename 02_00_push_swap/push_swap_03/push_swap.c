@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:40:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/16 15:16:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	push_swap(int argc, char **argv)
 	stk_a2b(elm, elm->piv, elm->a->size);
 	stk_display_all(elm->a, elm->b);
 	printf("------ sort complete! -------\n");
+	//printf("----- total : %d cmds -----\n", elm->cmdlst->size);
+	//cmd_cleaner(elm->cmdlst);
 	cmd_display_all(elm->cmdlst);
 	//free?
 }
