@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 15:16:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 21:19:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	push_swap(int argc, char **argv)
 {
 	t_elm	*elm;
 
+	if (argc < 3)
+		return ;
 	elm = (t_elm *)malloc(1 * sizeof(t_elm));
 	if (!elm)
 		exit(1);
@@ -28,7 +30,8 @@ void	push_swap(int argc, char **argv)
 	stk_display_all(elm->a, elm->b);
 	printf("------ sort complete! -------\n");
 	//printf("----- total : %d cmds -----\n", elm->cmdlst->size);
-	//cmd_cleaner(elm->cmdlst);
+	cmd_display_all(elm->cmdlst);
+	cmd_cleaner(elm);
 	cmd_display_all(elm->cmdlst);
 	//free?
 }

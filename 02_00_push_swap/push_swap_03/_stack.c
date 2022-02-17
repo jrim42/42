@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:37:20 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 21:46:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
+void	nd_extract(t_stk *stk, t_node *nd);
 
 void	stk_init(t_stk **stk)
 {
@@ -72,4 +73,28 @@ t_node	*stk_pop(t_stk *stk)
 	}
 	stk->size--;
 	return (cur_top);
+}
+
+void	nd_extract(t_stk *stk, t_node *nd)
+{
+	t_node	*prev_nd;
+	t_node	*next_nd;
+
+	//printf("in\n");
+	if (nd == stk->top)
+	{
+		stk_pop(stk);
+		return ;
+	}
+	prev_nd = nd->prev;
+	next_nd = nd->next;
+	// cmd_display_one(next_nd->data);
+	// cmd_display_one(nd->data);
+	// cmd_display_one(prev_nd->data);
+	prev_nd->next = next_nd;
+	next_nd->prev = prev_nd;
+	nd->next = NULL;
+	nd->prev = NULL;
+	stk->size--;
+	free(nd);
 }

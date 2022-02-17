@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 15:17:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 20:45:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
+void	nd_extract(t_stk *stk, t_node *nd);
 
 // _cmds.c
 void	cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt);
@@ -73,6 +74,7 @@ void	cmd_rev_rotate(int new_cmd, t_elm *elm);
 void	cmd_display_all(t_stk *cmd_lst);
 void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
 void	rr_cleaner(t_elm *elm, int new_cmd);
+void	cmd_cleaner(t_elm *elm);
 
 // _pivot.c
 void	piv_select(t_stk *stk, int size, t_piv *piv);

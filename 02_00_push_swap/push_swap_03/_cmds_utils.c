@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 15:34:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 21:52:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,24 @@
 void	cmd_display_all(t_stk *cmdlst);
 void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
 void	rr_cleaner(t_elm *elm, int new_cmd);
+void	cmd_cleaner(t_elm *elm);
 
 void	cmd_display_all(t_stk *cmdlst)
 {
 	t_node	*tmp;
 	int		size;
+	int		cmd_cnt;
 
 	tmp = cmdlst->top->prev;
 	size = cmdlst->size;
+	cmd_cnt = 0;
 	while (size--)
 	{
 		cmd_display_one(tmp->data);
+		cmd_cnt++;
 		tmp = tmp->prev;
 	}
-	printf("----- total : %d cmds -----\n", cmdlst->size);
+	printf("----- total : %d cmds -----\n", cmd_cnt);
 }
 
 void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt)
@@ -89,5 +93,149 @@ void	rr_cleaner(t_elm *elm, int new_cmd)
 	{
 		printf("4 in\n");
 		stk_push(elm->cmdlst, nd_init(new_cmd));
+	}
+}
+
+// void	cmd_cleaner(t_elm *elm)
+// {
+// 	t_stk	*cmdlst;
+// 	t_node	*tmp;
+// 	int		size;
+
+// 	cmdlst = elm->cmdlst;
+// 	tmp = cmdlst->top->prev;
+// 	size = cmdlst->size;
+// 	while (size--)
+// 	{
+// 		if (tmp->data == 32)
+// 		{
+// 			if (tmp->next->data == 20 && tmp->next->next->data == 21)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->next->data = -1;
+// 				tmp->next->next->data = -1;
+// 			}
+// 			else if (tmp->next->data == 20 && tmp->next->next->data == 21)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->next->data = -1;
+// 				tmp->next->next->data = -1;
+// 			}
+// 			else if (tmp->next->data == 20)
+// 			{
+// 				tmp->data = 31;
+// 				tmp->next->data = -1;
+// 			}
+// 			else if (tmp->next->data == 21)
+// 			{
+// 				tmp->data = 30;
+// 				tmp->next->data = -1;
+// 			}
+// 		}
+// 		else if (tmp->data == 31)
+// 		{
+// 			if (tmp->next->data == 21)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->next->data = -1;
+// 			}
+// 			else if (tmp->prev->data == 21)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->prev->data = -1;
+// 			}
+// 		}
+// 		else if (tmp->data == 30)
+// 		{
+// 			if (tmp->next->data == 20)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->next->data = -1;
+// 			}
+// 			else if (tmp->prev->data == 20)
+// 			{
+// 				tmp->data = -1;
+// 				tmp->prev->data = -1;
+// 			}
+// 		}
+// 		tmp = tmp->prev;
+// 	}
+// }
+
+void	cmd_cleaner(t_elm *elm)
+{
+	t_stk	*cmdlst;
+	t_node	*tmp;
+	t_node	*cur;
+	int		size;
+
+	cmdlst = elm->cmdlst;
+	tmp = cmdlst->top->prev;
+	size = cmdlst->size;
+	while (size--)
+	{	
+		if (tmp->data == 32)
+		{
+			if (tmp->next->data == 20 && tmp->next->next->data == 21)
+			{
+				printf("1\n");
+				nd_extract(cmdlst, tmp->next->next);
+				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp);
+			}
+			else if (tmp->next->data == 20 && tmp->next->next->data == 21)
+			{
+				printf("2\n");
+				nd_extract(cmdlst, tmp->next->next);
+				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp);
+			}
+			else if (tmp->next->data == 20)
+			{
+				printf("3\n");
+				nd_extract(cmdlst, tmp->next);
+				tmp->data = 31;
+			}
+			else if (tmp->next->data == 21)
+			{
+				printf("4\n");
+				nd_extract(cmdlst, tmp->next);
+				tmp->data = 30;
+			}
+		}
+		else if (tmp->data == 31)
+		{
+			if (tmp->next->data == 21)
+			{
+				printf("5\n");
+				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp);
+			}
+			else if (tmp->prev->data == 21)
+			{
+				printf("6\n");
+				nd_extract(cmdlst, tmp->prev);
+				nd_extract(cmdlst, tmp);
+				tmp = tmp->prev;
+			}
+		}
+		else if (tmp->data == 30)
+		{
+			if (tmp->next->data == 20)
+			{
+				printf("7\n");
+				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp);
+			}
+			else if (tmp->prev->data == 20)
+			{
+				printf("8\n");
+				cur = tmp;
+				tmp = tmp->prev->prev;
+				nd_extract(cmdlst, cur->prev);
+				nd_extract(cmdlst, cur);
+			}
+		}
+		tmp = tmp->prev;
 	}
 }
