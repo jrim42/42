@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/17 21:52:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 22:55:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void	cmd_cleaner(t_elm *elm)
 {
 	t_stk	*cmdlst;
 	t_node	*tmp;
-	t_node	*cur;
 	int		size;
 
 	cmdlst = elm->cmdlst;
@@ -177,64 +176,33 @@ void	cmd_cleaner(t_elm *elm)
 		if (tmp->data == 32)
 		{
 			if (tmp->next->data == 20 && tmp->next->next->data == 21)
-			{
-				printf("1\n");
-				nd_extract(cmdlst, tmp->next->next);
-				nd_extract(cmdlst, tmp->next);
-				nd_extract(cmdlst, tmp);
-			}
+				nd_extract(cmdlst, tmp, 3);
 			else if (tmp->next->data == 20 && tmp->next->next->data == 21)
-			{
-				printf("2\n");
-				nd_extract(cmdlst, tmp->next->next);
-				nd_extract(cmdlst, tmp->next);
-				nd_extract(cmdlst, tmp);
-			}
+				nd_extract(cmdlst, tmp, 3);
 			else if (tmp->next->data == 20)
 			{
-				printf("3\n");
-				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp->next, 1);
 				tmp->data = 31;
 			}
 			else if (tmp->next->data == 21)
 			{
-				printf("4\n");
-				nd_extract(cmdlst, tmp->next);
+				nd_extract(cmdlst, tmp->next, 1);
 				tmp->data = 30;
 			}
 		}
 		else if (tmp->data == 31)
 		{
 			if (tmp->next->data == 21)
-			{
-				printf("5\n");
-				nd_extract(cmdlst, tmp->next);
-				nd_extract(cmdlst, tmp);
-			}
+				nd_extract(cmdlst, tmp, 2);
 			else if (tmp->prev->data == 21)
-			{
-				printf("6\n");
-				nd_extract(cmdlst, tmp->prev);
-				nd_extract(cmdlst, tmp);
-				tmp = tmp->prev;
-			}
+				nd_extract(cmdlst, tmp, -2);
 		}
 		else if (tmp->data == 30)
 		{
 			if (tmp->next->data == 20)
-			{
-				printf("7\n");
-				nd_extract(cmdlst, tmp->next);
-				nd_extract(cmdlst, tmp);
-			}
+				nd_extract(cmdlst, tmp, 2);
 			else if (tmp->prev->data == 20)
-			{
-				printf("8\n");
-				cur = tmp;
-				tmp = tmp->prev->prev;
-				nd_extract(cmdlst, cur->prev);
-				nd_extract(cmdlst, cur);
-			}
+				nd_extract(cmdlst, tmp, -2);
 		}
 		tmp = tmp->prev;
 	}

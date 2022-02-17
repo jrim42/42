@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/17 20:45:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/17 22:07:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
-void	nd_extract(t_stk *stk, t_node *nd);
+void	nd_extract(t_stk *stk, t_node *nd, int cnt);
 
 // _cmds.c
 void	cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt);
