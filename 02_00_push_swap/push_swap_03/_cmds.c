@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:40:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:07:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 17:01:18 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt)
 	stk_push(elm->cmdlst, nd_init(new_cmd));
 	if (new_cmd == 0)
 		stk = elm->a;
-	else if (new_cmd == 1)
+	else
 		stk = elm->b;
 	cur_top = stk->top;
 	if (cur_top && cur_top->next)
@@ -71,7 +71,6 @@ void	cmd_rotate(int new_cmd, t_elm *elm, int *cmd_cnt)
 
 void	cmd_rev_rotate(int new_cmd, t_elm *elm)
 {
-	t_stk	*stk;
 	t_node	*cur_top;
 
 	rr_cleaner(elm, new_cmd);

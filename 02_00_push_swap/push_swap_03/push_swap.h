@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:47:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 16:59:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ typedef struct s_elm
 }				t_elm;
 
 //push_swap.c
-void	push_swap(int argc, char **argv);
-t_elm	*elm_init(t_elm *elm);
+void	elm_init(t_elm *elm);
 void	elm_free(t_elm *elm);
 
 // _input.c

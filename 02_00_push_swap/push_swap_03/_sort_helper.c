@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:57:00 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 17:01:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt)
 void	rr_cleaner(t_elm *elm, int new_cmd)
 {
 	t_stk	*cmdlst;
-	t_node	*tmp;
 	int		cur_cmd;
 
 	cmdlst = elm->cmdlst;
