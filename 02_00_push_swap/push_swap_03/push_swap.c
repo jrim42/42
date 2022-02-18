@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/17 21:19:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:06:31 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	push_swap(int argc, char **argv);
 void	elm_init(t_elm *elm);
+void	elm_free(t_elm *elm);
 
 void	push_swap(int argc, char **argv)
 {
@@ -29,11 +30,10 @@ void	push_swap(int argc, char **argv)
 	stk_a2b(elm, elm->piv, elm->a->size);
 	stk_display_all(elm->a, elm->b);
 	printf("------ sort complete! -------\n");
-	//printf("----- total : %d cmds -----\n", elm->cmdlst->size);
 	cmd_display_all(elm->cmdlst);
 	cmd_cleaner(elm);
 	cmd_display_all(elm->cmdlst);
-	//free?
+	elm_free(elm);
 }
 
 void	elm_init(t_elm *elm)
@@ -47,4 +47,9 @@ void	elm_init(t_elm *elm)
 		printf("piv allocation failed\n");
 		exit(1);
 	}
+}
+
+void	elm_free(t_elm *elm)
+{
+	
 }

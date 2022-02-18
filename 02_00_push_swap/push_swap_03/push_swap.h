@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/17 22:07:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:01:25 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_elm
 
 //push_swap.c
 void	push_swap(int argc, char **argv);
+void	elm_init(t_elm *elm);
+void	elm_free(t_elm *elm);
 
 // _input.c
 void	stk_fill(t_stk *stk, int argc, char **argv);
@@ -62,7 +64,6 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
-void	nd_extract(t_stk *stk, t_node *nd, int cnt);
 
 // _cmds.c
 void	cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt);
@@ -71,10 +72,9 @@ void	cmd_rotate(int new_cmd, t_elm *elm, int *cmd_cnt);
 void	cmd_rev_rotate(int new_cmd, t_elm *elm);
 
 // _cmds_utils.c
-void	cmd_display_all(t_stk *cmd_lst);
-void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
-void	rr_cleaner(t_elm *elm, int new_cmd);
 void	cmd_cleaner(t_elm *elm);
+void	cmd_display_all(t_stk *cmd_lst);
+void	cmd_display_one(int cmd);
 
 // _pivot.c
 void	piv_select(t_stk *stk, int size, t_piv *piv);
@@ -90,6 +90,8 @@ void	sort_3(t_elm *elm, t_stk *stk);
 // _sort_helper.c
 int		a2b_helper(t_elm *elm, int size);
 int		b2a_helper(t_elm *elm, int size);
+void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
+void	rr_cleaner(t_elm *elm, int new_cmd);
 
 // _sort_utils.c
 void	det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
@@ -99,7 +101,6 @@ int		stk_min(t_stk *stk, int size);
 int		stk_max(t_stk *stk, int size);
 
 // unnecessary.c
-void	cmd_display_one(int cmd);
 void	stk_display_all(t_stk *stk_a, t_stk *stk_b);
 void	data_swap(int *a, int *b);
 
