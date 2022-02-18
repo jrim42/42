@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:01:25 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:47:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_elm
 
 //push_swap.c
 void	push_swap(int argc, char **argv);
-void	elm_init(t_elm *elm);
+t_elm	*elm_init(t_elm *elm);
 void	elm_free(t_elm *elm);
 
 // _input.c
@@ -64,6 +64,7 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
+void	stk_del(t_stk *stk);
 
 // _cmds.c
 void	cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt);

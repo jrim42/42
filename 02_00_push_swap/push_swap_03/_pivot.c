@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:39:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 23:03:46 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:35:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	piv_select(t_stk *stk, int size, t_piv *piv)
 	b_idx = s_idx * 2;
 	arr = (int *)malloc(size * sizeof(int));
 	if (!arr)
-		return ;
+		exit(1) ;
 	arr_fill(stk, arr, size);
 	arr_quicksort(arr, 0, size - 1);
 	piv->s_piv = arr[s_idx];

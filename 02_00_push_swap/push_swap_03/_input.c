@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _input.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 23:02:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:37:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	stk_fill(t_stk *stk, int argc, char **argv)
 	while (idx_1 < argc)
 	{
 		input = ft_split(argv[idx_1], ' ');
-		if (check_num(input) == 0)
+		if (!input || check_num(input) == 0)
 			err_exit();
 		idx_2 = 0;
 		while (input[idx_2])
 		{
 			data = ft_atoi(input[idx_2]);
 			stk_push(stk, nd_init(data));
+			free(input[idx_2]);
 			idx_2++;
 		}
 		free(input);
@@ -93,7 +94,6 @@ int	check_dup(t_stk *stk)
 
 void	err_exit(void)
 {
-	//free?
 	write(1, "Error\n", 6);
 	exit(1);
 }

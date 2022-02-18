@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:02:22 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:11:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,6 @@
 void	cmd_cleaner(t_elm *elm);
 void	cmd_display_all(t_stk *cmdlst);
 void	cmd_display_one(int cmd);
-
-void	cmd_display_all(t_stk *cmdlst)
-{
-	t_node	*tmp;
-	int		size;
-	int		cmd_cnt;
-
-	tmp = cmdlst->top->prev;
-	size = cmdlst->size;
-	cmd_cnt = 0;
-	while (size--)
-	{
-		if (tmp->data != -1)
-		{
-			cmd_display_one(tmp->data);
-			cmd_cnt++;
-		}
-		tmp = tmp->prev;
-	}
-	printf("----- total : %d cmds -----\n", cmd_cnt);
-}
 
 void	cmd_cleaner(t_elm *elm)
 {
@@ -70,6 +49,27 @@ void	cmd_cleaner(t_elm *elm)
 		}
 		tmp = tmp->prev;
 	}
+}
+
+void	cmd_display_all(t_stk *cmdlst)
+{
+	t_node	*tmp;
+	int		size;
+	int		cmd_cnt;
+
+	tmp = cmdlst->top->prev;
+	size = cmdlst->size;
+	cmd_cnt = 0;
+	while (size--)
+	{
+		if (tmp->data != -1)
+		{
+			cmd_display_one(tmp->data);
+			cmd_cnt++;
+		}
+		tmp = tmp->prev;
+	}
+	printf("----- total : %d cmds -----\n", cmd_cnt);
 }
 
 void	cmd_display_one(int cmd)

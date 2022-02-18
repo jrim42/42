@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 11:47:28 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:32:48 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	stk_init(t_stk **stk);
 t_node	*nd_init(int num);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
+void	stk_del(t_stk *stk);
 
 void	stk_init(t_stk **stk)
 {
@@ -72,4 +73,22 @@ t_node	*stk_pop(t_stk *stk)
 	}
 	stk->size--;
 	return (cur_top);
+}
+
+void	stk_del(t_stk *stk)
+{
+	t_node	*tmp;
+	int		size;
+
+	tmp = stk->top;
+	size = stk->size;
+	while (size--)
+	{
+		tmp = stk_pop(stk);
+		tmp->prev = 0;
+		tmp->next = 0;
+		free(tmp);
+	}
+	stk->top = 0;
+	free(stk);
 }
