@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:40:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:02:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 12:07:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	cmd_rev_rotate(int new_cmd, t_elm *elm)
 {
 	t_stk	*stk;
 	t_node	*cur_top;
-	
+
 	rr_cleaner(elm, new_cmd);
 	if (new_cmd == 30 || new_cmd == 32)
 	{
