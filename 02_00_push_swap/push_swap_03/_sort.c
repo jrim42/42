@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/16 00:47:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/18 22:11:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	stk_a2b(t_elm *elm, t_piv *piv, int size)
 	int		rb_cnt;
 
 	printf("%s-------- a2b called! --------%s\n", GREEN, RESET);
+	printf("[size : %d]\n", size);
 	if (a2b_helper(elm, size) == 1)
 		return ;
 	det_init(piv, &ra_cnt, &pb_cnt, &rb_cnt);
 	piv_select(elm->a, size, piv);
+	printf("[b_piv : %d, s_piv : %d]\n", piv->b_piv, piv->s_piv);
 	while (size-- > 0)
 	{
 		tmp = elm->a->top;
@@ -57,10 +59,12 @@ void	stk_b2a(t_elm *elm, t_piv *piv, int size)
 	int		ra_cnt;
 
 	printf("%s-------- b2a called! --------%s\n", BLUE, RESET);
+	printf("[size : %d]\n", size);
 	if (b2a_helper(elm, size) == 1)
 		return ;
 	det_init(piv, &rb_cnt, &pa_cnt, &ra_cnt);
 	piv_select(elm->b, size, piv);
+	printf("[b_piv : %d, s_piv : %d]\n", piv->b_piv, piv->s_piv);
 	while (size-- > 0)
 	{
 		tmp = elm->b->top;
@@ -91,6 +95,7 @@ void	sort_2(t_elm *elm, t_stk *stk)
 	nd_2 = nd_1->next;
 	if (nd_1->data > nd_2->data)
 		cmd_swap(0, elm, NULL);
+	//tk_display_all(elm->a, elm->b);
 }
 
 void	sort_3(t_elm *elm, t_stk *stk)
@@ -126,4 +131,5 @@ void	sort_3(t_elm *elm, t_stk *stk)
 		cmd_rev_rotate(30, elm);
 		cmd_swap(0, elm, 0);
 	}
+	//stk_display_all(elm->a, elm->b);
 }
