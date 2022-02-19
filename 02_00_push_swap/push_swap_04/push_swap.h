@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 15:13:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/19 23:55:48 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		sort_3(t_elm *elm, t_stk *stk);
 int			a2b_helper(t_elm *elm, int size);
 int			b2a_helper(t_elm *elm, int size);
 void		rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
-void		rr_cleaner(t_elm *elm, int new_cmd);
+void		rrr_cleaner(t_elm *elm, int new_cmd);
 
 // _sort_utils.c
 void		det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);

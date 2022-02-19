@@ -6,7 +6,7 @@
 /*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 15:02:01 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/19 23:58:33 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		a2b_helper(t_elm *elm, int size);
 int		b2a_helper(t_elm *elm, int size);
 void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
-void	rr_cleaner(t_elm *elm, int new_cmd);
+void	rrr_cleaner(t_elm *elm, int new_cmd);
 
 int	a2b_helper(t_elm *elm, int size)
 {
@@ -88,7 +88,7 @@ void	rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt)
 			cmd_rev_rotate(31, elm);
 }
 
-void	rr_cleaner(t_elm *elm, int new_cmd)
+void	rrr_cleaner(t_elm *elm, int new_cmd)
 {
 	t_stk	*cmdlst;
 	int		cur_cmd;
