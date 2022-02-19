@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _stack.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 12:32:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/19 14:59:37 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	stk_push(t_stk *stk, t_node *new_top)
 {
 	t_node	*cur_top;
 
-	if (stk->size == 0)
+	if (new_top == NULL)
+		return ;
+	else if (stk->size == 0)
 		stk->top = new_top;
 	else
 	{
@@ -60,7 +62,9 @@ t_node	*stk_pop(t_stk *stk)
 	t_node	*new_top;
 
 	cur_top = stk->top;
-	if (stk->size == 1)
+	if (stk->size == 0)
+		return (NULL);
+	else if (stk->size == 1)
 		stk->top = NULL;
 	else
 	{

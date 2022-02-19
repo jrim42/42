@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _sort_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:55:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/15 23:05:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/19 14:56:24 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	stk_min(t_stk *stk, int size)
 	int		min;
 	t_node	*tmp;
 
-	min = 2147483647;
+	min = INT_MAX;
 	tmp = stk->top;
 	while (size--)
 	{
-		if (tmp->data < min)
+		if (tmp->data <= min)
 			min = tmp->data;
 		tmp = tmp->next;
 	}
@@ -88,11 +88,11 @@ int	stk_max(t_stk *stk, int size)
 	int		max;
 	t_node	*tmp;
 
-	max = -2147483648;
+	max = INT_MIN;
 	tmp = stk->top;
 	while (size--)
 	{
-		if (tmp->data > max)
+		if (tmp->data >= max)
 			max = tmp->data;
 		tmp = tmp->next;
 	}

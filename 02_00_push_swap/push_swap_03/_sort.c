@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _sort.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 22:11:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/19 14:56:56 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	sort_2(t_elm *elm, t_stk *stk)
 	nd_2 = nd_1->next;
 	if (nd_1->data > nd_2->data)
 		cmd_swap(0, elm, NULL);
-	//tk_display_all(elm->a, elm->b);
+	stk_display_all(elm->a, elm->b);
 }
 
 void	sort_3(t_elm *elm, t_stk *stk)
@@ -131,5 +131,5 @@ void	sort_3(t_elm *elm, t_stk *stk)
 		cmd_rev_rotate(30, elm);
 		cmd_swap(0, elm, 0);
 	}
-	//stk_display_all(elm->a, elm->b);
+	stk_display_all(elm->a, elm->b);
 }

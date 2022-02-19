@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _sort_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/18 17:01:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/19 15:02:01 by rimjeesoo        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	b2a_helper(t_elm *elm, int size)
 
 	a = elm->a;
 	b = elm->b;
-	if (size == 0)
+	if (b->size == 0 || size == 0)
 		return (1);
 	else if (size == 1)
 	{
