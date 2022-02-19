@@ -1,6 +1,6 @@
 TARGET = libft.a
 
-CC = gcc -Wall -Wextra -Werror -c -o
+CC = gcc -Wall -Wextra -Werror
 
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_toupper.c ft_tolower.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \

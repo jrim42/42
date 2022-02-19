@@ -27,7 +27,7 @@ $(LIB_A) :
 	@$(MAKE) -C $(LIB_DIR)
 
 $(NAME) : $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -o $@
 
 clean :
 	@$(MAKE) clean -C $(LIB_DIR)
