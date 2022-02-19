@@ -1,5 +1,5 @@
 NAME	= 	push_swap
-LIB_DIR	= 	./libft
+LIB_DIR	= 	./libft/
 LIB_A	= 	libft.a
 
 CC		= 	gcc
@@ -15,24 +15,26 @@ SRC		= 	push_swap.c\
 			_sort_helper.c\
 			_sort_utils.c\
 
+LIB 	=	$(addprefix $(LIB_DIR), $(LIB_A))
 OBJ		= 	$(SRC:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -I.
+# .c.o:
+# 	$(CC) $(CFLAGS) $^ -0 -@
 
-$(NAME) : $(OBJ)
-	make -C $(LIB_DIR)
-	cp $(LIB_DIR)/$(LIB_A) $(NAME)
-	ar rc $(NAME) $(OBJ)
+all : $(LIB_A) $(NAME)
 
-all : $(NAME)
+$(LIB_A) :
+	@$(MAKE) -C $(LIB_DIR)
+
+$(NAME) : $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean :
-	make -C $(LIB_DIR) clean
-	rm -f $(OBJ) $(BNS_OBJ)
+	@$(MAKE) clean -C $(LIB_DIR)
+	rm -f $(OBJ)
 
 fclean : clean
-	make -C $(LIB_DIR) fclean
+	@$(MAKE) fclean -C $(LIB_DIR) 
 	rm -f $(NAME)
 
 re : fclean all
