@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 23:55:48 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/20 15:41:27 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ long long	ft_atoll(char *str);
 // _input_utils
 int			ft_isspace_or_issign(const char *str, int *sign);
 
-// _stack.c
+// _stack_1.c
 void		stk_init(t_stk **stk);
 t_node		*nd_init(int num);
+void		stk_del(t_stk *stk);
+
+// _stack_2.c
+void		stk_append(t_stk *stk, t_node *new_nd);
 void		stk_push(t_stk *stk, t_node *new_top);
 t_node		*stk_pop(t_stk *stk);
-void		stk_del(t_stk *stk);
 
 // _cmds.c
 void		cmd_swap(int new_cmd, t_elm *elm, int *cmd_cnt);

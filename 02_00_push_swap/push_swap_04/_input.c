@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 15:10:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 15:37:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	stk_fill(t_stk *stk, int argc, char **argv)
 			data = ft_atoll(input[idx_2]);
 			if (data > INT_MAX || data < INT_MIN)
 				err_exit();
-			stk_push(stk, nd_init(data));
+			stk_append(stk, nd_init(data));
 			free(input[idx_2]);
 		}
 		free(input);
@@ -107,9 +107,9 @@ void	err_exit(void)
 
 long long	ft_atoll(char *str)
 {
-	unsigned long	num;
-	int				sign;
-	char			*ptr;
+	long long	num;
+	int			sign;
+	char		*ptr;
 
 	num = 0;
 	sign = 1;
@@ -121,13 +121,6 @@ long long	ft_atoll(char *str)
 		if (ft_isdigit(*(ptr + 1)) == 1 && *(ptr + 1) != '\0')
 			num *= 10;
 		ptr++;
-	}
-	if (num > LONG_MAX)
-	{
-		if (sign == 1)
-			return (-1);
-		else
-			return (0);
 	}
 	return ((long long)num * sign);
 }

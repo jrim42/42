@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _sort_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimjeesoo <rimjeesoo@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 23:58:33 by rimjeesoo        ###   ########.fr       */
+/*   Updated: 2022/02/20 15:24:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	a2b_helper(t_elm *elm, int size)
 	a = elm->a;
 	b = elm->b;
 	if (b->size == 0 && is_sorted(a, a->size) == 1)
-		return (1);
+		exit(0);
 	else if (size <= 1)
 		return (1);
 	else if (size == 2)

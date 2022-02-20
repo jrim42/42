@@ -7,7 +7,8 @@ CFLAGS	= 	-Wall -Wextra -Werror
 
 SRC		= 	push_swap.c\
 			_input.c\
-			_stack.c\
+			_stack_1.c\
+			_stack_2.c\
 			_cmds.c\
 			_cmds_utils.c\
 			_pivot.c\
