@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 15:41:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 16:37:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,6 @@ void		stk_fill(t_stk *stk, int argc, char **argv);
 int			check_num(char **input);
 int			check_dup(t_stk *stk);
 void		err_exit(void);
-long long	ft_atoll(char *str);
-
-// _input_utils
-int			ft_isspace_or_issign(const char *str, int *sign);
 
 // _stack_1.c
 void		stk_init(t_stk **stk);
@@ -87,8 +83,7 @@ void		cmd_display_one(int cmd);
 // _pivot.c
 void		piv_select(t_stk *stk, int size, t_piv *piv);
 void		arr_fill(t_stk *stk, int *arr, int size);
-void		arr_quicksort(int *arr, int start, int end);
-void		data_swap(int *a, int *b);
+void		arr_qsort(int *arr, int start, int end);
 
 // _sort.c
 void		stk_a2b(t_elm *elm, t_piv *piv, int size);
@@ -103,13 +98,16 @@ void		rrr_helper(t_elm *elm, int ra_cnt, int rb_cnt);
 void		rrr_cleaner(t_elm *elm, int new_cmd);
 
 // _sort_utils.c
-void		det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
 int			is_sorted(t_stk *stk, int size);
 int			is_rev_sorted(t_stk *stk, int size);
 int			stk_min(t_stk *stk, int size);
 int			stk_max(t_stk *stk, int size);
 
-// unnecessary.c
+// _utils.c
+long long	ft_atoll(char *str);
+void		det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
 void		stk_display_all(t_stk *stk_a, t_stk *stk_b);
+void		data_swap(int *a, int *b);
+int			ft_isspace_or_issign(const char *str, int *sign);
 
 #endif

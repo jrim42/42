@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:39:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 15:13:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 16:07:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	piv_select(t_stk *stk, int size, t_piv *piv);
 void	arr_fill(t_stk *stk, int *arr, int size);
-void	arr_quicksort(int *arr, int start, int end);
-void	data_swap(int *a, int *b);
+void	arr_qsort(int *arr, int start, int end);
 
 void	piv_select(t_stk *stk, int size, t_piv *piv)
 {
@@ -29,7 +28,7 @@ void	piv_select(t_stk *stk, int size, t_piv *piv)
 	if (!arr)
 		exit(1);
 	arr_fill(stk, arr, size);
-	arr_quicksort(arr, 0, size - 1);
+	arr_qsort(arr, 0, size - 1);
 	piv->s_piv = arr[s_idx];
 	piv->b_piv = arr[b_idx];
 	free(arr);
@@ -50,37 +49,28 @@ void	arr_fill(t_stk *stk, int *arr, int size)
 	}
 }
 
-void	arr_quicksort(int *arr, int start, int end)
+void	arr_qsort(int *arr, int start, int end)
 {
 	int	piv;
-	int	i;
-	int	j;
+	int	left;
+	int	right;
 
 	piv = start;
-	i = start + 1;
-	j = end;
+	left = start + 1;
+	right = end;
 	if (start >= end)
 		return ;
-	while (i <= j)
+	while (left <= right)
 	{
-		while (arr[i] <= arr[piv] && i < end + 1)
-			i++;
-		while (arr[j] >= arr[piv] && j > start)
-			j--;
-		if (i > j)
-			data_swap(&arr[j], &arr[piv]);
+		while (arr[left] <= arr[piv] && left < end + 1)
+			left++;
+		while (arr[right] >= arr[piv] && right > start)
+			right--;
+		if (left > right)
+			data_swap(&arr[right], &arr[piv]);
 		else
-			data_swap(&arr[j], &arr[i]);
-		arr_quicksort(arr, start, j - 1);
-		arr_quicksort(arr, j + 1, end);
+			data_swap(&arr[right], &arr[left]);
+		arr_qsort(arr, start, right - 1);
+		arr_qsort(arr, right + 1, end);
 	}
-}
-
-void	data_swap(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }

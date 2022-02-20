@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 15:37:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 15:56:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		stk_fill(t_stk *stk, int argc, char **argv);
 int			check_num(char **input);
 int			check_dup(t_stk *stk);
 void		err_exit(void);
-long long	ft_atoll(char *str);
 
 void	stk_fill(t_stk *stk, int argc, char **argv)
 {
@@ -29,7 +28,7 @@ void	stk_fill(t_stk *stk, int argc, char **argv)
 	while (idx_1++ < argc - 1)
 	{
 		input = ft_split(argv[idx_1], ' ');
-		if (!input || check_num(input) == 0)
+		if (input == 0 || check_num(input) == 0)
 			err_exit();
 		idx_2 = -1;
 		while (input[++idx_2])
@@ -103,24 +102,4 @@ void	err_exit(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
-}
-
-long long	ft_atoll(char *str)
-{
-	long long	num;
-	int			sign;
-	char		*ptr;
-
-	num = 0;
-	sign = 1;
-	ptr = (char *)str;
-	ptr += ft_isspace_or_issign(str, &sign);
-	while (ft_isdigit(*ptr) == 1 && *ptr != '\0')
-	{
-		num += (*ptr) - '0';
-		if (ft_isdigit(*(ptr + 1)) == 1 && *(ptr + 1) != '\0')
-			num *= 10;
-		ptr++;
-	}
-	return ((long long)num * sign);
 }

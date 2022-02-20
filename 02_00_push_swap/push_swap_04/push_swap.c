@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 17:55:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 16:40:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	main(int argc, char **argv)
 		return (0);
 	elm = (t_elm *)malloc(1 * sizeof(t_elm));
 	if (!elm)
-		exit(1);
+		return (0);
 	elm_init(elm);
 	stk_fill(elm->a, argc, argv);
 	stk_a2b(elm, elm->piv, elm->a->size);
+	stk_display_all(elm->a, elm->b);
 	cmd_cleaner(elm);
 	cmd_display_all(elm->cmdlst);
 	elm_free(elm);

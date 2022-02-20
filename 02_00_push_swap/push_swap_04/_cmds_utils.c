@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/19 15:11:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/20 16:41:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,25 @@ void	cmd_cleaner(t_elm *elm)
 {
 	t_node	*tmp;
 	int		size;
-	int		prev_cmd;
-	int		cur_cmd;
-	int		next_cmd;
 
 	tmp = elm->cmdlst->top->prev;
 	size = elm->cmdlst->size;
 	while (size--)
 	{	
-		prev_cmd = tmp->prev->data;
-		cur_cmd = tmp->data;
-		next_cmd = tmp->next->data;
-		if (cur_cmd == 31 && (prev_cmd == 21 || next_cmd == 21))
+		if (tmp->data == 31 && (tmp->prev->data == 21 || tmp->next->data == 21))
 		{
 			tmp->data = -1;
-			if (next_cmd == 21)
+			if (tmp->next->data == 21)
 				tmp->next->data = -1;
-			else if (prev_cmd == 21)
+			else if (tmp->prev->data == 21)
 				tmp->prev->data = -1;
 		}
-		else if (tmp->data == 30 && (prev_cmd == 20 || next_cmd == 20))
+		if (tmp->data == 30 && (tmp->prev->data == 20 || tmp->next->data == 20))
 		{
 			tmp->data = -1;
-			if (next_cmd == 20)
+			if (tmp->next->data == 20)
 				tmp->next->data = -1;
-			else if (prev_cmd == 20)
+			else if (tmp->prev->data == 20)
 				tmp->prev->data = -1;
 		}
 		tmp = tmp->prev;
@@ -55,18 +49,13 @@ void	cmd_display_all(t_stk *cmdlst)
 {
 	t_node	*tmp;
 	int		size;
-	int		cmd_cnt;
 
 	tmp = cmdlst->top->prev;
 	size = cmdlst->size;
-	cmd_cnt = 0;
 	while (size--)
 	{
 		if (tmp->data != -1)
-		{
 			cmd_display_one(tmp->data);
-			cmd_cnt++;
-		}
 		tmp = tmp->prev;
 	}
 }

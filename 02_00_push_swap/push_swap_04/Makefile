@@ -15,6 +15,7 @@ SRC		= 	push_swap.c\
 			_sort.c\
 			_sort_helper.c\
 			_sort_utils.c\
+			_utils.c\
 
 LIB 	=	$(addprefix $(LIB_DIR), $(LIB_A))
 OBJ		= 	$(SRC:.c=.o)
