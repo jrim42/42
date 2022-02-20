@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   _stack_2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/20 15:42:42 by jrim              #+#    #+#             */
+/*   Updated: 2022/02/20 15:43:25 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    stk_append(t_stk *stk, t_node *new_nd);
+void	stk_append(t_stk *stk, t_node *new_nd);
 void	stk_push(t_stk *stk, t_node *new_top);
 t_node	*stk_pop(t_stk *stk);
 
-void    stk_append(t_stk *stk, t_node *new_nd)
+void	stk_append(t_stk *stk, t_node *new_nd)
 {
-    t_node	*cur_top;
-    
-    if (new_nd == NULL)
+	t_node	*cur_top;
+
+	if (new_nd == NULL)
 		return ;
 	else if (stk->size == 0)
 		stk->top = new_nd;
