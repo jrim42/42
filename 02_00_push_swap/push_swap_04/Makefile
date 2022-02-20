@@ -5,6 +5,12 @@ LIB_A	= 	libft.a
 CC		= 	gcc
 CFLAGS	= 	-Wall -Wextra -Werror
 
+CLR_RD	=	\033[0;31m
+CLR_YL	=	\033[0;33m
+CLR_GR	= 	\033[0;32m
+CLR_BL	= 	\033[0;36m
+CLR_DF	= 	\033[0;37m
+
 SRC		= 	push_swap.c\
 			_input.c\
 			_stack_1.c\
@@ -20,24 +26,29 @@ SRC		= 	push_swap.c\
 LIB 	=	$(addprefix $(LIB_DIR), $(LIB_A))
 OBJ		= 	$(SRC:.c=.o)
 
-# .c.o:
-# 	$(CC) $(CFLAGS) $^ -0 -@
-
 all : $(LIB_A) $(NAME)
+
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB_A) :
 	@$(MAKE) -C $(LIB_DIR)
+	@echo "$(CLR_GR)[created]$(CLR_DF) : $(LIB_A)" 
 
 $(NAME) : $(OBJ) $(LIB)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@echo "$(CLR_GR)[created]$(CLR_DF) : $(NAME)" 
 
 clean :
 	@$(MAKE) clean -C $(LIB_DIR)
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(LIB_A) (obj files)"
+	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(NAME) (obj files)"
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIB_DIR) 
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(LIB_A)"
+	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(NAME)"
 
 re : fclean all
 
