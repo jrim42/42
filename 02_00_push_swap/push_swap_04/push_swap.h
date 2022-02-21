@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 20:16:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:51:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ void		arr_qsort(int *arr, int start, int end);
 // _sort.c
 void		stk_a2b(t_elm *elm, t_piv *piv, int size);
 void		stk_b2a(t_elm *elm, t_piv *piv, int size);
+
+// _sort_n.c
 void		sort_2(t_elm *elm, t_stk *stk);
 void		sort_3(t_elm *elm, t_stk *stk);
+void		sort_5(t_elm *elm, t_stk *stk);
 
 // _sort_helper.c
 int			a2b_helper(t_elm *elm, int size);
