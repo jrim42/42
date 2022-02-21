@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 17:03:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 18:59:48 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 {
 	t_elm	*elm;
 
-	if (argc < 3)
+	if (argc < 2)
 		return (0);
 	elm = (t_elm *)malloc(1 * sizeof(t_elm));
 	if (!elm)
@@ -27,7 +27,6 @@ int	main(int argc, char **argv)
 	elm_init(elm);
 	stk_fill(elm->a, argc, argv);
 	stk_a2b(elm, elm->piv, elm->a->size);
-	//stk_display_all(elm->a, elm->b);
 	cmd_cleaner(elm);
 	cmd_display_all(elm->cmdlst);
 	elm_free(elm);

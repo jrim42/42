@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 15:24:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 18:58:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	a2b_helper(t_elm *elm, int size)
 	a = elm->a;
 	b = elm->b;
 	if (b->size == 0 && is_sorted(a, a->size) == 1)
-		exit(0);
+		return(1);
 	else if (size <= 1)
 		return (1);
 	else if (size == 2)
