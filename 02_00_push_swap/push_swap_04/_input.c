@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 20:33:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:40:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	check_num(char **input)
 		if (input[idx_1][idx_2] == '-' || input[idx_1][idx_2] == '+')
 			idx_2++;
 		while (input[idx_1][idx_2] == '0')
+		{
 			idx_2++;
+			digit_cnt = 1;
+		}
 		while (ft_isdigit(input[idx_1][idx_2]))
 		{
 			idx_2++;
