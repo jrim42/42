@@ -36,6 +36,7 @@ $(LIB_A) :
 	@echo "$(CLR_GR)[created]$(CLR_DF) : $(LIB_A)" 
 
 $(NAME) : $(OBJ) $(LIB)
+	@$(CC) $(CFLAGS) $^ -o $@
 	@echo "$(CLR_GR)[created]$(CLR_DF) : $(NAME)" 
 
 clean :
