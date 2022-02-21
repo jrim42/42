@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 16:37:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 20:16:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void		elm_init(t_elm *elm);
 void		elm_free(t_elm *elm);
 
 // _input.c
-void		stk_fill(t_stk *stk, int argc, char **argv);
+void		stk_fill(t_elm *elm, int argc, char **argv);
 int			check_num(char **input);
 int			check_dup(t_stk *stk);
-void		err_exit(void);
+void		err_exit(t_elm *elm);
 
 // _stack_1.c
 void		stk_init(t_stk **stk);

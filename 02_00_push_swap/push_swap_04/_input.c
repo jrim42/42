@@ -6,18 +6,18 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:43:55 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 17:04:58 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 20:33:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		stk_fill(t_stk *stk, int argc, char **argv);
+void		stk_fill(t_elm *elm, int argc, char **argv);
 int			check_num(char **input);
 int			check_dup(t_stk *stk);
-void		err_exit(void);
+void		err_exit(t_elm *elm);
 
-void	stk_fill(t_stk *stk, int argc, char **argv)
+void	stk_fill(t_elm *elm, int argc, char **argv)
 {
 	char		**input;
 	int			idx_1;
@@ -29,20 +29,20 @@ void	stk_fill(t_stk *stk, int argc, char **argv)
 	{
 		input = ft_split(argv[idx_1], ' ');
 		if (input == 0 || check_num(input) == 0)
-			err_exit();
+			err_exit(elm);
 		idx_2 = -1;
 		while (input[++idx_2])
 		{
 			data = ft_atoll(input[idx_2]);
 			if (data > INT_MAX || data < INT_MIN)
-				err_exit();
-			stk_append(stk, nd_init(data));
+				err_exit(elm);
+			stk_append(elm->a, nd_init(data));
 			free(input[idx_2]);
 		}
 		free(input);
 	}
-	if (check_dup(stk) == 0)
-		err_exit();
+	if (check_dup(elm->a) == 0)
+		err_exit(elm);
 }
 
 int	check_num(char **input)
@@ -65,7 +65,7 @@ int	check_num(char **input)
 			idx_2++;
 			digit_cnt++;
 		}
-		if (input[idx_1][idx_2] || digit_cnt > 10)
+		if (input[idx_1][idx_2] || digit_cnt > 10 || digit_cnt == 0)
 			return (0);
 		idx_1++;
 	}
@@ -98,8 +98,9 @@ int	check_dup(t_stk *stk)
 	return (1);
 }
 
-void	err_exit(void)
+void	err_exit(t_elm *elm)
 {
-	write(2, "Error\n", 6);
+	elm_free(elm);
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/20 16:41:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 20:08:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	cmd_display_one(int cmd);
 
 void	cmd_cleaner(t_elm *elm)
 {
-	t_node	*tmp;
 	int		size;
+	t_node	*tmp;
 
-	tmp = elm->cmdlst->top->prev;
 	size = elm->cmdlst->size;
+	tmp = elm->cmdlst->top->prev;
 	while (size--)
 	{	
 		if (tmp->data == 31 && (tmp->prev->data == 21 || tmp->next->data == 21))
@@ -47,11 +47,11 @@ void	cmd_cleaner(t_elm *elm)
 
 void	cmd_display_all(t_stk *cmdlst)
 {
-	t_node	*tmp;
 	int		size;
+	t_node	*tmp;
 
-	tmp = cmdlst->top->prev;
 	size = cmdlst->size;
+	tmp = cmdlst->top->prev;
 	while (size--)
 	{
 		if (tmp->data != -1)

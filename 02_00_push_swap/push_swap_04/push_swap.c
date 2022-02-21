@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 18:59:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 20:39:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,20 @@ int	main(int argc, char **argv)
 	if (!elm)
 		return (0);
 	elm_init(elm);
-	stk_fill(elm->a, argc, argv);
-	stk_a2b(elm, elm->piv, elm->a->size);
-	cmd_cleaner(elm);
-	cmd_display_all(elm->cmdlst);
+	stk_fill(elm, argc, argv);
+	if (elm->a->size > 1)
+	{
+		stk_a2b(elm, elm->piv, elm->a->size);
+		if (elm->cmdlst->size > 0)
+		{
+			cmd_cleaner(elm);
+			cmd_display_all(elm->cmdlst);
+		}
+	}
+	//stk_display_all(elm->a, elm->b);
 	elm_free(elm);
+	//system("leaks push_swap > leaks_result;\
+	//		cat leaks_result | grep leaked && rm -rf leaks_result");
 	return (0);
 }
 
