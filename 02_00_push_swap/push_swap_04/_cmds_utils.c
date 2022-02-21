@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:51:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 20:08:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:04:31 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	cmd_display_all(t_stk *cmdlst)
 	t_node	*tmp;
 
 	size = cmdlst->size;
+	if (size == 0)
+		return ;
 	tmp = cmdlst->top->prev;
 	while (size--)
 	{

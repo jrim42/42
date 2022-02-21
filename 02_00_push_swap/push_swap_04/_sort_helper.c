@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 19:01:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:08:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	rrr_cleaner(t_elm *elm, int new_cmd)
 
 	cmdlst = elm->cmdlst;
 	cur_cmd = cmdlst->top->data;
-	if (cur_cmd < 20)
-		return ;
+	// if (cur_cmd < 20)
+	// 	return ;
 	if ((cur_cmd == 20 || cur_cmd == 21) && new_cmd == 32)
 	{
 		free(stk_pop(cmdlst));

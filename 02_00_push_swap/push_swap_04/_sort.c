@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 18:57:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/21 21:08:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	sort_3(t_elm *elm, t_stk *stk)
 		cmd_swap(0, elm, 0);
 	else if (nd->prev->data == max)
 		cmd_swap(0, elm, 0);
-	if (nd->data == max && (nd->prev->data == min || nd->next->data == min))
+	if (nd->data == max)
 	{
 		cmd_rotate(20, elm, 0);
 		cmd_swap(0, elm, 0);
