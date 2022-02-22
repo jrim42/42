@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 23:05:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 21:08:28 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/22 23:13:55 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	a2b_helper(t_elm *elm, int size)
 	}
 	else if (size == 3)
 	{
-		sort_3(elm, a);
+		sort_3_part(elm, a);
 		return (1);
 	}
 	return (0);
@@ -94,9 +94,12 @@ void	rrr_cleaner(t_elm *elm, int new_cmd)
 	int		cur_cmd;
 
 	cmdlst = elm->cmdlst;
+	if (cmdlst->size == 0)
+	{
+		stk_push(elm->cmdlst, nd_init(new_cmd));
+	 	return ;
+	}
 	cur_cmd = cmdlst->top->data;
-	// if (cur_cmd < 20)
-	// 	return ;
 	if ((cur_cmd == 20 || cur_cmd == 21) && new_cmd == 32)
 	{
 		free(stk_pop(cmdlst));

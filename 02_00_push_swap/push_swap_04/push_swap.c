@@ -6,12 +6,13 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/21 21:11:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/22 23:05:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	sort_filter(t_elm *elm, t_stk *a);
 void	elm_init(t_elm *elm);
 void	elm_free(t_elm *elm);
 
@@ -26,18 +27,32 @@ int	main(int argc, char **argv)
 		return (0);
 	elm_init(elm);
 	stk_fill(elm, argc, argv);
-	if (elm->a->size > 1)
-	{
-		stk_a2b(elm, elm->piv, elm->a->size);
-		if (elm->cmdlst->size > 4)
-			cmd_cleaner(elm);
-		cmd_display_all(elm->cmdlst);
-	}
+	sort_filter(elm, elm->a);
+	if (elm->cmdlst->size > 4)
+		cmd_cleaner(elm);
+	cmd_display_all(elm->cmdlst);
 	//stk_display_all(elm->a, elm->b);
 	elm_free(elm);
 	//system("leaks push_swap > leaks_result;\
 	//		cat leaks_result | grep leaked && rm -rf leaks_result");
 	return (0);
+}
+
+void	sort_filter(t_elm *elm, t_stk *a)
+{
+	int	size;
+
+	size = a->size;
+	if (size < 2)
+		return ;
+	else if (size == 2)
+		sort_2(elm, a);
+	else if (size == 3)
+		sort_3_only(elm, a);
+	else if (size == 5)
+		sort_5(elm, a);
+	else
+		stk_a2b(elm, elm->piv, elm->a->size);
 }
 
 void	elm_init(t_elm *elm)
