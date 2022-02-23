@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/24 00:55:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 01:01:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ void	sort_3_only(t_elm *elm, t_stk *stk)
 	int		min;
 	int		max;
 
-	if (is_sorted(stk, 3) == 1) // 123
+	if (is_sorted(stk, 3) == 1)
 		return ;
 	nd = stk->top->next;
 	min = stk_min(stk, 3);
 	max = stk_max(stk, 3);
 	if (nd->data == max)
 	{
-		cmd_rev_rotate(30, elm); // 231
-		if (nd->prev->data == min) // 132
+		cmd_rev_rotate(30, elm);
+		if (nd->prev->data == min)
 			cmd_swap(0, elm, 0);
 	}
 	else if (nd->prev->data == max)
 	{
-		cmd_rotate(20, elm, 0); // 312
-		if (nd->next->data == min) // 321
+		cmd_rotate(20, elm, 0);
+		if (nd->next->data == min)
 			cmd_swap(0, elm, 0);
 	}
-	else if (nd->next->data == max) // 213
+	else if (nd->next->data == max)
 		cmd_swap(0, elm, 0);
 }
 

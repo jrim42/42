@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/24 00:51:59 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 01:00:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	main(int argc, char **argv)
 	cmd_display_all(elm->cmdlst);
 	//stk_display_all(elm->a, elm->b);
 	elm_free(elm);
-	//system("leaks push_swap > leaks_result;\
-	//		cat leaks_result | grep leaked && rm -rf leaks_result");
 	return (0);
 }
 
