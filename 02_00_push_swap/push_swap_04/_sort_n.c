@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/22 23:10:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 00:55:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,28 @@ void	sort_3_part(t_elm *elm, t_stk *stk)
 
 void	sort_5(t_elm *elm, t_stk *stk)
 {
-	printf("[sort_5 called]");
-	if (elm || stk)
+	t_node	*nd;
+	int		size;
+	int		min;
+	int		max;
+
+	if (is_sorted(stk, 5) == 1)
 		return ;
+	size = 5;
+	min = stk_min(stk, 5);
+	max = stk_max(stk, 5);
+	while (size-- > 0)
+	{
+		nd = stk->top;
+		if (nd->data == min || nd->data == max)
+			cmd_push(11, elm, 0);
+		else
+			cmd_rotate(20, elm, 0);
+	}
+	sort_3_only(elm, elm->a);
+	if (elm->b->top->data == min)
+		cmd_swap(1, elm, 0);
+	cmd_push(10, elm, 0);
+	cmd_rotate(20, elm, 0);
+	cmd_push(10, elm, 0);
 }
