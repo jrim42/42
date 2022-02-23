@@ -19,6 +19,7 @@ SRC		= 	push_swap.c\
 			_cmds_utils.c\
 			_pivot.c\
 			_sort.c\
+			_sort_n.c\
 			_sort_helper.c\
 			_sort_utils.c\
 			_utils.c\
@@ -33,23 +34,23 @@ all : $(LIB_A) $(NAME)
 
 $(LIB_A) :
 	@$(MAKE) -C $(LIB_DIR)
-	@echo "$(CLR_GR)[created]$(CLR_DF) : $(LIB_A)" 
+	@echo "$(CLR_GR)[make]$(CLR_DF) : $(LIB_A)" 
 
 $(NAME) : $(OBJ) $(LIB)
 	@$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(CLR_GR)[created]$(CLR_DF) : $(NAME)" 
+	@echo "$(CLR_GR)[make]$(CLR_DF) : $(NAME)" 
 
 clean :
 	@$(MAKE) clean -C $(LIB_DIR)
 	@rm -f $(OBJ)
-	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(LIB_A) (obj files)"
-	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(NAME) (obj files)"
+	@echo "$(CLR_RD)[clean]$(CLR_DF) : $(LIB_A)"
+	@echo "$(CLR_RD)[clean]$(CLR_DF) : $(NAME)"
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIB_DIR) 
 	@rm -f $(NAME)
-	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(LIB_A)"
-	@echo "$(CLR_RD)[removed]$(CLR_DF) : $(NAME)"
+	@echo "$(CLR_RD)[fclean]$(CLR_DF) : $(LIB_A)"
+	@echo "$(CLR_RD)[fclean]$(CLR_DF) : $(NAME)"
 
 re : fclean all
 
