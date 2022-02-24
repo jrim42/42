@@ -14,13 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-# include <stdio.h>
 # include <limits.h>
-
-# define RESET "\033[0m"
-# define GREEN "\033[32m"
-# define BLUE "\033[34m"
-# define YELLOW "\033[33m"
 
 typedef struct s_node
 {
@@ -111,9 +105,9 @@ int			stk_max(t_stk *stk, int size);
 
 // _utils.c
 long long	ft_atoll(char *str);
+int			ft_isspace_or_issign(const char *str, int *sign);
 void		det_init(t_piv *piv, int *cnt_1, int *cnt_2, int *cnt_3);
 void		stk_display_all(t_stk *stk_a, t_stk *stk_b);
 void		data_swap(int *a, int *b);
-int			ft_isspace_or_issign(const char *str, int *sign);
 
 #endif

@@ -66,18 +66,20 @@ void	stk_display_all(t_stk *stk_a, t_stk *stk_b)
 	size_a = stk_a->size;
 	tmp_b = stk_b->top;
 	size_b = stk_b->size;
-	printf("%s a |", YELLOW);
+	write(1, " a |", 4);
 	while (size_a--)
 	{
-		printf(" %d |", tmp_a->data);
+		ft_putnbr_fd(tmp_a->data, 1);
+		write(1, " | ", 3);
 		tmp_a = tmp_a->next;
 	}
-	printf("\n");
-	printf(" b |");
+	write(1, "\n", 1);
+	write(1, " b |", 4);
 	while (size_b--)
 	{
-		printf(" %d |", tmp_b->data);
+		ft_putnbr_fd(tmp_b->data, 1);
+		write(1, " | ", 3);
 		tmp_b = tmp_b->next;
 	}
-	printf("%s\n", RESET);
+	write(1, "\n", 1);
 }
