@@ -34,23 +34,23 @@ all : $(LIB_A) $(NAME)
 
 $(LIB_A) :
 	@$(MAKE) -C $(LIB_DIR)
-	@echo "$(CLR_GR)[make]$(CLR_DF) : $(LIB_A)" 
+	@echo "$(LIB_A) is $(CLR_GR)ready$(CLR_DF)" 
 
 $(NAME) : $(OBJ) $(LIB)
 	@$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(CLR_GR)[make]$(CLR_DF) : $(NAME)" 
+	@echo "$(NAME) is $(CLR_GR)ready$(CLR_DF)" 
 
 clean :
 	@$(MAKE) clean -C $(LIB_DIR)
 	@rm -f $(OBJ)
-	@echo "$(CLR_RD)[clean]$(CLR_DF) : $(LIB_A)"
-	@echo "$(CLR_RD)[clean]$(CLR_DF) : $(NAME)"
+	@echo "$(LIB_A) is $(CLR_RD)cleaned$(CLR_DF)"
+	@echo "$(NAME) is $(CLR_RD)cleaned$(CLR_DF)"
 
 fclean : clean
 	@$(MAKE) fclean -C $(LIB_DIR) 
 	@rm -f $(NAME)
-	@echo "$(CLR_RD)[fclean]$(CLR_DF) : $(LIB_A)"
-	@echo "$(CLR_RD)[fclean]$(CLR_DF) : $(NAME)"
+	@echo "$(LIB_A) is $(CLR_RD)fcleaned$(CLR_DF)"
+	@echo "$(NAME) is $(CLR_RD)fcleaned$(CLR_DF)"
 
 re : fclean all
 

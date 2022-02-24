@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:38:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/24 01:00:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 11:59:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 	if (elm->cmdlst->size > 4)
 		cmd_cleaner(elm);
 	cmd_display_all(elm->cmdlst);
-	//stk_display_all(elm->a, elm->b);
 	elm_free(elm);
 	return (0);
 }
@@ -47,6 +46,8 @@ void	sort_filter(t_elm *elm, t_stk *a)
 		sort_2(elm, a);
 	else if (size == 3)
 		sort_3_only(elm, a);
+	else if (size == 4)
+		sort_4(elm, a);
 	else if (size == 5)
 		sort_5(elm, a);
 	else

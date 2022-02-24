@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 23:42:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/22 23:02:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 11:57:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		stk_b2a(t_elm *elm, t_piv *piv, int size);
 void		sort_2(t_elm *elm, t_stk *stk);
 void		sort_3_only(t_elm *elm, t_stk *stk);
 void		sort_3_part(t_elm *elm, t_stk *stk);
+void		sort_4(t_elm *elm, t_stk *stk);
 void		sort_5(t_elm *elm, t_stk *stk);
 
 // _sort_helper.c

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 21:49:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/24 01:01:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/24 11:58:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	sort_2(t_elm *elm, t_stk *stk);
 void	sort_3_only(t_elm *elm, t_stk *stk);
 void	sort_3_part(t_elm *elm, t_stk *stk);
+void	sort_4(t_elm *elm, t_stk *stk);
 void	sort_5(t_elm *elm, t_stk *stk);
 
 void	sort_2(t_elm *elm, t_stk *stk)
@@ -79,6 +80,28 @@ void	sort_3_part(t_elm *elm, t_stk *stk)
 		if (nd->data == min && nd->next->data == max)
 			cmd_swap(0, elm, 0);
 	}
+}
+
+void	sort_4(t_elm *elm, t_stk *stk)
+{
+	t_node	*nd;
+	int		size;
+	int		min;
+
+	if (is_sorted(stk, 4) == 1)
+		return ;
+	size = 4;
+	min = stk_min(stk, 4);
+	while (size-- > 0)
+	{
+		nd = stk->top;
+		if (nd->data == min)
+			cmd_push(11, elm, 0);
+		else
+			cmd_rotate(20, elm, 0);
+	}
+	sort_3_only(elm, elm->a);
+	cmd_push(10, elm, 0);
 }
 
 void	sort_5(t_elm *elm, t_stk *stk)
