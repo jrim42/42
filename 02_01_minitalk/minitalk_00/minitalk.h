@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:15:15 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/26 21:17:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/02/26 21:22:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@
 # include <signal.h>
 
 # include <stdio.h>
+
+void    err_display(int err_type);
 
 #endif
