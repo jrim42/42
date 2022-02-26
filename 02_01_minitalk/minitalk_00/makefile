@@ -1,5 +1,6 @@
 SRC		= 	client.c\
-			server.c
+			server.c\
+			_utils.c
 OBJ		= 	$(SRC:.c=.o)
 
 CC		= 	gcc
@@ -15,7 +16,7 @@ CLR_GR	= 	\033[0;32m
 CLR_BL	= 	\033[0;36m
 CLR_DF	= 	\033[0;37m
 
-all : $(LIB_A) server client 
+all : $(LIB_A) $(OBJ)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

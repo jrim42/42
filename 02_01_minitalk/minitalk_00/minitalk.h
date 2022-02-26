@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/26 21:15:32 by jrim             ###   ########.fr       */
+/*   Created: 2022/02/26 21:15:15 by jrim              #+#    #+#             */
+/*   Updated: 2022/02/26 21:17:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int main(int argc, char **argv)
-{
-    
-}
+# include "libft/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+
+# include <stdio.h>
+
+#endif
