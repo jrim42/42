@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 17:44:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 18:05:06 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ void    recieve_msg(int sig)
     static int  idx = 0;
     static char *msg = 0;
 
+    // if (sig == SIGUSR2)
+    //     printf("SIGUSR2 = 1\n");
+    // else
+    //     printf("SIGUSR1 = 0\n");
     if (len == 0)
         recieve_len(sig, &len, &cur_bit, &msg);
     else
@@ -84,8 +88,10 @@ void    recieve_len(int sig, int *len, int *cur_bit, char **msg)
 
 void    display_msg(int *len, char **msg, int *idx)
 {
-    if (msg)
+    printf("len : %d\n", *len);
+    if (*msg)
     {
+        printf("in\n");
         ft_putendl_fd(*msg, 1);
         free(*msg);
         *msg = 0;

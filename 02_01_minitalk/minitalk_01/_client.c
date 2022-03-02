@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 17:54:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 17:56:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int main(int argc, char **argv)
     len = ft_strlen(msg);
     send_len(len, pid);
     send_msg(msg, pid);
-    printf("%s\n", msg);
     return (0);
 }
 
