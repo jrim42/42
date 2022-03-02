@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:11:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/02/26 21:31:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 14:36:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    err_display(int err_type);
 void    err_display(int err_type)
 {
     if (err_type < 2)
-        ft_putstr_fd("usage : ", 1);
+        ft_putstr_fd("usage : ./server [no arg needed]", 1);
     else
         ft_putstr_fd("error : ", 1);
     if (err_type == 0)
