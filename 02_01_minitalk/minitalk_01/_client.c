@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 17:56:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 20:58:20 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void    check_arg(int argc, char **argv);
 void    display_clt_err(int err_type);
-void    send_len(int len, int pid);
+void    action(int sig);
 void    send_msg(char *msg, int pid);
 
 int main(int argc, char **argv)
 {
     int     pid;
     char    *msg;
-    int     len;
     
     check_arg(argc, argv);
     pid = ft_atoi(argv[1]);
@@ -30,10 +29,13 @@ int main(int argc, char **argv)
     ft_putchar_fd('\n', 1);
     if (pid <= 100 || pid > 999999)
         display_clt_err(1);
+    ft_putstr_fd("[received] : ", 1);
+    signal(SIGUSR1, action);
+    signal(SIGUSR2, action);
     msg = argv[2];
-    len = ft_strlen(msg);
-    send_len(len, pid);
     send_msg(msg, pid);
+    while (1)
+        pause();
     return (0);
 }
 
@@ -62,19 +64,17 @@ void    display_clt_err(int err_type)
     exit(1);
 }
 
-void    send_len(int len, int pid)
+void    action(int sig)
 {
-    int bit;
+    static int  received = 0;
 
-    bit = -1;
-    while (++bit < 32)
+    if (sig == SIGUSR1)
+        ++received;
+    else
     {
-        if (len & 0x01)
-            kill(pid, SIGUSR2);
-        else 
-            kill(pid, SIGUSR1);
-        len = len >> 1;
-        usleep(1000);
+        ft_putchar_fd(received, 1);
+        ft_putchar_fd('\n', 1);
+        exit(0);
     }
 }
 
@@ -88,15 +88,21 @@ void    send_msg(char *msg, int pid)
     while (msg[++idx])
     {
         ch = (int)msg[idx];
-        bit = -1;
-        while (++bit < 8)
+        bit = 8;
+        while (bit--)
         {
-            if (ch & 0x01)
+            if (ch >> bit & 0x01)
                 kill(pid, SIGUSR2);
             else 
                 kill(pid, SIGUSR1);
             ch = ch >> 1;
-            usleep(1000);
+            usleep(100);
         }
+    }
+    bit = 8;
+    while (bit--)
+    {
+        kill(pid, SIGUSR1);
+        usleep(100);
     }
 }
