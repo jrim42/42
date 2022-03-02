@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 18:05:06 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 19:32:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void    recieve_msg(int sig)
             msg[idx++] = ch;
             cur_bit = 0;
             if (ch == 0)
-                display_msg(&len, &msg, &idx);
+                return (display_msg(&len, &msg, &idx));
             ch = 0;
+            printf("msg[%d] : %c\n", idx - 1, msg[idx - 1]);
             return ;
         }
         cur_bit++;
@@ -81,6 +82,7 @@ void    recieve_len(int sig, int *len, int *cur_bit, char **msg)
             exit(1);
         *len = 1;
         *cur_bit = 0;
+        val = 0;
         return ;
     }
     (*cur_bit)++;
@@ -88,10 +90,8 @@ void    recieve_len(int sig, int *len, int *cur_bit, char **msg)
 
 void    display_msg(int *len, char **msg, int *idx)
 {
-    printf("len : %d\n", *len);
     if (*msg)
     {
-        printf("in\n");
         ft_putendl_fd(*msg, 1);
         free(*msg);
         *msg = 0;
