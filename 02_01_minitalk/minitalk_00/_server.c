@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 15:35:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/02 16:22:07 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void    display_srv_err(void);
 void    sig_handler(int sig);
+int     bin2dec(long long num);
+int     ft_power(int num, int cnt);
 void    recieve_len(int *cur_bit);
-void    ft_handler(int sig);
 
 int main(int argc, char **argv)
 {
@@ -44,13 +45,41 @@ int main(int argc, char **argv)
 
 void    sig_handler(int sig)
 {
+    static int  cnt = 0;
+    static char str[8];
+    int         cd;
 
+    str[cnt] = sig + 48;
+    cnt++;
+    if (cnt > 7)
+    {
+        cnt = 0;
+        cd = bin2dec(ft_atoi(str));
+        ft_putnbr_fd(cd, 1);
+    }
 }
 
-void ft_handler(int sig)
+int     ft_power(int num, int cnt)
 {
-    printf("signal recieved.(%d)\n", SIGINT);
-    sleep(2);
+    if (cnt == 0)
+        return (1);
+    return (num * ft_power(num, cnt - 1));
+}
+
+int     bin2dec(long long num)
+{
+    int dec;
+    int cnt;
+
+    dec = 0;
+    cnt = 0;
+    while (num > 0)
+    {
+        dec += (num % 10) * ft_power(2, cnt);
+        num /= 10;
+        cnt++;
+    }
+    return (dec);
 }
 
 void    display_srv_err(void)
