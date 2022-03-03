@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 20:57:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/03 13:33:31 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void    action(int sig, siginfo_t *info, void *context)
         {
             kill(clt_pid, SIGUSR2);
             clt_pid = 0;
+            ft_putchar_fd('\n', 1);
             return ;
         }
         ft_putchar_fd(ch, 1);

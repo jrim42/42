@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/02 20:58:20 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/03 13:31:25 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     
     check_arg(argc, argv);
     pid = ft_atoi(argv[1]);
-    ft_putstr_fd("[pid] : ", 1);
+    ft_putstr_fd("[sent] : ", 1);
     ft_putnbr_fd(pid, 1);
     ft_putchar_fd('\n', 1);
     if (pid <= 100 || pid > 999999)
@@ -80,26 +80,23 @@ void    action(int sig)
 
 void    send_msg(char *msg, int pid)
 {
-    int idx;
-    int bit;
-    int ch;
+    int     bit;
+    char    ch;
 
-    idx = -1;
-    while (msg[++idx])
+    while (*msg)
     {
-        ch = (int)msg[idx];
         bit = 8;
+        ch = *msg++;
         while (bit--)
         {
-            if (ch >> bit & 0x01)
+            if (ch >> bit & 1)
                 kill(pid, SIGUSR2);
             else 
                 kill(pid, SIGUSR1);
-            ch = ch >> 1;
             usleep(100);
         }
     }
-    bit = 8;
+    bit = 8; // sending null character
     while (bit--)
     {
         kill(pid, SIGUSR1);
