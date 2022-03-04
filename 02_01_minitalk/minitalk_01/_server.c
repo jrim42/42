@@ -6,13 +6,13 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/03 17:02:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/04 10:02:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	action(int sig, siginfo_t *info, void *context);
+void	recieve_msg(int sig, siginfo_t *info, void *context);
 
 int	main(int argc, char **argv)
 {
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	ft_putstr_fd("> server pid is [\033[0;33m", 1);
 	ft_putnbr_fd(srv_pid, 1);
 	ft_putstr_fd("\033[0;37m]\n", 1);
-	s_sigaction.sa_sigaction = action;
+	s_sigaction.sa_sigaction = recieve_msg;
 	s_sigaction.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_sigaction, NULL);
 	sigaction(SIGUSR2, &s_sigaction, NULL);
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-void	action(int sig, siginfo_t *info, void *context)
+void	recieve_msg(int sig, siginfo_t *info, void *context)
 {
 	static int		idx = 0;
 	static pid_t	clt_pid = 0;
