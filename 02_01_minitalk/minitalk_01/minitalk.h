@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:15:15 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/03 16:35:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/04 10:04:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,5 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-
-# include <stdio.h>
 
 #endif
