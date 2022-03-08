@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 20:21:10 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/06 17:27:50 by jrim             ###   ########.fr       */
+/*   Created: 2022/03/08 16:09:32 by jrim              #+#    #+#             */
+/*   Updated: 2022/03/08 16:09:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_ch(char ch, int *clt_pid)
 		kill(*clt_pid, SIGUSR2);
 		(*clt_pid) = 0;
 		ft_putstr_fd("\n", 1);
-		exit(0);
+		return ;
 	}
 	ft_putchar_fd(ch, 1);
 	kill(*clt_pid, SIGUSR1);
