@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/11 14:34:28 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/11 16:31:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 
 #define X_EVENT_KEY_PRESS 2     // mlx_hook 함수의 두 번째 인자인 
 #define X_EVENT_KEY_RELEASE 3   // x_event에 들어가는 값

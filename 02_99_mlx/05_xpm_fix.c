@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_png_fix.c                                       :+:      :+:    :+:   */
+/*   05_xpm_fix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:11 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/08 21:28:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/11 16:28:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "help.h"
 
 #define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+#define WIN_HEIGHT 800
 
 typedef struct s_mlx
 {
@@ -40,7 +40,7 @@ int main(void)
 
 	mlx.mlx_ptr = mlx_init();
 	mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "modify img!");
-	img.img_ptr = mlx_xpm_file_to_image(mlx.mlx_ptr, "../textures/wall_w.xpm", &img.width, &img.height);
+	img.img_ptr = mlx_xpm_file_to_image(mlx.mlx_ptr, "./img/img.xpm", &img.width, &img.height);
 	img.data = (int *)mlx_get_data_addr(img.img_ptr, &img.bpp, &img.size_line, &img.endian);
 	count_h = 0;
 	while (count_h < img.height)
@@ -49,9 +49,9 @@ int main(void)
 		while (count_w < (img.width / 2)) // 절반만 픽셀 출력을 하기 위해
 		{
 			if (count_w % 2)
-				img.data[count_h * img.width + count_w] = 0xFFFFFF;
+				img.data[count_h * img.width + count_w] = 0x5499C7;
 			else
-				img.data[count_h * img.width + count_w] = 0xFF0000;
+				img.data[count_h * img.width + count_w] = 0xEAF2F8;
 			count_w++;
 		}
 		count_h++;

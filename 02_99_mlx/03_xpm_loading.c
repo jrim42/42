@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:27:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/11 14:35:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/11 17:02:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int main(void)
 
 	mlx_ptr = mlx_init();
 	param_init(&param);
-	win_ptr = mlx_new_window(mlx_ptr, 1200, 1200, "load image");
-	img_ptr = mlx_xpm_file_to_image(mlx_ptr, "./img/img.xpm", &width, &height);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);
+	win_ptr = mlx_new_window(mlx_ptr, 800, 800, "load image");
+	img_ptr = mlx_xpm_file_to_image(mlx_ptr, "./img/img15.xpm", &width, &height);
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 400, 400);
 	mlx_hook(win_ptr, X_EVENT_KEY_PRESS, 0, &key_press, &param);
 	mlx_loop(mlx_ptr);
 	return (0);

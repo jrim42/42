@@ -6,18 +6,17 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:27:53 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/08 21:27:55 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/11 16:26:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../mlx/mlx.h"
+#include "help.h"
 
 # define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_HEIGHT 800
 
 # define IMG_WIDTH 400
-# define IMG_HEIGHT 300
+# define IMG_HEIGHT 400
 
 typedef struct	s_img
 {
@@ -59,9 +58,9 @@ int	main(void)
 		while (++count_w < IMG_WIDTH)
 		{
 			if (count_w % 2)
-				img.data[count_h * IMG_WIDTH + count_w] = 0xFFFFFF;
+				img.data[count_h * IMG_WIDTH + count_w] = 0x5499C7;
 			else
-				img.data[count_h * IMG_WIDTH + count_w] = 0xFF0000;
+				img.data[count_h * IMG_WIDTH + count_w] = 0xEAF2F8;
 		}
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, img.img_ptr, 0, 0);
