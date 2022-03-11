@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:25:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/08 21:29:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/11 14:08:07 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(void)
 	void *win_ptr;
 
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "mlx 42");
+	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "new window sample");
 	mlx_loop(mlx_ptr);
 }
 
