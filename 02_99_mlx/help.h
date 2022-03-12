@@ -6,13 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/11 20:54:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/12 17:59:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HELP_H
 # define HELP_H
 
+# include "libft/libft.h"
 # include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>

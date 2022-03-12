@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   06_print_map.c                                     :+:      :+:    :+:   */
+/*   map_sample.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/12 17:40:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/12 18:26:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 #define X_EVENT_KEYPRESS 2
 #define X_EVENT_EXIT 17
 #define KEYCODE_EXIT 53
+#define IMG_PATH "./img/"
 
 typedef struct s_img
 {
 	void	*img_ptr;
 	int		*data;
+	int		h;
+	int		w;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -36,6 +39,7 @@ typedef struct s_game
 	void 	*win_ptr;
 	t_img 	img;
 	t_img	player;
+	t_img	tile;
 	int 	map[ROW][COL];
 } 			t_game;
 
@@ -43,7 +47,8 @@ void	minilibx_init(t_game *game);
 void	img_init(t_game *game);
 void	draw_pixels_of_tile(t_game *game, int row, int col);
 void	draw_pixels_of_player(t_game *game, int row, int col);
-void	draw_pixels_of_exit(t_game *game, int row, int col);
+void	*ft_xpm_to_img(t_game *game, char *str);
+void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 void	draw_tiles(t_game *game);
 void	map_init(t_game *game);
 int		press_key(int keycode, t_game game);
@@ -75,68 +80,31 @@ void img_init(t_game *game)
 
 void draw_pixels_of_tile(t_game *game, int row, int col)
 {
-	int tile_row, tile_col;
-
 	row *= TILES;
 	col *= TILES;
-	tile_row = 0;
-	while (tile_row < TILES)
-	{
-		tile_col = 0;
-		while (tile_col < TILES)
-		{
-			if (tile_row == TILES - 1 || tile_col == TILES - 1)
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0xb3b3b3;
-			else
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0xFFFFFF;
-			tile_col++;
-		}
-		tile_row++;
-	}
+	game->tile.h = TILES;
+	game->tile.w = TILES;
+	game->tile.img_ptr = ft_xpm_to_img(game, "img/tile00.xpm");
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->player.img_ptr, row, col);
 }
 
 void draw_pixels_of_player(t_game *game, int row, int col)
 {
-	int tile_row, tile_col;
-
 	row *= TILES;
 	col *= TILES;
-	tile_row = 0;
-	while (tile_row < TILES)
-	{
-		tile_col = 0;
-		while (tile_col < TILES)
-		{
-			if (tile_row == TILES - 1 || tile_col == TILES - 1)
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0xb3b3b3;
-			else
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0x1ABC9C;
-			tile_col++;
-		}
-		tile_row++;
-	}
+	game->tile.h = TILES;
+	game->tile.w = TILES;
+	game->tile.img_ptr = ft_xpm_to_img(game, "img/img60.xpm");
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->tile.img_ptr, row, col);
 }
 
-void draw_pixels_of_exit(t_game *game, int row, int col)
+void	*ft_xpm_to_img(t_game *game, char *str)
 {
-	int tile_row, tile_col;
+	void	*img;
 
-	row *= TILES;
-	col *= TILES;
-	tile_row = 0;
-	while (tile_row < TILES)
-	{
-		tile_col = 0;
-		while (tile_col < TILES)
-		{
-			if (tile_row == TILES - 1 || tile_col == TILES - 1)
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0xb3b3b3;
-			else
-				game->img.data[(tile_row + row) * WIDTH + (tile_col + col)] = 0xF7DC6F;
-			tile_col++;
-		}
-		tile_row++;
-	}
+	img = mlx_xpm_file_to_image(game->mlx_ptr, str,
+			&(game->img.w), &(game->img.h));
+	return (img);
 }
 
 void draw_tiles(t_game *game)
@@ -150,11 +118,9 @@ void draw_tiles(t_game *game)
 		while (col < COL)
 		{
 			if (game->map[row][col] == 1)
-				draw_pixels_of_tile(game, row, col);
+				ft_put_img64(game, game->tile.img_ptr, col, row);
 			else if (game->map[row][col] == 2)
-				draw_pixels_of_player(game, row, col);
-			else if (game->map[row][col] == 3)
-				draw_pixels_of_exit(game, row, col);
+				ft_put_img64(game, game->player.img_ptr, col, row);
 			col++;
 		}
 		row++;
@@ -165,7 +131,7 @@ void map_init(t_game *game)
 {
 	int src[ROW][COL] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 3, 1},
+	{1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1},
 	{1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1},
 	{1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
 	{1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1},
@@ -180,7 +146,6 @@ void map_init(t_game *game)
 	{1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1},
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 	};
-
 	memcpy(game->map, src, sizeof(int) * ROW * COL);
 	draw_tiles(game);
 }
