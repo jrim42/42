@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/14 23:35:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/14 23:39:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void init_map(t_game *game)
 	memcpy(game->maps.coord, src, sizeof(int) * ROW * COL);
 }
 
-int	press_key(int keycode, t_game game)
+int	press_key(int keycode)
 {
 	if (keycode == KEYCODE_EXIT)
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/14 23:35:31 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/14 23:40:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	init_game(t_game *game);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 void	init_map(t_game *game);
-int		press_key(int keycode, t_game game);
+int		press_key(int keycode);
 
 #endif
