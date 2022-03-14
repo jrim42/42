@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/14 23:22:07 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/14 23:35:31 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,48 @@
 # include <stdio.h>
 # include <string.h>
 
-#define X_EVENT_KEY_PRESS 2     // mlx_hook 함수의 두 번째 인자인 
-#define X_EVENT_KEY_RELEASE 3   // x_event에 들어가는 값
+#define TILES 60
+#define COL 15
+#define ROW 15
+#define WIDTH TILES * COL
+#define HEIGHT TILES * ROW
+#define X_EVENT_KEYPRESS 2
+#define X_EVENT_EXIT 17
+#define KEYCODE_EXIT 53
 
-#define KEY_W 13    // W     
-#define KEY_A 0     // A
-#define KEY_S 1     // S
-#define KEY_D 2     // D
-#define KEY_ESC 53  // ESC
+typedef struct s_img
+{
+	void	*ptr;
+	int		*data;
+	int		h;
+	int		w;
+}			t_img;
 
-typedef	struct s_param // 키 값을 입력 받고 정해진 동작을 수행했는지
-{                      // 여부를 판단하기 위해 선언하였다.
-	int x;               // x값
-	int y;               // y값
-} t_param;
+typedef struct s_map
+{
+	int 	rows;
+	int 	cols;
+	int		coord[ROW][COL];
+}			t_map;
 
-void    param_init(t_param *param); // 구조체 param 초기화 함수
-int     key_press(int keycode, t_param *param); // 어떤 키가 눌렸는지 판단하고, 정의된 행동 수행
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	int			fps;
+	t_img		img64;
+	t_img		road;
+	t_img		wall;
+	t_img		player;
+	t_map 		maps;
+}				t_game;
+
+int		main_loop(t_game *game);
+void	draw_map(t_game *game);
+void	init_game(t_game *game);
+void	*ft_xpm_to_img(t_game *game, char *str);
+void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
+void	init_map(t_game *game);
+int		press_key(int keycode, t_game game);
 
 #endif
