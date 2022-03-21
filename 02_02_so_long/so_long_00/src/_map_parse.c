@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 20:41:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 20:54:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	map_read(t_game *game, char *map_src)
 		while (idx_2 < ROW)
 		{
 			game->maps.coord[idx_1][idx_2] = line[idx_2];
-			printf("%c", game->maps.coord[idx_1][idx_2]);
 			idx_2++;
 		}
-		printf("\n");
 		idx_1++;
 		free(line);
 	}
