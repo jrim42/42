@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _map_parse.c                                       :+:      :+:    :+:   */
+/*   _map_read.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 20:54:59 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 21:14:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_read(t_game *game, char *map_src);
-void 	map_parse(t_game *game);
 
 void	map_read(t_game *game, char *map_src)
 {
@@ -44,10 +43,4 @@ void	map_read(t_game *game, char *map_src)
 		free(line);
 	}
 	close(fd);
-}
-
-void map_parse(t_game *game)
-{
-	if (game)
-		return;
 }

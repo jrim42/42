@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 19:58:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 21:14:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ int		main_loop(t_game *game);
 void	init_map(t_game *game);
 int		press_key(int keycode);
 
-void    map_elm_init(t_game *game);
+void    img_init(t_game *game);
+
 void	map_gen(t_game *game);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 
 void	map_read(t_game *game, char *map_src);
+
 void 	map_parse(t_game *game);
 
 #endif

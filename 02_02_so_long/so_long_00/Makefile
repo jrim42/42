@@ -22,7 +22,7 @@ MLX_DIR		=	./mlx/
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework Appkit
 
 SRC			=	src/so_long.c\
-				src/_map_parse.c\
+				src/_map_read.c\
 				src/_map_gen.c\
 				
 OBJ			=	$(SRC:.c=.o)

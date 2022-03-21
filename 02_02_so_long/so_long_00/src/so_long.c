@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 20:42:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 21:16:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	init_game(t_game *game)
 	width = COL * TILES;
 	height = ROW * TILES;
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");
-	map_elm_init(game);
 }
 
 int	press_key(int keycode)
