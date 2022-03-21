@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:35 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/23 20:06:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 19:59:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*fill_depot(int fd, char *depot);
 char	*trim_eol(char *depot);
 char	*trim_depot(char *depot);
 
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
-char	*ft_strndup(const char *s1, size_t n);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_strjoin(char *s1, char *s2);
+size_t	gnl_strlen(const char *s);
+size_t	gnl_strlcat(char *dst, const char *src, size_t dstsize);
+char	*gnl_strndup(const char *s1, size_t n);
 
 #endif

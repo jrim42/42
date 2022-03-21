@@ -6,25 +6,16 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 18:17:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 19:49:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    map_elm_init(t_game *game);
 void	map_gen(t_game *game);
+void    map_elm_init(t_game *game);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
-
-void    map_elm_init(t_game *game)
-{
-    game->road.ptr = ft_xpm_to_img(game, "img/road.xpm");
-	game->wall.ptr = ft_xpm_to_img(game, "img/wall.xpm");
-    game->exit.ptr = ft_xpm_to_img(game, "img/exit.xpm");
-    game->collec.ptr = ft_xpm_to_img(game, "img/collector.xpm");
-	game->player.ptr = ft_xpm_to_img(game, "img/player.xpm");
-}
 
 void	map_gen(t_game *game)
 {
@@ -49,6 +40,15 @@ void	map_gen(t_game *game)
 		}
 		i++;
 	}
+}
+
+void    map_elm_init(t_game *game)
+{
+    game->road.ptr = ft_xpm_to_img(game, "img/road.xpm");
+	game->wall.ptr = ft_xpm_to_img(game, "img/wall.xpm");
+    game->exit.ptr = ft_xpm_to_img(game, "img/exit.xpm");
+    game->collec.ptr = ft_xpm_to_img(game, "img/collector.xpm");
+	game->player.ptr = ft_xpm_to_img(game, "img/player.xpm");
 }
 
 void	*ft_xpm_to_img(t_game *game, char *str)

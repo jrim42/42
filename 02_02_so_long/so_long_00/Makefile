@@ -36,7 +36,7 @@ $(NAME) : $(OBJ)
 	@$(MAKE) -C $(LIB_DIR)
 	@$(MAKE) -C $(GNL_DIR)
 	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+	@$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(GNL_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean :

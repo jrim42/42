@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 18:30:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 19:58:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include "../mlx/mlx.h"
+# include <fcntl.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -40,7 +43,7 @@ typedef struct s_map
 {
 	int 	rows;
 	int 	cols;
-	int		coord[ROW][COL];
+	char	**coord;
 }			t_map;
 
 typedef struct s_game
@@ -57,6 +60,7 @@ typedef struct s_game
 	t_map 		maps;
 }				t_game;
 
+void	err_exit(char *msg);
 int		main_loop(t_game *game);
 void	init_map(t_game *game);
 int		press_key(int keycode);
@@ -66,6 +70,7 @@ void	map_gen(t_game *game);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 
-void 	init_map(t_game *game);
+void	map_read(t_game *game, char *map_src);
+void 	map_parse(t_game *game);
 
 #endif

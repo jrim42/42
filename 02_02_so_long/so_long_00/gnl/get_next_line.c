@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:32 by jrim              #+#    #+#             */
-/*   Updated: 2021/11/23 20:06:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 20:00:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*fill_depot(int fd, char *depot)
 	if (!buf)
 		return (0);
 	byte = 1;
-	while (byte > 0 && ft_strchr(depot, '\n') == 0)
+	while (byte > 0 && gnl_strchr(depot, '\n') == 0)
 	{
 		byte = read(fd, buf, BUFFER_SIZE);
 		if (byte == -1)
@@ -53,7 +53,7 @@ char	*fill_depot(int fd, char *depot)
 			return (0);
 		}
 		buf[byte] = '\0';
-		depot = ft_strjoin(depot, buf);
+		depot = gnl_strjoin(depot, buf);
 	}
 	free(buf);
 	return (depot);
@@ -63,10 +63,10 @@ char	*trim_eol(char *depot)
 {
 	int	eol_idx;
 
-	if (ft_strchr(depot, '\n') == 0)
+	if (gnl_strchr(depot, '\n') == 0)
 		return (depot);
-	eol_idx = (int)(ft_strchr(depot, '\n') - depot);
-	return (ft_strndup(depot, eol_idx + 1));
+	eol_idx = (int)(gnl_strchr(depot, '\n') - depot);
+	return (gnl_strndup(depot, eol_idx + 1));
 }
 
 char	*trim_depot(char *depot)
@@ -75,16 +75,16 @@ char	*trim_depot(char *depot)
 	int		trimmed_len;
 	char	*new_depot;
 
-	if (ft_strchr(depot, '\n') == 0)
+	if (gnl_strchr(depot, '\n') == 0)
 		return (0);
-	eol_idx = (int)(ft_strchr(depot, '\n') - depot);
+	eol_idx = (int)(gnl_strchr(depot, '\n') - depot);
 	if (depot[eol_idx + 1] == '\0')
 	{
 		free(depot);
 		return (0);
 	}
-	trimmed_len = ft_strlen(depot) - (eol_idx + 1);
-	new_depot = ft_strndup(depot + eol_idx + 1, trimmed_len);
+	trimmed_len = gnl_strlen(depot) - (eol_idx + 1);
+	new_depot = gnl_strndup(depot + eol_idx + 1, trimmed_len);
 	free(depot);
 	return (new_depot);
 }
