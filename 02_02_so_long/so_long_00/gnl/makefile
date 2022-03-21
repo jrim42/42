@@ -1,4 +1,4 @@
-NAME	=	gnl
+NAME	=	gnl.a
 
 RED		=	\033[0;31m
 GRN		= 	\033[0;32m

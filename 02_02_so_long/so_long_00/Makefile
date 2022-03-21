@@ -1,10 +1,10 @@
 NAME		=	so_long
 
-RED		=	\033[0;31m
-GRN		= 	\033[0;32m
-YLW		=	\033[0;33m
-BLU		= 	\033[0;36m
-DFT		= 	\033[0;37m
+RED			=	\033[0;31m
+GRN			= 	\033[0;32m
+YLW			=	\033[0;33m
+BLU			= 	\033[0;36m
+DFT			= 	\033[0;37m
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
@@ -15,7 +15,7 @@ LIB_DIR		=	./libft/
 LIB_NAME	=	libft.a
 LIBS		=	$(addprefix $(LIB_DIR), $(LIB_NAME))
 GNL_DIR		=	./gnl/
-GNL_NAME	=	gnl
+GNL_NAME	=	gnl.a
 GNLS		=	$(addprefix $(GNL_DIR), $(GNL_NAME))
 MLX_DIR		=	./mlx/
 
@@ -27,7 +27,7 @@ SRC			=	src/so_long.c\
 				
 OBJ			=	$(SRC:.c=.o)
 
-all : $(NAME)
+all : $(NAME) 
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -36,7 +36,7 @@ $(NAME) : $(OBJ)
 	@$(MAKE) -C $(LIB_DIR)
 	@$(MAKE) -C $(GNL_DIR)
 	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(GNL_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+	@$(CC) -o $(NAME) $(OBJ) $(LIBS) $(GNLS) $(MLX_FLAGS)
 	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean :
