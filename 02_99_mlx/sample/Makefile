@@ -1,5 +1,11 @@
 NAME		=	so_long
 
+RED		=	\033[0;31m
+GRN		= 	\033[0;32m
+YLW		=	\033[0;33m
+BLU		= 	\033[0;36m
+DFT		= 	\033[0;37m
+
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 AR			=	ar rcs
@@ -12,7 +18,10 @@ MLX_DIR		=	./mlx/
 
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework Appkit
 
-SRC			=	map_sample.c
+SRC			=	so_long.c\
+				_map_parse.c\
+				_map_gen.c\
+				
 OBJ			=	$(SRC:.c=.o)
 
 all : $(NAME)
@@ -21,18 +30,21 @@ all : $(NAME)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	make -C $(LIB_DIR)
-	make -C $(MLX_DIR)
-	$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+	@$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(MLX_DIR)
+	@$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean :
-	make -C $(LIB_DIR) clean
-	make -C $(MLX_DIR) clean
-	$(RM) $(OBJ)
+	@$(MAKE) -C $(LIB_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
+	@$(RM) $(OBJ)
+	@echo "$(RED)cleaned$(DFT)"
 
 fclean : clean
-	make -C $(LIB_DIR) fclean
-	$(RM) $(NAME)
+	@$(MAKE) -C $(LIB_DIR) fclean
+	@$(RM) $(NAME)
+	@echo "$(RED)fcleaned$(DFT)"
 
 re : clean all
 
