@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 19:45:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/21 20:42:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 		err_exit("[usage]: ./so_long [FILENAME.ber]\n");
 	map_read(&game, argv[1]);
 	init_game(&game);
+	map_gen(&game);
 	mlx_hook(game.win, X_EVENT_KEYPRESS, 0, &press_key, &game);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
