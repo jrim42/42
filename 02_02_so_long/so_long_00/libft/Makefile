@@ -59,6 +59,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
+	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean:
 	@rm -f $(OBJ) $(BNS_OBJ)

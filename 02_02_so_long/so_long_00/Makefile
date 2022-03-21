@@ -14,6 +14,9 @@ RM			=	rm -f
 LIB_DIR		=	./libft/
 LIB_NAME	=	libft.a
 LIBS		=	$(addprefix $(LIB_DIR), $(LIB_NAME))
+GNL_DIR		=	./gnl/
+GNL_NAME	=	gnl
+GNLS		=	$(addprefix $(GNL_DIR), $(GNL_NAME))
 MLX_DIR		=	./mlx/
 
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework Appkit
@@ -31,18 +34,21 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(GNL_DIR)
 	@$(MAKE) -C $(MLX_DIR)
 	@$(CC) -o $(NAME) $(OBJ) -L $(LIB_DIR) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean :
 	@$(MAKE) -C $(LIB_DIR) clean
+	@$(MAKE) -C $(GNL_DIR) clean
 	@$(MAKE) -C $(MLX_DIR) clean
 	@$(RM) $(OBJ)
 	@echo "$(RED)cleaned$(DFT)"
 
 fclean : clean
 	@$(MAKE) -C $(LIB_DIR) fclean
+	@$(MAKE) -C $(GNL_DIR) fclean
 	@$(RM) $(NAME)
 	@echo "$(RED)fcleaned$(DFT)"
 
