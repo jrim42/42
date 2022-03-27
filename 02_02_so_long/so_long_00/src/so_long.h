@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 21:14:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/26 16:34:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_map
 	int 	cols;
 	char	**coord;
 }			t_map;
+
+typedef struct s_m_val
+{
+	int		player;
+	int		exit;
+}			t_m_val;
 
 typedef struct s_game
 {

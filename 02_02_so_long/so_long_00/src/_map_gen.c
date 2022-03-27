@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 21:15:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/27 23:05:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	map_gen(t_game *game)
 				ft_put_img64(game, game->player.ptr, j, i);
 			else if (game->maps.coord[i][j] == 'E')
 				ft_put_img64(game, game->exit.ptr, j, i);
+			else if (game->maps.coord[i][j] == 'C')
+				ft_put_img64(game, game->collec.ptr, j, i);
 			j++;
 		}
 		i++;
