@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 15:23:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 16:13:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 
 #define TILES 60
+#define ELM "01PEC"
 // #define COL 15
 // #define ROW 15
 #define WIDTH TILES * COL
@@ -39,18 +40,20 @@ typedef struct s_img
 	int		w;
 }			t_img;
 
+typedef struct s_val
+{
+	int		_p;
+	int		_e;
+	int		_c;
+}			t_val;
+
 typedef struct s_map
 {
+	t_val	*val;
 	int 	rows;
 	int 	cols;
 	char	**coord;
 }			t_map;
-
-typedef struct s_m_val
-{
-	int		player;
-	int		exit;
-}			t_m_val;
 
 typedef struct s_game
 {
@@ -81,6 +84,8 @@ void	map_read(t_game *game, char *map_src);
 void	map_cnt(t_game *game, char *map_src);
 void	map_malloc(t_game *game);
 
-void 	map_check(t_game *game);
+void    map_check(t_game *game, char **map);
+void    _init_val(t_val *val);
+void     _check_elm(t_game *game, char **map);
 
 #endif

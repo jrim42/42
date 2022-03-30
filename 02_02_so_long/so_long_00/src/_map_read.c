@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 15:41:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:06:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	map_read(t_game *game, char *map_src)
 void	map_cnt(t_game *game, char *map_src)
 {
 	int		fd;
+	int		tot_cnt;
 	int		col_cnt;
 	int		row_cnt;
 	char	*line = 0;
@@ -59,12 +60,16 @@ void	map_cnt(t_game *game, char *map_src)
 		err_exit("[error] : empty map");
 	col_cnt = 1;
 	row_cnt = ft_strlen(line) - 1;
+	tot_cnt = row_cnt;
 	while ((line = get_next_line(fd)) != 0)
 	{
+		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
 		free(line);
 	}
 	close(fd);
+	if ((tot_cnt + 1) % col_cnt != 0)
+		err_exit("[error] : map is not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
 	// printf("%d %d\n", game->maps.cols, game->maps.rows);
