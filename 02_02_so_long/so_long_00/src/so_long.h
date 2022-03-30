@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:16:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:21:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_W 13
+# define KEY_UP 126
+# define KEY_DW 125
+# define KEY_LF 123
+# define KEY_RT 124
 
 typedef struct s_img
 {

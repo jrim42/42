@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:06:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:16:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:22:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int     key_press(int key, t_game *game)
 {
     if (key == KEY_EXIT)
 		exit(0);
-    else if (key == KEY_A)
+    else if (key == KEY_A || key == KEY_LF)
         _left(game);
-    else if (key == KEY_S)
+    else if (key == KEY_S || key == KEY_DW)
         _down(game);
-    else if (key == KEY_D)
+    else if (key == KEY_D || key == KEY_RT)
         _right(game);
-    else if (key == KEY_W)
+    else if (key == KEY_W || key == KEY_UP)
         _up(game);
 	return (0);
 }
