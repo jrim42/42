@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:21:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:29:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 # define TILES 60
 # define ELM "01PEC"
-# define WIDTH TILES * COL
-# define HEIGHT TILES * ROW
 # define X_EVENT_KEYPRESS 2
 # define X_EVENT_EXIT 17
 
@@ -62,6 +60,15 @@ typedef struct s_map
 	char	**coord;
 }			t_map;
 
+typedef struct s_plyr
+{
+	t_img	*plyr;
+	int		step;
+	int		collec;
+	int		row_pos;
+	int		col_pos;
+}			t_plyr;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -76,21 +83,30 @@ typedef struct s_game
 	t_map 		maps;
 }				t_game;
 
+// so_long.c
 void	err_exit(char *msg);
 int		main_loop(t_game *game);
 void	init_game(t_game *game);
 
+// _key.c
 int     key_press(int key, t_game *game);
+void    _up(t_game *game);
+void    _down(t_game *game);
+void    _left(t_game *game);
+void    _right(t_game *game);
 
+// _map_gen.c
 void	map_gen(t_game *game);
 void    img_init(t_game *game);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 
+// _map_read.c
 void	map_read(t_game *game, char *map_src);
-void	map_cnt(t_game *game, char *map_src);
-void	map_malloc(t_game *game);
+void	_map_cnt(t_game *game, char *map_src);
+void	_map_malloc(t_game *game);
 
+// map_check.c
 void    map_check(t_game *game, char **map);
 void    _init_val(t_val *val);
 void    _check_elm(t_game *game, char **map);

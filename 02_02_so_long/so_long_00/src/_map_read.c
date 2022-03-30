@@ -6,15 +6,15 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:06:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:29:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_read(t_game *game, char *map_src);
-void	map_cnt(t_game *game, char *map_src);
-void	map_malloc(t_game *game);
+void	_map_cnt(t_game *game, char *map_src);
+void	_map_malloc(t_game *game);
 
 void	map_read(t_game *game, char *map_src)
 {
@@ -23,8 +23,8 @@ void	map_read(t_game *game, char *map_src)
 	int		row_idx;
 	char	*line = 0;
 
-	map_cnt(game, map_src);
-	map_malloc(game);
+	_map_cnt(game, map_src);
+	_map_malloc(game);
 	game->maps.coord = (char **)malloc(game->maps.cols * sizeof(char *));
 	col_idx = -1;
 	while (++col_idx < game->maps.cols)
@@ -45,7 +45,7 @@ void	map_read(t_game *game, char *map_src)
 	close(fd);
 }
 
-void	map_cnt(t_game *game, char *map_src)
+void	_map_cnt(t_game *game, char *map_src)
 {
 	int		fd;
 	int		tot_cnt;
@@ -75,7 +75,7 @@ void	map_cnt(t_game *game, char *map_src)
 	// printf("%d %d\n", game->maps.cols, game->maps.rows);
 }
 
-void	map_malloc(t_game *game)
+void	_map_malloc(t_game *game)
 {
 	int		col;
 	int		row;
