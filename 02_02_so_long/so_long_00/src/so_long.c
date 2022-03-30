@@ -6,15 +6,15 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:10:11 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:31:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	init_game(t_game *game);
 void	err_exit(char *msg);
 int		main_loop(t_game *game);
-void	init_game(t_game *game);
 
 int main(int argc, char **argv)
 {
@@ -32,6 +32,17 @@ int main(int argc, char **argv)
 	return (0);
 }
 
+void	init_game(t_game *game)
+{
+	int	width;
+	int	height;
+
+	game->mlx = mlx_init();
+	width = game->maps.rows * TILES;
+	height = game->maps.cols * TILES;
+	game->win = mlx_new_window(game->mlx, width, height, "so_long");
+}
+
 void	err_exit(char *msg)
 {
 	ft_putendl_fd(msg, 2);
@@ -44,13 +55,3 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-void	init_game(t_game *game)
-{
-	int	width;
-	int	height;
-
-	game->mlx = mlx_init();
-	width = game->maps.rows * TILES;
-	height = game->maps.cols * TILES;
-	game->win = mlx_new_window(game->mlx, width, height, "so_long");
-}

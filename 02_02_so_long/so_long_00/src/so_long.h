@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/30 17:29:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 17:31:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ typedef struct s_game
 }				t_game;
 
 // so_long.c
+void	init_game(t_game *game);
 void	err_exit(char *msg);
 int		main_loop(t_game *game);
-void	init_game(t_game *game);
 
 // _key.c
 int     key_press(int key, t_game *game);
