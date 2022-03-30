@@ -25,6 +25,7 @@ SRC			=	src/so_long.c\
 				src/_map_read.c\
 				src/_map_check.c\
 				src/_map_gen.c\
+				src/_key.c\
 				
 OBJ			=	$(SRC:.c=.o)
 
