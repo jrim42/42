@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 21:16:14 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 14:55:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		err_exit("[usage]: ./so_long [FILENAME.ber]\n");
 	map_read(&game, argv[1]);
+	map_check(&game);
 	init_game(&game);
 	map_gen(&game);
 	mlx_hook(game.win, X_EVENT_KEYPRESS, 0, &press_key, &game);
@@ -50,8 +51,8 @@ void	init_game(t_game *game)
 	int	height;
 
 	game->mlx = mlx_init();
-	width = COL * TILES;
-	height = ROW * TILES;
+	width = game->maps.rows * TILES;
+	height = game->maps.cols * TILES;
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");
 }
 

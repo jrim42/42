@@ -6,16 +6,16 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:57 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 21:14:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 14:56:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void 	map_parse(t_game *game);
+void 	map_check(t_game *game);
 
-void 	map_parse(t_game *game)
+void 	map_check(t_game *game)
 {
     if (game)
-		return;
+      printf("map_check in\n");
 }

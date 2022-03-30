@@ -23,6 +23,7 @@ MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework Appkit
 
 SRC			=	src/so_long.c\
 				src/_map_read.c\
+				src/_map_check.c\
 				src/_map_gen.c\
 				
 OBJ			=	$(SRC:.c=.o)

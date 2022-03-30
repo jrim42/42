@@ -6,41 +6,80 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 21:14:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 15:41:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_read(t_game *game, char *map_src);
+void	map_cnt(t_game *game, char *map_src);
+void	map_malloc(t_game *game);
 
 void	map_read(t_game *game, char *map_src)
 {
 	int		fd;
-	int		idx_1;
-	int		idx_2;
+	int		col_idx;
+	int		row_idx;
 	char	*line = 0;
 
+	map_cnt(game, map_src);
+	map_malloc(game);
+	game->maps.coord = (char **)malloc(game->maps.cols * sizeof(char *));
+	col_idx = -1;
+	while (++col_idx < game->maps.cols)
+		game->maps.coord[col_idx] = (char *)malloc(game->maps.rows * sizeof(char));
 	fd = open(map_src, O_RDONLY);
-	if (fd <= 0)
-		err_exit("[error] : file open failed");
-	game->maps.cols = COL;
-	game->maps.rows = ROW;
-	game->maps.coord = (char **)malloc(COL * sizeof(char *));
-	idx_1 = -1;
-	while (++idx_1 < ROW)
-		game->maps.coord[idx_1] = (char *)malloc(ROW * sizeof(char));
-	idx_1 = 0;
+	col_idx = 0;
 	while ((line = get_next_line(fd)) != 0)
 	{
-		idx_2 = 0;
-		while (idx_2 < ROW)
+		row_idx = 0;
+		while (row_idx < game->maps.rows)
 		{
-			game->maps.coord[idx_1][idx_2] = line[idx_2];
-			idx_2++;
+			game->maps.coord[col_idx][row_idx] = line[row_idx];
+			row_idx++;
 		}
-		idx_1++;
+		col_idx++;
 		free(line);
 	}
 	close(fd);
+}
+
+void	map_cnt(t_game *game, char *map_src)
+{
+	int		fd;
+	int		col_cnt;
+	int		row_cnt;
+	char	*line = 0;
+	
+	fd = open(map_src, O_RDONLY);
+	if (fd <= 0)
+		err_exit("[error] : file open failed");
+	if ((line = get_next_line(fd)) == 0)
+		err_exit("[error] : empty map");
+	col_cnt = 1;
+	row_cnt = ft_strlen(line) - 1;
+	while ((line = get_next_line(fd)) != 0)
+	{
+		col_cnt++;
+		free(line);
+	}
+	close(fd);
+	game->maps.cols = col_cnt;
+	game->maps.rows = row_cnt;
+	// printf("%d %d\n", game->maps.cols, game->maps.rows);
+}
+
+void	map_malloc(t_game *game)
+{
+	int		col;
+	int		row;
+	int		idx;
+
+	col = game->maps.cols;
+	row = game->maps.rows;
+	game->maps.coord = (char **)malloc(col * sizeof(char *));
+	idx = -1;
+	while (++idx < col)
+		game->maps.coord[idx] = (char *)malloc(row * sizeof(char));
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/26 16:34:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/03/30 15:23:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <string.h>
 
 #define TILES 60
-#define COL 15
-#define ROW 15
+// #define COL 15
+// #define ROW 15
 #define WIDTH TILES * COL
 #define HEIGHT TILES * ROW
 #define X_EVENT_KEYPRESS 2
@@ -68,7 +68,7 @@ typedef struct s_game
 
 void	err_exit(char *msg);
 int		main_loop(t_game *game);
-void	init_map(t_game *game);
+void	init_game(t_game *game);
 int		press_key(int keycode);
 
 void    img_init(t_game *game);
@@ -78,7 +78,9 @@ void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
 
 void	map_read(t_game *game, char *map_src);
+void	map_cnt(t_game *game, char *map_src);
+void	map_malloc(t_game *game);
 
-void 	map_parse(t_game *game);
+void 	map_check(t_game *game);
 
 #endif
