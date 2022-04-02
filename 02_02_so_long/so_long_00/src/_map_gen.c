@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 17:31:07 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/02 17:35:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	map_gen(t_game *game)
 	int		i;
 	int		j;
 
-	img_init(game);
 	i = 0;
 	while (i < game->maps.rows)
 	{

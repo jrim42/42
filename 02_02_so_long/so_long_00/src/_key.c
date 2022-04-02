@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:06:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:08 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/02 17:58:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,36 @@ int     key_press(int key, t_game *game)
 
 void    _up(t_game *game, t_player *player)
 {
-    if (game && player)
-        printf("up\n");
+    if (!game)
+        return ;
+    player->y_pos++;
+    player->step++;
+	printf("up : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
 void    _down(t_game *game, t_player *player)
 {
-    if (game && player)
-        printf("down\n");
+    if (!game)
+        return ;
+    player->y_pos--;
+    player->step++;
+	printf("down : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
 void    _left(t_game *game, t_player *player)
 {
-    if (game && player)
-        printf("left\n");
+    if (!game)
+        return ;
+    player->x_pos--;
+    player->step++;
+	printf("left : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
 void    _right(t_game *game, t_player *player)
 {
-    if (game && player)
-        printf("right\n");
+    if (!game)
+        return ;
+    player->x_pos++;
+    player->step++;
+	printf("right : (%d, %d)\n", player->x_pos, player->y_pos);
 }

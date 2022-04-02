@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 17:28:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/02 17:51:55 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	return (0);
 }
-
-
 
 void	err_exit(char *msg)
 {

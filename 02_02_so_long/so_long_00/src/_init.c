@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:30 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 17:30:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/02 17:54:25 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	game_init(t_game *game);
 void    img_init(t_game *game);
+void	player_init(t_game *game, t_player *player);
 
 void	game_init(t_game *game)
 {
@@ -24,6 +25,8 @@ void	game_init(t_game *game)
 	width = game->maps.rows * TILES;
 	height = game->maps.cols * TILES;
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");
+	img_init(game);
+	player_init(game, &game->player);
 }
 
 void    img_init(t_game *game)
@@ -33,4 +36,32 @@ void    img_init(t_game *game)
     game->exit.ptr = ft_xpm_to_img(game, "img/exit.xpm");
     game->collec.ptr = ft_xpm_to_img(game, "img/collector.xpm");
 	game->player.p_img->ptr = ft_xpm_to_img(game, "img/player.xpm");
+}
+
+void	player_init(t_game *game, t_player *player)
+{
+	char	**map;
+	int		x;
+	int		y;
+	
+	player->step = 0;
+	player->collec = 0;
+	player->dir = -1;
+	map = game->maps.coord;
+	y = 0;
+	while (y < game->maps.cols)
+	{
+		x = 0;
+		while (x < game->maps.rows)
+		{
+			if (map[y][x] == 'P')
+			{
+				player->x_pos = x;
+				player->y_pos = y;
+			}
+			x++;
+		}
+		y++;
+	}
+	printf("start : (%d, %d)\n", player->x_pos, player->y_pos);
 }
