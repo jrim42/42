@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 17:44:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/02 18:40:27 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_player
 	int		collec;
 	int		x_pos;
 	int		y_pos;
+	int		x_end;
+	int		y_end;
 	int		dir;
 }			t_player;
 
@@ -87,11 +89,13 @@ typedef struct s_game
 	t_img		collec;
 	t_player	player;
 	t_map 		maps;
+	int			end;
 }				t_game;
 
 // so_long.c
 void	err_exit(char *msg);
 int		main_loop(t_game *game);
+int		game_end(t_game *game);
 
 // _init.c
 void	game_init(t_game *game);
