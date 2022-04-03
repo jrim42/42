@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/03 14:25:58 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:46:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,11 @@ void	player_init(t_game *game, t_player *player);
 
 // _key.c
 int     key_press(int key, t_game *game);
-void    _up(t_game *game, t_player *player);
-void    _down(t_game *game, t_player *player);
-void    _left(t_game *game, t_player *player);
-void    _right(t_game *game, t_player *player);
+
+// _move.c
+void    _move(t_game *game, t_player *player, int dir);
+int     _move_stuck(char **map, t_player *player, int dir);
+void    _move_display(t_player *player, int dir);
 
 // _map_gen.c
 void	map_gen(t_game *game);

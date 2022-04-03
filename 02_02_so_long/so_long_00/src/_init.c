@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:30 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/03 14:26:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:28:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	game_init(t_game *game)
 	width = game->maps.rows * TILES;
 	height = game->maps.cols * TILES;
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");
-	// game->end = 0;
+	game->end = 0;
 	img_init(game);
 	player_init(game, &game->player);
 }
@@ -60,15 +60,15 @@ void	player_init(t_game *game, t_player *player)
 				player->x_pos = x;
 				player->y_pos = y;
 			}
-			// else if (map[y][x] == 'E')
-			// {
-			// 	player->x_end = x;
-			// 	player->y_end = y;
-			// }
+			else if (map[y][x] == 'E')
+			{
+				player->x_end = x;
+				player->y_end = y;
+			}
 			x++;
 		}
 		y++;
 	}
 	printf("start : (%d, %d)\n", player->x_pos, player->y_pos);
-	// printf("end : (%d, %d)\n", player->x_end, player->y_end);
+	printf("end : (%d, %d)\n", player->x_end, player->y_end);
 }

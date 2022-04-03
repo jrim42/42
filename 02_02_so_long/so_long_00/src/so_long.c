@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 18:40:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:30:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void	err_exit(char *msg)
 int	main_loop(t_game *game)
 {
 	map_gen(game);
-	// if (game->end == 1)
-	// 	game_end(game);
+	if (game->end == 1)
+		game_end(game);
 	return (0);
 }
 
 int	game_end(t_game *game)
 {
+	printf("total step : %d\n", game->player.step);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
