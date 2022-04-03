@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 18:23:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:25:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	map_gen(t_game *game)
 			else if (game->maps.coord[i][j] == '1')
 				ft_put_img64(game, game->wall.ptr, j, i);
 			else if (game->maps.coord[i][j] == 'P')
-				ft_put_img64(game, game->player.p_img->ptr, j, i);
+				ft_put_img64(game, game->player.p_img.ptr, j, i);
 			else if (game->maps.coord[i][j] == 'E')
 				ft_put_img64(game, game->exit.ptr, j, i);
 			else if (game->maps.coord[i][j] == 'C')

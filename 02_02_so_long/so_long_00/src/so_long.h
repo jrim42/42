@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 18:40:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:25:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_img	*p_img;
+	t_img	p_img;
 	int		step;
 	int		collec;
 	int		x_pos;

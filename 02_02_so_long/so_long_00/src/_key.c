@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:06:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/02 18:39:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/03 14:27:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    _up(t_game *game, t_player *player)
         return ;
     player->y_pos--;
     player->step++;
-    ft_put_img64(game, player->p_img->ptr, player->x_pos, player->y_pos);
+    ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
 	printf("up : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
@@ -50,7 +50,7 @@ void    _down(t_game *game, t_player *player)
         return ;
     player->y_pos++;
     player->step++;
-    ft_put_img64(game, player->p_img->ptr, player->x_pos, player->y_pos);
+    ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
 	printf("down : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
@@ -60,7 +60,7 @@ void    _left(t_game *game, t_player *player)
         return ;
     player->x_pos--;
     player->step++;
-    ft_put_img64(game, player->p_img->ptr, player->x_pos, player->y_pos);
+    ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
 	printf("left : (%d, %d)\n", player->x_pos, player->y_pos);
 }
 
@@ -70,6 +70,6 @@ void    _right(t_game *game, t_player *player)
         return ;
     player->x_pos++;
     player->step++;
-    ft_put_img64(game, player->p_img->ptr, player->x_pos, player->y_pos);
+    ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
 	printf("right : (%d, %d)\n", player->x_pos, player->y_pos);
 }
