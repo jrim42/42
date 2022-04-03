@@ -52,7 +52,7 @@ void	_map_cnt(t_game *game, char *map_src)
 	int		col_cnt;
 	int		row_cnt;
 	char	*line = 0;
-	
+
 	fd = open(map_src, O_RDONLY);
 	if (fd <= 0)
 		err_exit("[error] : file open failed");
@@ -72,7 +72,6 @@ void	_map_cnt(t_game *game, char *map_src)
 		err_exit("[error] : map is not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
-	// printf("%d %d\n", game->maps.cols, game->maps.rows);
 }
 
 void	_map_malloc(t_game *game)

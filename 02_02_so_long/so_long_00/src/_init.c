@@ -13,7 +13,7 @@
 #include "so_long.h"
 
 void	game_init(t_game *game);
-void    img_init(t_game *game);
+void	img_init(t_game *game);
 void	player_init(t_game *game, t_player *player);
 
 void	game_init(t_game *game)
@@ -30,12 +30,12 @@ void	game_init(t_game *game)
 	player_init(game, &game->player);
 }
 
-void    img_init(t_game *game)
+void	img_init(t_game *game)
 {
-    game->road.ptr = ft_xpm_to_img(game, "img/road.xpm");
+	game->road.ptr = ft_xpm_to_img(game, "img/road.xpm");
 	game->wall.ptr = ft_xpm_to_img(game, "img/wall.xpm");
-    game->exit.ptr = ft_xpm_to_img(game, "img/exit.xpm");
-    game->collec.ptr = ft_xpm_to_img(game, "img/collector.xpm");
+	game->exit.ptr = ft_xpm_to_img(game, "img/exit.xpm");
+	game->collec.ptr = ft_xpm_to_img(game, "img/collector.xpm");
 	game->player.p_img.ptr = ft_xpm_to_img(game, "img/player.xpm");
 }
 
@@ -44,7 +44,7 @@ void	player_init(t_game *game, t_player *player)
 	char	**map;
 	int		x;
 	int		y;
-	
+
 	player->step = 0;
 	player->collec = 0;
 	player->dir = -1;

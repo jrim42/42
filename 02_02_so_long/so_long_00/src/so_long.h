@@ -60,8 +60,8 @@ typedef struct s_val
 typedef struct s_map
 {
 	t_val	*val;
-	int 	rows;
-	int 	cols;
+	int		rows;
+	int		cols;
 	char	**coord;
 }			t_map;
 
@@ -88,7 +88,7 @@ typedef struct s_game
 	t_img		exit;
 	t_img		collec;
 	t_player	player;
-	t_map 		maps;
+	t_map		maps;
 	int			end;
 }				t_game;
 
@@ -99,16 +99,16 @@ int		game_end(t_game *game);
 
 // _init.c
 void	game_init(t_game *game);
-void    img_init(t_game *game);
+void	img_init(t_game *game);
 void	player_init(t_game *game, t_player *player);
 
 // _key.c
-int     key_press(int key, t_game *game);
+int		key_press(int key, t_game *game);
 
 // _move.c
-void    _move(t_game *game, t_player *player, int dir);
-int     _move_stuck(char **map, t_player *player, int dir);
-void    _move_display(t_player *player, int dir);
+void	_move(t_game *game, t_player *player, int dir);
+int		_move_stuck(char **map, t_player *player, int dir);
+void	_move_display(t_player *player, int dir);
 
 // _map_gen.c
 void	map_gen(t_game *game);
@@ -119,9 +119,9 @@ void	_map_cnt(t_game *game, char *map_src);
 void	_map_malloc(t_game *game);
 
 // _map_check.c
-void    map_check(t_game *game, char **map);
-void    _init_val(t_val *val);
-void    _check_elm(t_game *game, char **map);
+void	map_check(t_game *game, char **map);
+void	_init_val(t_val *val);
+void	_check_elm(t_game *game, char **map);
 
 // _img_utils.c
 void	*ft_xpm_to_img(t_game *game, char *str);
