@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 16:21:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 19:19:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define DIR_LF 2 
 # define DIR_RT 3
 
+# define RED "\\033[0\;31m"
+# define GRN "\\033[0;32m"
+# define YLW "\\033[0;33m"
+# define BLU "\\033[0;36m"
+# define DFL "\\033[0;37m"
+
 typedef struct s_img
 {
 	void	*ptr;
@@ -62,7 +68,7 @@ typedef struct s_map
 	t_val	*val;
 	int		rows;
 	int		cols;
-	int		*collec;
+	int		*c_pos;
 	char	**coord;
 }			t_map;
 
@@ -70,7 +76,8 @@ typedef struct s_player
 {
 	t_img	p_img;
 	int		step;
-	int		collec;
+	int		c_tot;
+	int		c_cur;
 	int		x_pos;
 	int		y_pos;
 	int		x_end;
@@ -111,9 +118,16 @@ int		key_press(int key, t_game *game);
 void	_move(t_game *game, t_player *player, int dir);
 int		_move_stuck(char **map, t_player *player, int dir);
 void	_move_display(t_player *player, int dir);
+void	_end_check(t_game *game, t_player *player);
+
+// _collec.c
+void    _collec(t_game *game, t_player *player);
+void    _collec_display(t_player *player);
+void    _collec_c2t(t_game *game, int c_pos);
 
 // _map_gen.c
 void	map_gen(t_game *game);
+void	map_draw(t_game *game, int *img_ptr, int x_pos, int y_pos);
 
 // _map_read.c
 void	map_read(t_game *game, char *map_src);

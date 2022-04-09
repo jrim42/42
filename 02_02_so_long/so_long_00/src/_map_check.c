@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 16:54:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 19:14:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void     _check_elm(t_game *game, char **map)
     }
     if (val->_p * val->_c * val->_e == 0)
         err_exit("[error] : map element unfulfilled");
-    game->player.collec = val->_c;
-    printf("%d\n", game->player.collec);
+    game->player.c_tot = val->_c;
+    printf("c_tot : %d\n", game->player.c_tot);
 }
 
 void    _check_wall(t_game *game, char **map)

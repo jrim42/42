@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 16:34:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 19:13:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int main(int argc, char **argv)
 	map_read(&game, argv[1]);
 	map_check(&game, game.maps.coord);
 	game_init(&game);
-	map_gen(&game);
 	mlx_hook(game.win, X_EVENT_KEYPRESS, 0, &key_press, &game);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
@@ -48,6 +47,7 @@ int	main_loop(t_game *game)
 
 int	game_end(t_game *game)
 {
+	printf("congrats!\n");
 	printf("total step : %d\n", game->player.step);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);

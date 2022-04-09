@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 16:13:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 19:12:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	_move(t_game *game, t_player *player, int dir);
 int		_move_stuck(char **map, t_player *player, int dir);
 void	_move_display(t_player *player, int dir);
+void	_end_check(t_game *game, t_player *player);
 
 void	_move(t_game *game, t_player *player, int dir)
 {
@@ -29,11 +30,11 @@ void	_move(t_game *game, t_player *player, int dir)
 	else if (dir == DIR_RT)
 		player->x_pos++;
 	player->step++;
+	_collec(game, player);
 	printf("step : %d\n", player->step);
 	ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
 	//_move_display(player, dir);
-	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
-		game->end = 1;
+	_end_check(game, player);
 }
 
 int	_move_stuck(char **map, t_player *player, int dir)
@@ -64,4 +65,18 @@ void	_move_display(t_player *player, int dir)
 		printf("left : (%d, %d)\n", player->x_pos, player->y_pos);
 	else if (dir == DIR_RT)
 		printf("right : (%d, %d)\n", player->x_pos, player->y_pos);
+}
+
+void	_end_check(t_game *game, t_player *player)
+{
+	int	c_left;
+
+	c_left = player->c_tot - player->c_cur;
+	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
+	{
+		if (c_left == 0)
+			game->end = 1;
+		else
+			printf("%d items are left! you can't leave!\n", c_left);
+	}
 }

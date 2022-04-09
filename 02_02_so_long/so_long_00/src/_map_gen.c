@@ -6,13 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/03 14:25:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 19:19:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_gen(t_game *game);
+void	map_draw(t_game *game, int *img_ptr, int x_pos, int y_pos);
 
 void	map_gen(t_game *game)
 {
