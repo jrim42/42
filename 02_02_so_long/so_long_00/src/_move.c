@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/03 14:45:22 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 16:13:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	_move(t_game *game, t_player *player, int dir)
 	else if (dir == DIR_RT)
 		player->x_pos++;
 	player->step++;
+	printf("step : %d\n", player->step);
 	ft_put_img64(game, player->p_img.ptr, player->x_pos, player->y_pos);
-	_move_display(player, dir);
+	//_move_display(player, dir);
 	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
 		game->end = 1;
 }

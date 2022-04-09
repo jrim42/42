@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/03 14:46:28 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/09 16:21:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_map
 	t_val	*val;
 	int		rows;
 	int		cols;
+	int		*collec;
 	char	**coord;
 }			t_map;
 
@@ -101,6 +102,7 @@ int		game_end(t_game *game);
 void	game_init(t_game *game);
 void	img_init(t_game *game);
 void	player_init(t_game *game, t_player *player);
+void	collec_init(t_game *game, t_map *map);
 
 // _key.c
 int		key_press(int key, t_game *game);
