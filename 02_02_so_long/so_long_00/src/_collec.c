@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 18:33:14 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 19:17:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/11 21:12:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,12 @@ void    _collec_display(t_player *player)
 
 void    _collec_c2t(t_game *game, int c_pos)
 {
-    int x_pos;
-    int y_pos;
+    int     x_pos;
+    int     y_pos;
+    char    **map;
 
     x_pos = c_pos / 100;
     y_pos = c_pos % 100;
-    ft_put_img64(game, game->road.ptr, x_pos, y_pos);
+    map = game->maps.coord;
+    map[y_pos][x_pos] = '0';
 }
