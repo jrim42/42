@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:30 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 19:13:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 19:43:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	player_init(t_game *game, t_player *player)
 			}
 		}
 	}
-	// printf("start : (%d, %d)\n", player->x_pos, player->y_pos);
-	// printf("end : (%d, %d)\n", player->x_end, player->y_end);
 }
 
 void	collec_init(t_game *game, t_map *maps)

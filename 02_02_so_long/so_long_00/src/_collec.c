@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 18:33:14 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/11 21:12:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 19:43:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void    _collec_display(t_player *player)
 
     c_left = player->c_tot - player->c_cur;
     if (c_left == 0)
-        printf("player has collected all items!\n");
+        ft_putstr_fd("player has collected all items!\n", 1);
     else
-        printf("player has collected item (%d items left)\n", c_left);
+        _msg_display("player has collected item (", c_left, " items left)");
 }
 
 void    _collec_c2t(t_game *game, int c_pos)

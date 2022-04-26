@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:25 by jrim              #+#    #+#             */
-/*   Updated: 2022/03/21 20:00:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 19:29:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 char	*gnl_strjoin(char *s1, char *s2)
 {
-	size_t	idx;
 	size_t	total_len;
 	char	*new_str;
 
-	idx = 0;
 	if (!(s2))
 		return ((char *)s1);
 	total_len = gnl_strlen(s1) + gnl_strlen(s2) + 1;

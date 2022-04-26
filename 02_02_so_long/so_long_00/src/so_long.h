@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/11 21:22:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 19:40:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,11 @@ void	_check_elm(t_game *game, char **map);
 // _img_utils.c
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img64(t_game *game, void *img_ptr, int x, int y);
+
+// _utils.c
+void    _msg_display(char *msg1, int num, char *msg2);
+
+// _unnecessary.c
+void	_move_display(t_player *player, int dir);
 
 #endif
