@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 19:51:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 21:51:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	main_loop(t_game *game)
 
 int	game_end(t_game *game)
 {
-	ft_putstr("congrats!\n", 1);
-	printf("total step : %d\n", game->player.step);
+	ft_putstr_fd("congrats!\n", 1);
+	_msg_display("total step : ", game->player.step, 0);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
