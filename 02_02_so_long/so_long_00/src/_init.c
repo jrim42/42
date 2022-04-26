@@ -81,8 +81,8 @@ void	collec_init(t_game *game, t_map *maps)
 	map = maps->coord;
 	maps->c_pos = (int *)malloc(game->player.c_tot * sizeof(int));
 	if (!maps->c_pos)
-        err_exit("[error] : allocation failed");
-	c_cnt = 0;	
+		err_exit("[error] : allocation failed");
+	c_cnt = 0;
 	y = 0;
 	while (++y < game->maps.cols && c_cnt < game->player.c_tot)
 	{

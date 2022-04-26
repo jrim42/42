@@ -33,7 +33,6 @@ void	_move(t_game *game, t_player *player, int dir)
 	_collec(game, player);
 	_msg_display("step : ", player->step, 0);
 	game->maps.coord[player->y_pos][player->x_pos] = 'P';
-	//_move_display(player, dir);
 	_end_check(game, player);
 }
 

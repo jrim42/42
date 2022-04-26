@@ -121,9 +121,9 @@ void	_move_display(t_player *player, int dir);
 void	_end_check(t_game *game, t_player *player);
 
 // _collec.c
-void    _collec(t_game *game, t_player *player);
-void    _collec_display(t_player *player);
-void    _collec_c2t(t_game *game, int c_pos);
+void	_collec(t_game *game, t_player *player);
+void	_collec_display(t_player *player);
+void	_collec_c2t(t_game *game, int c_pos);
 
 // _map_gen.c
 void	map_gen(t_game *game);
@@ -144,7 +144,7 @@ void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img(t_game *game, void *img_ptr, int x, int y);
 
 // _utils.c
-void    _msg_display(char *msg1, int num, char *msg2);
+void	_msg_display(char *msg1, int num, char *msg2);
 
 // _unnecessary.c
 void	_move_display(t_player *player, int dir);

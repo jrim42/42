@@ -16,9 +16,9 @@ void	err_exit(char *msg);
 int		main_loop(t_game *game);
 int		game_end(t_game *game);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
 	if (argc != 2)
 		err_exit("[usage]: ./so_long [FILENAME.ber]");
@@ -47,7 +47,7 @@ int	main_loop(t_game *game)
 
 int	game_end(t_game *game)
 {
-	printf("congrats!\n");
+	ft_putstr("congrats!\n", 1);
 	printf("total step : %d\n", game->player.step);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);

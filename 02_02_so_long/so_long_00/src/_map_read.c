@@ -21,7 +21,7 @@ void	map_read(t_game *game, char *map_src)
 	int		fd;
 	int		y;
 	int		x;
-	char	*line = 0;
+	char	*line;
 
 	_map_cnt(game, map_src);
 	_map_malloc(game);
@@ -43,8 +43,6 @@ void	map_read(t_game *game, char *map_src)
 		free(line);
 	}
 	close(fd);
-	// for(int i = 0; i < game->maps.cols; i++)
-	// 	printf("%s\n", game->maps.coord[i]);
 }
 
 void	_map_cnt(t_game *game, char *map_src)
@@ -53,7 +51,7 @@ void	_map_cnt(t_game *game, char *map_src)
 	int		tot_cnt;
 	int		col_cnt;
 	int		row_cnt;
-	char	*line = 0;
+	char	*line;
 
 	fd = open(map_src, O_RDONLY);
 	if (fd <= 0)
@@ -74,7 +72,6 @@ void	_map_cnt(t_game *game, char *map_src)
 		err_exit("[error] : map is not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
-	// printf("col : %d, row : %d\n", col_cnt, row_cnt);
 }
 
 void	_map_malloc(t_game *game)
@@ -89,5 +86,4 @@ void	_map_malloc(t_game *game)
 	idx = -1;
 	while (++idx < col)
 		game->maps.coord[idx] = (char *)malloc(row * sizeof(char));
-	// printf("col : %d, row : %d\n", col, row);
 }
