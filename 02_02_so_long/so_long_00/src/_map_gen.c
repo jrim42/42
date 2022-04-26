@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 20:16:24 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 21:17:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	map_gen(t_game *game)
 	int		y;
 
 	y = 0;
-	while (y < game->maps.rows)
+	while (y < game->maps.cols)
 	{
 		x = 0;
-		while (x < game->maps.cols)
+		while (x < game->maps.rows)
 		{
 			if (game->maps.coord[y][x] == '0')
 				ft_put_img(game, game->road.ptr, x, y);

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 19:44:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 21:31:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void    _init_val(t_val *val)
 
 void     _check_elm(t_game *game, char **map)
 {
-    int     col;
-    int     row;
+    int     x;
+    int     y;
     char    ch;
     t_val   *val;
     
-    col = 0;
+    y = 0;
     val = game->maps.val;
-    while (col < game->maps.cols)
+    while (y < game->maps.cols)
     {
-        row = 0;
-        while (row < game->maps.rows)
+        x = 0;
+        while (x < game->maps.rows)
         {
-            ch = map[col][row];
+            ch = map[y][x];
             if (ft_strchr(ELM, ch) == 0)
                 err_exit("[error] : invalid char in map");
             else if (ch == 'P')
@@ -58,9 +58,9 @@ void     _check_elm(t_game *game, char **map)
                 val->_c++;
             else if (ch == 'E')
                 val->_e = 1;
-            row++;
+            x++;
         }
-        col++;
+        y++;
     }
     if (val->_p * val->_c * val->_e == 0)
         err_exit("[error] : map element unfulfilled");
@@ -69,21 +69,21 @@ void     _check_elm(t_game *game, char **map)
 
 void    _check_wall(t_game *game, char **map)
 {
-    int     col;
-    int     row;
+    int     x;
+    int     y;
     
-    col = 0;
-    while (col < game->maps.cols)
+    y = 0;
+    while (y < game->maps.cols)
     {
-        row = 0;
-        while (row < game->maps.rows)
+        x = 0;
+        while (x < game->maps.rows)
         {
-            if (col % (game->maps.cols - 1) != 0 && row % (game->maps.rows - 1) != 0)
+            if (y % (game->maps.cols - 1) != 0 && x % (game->maps.rows - 1) != 0)
                 break ;
-            if (map[col][row] != '1')
+            if (map[y][x] != '1')
                 err_exit("[error] : invalid map - no walls!");
-            row++;
+            x++;
         }
-        col++;
+        y++;
     }
 }

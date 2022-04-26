@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 20:15:16 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 21:16:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void	_map_malloc(t_game *game)
 	idx = -1;
 	while (++idx < col)
 		game->maps.coord[idx] = (char *)malloc(row * sizeof(char));
+	// printf("col : %d, row : %d\n", col, row);
 }
