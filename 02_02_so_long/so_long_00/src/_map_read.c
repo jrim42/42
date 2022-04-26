@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 19:44:18 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 20:15:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,32 @@ void	_map_malloc(t_game *game);
 void	map_read(t_game *game, char *map_src)
 {
 	int		fd;
-	int		col_idx;
-	int		row_idx;
+	int		y;
+	int		x;
 	char	*line = 0;
 
 	_map_cnt(game, map_src);
 	_map_malloc(game);
 	game->maps.coord = (char **)malloc(game->maps.cols * sizeof(char *));
-	col_idx = -1;
-	while (++col_idx < game->maps.cols)
-		game->maps.coord[col_idx] = (char *)malloc(game->maps.rows * sizeof(char));
+	y = -1;
+	while (++y < game->maps.cols)
+		game->maps.coord[y] = (char *)malloc(game->maps.rows * sizeof(char));
 	fd = open(map_src, O_RDONLY);
-	col_idx = 0;
+	y = 0;
 	while ((line = get_next_line(fd)) != 0)
 	{
-		row_idx = 0;
-		while (row_idx < game->maps.rows)
+		x = 0;
+		while (x < game->maps.rows)
 		{
-			game->maps.coord[col_idx][row_idx] = line[row_idx];
-			row_idx++;
+			game->maps.coord[y][x] = line[x];
+			x++;
 		}
-		col_idx++;
+		y++;
 		free(line);
 	}
 	close(fd);
+	// for(int i = 0; i < game->maps.cols; i++)
+	// 	printf("%s\n", game->maps.coord[i]);
 }
 
 void	_map_cnt(t_game *game, char *map_src)
@@ -72,6 +74,7 @@ void	_map_cnt(t_game *game, char *map_src)
 		err_exit("[error] : map is not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
+	// printf("col : %d, row : %d\n", col_cnt, row_cnt);
 }
 
 void	_map_malloc(t_game *game)

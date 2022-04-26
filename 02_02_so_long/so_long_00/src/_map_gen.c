@@ -6,38 +6,37 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:05:42 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/09 19:19:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/26 20:16:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_gen(t_game *game);
-void	map_draw(t_game *game, int *img_ptr, int x_pos, int y_pos);
 
 void	map_gen(t_game *game)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
-	i = 0;
-	while (i < game->maps.rows)
+	y = 0;
+	while (y < game->maps.rows)
 	{
-		j = 0;
-		while (j < game->maps.cols)
+		x = 0;
+		while (x < game->maps.cols)
 		{
-			if (game->maps.coord[i][j] == '0')
-				ft_put_img64(game, game->road.ptr, j, i);
-			else if (game->maps.coord[i][j] == '1')
-				ft_put_img64(game, game->wall.ptr, j, i);
-			else if (game->maps.coord[i][j] == 'P')
-				ft_put_img64(game, game->player.p_img.ptr, j, i);
-			else if (game->maps.coord[i][j] == 'E')
-				ft_put_img64(game, game->exit.ptr, j, i);
-			else if (game->maps.coord[i][j] == 'C')
-				ft_put_img64(game, game->collec.ptr, j, i);
-			j++;
+			if (game->maps.coord[y][x] == '0')
+				ft_put_img(game, game->road.ptr, x, y);
+			else if (game->maps.coord[y][x] == '1')
+				ft_put_img(game, game->wall.ptr, x, y);
+			else if (game->maps.coord[y][x] == 'P')
+				ft_put_img(game, game->player.p_img.ptr, x, y);
+			else if (game->maps.coord[y][x] == 'E')
+				ft_put_img(game, game->exit.ptr, x, y);
+			else if (game->maps.coord[y][x] == 'C')
+				ft_put_img(game, game->collec.ptr, x, y);
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
