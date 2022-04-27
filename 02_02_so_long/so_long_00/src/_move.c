@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 19:41:14 by jrim             ###   ########.fr       */
+/*   Updated: 2022/04/27 16:57:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	_move(t_game *game, t_player *player, int dir)
 {
 	if (_move_stuck(game->maps.coord, player, dir) == 1)
 		return ;
-	game->maps.coord[player->y_pos][player->x_pos] = '0';
+	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
+		game->maps.coord[player->y_pos][player->x_pos] = 'E';
+	else
+		game->maps.coord[player->y_pos][player->x_pos] = '0';
 	if (dir == DIR_UP)
 		player->y_pos--;
 	else if (dir == DIR_DW)
