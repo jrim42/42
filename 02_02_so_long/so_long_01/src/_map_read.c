@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 20:58:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 22:55:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	_map_malloc(t_game *game);
 void	map_read(t_game *game, char *map_src)
 {
 	int		fd;
-	int		y;
 	int		x;
+	int		y;
 	char	*line;
 
 	_map_cnt(game, map_src);
@@ -30,16 +30,13 @@ void	map_read(t_game *game, char *map_src)
 	while (++y < game->maps.cols)
 		game->maps.coord[y] = (char *)malloc(game->maps.rows * sizeof(char));
 	fd = open(map_src, O_RDONLY);
-	y = 0;
-	while ((line = get_next_line(fd)) != 0)
+	y = -1;
+	while (++y < game->maps.cols)
 	{
-		x = 0;
-		while (x < game->maps.rows)
-		{
+		line = get_next_line(fd);
+		x = -1;
+		while (++x < game->maps.rows)
 			game->maps.coord[y][x] = line[x];
-			x++;
-		}
-		y++;
 		free(line);
 	}
 	close(fd);
@@ -56,17 +53,19 @@ void	_map_cnt(t_game *game, char *map_src)
 	fd = open(map_src, O_RDONLY);
 	if (fd <= 0)
 		msg_err("[error] : file open failed");
-	if ((line = get_next_line(fd)) == 0)
+	line = get_next_line(fd);
+	if (line == NULL)
 		msg_err("[error] : empty map");
-	col_cnt = 1;
+	col_cnt = 0;
 	row_cnt = ft_strlen(line) - 1;
 	tot_cnt = row_cnt;
-	while ((line = get_next_line(fd)) != 0)
+	while (line != 0)
 	{
 		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
-		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
 	close(fd);
 	if ((tot_cnt + 1) % col_cnt != 0)
 		msg_err("[error] : map is not rectangle");
