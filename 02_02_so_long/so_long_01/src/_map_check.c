@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:11:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:36:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,24 @@ void	_check_elm(t_game *game, char **map)
 {
 	int		x;
 	int		y;
-	char	ch;
 	t_val	*val;
 
-	y = 0;
+	y = -1;
 	val = game->maps.val;
-	while (y < game->maps.cols)
+	while (++y < game->maps.cols)
 	{
-		x = 0;
-		while (x < game->maps.rows)
+		x = -1;
+		while (++x < game->maps.rows)
 		{
-			ch = map[y][x];
-			if (ft_strchr(ELM, ch) == 0)
+			if (ft_strchr(ELM, map[y][x]) == 0)
 				msg_err("[error] : invalid char in map");
-			else if (ch == 'P')
+			else if (map[y][x] == 'P')
 				val->_p = 1;
-			else if (ch == 'C')
+			else if (map[y][x] == 'C')
 				val->_c++;
-			else if (ch == 'E')
+			else if (map[y][x] == 'E')
 				val->_e = 1;
-			x++;
 		}
-		y++;
 	}
 	if (val->_p * val->_c * val->_e == 0)
 		msg_err("[error] : map element unfulfilled");
@@ -78,7 +74,8 @@ void	_check_wall(t_game *game, char **map)
 		x = 0;
 		while (x < game->maps.rows)
 		{
-			if (y % (game->maps.cols - 1) != 0 && x % (game->maps.rows - 1) != 0)
+			if (y % (game->maps.cols - 1) != 0 \
+				&& x % (game->maps.rows - 1) != 0)
 				break ;
 			if (map[y][x] != '1')
 				msg_err("[error] : invalid map - no walls!");

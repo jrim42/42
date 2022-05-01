@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:12:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 20:58:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	map_read(t_game *game, char *map_src)
 void	_map_cnt(t_game *game, char *map_src)
 {
 	int		fd;
+	char	*line;
 	int		tot_cnt;
 	int		col_cnt;
 	int		row_cnt;
-	char	*line;
 
 	fd = open(map_src, O_RDONLY);
 	if (fd <= 0)

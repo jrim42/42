@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 19:32:21 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:14:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 20:52:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,21 @@ void	msg_dfl(char *msg1, int num, char *msg2)
 void	*file_to_img(t_game *game, char *str)
 {
 	void	*img;
+	int		width;
+	int		height;
 
-	img = mlx_xpm_file_to_image(game->mlx, str, &(game->img_dlf.w), &(game->img_dlf.h));
+	width = game->img_dlf.w;
+	height = game->img_dlf.h;
+	img = mlx_xpm_file_to_image(game->mlx, str, &width, &height);
 	return (img);
 }
 
 void	put_img(t_game *game, void *img_ptr, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, img_ptr, x * TILES, y * TILES);
+	int	x_pos;
+	int	y_pos;
+
+	x_pos = x * TILES;
+	y_pos = y * TILES;
+	mlx_put_image_to_window(game->mlx, game->win, img_ptr, x_pos, y_pos);
 }
