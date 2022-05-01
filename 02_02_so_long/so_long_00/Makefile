@@ -22,11 +22,10 @@ MLX_DIR		=	./mlx/
 MLX_FLAGS	=	-L./mlx -lmlx -framework OpenGL -framework Appkit
 
 SRC			=	src/so_long.c\
-				src/_init.c\
-				src/_img_utils.c\
 				src/_map_read.c\
 				src/_map_check.c\
 				src/_map_gen.c\
+				src/_init.c\
 				src/_key.c\
 				src/_move.c\
 				src/_collec.c\

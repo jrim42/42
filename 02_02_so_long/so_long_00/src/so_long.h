@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 21:10:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 16:50:27 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,21 @@ typedef struct s_game
 }				t_game;
 
 // so_long.c
-void	err_exit(char *msg);
 int		main_loop(t_game *game);
 int		game_end(t_game *game);
+
+// _map_gen.c
+void	map_gen(t_game *game);
+
+// _map_read.c
+void	map_read(t_game *game, char *map_src);
+void	_map_cnt(t_game *game, char *map_src);
+void	_map_malloc(t_game *game);
+
+// _map_check.c
+void	map_check(t_game *game, char **map);
+void	_init_val(t_val *val);
+void	_check_elm(t_game *game, char **map);
 
 // _init.c
 void	game_init(t_game *game);
@@ -125,26 +137,11 @@ void	_collec(t_game *game, t_player *player);
 void	_collec_display(t_player *player);
 void	_collec_c2t(t_game *game, int c_pos);
 
-// _map_gen.c
-void	map_gen(t_game *game);
-void	map_draw(t_game *game, int *img_ptr, int x_pos, int y_pos);
-
-// _map_read.c
-void	map_read(t_game *game, char *map_src);
-void	_map_cnt(t_game *game, char *map_src);
-void	_map_malloc(t_game *game);
-
-// _map_check.c
-void	map_check(t_game *game, char **map);
-void	_init_val(t_val *val);
-void	_check_elm(t_game *game, char **map);
-
-// _img_utils.c
+// _utils.c
+void	err_exit(char *msg);
+void	_msg_display(char *msg1, int num, char *msg2);
 void	*ft_xpm_to_img(t_game *game, char *str);
 void	ft_put_img(t_game *game, void *img_ptr, int x, int y);
-
-// _utils.c
-void	_msg_display(char *msg1, int num, char *msg2);
 
 // _unnecessary.c
 void	_move_display(t_player *player, int dir);

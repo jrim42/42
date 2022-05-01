@@ -6,13 +6,12 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 21:51:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 16:43:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	err_exit(char *msg);
 int		main_loop(t_game *game);
 int		game_end(t_game *game);
 
@@ -29,12 +28,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
-}
-
-void	err_exit(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-	exit(1);
 }
 
 int	main_loop(t_game *game)
