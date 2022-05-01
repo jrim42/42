@@ -6,14 +6,12 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:09:15 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:27:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:28:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
-# include <stdio.h>
 
 # include <stdarg.h>
 # include <stdlib.h>
