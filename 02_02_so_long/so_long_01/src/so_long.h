@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 16:50:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:20:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	int			fps;
-	t_img		img64;
+	t_img		img_dlf;
 	t_img		road;
 	t_img		wall;
 	t_img		exit;
@@ -101,6 +100,7 @@ typedef struct s_game
 }				t_game;
 
 // so_long.c
+int		key_press(int key, t_game *game);
 int		main_loop(t_game *game);
 int		game_end(t_game *game);
 
@@ -119,31 +119,24 @@ void	_check_elm(t_game *game, char **map);
 
 // _init.c
 void	game_init(t_game *game);
-void	img_init(t_game *game);
-void	player_init(t_game *game, t_player *player);
-void	collec_init(t_game *game, t_map *map);
-
-// _key.c
-int		key_press(int key, t_game *game);
+void	_init_img(t_game *game);
+void	_init_p(t_game *game, t_player *player);
+void	_init_c(t_game *game, t_map *map);
 
 // _move.c
-void	_move(t_game *game, t_player *player, int dir);
-int		_move_stuck(char **map, t_player *player, int dir);
-void	_move_display(t_player *player, int dir);
+void	move(t_game *game, t_player *player, int dir);
+int		_stuck_check(char **map, t_player *player, int dir);
 void	_end_check(t_game *game, t_player *player);
 
 // _collec.c
-void	_collec(t_game *game, t_player *player);
-void	_collec_display(t_player *player);
-void	_collec_c2t(t_game *game, int c_pos);
+void	collec(t_game *game, t_player *player);
+void	_collec_msg(t_player *player);
+void	_collec_to_tile(t_game *game, int c_pos);
 
 // _utils.c
-void	err_exit(char *msg);
-void	_msg_display(char *msg1, int num, char *msg2);
-void	*ft_xpm_to_img(t_game *game, char *str);
-void	ft_put_img(t_game *game, void *img_ptr, int x, int y);
-
-// _unnecessary.c
-void	_move_display(t_player *player, int dir);
+void	msg_err(char *msg);
+void	msg_dfl(char *msg1, int num, char *msg2);
+void	*file_to_img(t_game *game, char *str);
+void	put_img(t_game *game, void *img_ptr, int x, int y);
 
 #endif

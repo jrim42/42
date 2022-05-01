@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 21:31:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:11:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	map_check(t_game *game, char **map)
 {
 	game->maps.val = (t_val *)malloc(sizeof(t_val));
 	if (!game->maps.val)
-		err_exit("[error] : allocation failed");
+		msg_err("[error] : allocation failed");
 	_init_val(game->maps.val);
 	_check_elm(game, map);
 	_check_wall(game, map);
@@ -51,7 +51,7 @@ void	_check_elm(t_game *game, char **map)
 		{
 			ch = map[y][x];
 			if (ft_strchr(ELM, ch) == 0)
-				err_exit("[error] : invalid char in map");
+				msg_err("[error] : invalid char in map");
 			else if (ch == 'P')
 				val->_p = 1;
 			else if (ch == 'C')
@@ -63,7 +63,7 @@ void	_check_elm(t_game *game, char **map)
 		y++;
 	}
 	if (val->_p * val->_c * val->_e == 0)
-		err_exit("[error] : map element unfulfilled");
+		msg_err("[error] : map element unfulfilled");
 	game->player.c_tot = val->_c;
 }
 
@@ -81,7 +81,7 @@ void	_check_wall(t_game *game, char **map)
 			if (y % (game->maps.cols - 1) != 0 && x % (game->maps.rows - 1) != 0)
 				break ;
 			if (map[y][x] != '1')
-				err_exit("[error] : invalid map - no walls!");
+				msg_err("[error] : invalid map - no walls!");
 			x++;
 		}
 		y++;

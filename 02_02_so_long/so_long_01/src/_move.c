@@ -6,19 +6,19 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/27 16:57:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:21:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	_move(t_game *game, t_player *player, int dir);
-int		_move_stuck(char **map, t_player *player, int dir);
+void	move(t_game *game, t_player *player, int dir);
+int		_stuck_check(char **map, t_player *player, int dir);
 void	_end_check(t_game *game, t_player *player);
 
-void	_move(t_game *game, t_player *player, int dir)
+void	move(t_game *game, t_player *player, int dir)
 {
-	if (_move_stuck(game->maps.coord, player, dir) == 1)
+	if (_stuck_check(game->maps.coord, player, dir) == 1)
 		return ;
 	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
 		game->maps.coord[player->y_pos][player->x_pos] = 'E';
@@ -33,13 +33,13 @@ void	_move(t_game *game, t_player *player, int dir)
 	else if (dir == DIR_RT)
 		player->x_pos++;
 	player->step++;
-	_collec(game, player);
-	_msg_display("step : ", player->step, 0);
+	collec(game, player);
+	msg_dfl("step : ", player->step, 0);
 	game->maps.coord[player->y_pos][player->x_pos] = 'P';
 	_end_check(game, player);
 }
 
-int	_move_stuck(char **map, t_player *player, int dir)
+int	_stuck_check(char **map, t_player *player, int dir)
 {
 	int	x;
 	int	y;
@@ -67,6 +67,6 @@ void	_end_check(t_game *game, t_player *player)
 		if (c_left == 0)
 			game->end = 1;
 		else
-			_msg_display(0, c_left, " items are left! you can't leave!");
+			msg_dfl(0, c_left, " items are left! you can't leave!");
 	}
 }

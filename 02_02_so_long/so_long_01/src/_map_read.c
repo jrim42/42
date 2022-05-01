@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/04/26 21:16:28 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 17:12:04 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	_map_cnt(t_game *game, char *map_src)
 
 	fd = open(map_src, O_RDONLY);
 	if (fd <= 0)
-		err_exit("[error] : file open failed");
+		msg_err("[error] : file open failed");
 	if ((line = get_next_line(fd)) == 0)
-		err_exit("[error] : empty map");
+		msg_err("[error] : empty map");
 	col_cnt = 1;
 	row_cnt = ft_strlen(line) - 1;
 	tot_cnt = row_cnt;
@@ -69,7 +69,7 @@ void	_map_cnt(t_game *game, char *map_src)
 	}
 	close(fd);
 	if ((tot_cnt + 1) % col_cnt != 0)
-		err_exit("[error] : map is not rectangle");
+		msg_err("[error] : map is not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
 }
