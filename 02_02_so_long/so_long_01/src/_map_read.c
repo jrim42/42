@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 22:55:33 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/01 22:57:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	_map_cnt(t_game *game, char *map_src)
 	{
 		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
+		//이전 line과 글자수 같은지 확인하기
 		line = get_next_line(fd);
 	}
 	free(line);
