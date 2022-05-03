@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 21:00:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/03 22:27:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv)
 	map_read(&game, argv[1]);
 	map_check(&game, game.maps.coord);
 	game_init(&game);
-	mlx_hook(game.win, X_EVENT_KEYPRESS, 0, &key_press, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
+	mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &game_end, &game);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
@@ -34,7 +35,7 @@ int	main(int argc, char **argv)
 int	key_press(int key, t_game *game)
 {
 	if (key == KEY_EXIT)
-		exit(0);
+		game_end(game);
 	else if (key == KEY_A || key == KEY_LF)
 		move(game, &game->player, DIR_LF);
 	else if (key == KEY_S || key == KEY_DW)
@@ -56,7 +57,7 @@ int	main_loop(t_game *game)
 
 int	game_end(t_game *game)
 {
-	ft_putstr_fd("\033[0;32mcongrats!\n\033[0;37m", 1);
+	ft_putstr_fd("\033[0;32mgame ends!\n\033[0;37m", 1);
 	msg_dfl("total step : ", game->player.step, 0);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);

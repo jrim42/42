@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 21:26:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/03 22:01:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	map_read(t_game *game, char *map_src)
 	while (++y < game->maps.cols)
 		game->maps.coord[y] = (char *)malloc(game->maps.rows * sizeof(char));
 	fd = open(map_src, O_RDONLY);
+	line = (char *)malloc((game->maps.rows + 1) * sizeof(char));
 	y = -1;
 	while (++y < game->maps.cols)
 	{
@@ -37,8 +38,8 @@ void	map_read(t_game *game, char *map_src)
 		x = -1;
 		while (++x < game->maps.rows)
 			game->maps.coord[y][x] = line[x];
-		free(line);
 	}
+	free(line);
 	close(fd);
 }
 
@@ -56,24 +57,20 @@ void	_map_cnt(t_game *game, char *map_src)
 	line = get_next_line(fd);
 	if (line == NULL)
 		msg_err("[error] : empty map");
-	col_cnt = 1;
+	col_cnt = 0;
 	row_cnt = ft_strlen(line) - 1;
-	tot_cnt = row_cnt;
+	tot_cnt = 0;
 	while (line != 0)
 	{
-		// printf("line : %zu\n", ft_strlen(line));
-		printf("tot : %d, col : %d\n", tot_cnt + 1, col_cnt);
 		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
-		//이전 line과 글자수 같은지 확인하기
 		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
-	printf("tot : %d, col : %d\n", tot_cnt + 1, col_cnt);
 	if ((tot_cnt + 1) % col_cnt != 0)
 		msg_err("[error] : map is not rectangle");
-	game->maps.cols = col_cnt - 1;
+	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
 }
 

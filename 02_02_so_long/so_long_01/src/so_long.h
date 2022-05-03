@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 21:09:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/03 22:27:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 
 # define TILES 60
 # define ELM "01PEC"
-# define X_EVENT_KEYPRESS 2
-# define X_EVENT_EXIT 17
+
+# define X_EVENT_KEY_PRESS 2
+# define X_EVENT_KEY_EXIT 17
 
 # define KEY_EXIT 53
 # define KEY_A 0
