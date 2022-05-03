@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:30 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:14:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/03 20:26:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	_init_img(t_game *game)
 	game->road.ptr = file_to_img(game, "img/road.xpm");
 	game->wall.ptr = file_to_img(game, "img/wall.xpm");
 	game->exit.ptr = file_to_img(game, "img/exit.xpm");
-	game->collec.ptr = file_to_img(game, "img/collector.xpm");
+	game->collec.ptr = file_to_img(game, "img/key.xpm");
 	game->player.p_img.ptr = file_to_img(game, "img/player.xpm");
 }
 
