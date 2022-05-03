@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 20:07:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/03 21:26:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void	_map_cnt(t_game *game, char *map_src)
 	line = get_next_line(fd);
 	if (line == NULL)
 		msg_err("[error] : empty map");
-	col_cnt = 0;
+	col_cnt = 1;
 	row_cnt = ft_strlen(line) - 1;
 	tot_cnt = row_cnt;
 	while (line != 0)
 	{
+		// printf("line : %zu\n", ft_strlen(line));
+		printf("tot : %d, col : %d\n", tot_cnt + 1, col_cnt);
 		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
 		//이전 line과 글자수 같은지 확인하기
@@ -68,9 +70,10 @@ void	_map_cnt(t_game *game, char *map_src)
 	}
 	free(line);
 	close(fd);
+	printf("tot : %d, col : %d\n", tot_cnt + 1, col_cnt);
 	if ((tot_cnt + 1) % col_cnt != 0)
 		msg_err("[error] : map is not rectangle");
-	game->maps.cols = col_cnt;
+	game->maps.cols = col_cnt - 1;
 	game->maps.rows = row_cnt;
 }
 
