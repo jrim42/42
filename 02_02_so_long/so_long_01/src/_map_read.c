@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 22:01:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 17:26:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	map_read(t_game *game, char *map_src)
 	while (++y < game->maps.cols)
 		game->maps.coord[y] = (char *)malloc(game->maps.rows * sizeof(char));
 	fd = open(map_src, O_RDONLY);
-	line = (char *)malloc((game->maps.rows + 1) * sizeof(char));
 	y = -1;
 	while (++y < game->maps.cols)
 	{

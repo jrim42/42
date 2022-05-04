@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:36:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 18:57:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ void	_check_elm(t_game *game, char **map)
 		while (++x < game->maps.rows)
 		{
 			if (ft_strchr(ELM, map[y][x]) == 0)
-				msg_err("[error] : invalid char in map");
+				msg_err("[error] : invalid character");
 			else if (map[y][x] == 'P')
-				val->_p = 1;
+				val->_p++;
 			else if (map[y][x] == 'C')
 				val->_c++;
 			else if (map[y][x] == 'E')
-				val->_e = 1;
+				val->_e++;
 		}
 	}
-	if (val->_p * val->_c * val->_e == 0)
-		msg_err("[error] : map element unfulfilled");
+	if (val->_p * val->_e != 1 || val->_c == 0)
+		msg_err("[error] : map element");
 	game->player.c_tot = val->_c;
 }
 
@@ -78,7 +78,7 @@ void	_check_wall(t_game *game, char **map)
 				&& x % (game->maps.rows - 1) != 0)
 				break ;
 			if (map[y][x] != '1')
-				msg_err("[error] : invalid map - no walls!");
+				msg_err("[error] : no walls");
 			x++;
 		}
 		y++;

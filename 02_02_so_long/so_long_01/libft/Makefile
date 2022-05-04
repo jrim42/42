@@ -72,4 +72,4 @@ re: fclean all
 bonus: $(OBJ) $(BNS_OBJ)
 	@ar rc $(NAME) $(OBJ) $(BNS_OBJ)
 
-.PHONY: all clean fclean re bonus
+PHONY: all clean fclean re bonus
