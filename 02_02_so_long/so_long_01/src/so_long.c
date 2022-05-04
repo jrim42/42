@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 19:38:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 21:12:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		key_press(int key, t_game *game);
 int		main_loop(t_game *game);
+void	_end_check(t_game *game, t_player *player);
 int		game_end(t_game *game);
 
 int	main(int argc, char **argv)
@@ -57,6 +58,20 @@ int	main_loop(t_game *game)
 		game_end(game);
 	}
 	return (0);
+}
+
+void	_end_check(t_game *game, t_player *player)
+{
+	int	c_left;
+
+	c_left = player->c_tot - player->c_cur;
+	if (player->x_pos == player->x_end && player->y_pos == player->y_end)
+	{
+		if (c_left == 0)
+			game->end = 1;
+		else
+			msg_dfl(0, c_left, " items are left! you can't leave!");
+	}
 }
 
 int	game_end(t_game *game)

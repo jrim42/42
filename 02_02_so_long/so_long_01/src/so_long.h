@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 20:18:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 21:12:06 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_game
 // so_long.c
 int		key_press(int key, t_game *game);
 int		main_loop(t_game *game);
+void	_end_check(t_game *game, t_player *player);
 int		game_end(t_game *game);
 
 // _map_gen.c
@@ -130,7 +131,6 @@ void	move(t_game *game, t_player *player, int new_dir);
 int		_wall_check(char **map, t_player *player, int new_dir);
 void	_alt_tile(t_player *player, char **map);
 void	_alt_pos(t_player *player, int new_dir);
-void	_end_check(t_game *game, t_player *player);
 
 // _collec.c
 void	collec(t_game *game, t_player *player);
