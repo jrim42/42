@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 21:15:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 21:20:18 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	move(t_game *game, t_player *player, int new_dir);
 void	_alt_dir(t_game *game, t_player *player, int new_dir);
-int		_wall_check(char **map, t_player *player, int new_dir);
+int		_stuck(char **map, t_player *player, int new_dir);
 void	_alt_tile(t_player *player, char **map);
 void	_alt_pos(t_player *player, int new_dir);
 
 void	move(t_game *game, t_player *player, int new_dir)
 {
 	_alt_dir(game, player, new_dir);
-	if (_wall_check(game->maps.coord, player, new_dir) == 1)
+	if (_stuck(game->maps.coord, player, new_dir) == 1)
 		return ;
 	_alt_tile(player, game->maps.coord);
 	_alt_pos(player, new_dir);
