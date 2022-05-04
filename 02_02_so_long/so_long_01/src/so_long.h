@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:24:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 22:27:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 20:18:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ int		game_end(t_game *game);
 void	map_gen(t_game *game);
 
 // _map_read.c
-void	map_read(t_game *game, char *map_src);
-void	_map_cnt(t_game *game, char *map_src);
+void	map_read(t_game *game, char *map_file);
+void	_map_cnt(t_game *game, char *map_file);
 void	_map_malloc(t_game *game);
+void	_map_save(t_game *game, char *map_file);
 
 // _map_check.c
 void	map_check(t_game *game, char **map);
-void	_init_val(t_val *val);
+void	_init_val(t_val **val);
 void	_check_elm(t_game *game, char **map);
 
 // _init.c
@@ -125,8 +126,10 @@ void	_init_p(t_game *game, t_player *player);
 void	_init_c(t_game *game, t_map *map);
 
 // _move.c
-void	move(t_game *game, t_player *player, int dir);
-int		_stuck_check(char **map, t_player *player, int dir);
+void	move(t_game *game, t_player *player, int new_dir);
+int		_wall_check(char **map, t_player *player, int new_dir);
+void	_alt_tile(t_player *player, char **map);
+void	_alt_pos(t_player *player, int new_dir);
 void	_end_check(t_game *game, t_player *player);
 
 // _collec.c

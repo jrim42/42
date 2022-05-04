@@ -6,43 +6,25 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 17:26:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 19:30:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_read(t_game *game, char *map_src);
-void	_map_cnt(t_game *game, char *map_src);
+void	map_read(t_game *game, char *map_file);
+void	_map_cnt(t_game *game, char *map_file);
 void	_map_malloc(t_game *game);
+void	_map_save(t_game *game, char *map_file);
 
-void	map_read(t_game *game, char *map_src)
+void	map_read(t_game *game, char *map_file)
 {
-	int		fd;
-	int		x;
-	int		y;
-	char	*line;
-
-	_map_cnt(game, map_src);
+	_map_cnt(game, map_file);
 	_map_malloc(game);
-	game->maps.coord = (char **)malloc(game->maps.cols * sizeof(char *));
-	y = -1;
-	while (++y < game->maps.cols)
-		game->maps.coord[y] = (char *)malloc(game->maps.rows * sizeof(char));
-	fd = open(map_src, O_RDONLY);
-	y = -1;
-	while (++y < game->maps.cols)
-	{
-		line = get_next_line(fd);
-		x = -1;
-		while (++x < game->maps.rows)
-			game->maps.coord[y][x] = line[x];
-	}
-	free(line);
-	close(fd);
+	_map_save(game, map_file);
 }
 
-void	_map_cnt(t_game *game, char *map_src)
+void	_map_cnt(t_game *game, char *map_file)
 {
 	int		fd;
 	char	*line;
@@ -50,12 +32,10 @@ void	_map_cnt(t_game *game, char *map_src)
 	int		col_cnt;
 	int		row_cnt;
 
-	fd = open(map_src, O_RDONLY);
-	if (fd <= 0)
-		msg_err("[error] : file open failed");
+	fd = open(map_file, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
-		msg_err("[error] : empty map");
+		msg_err("[error] : file open failed or empty map");
 	col_cnt = 0;
 	row_cnt = ft_strlen(line) - 1;
 	tot_cnt = 0;
@@ -65,10 +45,9 @@ void	_map_cnt(t_game *game, char *map_src)
 		col_cnt++;
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	if ((tot_cnt + 1) % col_cnt != 0)
-		msg_err("[error] : map is not rectangle");
+		msg_err("[error] : not rectangle");
 	game->maps.cols = col_cnt;
 	game->maps.rows = row_cnt;
 }
@@ -81,8 +60,33 @@ void	_map_malloc(t_game *game)
 
 	col = game->maps.cols;
 	row = game->maps.rows;
-	game->maps.coord = (char **)malloc(col * sizeof(char *));
 	idx = -1;
+	game->maps.coord = (char **)malloc(col * sizeof(char *));
+	if (!game->maps.coord)
+		msg_err("[error] : allocation failed");
 	while (++idx < col)
+	{
 		game->maps.coord[idx] = (char *)malloc(row * sizeof(char));
+		if (!game->maps.coord[idx])
+			msg_err("[error] : allocation failed");
+	}
+}
+
+void	_map_save(t_game *game, char *map_file)
+{
+	int		fd;
+	int		x;
+	int		y;
+	char	*line;
+
+	fd = open(map_file, O_RDONLY);
+	y = -1;
+	while (++y < game->maps.cols)
+	{
+		line = get_next_line(fd);
+		x = -1;
+		while (++x < game->maps.rows)
+			game->maps.coord[y][x] = line[x];
+	}
+	close(fd);
 }

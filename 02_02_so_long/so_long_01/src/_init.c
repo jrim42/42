@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 21:13:30 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 20:26:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 19:36:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	game_init(t_game *game)
 	game->mlx = mlx_init();
 	width = game->maps.rows * TILES;
 	height = game->maps.cols * TILES;
-	game->win = mlx_new_window(game->mlx, width, height, "so_long");
+	game->win = mlx_new_window(game->mlx, width, height, "titled goose game");
 	game->end = 0;
 	_init_img(game);
 	_init_p(game, &game->player);
@@ -50,10 +50,10 @@ void	_init_p(t_game *game, t_player *player)
 	player->c_cur = 0;
 	player->dir = -1;
 	y = 0;
-	while (++y < game->maps.cols)
+	while (++y < game->maps.cols - 1)
 	{
 		x = 0;
-		while (++x < game->maps.rows)
+		while (++x < game->maps.rows - 1)
 		{
 			if (game->maps.coord[y][x] == 'P')
 			{
@@ -82,10 +82,10 @@ void	_init_c(t_game *game, t_map *maps)
 		msg_err("[error] : allocation failed");
 	c_cnt = 0;
 	y = 0;
-	while (++y < game->maps.cols && c_cnt < game->player.c_tot)
+	while (++y < game->maps.cols - 1 && c_cnt < game->player.c_tot)
 	{
 		x = 0;
-		while (++x < game->maps.rows)
+		while (++x < game->maps.rows - 1)
 			if (map[y][x] == 'C')
 				maps->c_pos[c_cnt++] = x * 100 + y;
 	}

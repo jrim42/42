@@ -6,33 +6,33 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 15:55:29 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 18:57:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 19:20:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	map_check(t_game *game, char **map);
-void	_init_val(t_val *val);
+void	_init_val(t_val **val);
 void	_check_elm(t_game *game, char **map);
 void	_check_wall(t_game *game, char **map);
 
 void	map_check(t_game *game, char **map)
 {
-	game->maps.val = (t_val *)malloc(sizeof(t_val));
-	if (!game->maps.val)
-		msg_err("[error] : allocation failed");
-	_init_val(game->maps.val);
+	_init_val(&game->maps.val);
 	_check_elm(game, map);
 	_check_wall(game, map);
 	free(game->maps.val);
 }
 
-void	_init_val(t_val *val)
+void	_init_val(t_val **val)
 {
-	val->_c = 0;
-	val->_e = 0;
-	val->_p = 0;
+	*val = (t_val *)malloc(sizeof(t_val));
+	if (!(*val))
+		msg_err("[error] : allocation failed");
+	(*val)->_c = 0;
+	(*val)->_e = 0;
+	(*val)->_p = 0;
 }
 
 void	_check_elm(t_game *game, char **map)

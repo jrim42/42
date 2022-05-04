@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 16:49:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 19:38:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ int	main_loop(t_game *game)
 {
 	map_gen(game);
 	if (game->end == 1)
+	{
+		ft_putstr_fd("\033[0;32mcongrats!\n\033[0;37m", 1);
+		msg_dfl("total step : ", game->player.step, 0);
 		game_end(game);
+	}
 	return (0);
 }
 
 int	game_end(t_game *game)
 {
-	ft_putstr_fd("\033[0;32mgame ends!\n\033[0;37m", 1);
-	msg_dfl("total step : ", game->player.step, 0);
+	ft_putstr_fd("\033[0;32mbye!\n\033[0;37m", 1);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
