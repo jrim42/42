@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/03 21:57:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 17:30:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char	*get_next_line(int fd)
 	depot = fill_depot(fd, depot);
 	if (!depot || !(*depot))
 	{
-		if (depot)
-			free(depot);
+		free(depot);
 		return (0);
 	}
 	one_line = trim_eol(depot);
