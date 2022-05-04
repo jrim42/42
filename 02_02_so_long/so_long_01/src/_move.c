@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 21:20:18 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/04 21:23:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	_alt_dir(t_game *game, t_player *player, int new_dir)
 		player->p_img.ptr = file_to_img(game, "img/p_right.xpm");
 }
 
-int	_wall_check(char **map, t_player *player, int new_dir)
+int	_stuck(char **map, t_player *player, int new_dir)
 {
 	int	x;
 	int	y;
