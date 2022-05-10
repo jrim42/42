@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:25 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 18:57:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 16:52:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 		return (new_str);
 	gnl_strlcat(new_str, (char *)s1, gnl_strlen(s1) + 1);
 	gnl_strlcat(new_str, (char *)s2, total_len);
+	free(s1);
 	return (new_str);
 }
 

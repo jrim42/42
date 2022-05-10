@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 15:15:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 17:30:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 16:57:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*get_next_line(int fd)
 	if (!depot || !(*depot))
 	{
 		free(depot);
+		depot = 0;
 		return (0);
 	}
 	one_line = trim_eol(depot);
@@ -49,12 +50,14 @@ char	*fill_depot(int fd, char *depot)
 		if (byte == -1)
 		{
 			free(buf);
+			buf = 0;
 			return (0);
 		}
 		buf[byte] = '\0';
 		depot = gnl_strjoin(depot, buf);
 	}
 	free(buf);
+	buf = 0;
 	return (depot);
 }
 
@@ -80,10 +83,12 @@ char	*trim_depot(char *depot)
 	if (depot[eol_idx + 1] == '\0')
 	{
 		free(depot);
+		depot = 0;
 		return (0);
 	}
 	trimmed_len = gnl_strlen(depot) - (eol_idx + 1);
 	new_depot = gnl_strndup(depot + eol_idx + 1, trimmed_len);
 	free(depot);
+	depot = 0;
 	return (new_depot);
 }
