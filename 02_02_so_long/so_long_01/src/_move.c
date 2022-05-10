@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:31:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 21:23:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 21:55:06 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ void	move(t_game *game, t_player *player, int new_dir)
 		return ;
 	_alt_tile(player, game->maps.coord);
 	_alt_pos(player, new_dir);
-	player->step++;
 	collec(game, player);
-	msg_dfl("step : ", player->step, 0);
 	game->maps.coord[player->y_pos][player->x_pos] = 'P';
-	_end_check(game, player);
+	end_check(game, player);
 }
 
 void	_alt_dir(t_game *game, t_player *player, int new_dir)
@@ -77,4 +75,6 @@ void	_alt_pos(t_player *player, int new_dir)
 	else if (new_dir == DIR_RT)
 		player->x_pos++;
 	player->dir = new_dir;
+	player->step++;
+	msg_dfl("step : ", player->step, 0);
 }

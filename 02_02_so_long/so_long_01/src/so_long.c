@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 21:28:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/10 16:59:20 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 22:00:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		key_press(int key, t_game *game);
 int		main_loop(t_game *game);
-void	_end_check(t_game *game, t_player *player);
+void	end_check(t_game *game, t_player *player);
 int		game_end(t_game *game);
 
 int	main(int argc, char **argv)
@@ -60,7 +60,7 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-void	_end_check(t_game *game, t_player *player)
+void	end_check(t_game *game, t_player *player)
 {
 	int	c_left;
 
@@ -70,13 +70,13 @@ void	_end_check(t_game *game, t_player *player)
 		if (c_left == 0)
 			game->end = 1;
 		else
-			msg_dfl(0, c_left, " items are left! you can't leave!");
+			msg_dfl(0, c_left, " items left! you can't leave!");
 	}
 }
 
 int	game_end(t_game *game)
 {
-	ft_putstr_fd("\033[0;32mbye!\n\033[0;37m", 1);
+	ft_putstr_fd("\033[0;33mbye!\n\033[0;37m", 1);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }

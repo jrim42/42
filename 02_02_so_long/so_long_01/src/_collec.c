@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 18:33:14 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/01 17:21:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 21:59:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	collec(t_game *game, t_player *player);
 void	_collec_msg(t_player *player);
-void	_collec_to_tile(t_game *game, int c_pos);
+void	_alt_collec(t_game *game, int c_pos);
 
 void	collec(t_game *game, t_player *player)
 {
@@ -30,7 +30,7 @@ void	collec(t_game *game, t_player *player)
 		if (c_pos[idx] != -1 && c_pos[idx] == p_pos)
 		{
 			player->c_cur++;
-			_collec_to_tile(game, c_pos[idx]);
+			_alt_collec(game, c_pos[idx]);
 			_collec_msg(player);
 			c_pos[idx] = -1;
 		}
@@ -44,12 +44,13 @@ void	_collec_msg(t_player *player)
 
 	c_left = player->c_tot - player->c_cur;
 	if (c_left == 0)
-		ft_putstr_fd("player has collected all items!\n", 1);
+		ft_putstr_fd("\033[0;32myou have collected all items!\n\033[0;37m", 1);
 	else
-		msg_dfl("player has collected item (", c_left, " items left)");
+		msg_dfl("\033[0;32myou have collected an item\033[0;37m (", \
+		c_left, " left)");
 }
 
-void	_collec_to_tile(t_game *game, int c_pos)
+void	_alt_collec(t_game *game, int c_pos)
 {
 	int		x_pos;
 	int		y_pos;
