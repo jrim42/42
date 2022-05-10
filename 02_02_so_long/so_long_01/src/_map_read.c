@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:13:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/04 19:30:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/05/10 16:59:31 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	_map_cnt(t_game *game, char *map_file)
 	{
 		tot_cnt += ft_strlen(line) - 1;
 		col_cnt++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -66,7 +67,7 @@ void	_map_malloc(t_game *game)
 		msg_err("[error] : allocation failed");
 	while (++idx < col)
 	{
-		game->maps.coord[idx] = (char *)malloc(row * sizeof(char));
+		game->maps.coord[idx] = (char *)malloc((row + 1) * sizeof(char));
 		if (!game->maps.coord[idx])
 			msg_err("[error] : allocation failed");
 	}
@@ -87,6 +88,8 @@ void	_map_save(t_game *game, char *map_file)
 		x = -1;
 		while (++x < game->maps.rows)
 			game->maps.coord[y][x] = line[x];
+		game->maps.coord[y][x] = '\0';
+		free(line);
 	}
 	close(fd);
 }
