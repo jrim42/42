@@ -1,5 +1,11 @@
 NAME	=	libft.a
 
+RED		=	\033[0;31m
+GRN		= 	\033[0;32m
+YLW		=	\033[0;33m
+BLU		= 	\033[0;36m
+DFT		= 	\033[0;37m
+
 CC 		= 	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 
