@@ -9,33 +9,23 @@ void h_INT(int signum)
 {
     if (signum != SIGINT)
         return;
-    printf("ctrl + c\n");
-    exit(0);
+    printf("ctrl + c print a new prompt on a newline\n");
 }
 
 void h_QUIT(int signum)
 {
     if (signum != SIGQUIT)
         return;
-    printf("ctrl + \\\n");
-    exit(0);
+    printf("ctrl + \\ do nothing\n");
 }
 
-void h_STOP(int signum)
-{
-    if (signum != SIGSTOP)
-        return;
-    printf("ctrl + z\n");
-    exit(0);
-}
 
 int main(void)
 {
     char *line;
 
-    signal(SIGINT, h_INT);
-    signal(SIGQUIT, h_QUIT);
-    signal(SIGSTOP, h_STOP);
+    signal(SIGINT, h_INT);      // ctrl + c
+    signal(SIGQUIT, h_QUIT);    // ctrl + '\'
     while (1)
     {
         line = readline("> ");
@@ -48,7 +38,7 @@ int main(void)
         }
         else
         {
-            printf("exit\n");
+            printf("\b\bctrl + d exit the shell\n");
             break;
         }
     }
