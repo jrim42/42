@@ -14,8 +14,10 @@ int        main(void)
     if (S_ISDIR(stat_buf.st_mode))
         printf("> %s is directory\n", f_name);
     else if (S_ISREG(stat_buf.st_mode))
+    {
         printf("> %s is regular file\n", f_name);
         // printf("file size : %lld\n", stat_buf.st_size);
+    }
     else
         perror(f_name);
     free(f_name);
