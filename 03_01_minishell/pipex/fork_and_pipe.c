@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define BUFSIZE 30
 
 int main(void)
 {
@@ -23,18 +24,17 @@ int main(void)
         printf("fork() error");
         exit(1);
     }
-    if (pid == 0)
+    else if (pid == 0)
     {
-        write(fd1[1], "(자식에서 입력)\n", 25);
+        write(fd1[1], "written from child\n", 19);
         read(fd2[0], buffer, 25);
-        printf("\n자식출력: %s\n", buffer);
-
+        printf("자식출력: %s\n", buffer);
     }
     else
     {
-        write(fd2[1], "(부모에서 입력)", 25);
+        write(fd2[1], "written from parent\n", 26);
         read(fd1[0], buffer, BUFSIZE);
-        printf("\n부모출력: %s\n", buffer);
+        printf("부모출력: %s\n", buffer);
     }
     return (0);
 }
