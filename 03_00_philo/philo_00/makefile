@@ -11,10 +11,10 @@ CFLAGS		=	-Wall -Werror -Wextra
 AR			=	ar rcs
 RM			=	rm -f
 
-SRC			=	philo.c \
-				_param.c \
-				_state.c \
-				_utils.c
+SRC			=	src/philo.c \
+				src/_param.c \
+				src/_state.c \
+				src/_utils.c
 				
 OBJ			=	$(SRC:.c=.o)
 
