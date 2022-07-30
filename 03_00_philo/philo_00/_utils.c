@@ -5,16 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 16:53:19 by jrim              #+#    #+#             */
-/*   Updated: 2022/05/18 17:19:39 by jrim             ###   ########.fr       */
+/*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
+/*   Updated: 2022/07/30 14:32:55 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	err_exit(char *err_msg, int exit_state);
 int	    ft_atoi(const char *str);
 int	    space_or_sign(const char *str, int *sign);
 char	*ft_strchr(const char *s, int c);
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+
+
+void	err_exit(char *err_msg, int exit_state)
+{
+	printf("error: %s\n", err_msg);
+	exit (exit_state);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -34,12 +44,7 @@ int	ft_atoi(const char *str)
 		ptr++;
 	}
 	if (num > LONG_MAX)
-	{
-		if (sign == 1)
-			return (-1);
-		else
-			return (0);
-	}
+		err_exit("out of bounds", 1);
 	return ((int)num * sign);
 }
 
@@ -48,8 +53,7 @@ int	space_or_sign(const char *str, int *sign)
 	int	idx;
 
 	idx = 0;
-	while (str[idx] == ' ' || str[idx] == '\f' || str[idx] == '\n'
-		|| str[idx] == '\r' || str[idx] == '\t' || str[idx] == '\v')
+	while (ft_strchr(WH_SP, str[idx]))
 		idx++;
 	if (str[idx] == '+' || str[idx] == '-')
 	{
@@ -77,4 +81,21 @@ char	*ft_strchr(const char *s, int c)
 		ptr++;
 	}
 	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }

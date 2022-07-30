@@ -11,7 +11,10 @@ CFLAGS		=	-Wall -Werror -Wextra
 AR			=	ar rcs
 RM			=	rm -f
 
-SRC			=	
+SRC			=	philo.c \
+				_param.c \
+				_state.c \
+				_utils.c
 				
 OBJ			=	$(SRC:.c=.o)
 
@@ -28,10 +31,13 @@ clean :
 	@$(RM) $(OBJ)
 	@echo "$(RED)cleaned$(DFT)"
 
-fclean : clean
+fclean :
+	@$(MAKE) clean
 	@$(RM) $(NAME)
 	@echo "$(RED)fcleaned$(DFT)"
 
-re : fclean all
+re : 
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 PHONY : all clean fclean re
