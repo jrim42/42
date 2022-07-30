@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/30 14:41:00 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/30 14:46:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int parse_param(int argc, char **argv, t_param *param)
     if (_check_arg(argc, argv) == INVALID)
         err_exit("invalid character in params", 1);
     param->number_of_philosophers = ft_atoi(argv[1]);
+    // fork num?
     param->time_to_die = ft_atoi(argv[2]);
     param->time_to_eat = ft_atoi(argv[3]);
     param->time_to_sleep = ft_atoi(argv[4]);

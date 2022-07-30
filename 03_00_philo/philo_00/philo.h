@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/30 14:42:29 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/30 14:49:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 typedef struct s_philo
 {
-    pthread_t    thread;
+    pthread_t    *thread;
     int          fork_l;
     int          fork_r;
     int          ms_start;
