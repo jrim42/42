@@ -6,25 +6,17 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/30 14:54:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/31 22:12:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	err_exit(char *err_msg, int exit_state);
-int	    ft_atoi(const char *str);
-int	    space_or_sign(const char *str, int *sign);
+int		ft_atoi(const char *str);
+int		space_or_sign(const char *str, int *sign);
 char	*ft_strchr(const char *s, int c);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
-
-
-void	err_exit(char *err_msg, int exit_state)
-{
-	printf("error: %s\n", err_msg);
-	exit (exit_state);
-}
 
 int	ft_atoi(const char *str)
 {

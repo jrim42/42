@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 21:51:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/31 22:12:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	philo_eat(t_philo *philo)
 void	philo_sleep(t_philo *philo)
 {
 	if (philo)
-		printf("philo needs some sleep...\n");	
+		printf("philo needs some sleep...\n");
 }
 
 void	philo_think(t_philo *philo)
 {
 	if (philo)
-		printf("philo thinks, therefore he is...\n");	
+		printf("philo thinks, therefore he is...\n");
 }
