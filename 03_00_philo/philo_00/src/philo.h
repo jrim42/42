@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/30 14:49:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/31 16:18:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_philo
 
 typedef struct s_param
 {
-    int     number_of_philosophers;
-    int     time_to_die;
-    int     time_to_eat;
-    int     time_to_sleep;
-    int     number_of_times_each_philosopher_must_eat;
+    int     num_philo;
+    int     ms_to_die;
+    int     ms_to_eat;
+    int     ms_to_sleep;
+    int     num_eat;
 } t_param;
 
 typedef struct s_state
@@ -64,6 +64,14 @@ typedef struct s_state
     int     philo_num;
     int     philo_state;
 } t_state;
+
+typedef struct s_info
+{
+    t_philo         *philo;
+    t_param         *param;
+    pthread_mutex_t *fork;
+    // t_state *state;
+} t_info;
 
 //
 void    malloc_err(void);

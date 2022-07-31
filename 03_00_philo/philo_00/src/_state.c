@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:21:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/30 14:38:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/31 15:51:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void    print_state(t_state *state)
 void    print_param(t_param *param)
 {
     printf("---------------------\n");
-    printf("  philo  :  %d\n", param->number_of_philosophers);
-    printf("   die   :  %d\n", param->time_to_die);
-    printf("   eat   :  %d\n", param->time_to_eat);
-    printf("  sleep  :  %d\n", param->time_to_sleep);
-    if (param->number_of_times_each_philosopher_must_eat != -1)
-        printf(" num eat :  %d\n", param->number_of_times_each_philosopher_must_eat);
+    printf("  philo  :  %d\n", param->num_philo);
+    printf("   die   :  %d\n", param->ms_to_die);
+    printf("   eat   :  %d\n", param->ms_to_eat);
+    printf("  sleep  :  %d\n", param->ms_to_sleep);
+    if (param->num_eat != -1)
+        printf(" num eat :  %d\n", param->num_eat);
     printf("---------------------\n");
 }
