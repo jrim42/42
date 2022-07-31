@@ -12,8 +12,10 @@ AR			=	ar rcs
 RM			=	rm -f
 
 SRC			=	src/philo.c \
+				src/_eggshell.c \
 				src/_param.c \
-				src/_state.c \
+				src/_print.c \
+				src/_routine.c \
 				src/_utils.c
 				
 OBJ			=	$(SRC:.c=.o)
