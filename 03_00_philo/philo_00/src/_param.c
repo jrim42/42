@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 16:00:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/07/31 16:39:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int parse_param(int argc, char **argv, t_param *param)
         err_exit("invalid param number", 1);
     if (_check_arg(argc, argv) == INVALID)
         err_exit("invalid character in params", 1);
-    param->num_philo = ft_atoi(argv[1]); // 0이면 에러처리 해하?
+    param->num_philo = ft_atoi(argv[1]); // 0이면 에러처리 해야하나?
     // fork num?
     param->ms_to_die = ft_atoi(argv[2]);
     param->ms_to_eat = ft_atoi(argv[3]);
