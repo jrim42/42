@@ -6,13 +6,15 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 22:15:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/01 18:43:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_philo(t_philo *philo, t_param *param, pthread_mutex_t *fork);
+int		init_philo(t_philo *philo, t_param *param, pthread_mutex_t *fork);
+void	create_philo(t_info *info, t_philo *philo);
+void	bye_philo(t_info *info, t_philo *philo);
 
 int	main(int argc, char **argv)
 {
@@ -25,7 +27,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_philo(info->philo, info->param, info->fork) == FAILURE)
 		return (1);
-	// print_param(param);
+	create_philo(info, info->philo);
 	return (0);
 }
 
@@ -40,17 +42,48 @@ int	init_philo(t_philo *philo, t_param *param, pthread_mutex_t *fork)
 	idx = -1;
 	while (++idx < param->num_philo)
 	{
-		// philo[idx].thread = (pthread_t *)malloc(sizeof(pthread_t));
-		// if (philo[idx].thread == NULL)
-		//     err_exit("cannot allocate memory", 12);
-		// fork init 과 philo init을 구분할까?
+		philo[idx].name = idx;
 		pthread_mutex_init(&fork[idx], NULL);
-		philo[idx].fork_l = idx;
-		philo[idx].fork_r = (idx + 1) % param->num_philo;
-		philo[idx].ms_start = 0;
-		philo[idx].ms_end = 0;
-		philo[idx].num_eat = 0;
-		philo[idx].num_sleep = 0;
+		pthread_mutex_init(&philo[idx].checker, NULL);
+		if (idx == 0)
+			philo[idx].fork_left = &fork[param->num_philo - 1];
+		else
+			philo[idx].fork_left = &fork[idx - 1];
+		philo[idx].fork_right = &fork[idx];
 	}
 	return (SUCCESS);
+}
+
+void	create_philo(t_info *info, t_philo *philo)
+{
+	int			idx;
+	pthread_t	thread;
+
+	idx = -1;
+	gettimeofday(&info->birthday, NULL);
+	while (++idx < info->param->num_philo)
+	{
+		philo[idx].last_eat = info->birthday;
+		pthread_create(&philo[idx].thread, NULL, routine, &philo[idx]);
+		pthread_create(&thread, NULL, eggshell, &philo[idx]);
+		pthread_detach(thread);
+	}
+	if (info->param->num_eat != 0)
+		printf("philo must eat...\n");
+}
+
+void	bye_philo(t_info *info, t_philo *philo)
+{
+	int			idx;
+	
+	idx = -1;
+	while (++idx < info->param->num_philo)
+	{
+		pthread_join(philo[idx].thread, NULL);
+		pthread_mutex_destroy(&philo[idx].checker);
+	}
+	// free philo
+	while (idx-- > 0)
+		pthread_mutex_destroy(&info->fork[idx]);		
+	// free fork
 }

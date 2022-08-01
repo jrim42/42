@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 22:16:35 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/01 18:36:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,18 @@
 
 typedef struct s_philo
 {
-	int				num;
+	int				name;
 	pthread_t		*thread;
-	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*fork_r;
-	int				ms_start;
-	int				ms_end;
-	int				num_eat;
-	int				num_sleep;
-	int				num_think;
-	int				state;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*fork_right;
+	pthread_mutex_t	*checker;
+	struct timeval	last_eat;
+	
+	// int				ms_start;
+	// int				ms_end;
+	// int				num_eat;
+	// int				num_sleep;
+	// int				num_think;
 }					t_philo;
 
 typedef struct s_param
@@ -59,24 +61,27 @@ typedef struct s_param
 	int		num_eat;
 }			t_param;
 
-typedef struct s_state
-{
-	time_t	timestamp_in_ms;
-	int		philo_num;
-	int		philo_state;
-}			t_state;
-
 typedef struct s_info
 {
 	t_philo			*philo;
 	t_param			*param;
 	pthread_mutex_t	*fork;
-	// t_state *state;
+	struct timeval	birthday;
 }					t_info;
 
 // _param.c
 int		parse_param(int argc, char **argv, t_param *param);
 int		_check_arg(int argc, char **argv);
+
+// _routine.c
+void	*routine(t_philo *philo);
+void	philo_get_fork(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+
+// _eggshell.c
+void	*eggshell(t_philo *philo);
 
 // _print.c
 void	print_error(char *err_msg, int exit_state);

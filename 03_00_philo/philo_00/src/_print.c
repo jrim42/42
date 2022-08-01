@@ -6,14 +6,15 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:21:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 22:11:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/01 19:09:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 void	print_error(char *err_msg, int exit_state);
-void	print_state(t_state *state);
+void	print_routine(t_philo *philo, char *msg);
+// void	print_state(t_state *state);
 void	print_param(t_param *param);
 
 void	print_error(char *err_msg, int exit_state)
@@ -23,23 +24,35 @@ void	print_error(char *err_msg, int exit_state)
 	exit (exit_state);
 }
 
-void	print_state(t_state *state)
+void	print_routine(t_philo *philo, char *msg)
 {
-	int	p_state;
+	long long		ms;
+	struct timeval	now;
 
-	p_state = state->philo_state;
-	printf("%ld %d", state->timestamp_in_ms, state->philo_num);
-	if (p_state == FORK)
-		printf(" has taken a fork\n");
-	else if (p_state == EAT)
-		printf(" is eating\n");
-	else if (p_state == SLEEP)
-		printf(" is sleeping\n");
-	else if (p_state == THINK)
-		printf(" is thinking\n");
-	else if (p_state == -1)
-		printf(" died\n");
+	// pthread_mutex_lock();
+	gettimeofday(&now, NULL);
+	ms = now.tv_sec * 1000 + now.tv_usec / 1000;
+	// print
+	// pthread_mutex_unlock();
 }
+
+// void	print_state(t_state *state)
+// {
+// 	int	p_state;
+
+// 	p_state = state->philo_state;
+// 	printf("%ld %d", state->timestamp_in_ms, state->philo_num);
+// 	if (p_state == FORK)
+// 		printf(" has taken a fork\n");
+// 	else if (p_state == EAT)
+// 		printf(" is eating\n");
+// 	else if (p_state == SLEEP)
+// 		printf(" is sleeping\n");
+// 	else if (p_state == THINK)
+// 		printf(" is thinking\n");
+// 	else if (p_state == -1)
+// 		printf(" died\n");
+// }
 
 void	print_param(t_param *param)
 {
