@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/01 18:36:46 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/02 17:33:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@
 # define FAILURE 0
 # define VALID 1
 # define INVALID 0
-
-# define DFL 0
-# define FORK 1
-# define EAT 2
-# define SLEEP 3
-# define THINK 4
-# define DIE -1
+# define DONE 1
+# define UNDONE 0
 
 typedef struct s_philo
 {
@@ -44,12 +39,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*checker;
 	struct timeval	last_eat;
-	
-	// int				ms_start;
-	// int				ms_end;
-	// int				num_eat;
-	// int				num_sleep;
-	// int				num_think;
+	t_info			*info
 }					t_philo;
 
 typedef struct s_param
@@ -66,6 +56,9 @@ typedef struct s_info
 	t_philo			*philo;
 	t_param			*param;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	*is_done;
+	int				flag;
+	int				hungry_philo;
 	struct timeval	birthday;
 }					t_info;
 
@@ -81,12 +74,14 @@ void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 
 // _eggshell.c
-void	*eggshell(t_philo *philo);
+void	*eggshell_1(t_philo *philo);
+void	*eggshell_2(t_info	*info);
 
 // _print.c
-void	print_error(char *err_msg, int exit_state);
-void	print_state(t_state *state);
-void	print_param(t_param *param);
+long long	get_time_interval(struct timeval t1, struct timeval t2);
+void		print_error(char *err_msg, int exit_state);
+void		print_routine(t_philo *philo, char *msg);
+void		print_param(t_param *param);
 
 // _utils.c
 int		ft_atoi(const char *str);
