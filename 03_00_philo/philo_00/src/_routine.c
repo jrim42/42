@@ -6,20 +6,23 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/02 17:33:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 16:44:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*routine(t_philo *philo);
+void	*routine(void *void_philo);
 void	philo_get_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 
-void	*routine(t_philo *philo)
+void	*routine(void *void_philo)
 {
+	t_philo *philo;
+
+	philo = void_philo;
 	if (philo->name % 2 == 0)
 		usleep(philo->info->param->ms_to_eat * 1000);
 	while (1)
@@ -46,19 +49,19 @@ void	philo_eat(t_philo *philo)
 	t_info		*info;
 
 	info = philo->info;
-	pthread_mutex_lock(&philo->checker);
+	pthread_mutex_lock(philo->checker);
 	gettimeofday(&philo->last_eat, NULL);
 	interval = get_time_interval(philo->last_eat, info->birthday);
 	pthread_mutex_lock(info->is_done);
 	if (info->flag == UNDONE)
 		printf("%lld\t%d\t is eating\n", interval, philo->name + 1);
 	info->hungry_philo--;
-	// 
+	// if (info->hungry_philo == info->param->)
 	pthread_mutex_unlock(info->is_done);
 	usleep(info->param->ms_to_eat * 1000);
-	pthread_mutex_unlock(&philo->fork_left);
-	pthread_mutex_unlock(&philo->fork_right);
-	pthread_mutex_unlock(&philo->checker);
+	pthread_mutex_unlock(philo->fork_left);
+	pthread_mutex_unlock(philo->fork_right);
+	pthread_mutex_unlock(philo->checker);
 }
 
 void	philo_sleep(t_philo *philo)

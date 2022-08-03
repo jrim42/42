@@ -6,19 +6,18 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 22:12:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 16:43:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		ft_atoi(const char *str);
-int		space_or_sign(const char *str, int *sign);
+int		philo_atoi(const char *str);
 char	*ft_strchr(const char *s, int c);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
-int	ft_atoi(const char *str)
+int	philo_atoi(const char *str)
 {
 	unsigned long	num;
 	int				sign;
@@ -27,33 +26,23 @@ int	ft_atoi(const char *str)
 	num = 0;
 	sign = 1;
 	ptr = (char *)str;
-	ptr += space_or_sign(str, &sign);
-	while (ft_isdigit(*ptr) == 1 && *ptr != '\0')
+	while (*ptr && ft_strchr(WH_SP, *ptr))
+		ptr++;
+	if (*ptr == '-')
+	{
+		sign = -1;
+		ptr++;
+	}
+	while (*ptr && ft_isdigit(*ptr))
 	{
 		num += (*ptr) - '0';
-		if (ft_isdigit(*(ptr + 1)) == 1 && *(ptr + 1) != '\0')
+		if (*(ptr + 1) && ft_isdigit(*(ptr + 1)))
 			num *= 10;
 		ptr++;
 	}
 	if (num > LONG_MAX)
-		err_exit("out of bounds", 1);
+		print_error("out of bounds", 1);
 	return ((int)num * sign);
-}
-
-int	space_or_sign(const char *str, int *sign)
-{
-	int	idx;
-
-	idx = 0;
-	while (ft_strchr(WH_SP, str[idx]))
-		idx++;
-	if (str[idx] == '+' || str[idx] == '-')
-	{
-		if (str[idx] == '-')
-			(*sign) *= (-1);
-		idx++;
-	}
-	return (idx);
 }
 
 char	*ft_strchr(const char *s, int c)

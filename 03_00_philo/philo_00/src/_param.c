@@ -6,15 +6,16 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/07/31 22:10:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 16:18:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	parse_param(int argc, char **argv, t_param *param);
-int	_check_arg(int argc, char **argv);
-int _check_param(t_param *param);       // 음수 거르기?
+int		parse_param(int argc, char **argv, t_param *param);
+int		_check_arg(int argc, char **argv);
+void	_get_param(int argc, char **argv, t_param *param);
+int 	_check_param(int argc, t_param *param);
 
 int	parse_param(int argc, char **argv, t_param *param)
 {
@@ -25,15 +26,9 @@ int	parse_param(int argc, char **argv, t_param *param)
 		print_error("invalid param number", 1);
 	if (_check_arg(argc, argv) == INVALID)
 		print_error("invalid character in params", 1);
-	param->num_philo = ft_atoi(argv[1]); // 0이면 에러처리 해야하나?
-	// fork num?
-	param->ms_to_die = ft_atoi(argv[2]);
-	param->ms_to_eat = ft_atoi(argv[3]);
-	param->ms_to_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		param->num_eat = ft_atoi(argv[5]);
-	else
-		param->num_eat = -1;
+	_get_param(argc, argv, param);
+	if (_check_param(argc, param) == INVALID)
+		print_error("invalid params", 1);
 	return (SUCCESS);
 }
 
@@ -54,5 +49,33 @@ int _check_arg(int argc, char **argv)
 				return (INVALID);
 		}
 	}
+	return (VALID);
+}
+
+void	_get_param(int argc, char **argv, t_param *param)
+{
+	param->num_philo = philo_atoi(argv[1]); // 0이면 에러처리 해야하나?
+	// fork num?
+	param->ms_to_die = philo_atoi(argv[2]);
+	param->ms_to_eat = philo_atoi(argv[3]);
+	param->ms_to_sleep = philo_atoi(argv[4]);
+	if (argc == 6)
+		param->num_eat = philo_atoi(argv[5]);
+	else
+		param->num_eat = -1;
+}
+
+int 	_check_param(int argc, t_param *param)
+{
+	if (param->num_philo < 0)
+		return (INVALID);
+	else if (param->ms_to_die < 0)
+		return (INVALID);
+	else if (param->ms_to_eat < 0)
+		return (INVALID);
+	else if (param->ms_to_sleep < 0)
+		return (INVALID);
+	else if (argc == 6 && param->num_eat < 0)
+		return (INVALID);
 	return (VALID);
 }

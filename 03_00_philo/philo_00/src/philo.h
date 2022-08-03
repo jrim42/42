@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/02 17:33:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 16:40:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*checker;
 	struct timeval	last_eat;
-	t_info			*info
+	struct s_info	*info;
 }					t_philo;
 
 typedef struct s_param
@@ -67,15 +67,15 @@ int		parse_param(int argc, char **argv, t_param *param);
 int		_check_arg(int argc, char **argv);
 
 // _routine.c
-void	*routine(t_philo *philo);
+void	*routine(void *philo_void);
 void	philo_get_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 
 // _eggshell.c
-void	*eggshell_1(t_philo *philo);
-void	*eggshell_2(t_info	*info);
+void	*eggshell_1(void *void_philo);
+void	*eggshell_2(void *void_info);
 
 // _print.c
 long long	get_time_interval(struct timeval t1, struct timeval t2);
@@ -84,8 +84,9 @@ void		print_routine(t_philo *philo, char *msg);
 void		print_param(t_param *param);
 
 // _utils.c
-int		ft_atoi(const char *str);
-int		space_or_sign(const char *str, int *sign);
+int		philo_atoi(const char *str);
 char	*ft_strchr(const char *s, int c);
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
 
 #endif
