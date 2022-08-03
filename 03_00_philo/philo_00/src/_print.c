@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:21:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/03 21:31:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 23:30:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_routine(t_philo *philo, char *msg)
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, philo->info->birthday);
 	if (philo->info->is_done == UNDONE)
-		printf("%lld\t%d\t %s\n", interval, philo_name, msg);
+		printf("%lld\t%d\t%s\n", interval, philo_name, msg);
 	pthread_mutex_unlock(philo->info->philo_mtx);
 }
 
@@ -61,4 +61,21 @@ void	print_param(t_param *param)
 	if (param->num_eat != -1)
 		printf(" num eat :  %d\n", param->num_eat);
 	printf("---------------------\n");
+}
+
+void	print_philo(t_philo *philo)
+{
+	int			idx;
+	long long	last_eat;
+
+	idx = -1;
+	while (++idx < philo->info->param->num_philo)
+	{
+		last_eat = philo[idx].last_eat.tv_sec * 1000 + philo[idx].last_eat.tv_usec / 1000;
+		printf("---------------------\n");
+		printf("   name   :  %d\n", philo[idx].name);
+		printf("   fork   :  %d and %d\n", philo[idx].fork_left, philo[idx].fork_right);
+		printf(" birthday :  %lld\n", last_eat);
+		printf("---------------------\n");
+	}
 }

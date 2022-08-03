@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/03 16:18:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 22:49:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int 	_check_param(int argc, t_param *param);
 
 int	parse_param(int argc, char **argv, t_param *param)
 {
-	param = (t_param *)malloc(1 * sizeof(t_param));
-	if (!param)
-		print_error("cannot allocate memory", 12);
+	// param = (t_param *)malloc(1 * sizeof(t_param));
+	// if (!param)
+	// 	print_error("cannot allocate memory", 12);
 	if (argc < 5 || argc > 6)
 		print_error("invalid param number", 1);
 	if (_check_arg(argc, argv) == INVALID)
@@ -54,8 +54,7 @@ int _check_arg(int argc, char **argv)
 
 void	_get_param(int argc, char **argv, t_param *param)
 {
-	param->num_philo = philo_atoi(argv[1]); // 0이면 에러처리 해야하나?
-	// fork num?
+	param->num_philo = philo_atoi(argv[1]);
 	param->ms_to_die = philo_atoi(argv[2]);
 	param->ms_to_eat = philo_atoi(argv[3]);
 	param->ms_to_sleep = philo_atoi(argv[4]);
@@ -67,7 +66,7 @@ void	_get_param(int argc, char **argv, t_param *param)
 
 int 	_check_param(int argc, t_param *param)
 {
-	if (param->num_philo < 0)
+	if (param->num_philo <= 0)
 		return (INVALID);
 	else if (param->ms_to_die < 0)
 		return (INVALID);
