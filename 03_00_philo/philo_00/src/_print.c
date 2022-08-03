@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:21:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/03 23:30:58 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 00:19:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,18 @@ void	print_param(t_param *param)
 void	print_philo(t_philo *philo)
 {
 	int			idx;
-	long long	last_eat;
+	t_info		*info;
+	long long	birthday;
 
 	idx = -1;
+	info = philo->info;
+	birthday = info->birthday.tv_sec * 1000 + info->birthday.tv_usec / 1000;
 	while (++idx < philo->info->param->num_philo)
 	{
-		last_eat = philo[idx].last_eat.tv_sec * 1000 + philo[idx].last_eat.tv_usec / 1000;
 		printf("---------------------\n");
 		printf("   name   :  %d\n", philo[idx].name);
 		printf("   fork   :  %d and %d\n", philo[idx].fork_left, philo[idx].fork_right);
-		printf(" birthday :  %lld\n", last_eat);
+		printf(" birthday :  %lld\n", birthday);
 		printf("---------------------\n");
 	}
 }

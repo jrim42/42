@@ -6,7 +6,7 @@ YLW			=	\033[0;33m
 BLU			= 	\033[0;36m
 DFT			= 	\033[0;37m
 
-CC			=	gcc
+CC			=	gcc 
 CFLAGS		=	-Wall -Werror -Wextra
 AR			=	ar rcs
 RM			=	rm -f
