@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/03 16:40:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/03 21:47:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,20 @@
 # define INVALID 0
 # define DONE 1
 # define UNDONE 0
+# define UNOCCUPIED 1
+# define OCCUPIED 0
 
 typedef struct s_philo
 {
-	int				name;
-	pthread_t		*thread;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*fork_right;
-	pthread_mutex_t	*checker;
-	struct timeval	last_eat;
+	int				name;				// 철학자 번호
+	pthread_t		*thread;			// 철학자에게 할당된 쓰레드
+	int				fork_left;			// 왼쪽 포크 번호
+	int				fork_right;			// 오른쪽 포크 번호
+	// pthread_mutex_t	*fork_left;
+	// pthread_mutex_t	*fork_right;
+	// pthread_mutex_t	*checker;
+	struct timeval	last_eat;			// 마지막으로 식사한 시간
+	int				eat_cnt;			// 철학자가 식사한 횟수, 마지막 인자 처리용
 	struct s_info	*info;
 }					t_philo;
 
@@ -55,9 +60,12 @@ typedef struct s_info
 {
 	t_philo			*philo;
 	t_param			*param;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*is_done;
-	int				flag;
+	pthread_mutex_t	*fork_mtx;			// fork mutex
+	int				*fork_arr;			// fork 존재 유무
+	// pthread_mutex_t	*is_done;
+	pthread_mutex_t	*philo_mtx;			// thread timestamp 꼬임 방지
+	// int				flag;
+	int				is_done;
 	int				hungry_philo;
 	struct timeval	birthday;
 }					t_info;
