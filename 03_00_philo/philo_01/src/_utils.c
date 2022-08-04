@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/03 16:43:13 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 12:55:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		philo_atoi(const char *str);
 char	*ft_strchr(const char *s, int c);
-int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
 int	philo_atoi(const char *str)
@@ -33,10 +32,10 @@ int	philo_atoi(const char *str)
 		sign = -1;
 		ptr++;
 	}
-	while (*ptr && ft_isdigit(*ptr))
+	while (*ptr && ft_strchr(NUM, *ptr))
 	{
 		num += (*ptr) - '0';
-		if (*(ptr + 1) && ft_isdigit(*(ptr + 1)))
+		if (*(ptr + 1) && ft_strchr(NUM, *(ptr + 1)))
 			num *= 10;
 		ptr++;
 	}
@@ -61,13 +60,6 @@ char	*ft_strchr(const char *s, int c)
 		idx++;
 		ptr++;
 	}
-	return (0);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
 	return (0);
 }
 
