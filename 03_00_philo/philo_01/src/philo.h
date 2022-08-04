@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 12:50:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 13:37:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@
 
 typedef struct s_philo
 {
-	int				name;				// 철학자 번호
-	// int				state;				// 현재상태
-	int				eat_cnt;			// 철학자가 식사한 횟수, 마지막 인자 처리용
-	struct timeval	last_eat;			// 마지막으로 식사한 시간
-	pthread_mutex_t	*fork_left;			// 왼쪽 포크 mutex
-	pthread_mutex_t	*fork_right;		// 오른쪽 포크 mutex
+	int				name;
+	// int				state;
+	int				eat_cnt;
+	struct timeval	last_eat;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*fork_right;
 	struct s_info	*info;
 }					t_philo;
 
@@ -60,38 +60,43 @@ typedef struct s_info
 	int				stuffed_philo;
 	int				is_done;
 	struct timeval	birthday;
-	pthread_mutex_t	*fork_mtx;			// fork mutex
-	pthread_mutex_t	philo_mtx;			// thread timestamp 꼬임 방지
-	// int				*fork_arr;			// fork 존재 유무
+	pthread_mutex_t	*fork_mtx;
+	pthread_mutex_t	philo_mtx;
 }					t_info;
 
+// _philo.c
+// main
+int			init_info(t_param *param, t_info *info);
+int			init_philo(t_philo *philo, t_param *param, t_info *info);
+void		create_philo(t_info *info, t_philo *philo);
+void		bye_philo(t_info *info);
+
 // _param.c
-int		init_param(int argc, char **argv, t_param *param);
-int		_check_arg(int argc, char **argv);
+int			init_param(int argc, char **argv, t_param *param);
+int			_check_arg(int argc, char **argv);
+void		_get_param(int argc, char **argv, t_param *param);
+int			_check_param(int argc, t_param *param);
 
 // _routine.c
-void	*routine(void *philo_void);
+void		*routine(void *philo_void);
 // static void	philo_get_fork(t_philo *philo);
 // static void	philo_eat(t_philo *philo);
 // static void	philo_sleep(t_philo *philo);
 // static void	philo_think(t_philo *philo);
 
 // _eggshell.c
-void	*eggshell(void	*void_info);
-// void	*eggshell_1(void *void_philo);
-// void	*eggshell_2(void *void_info);
+void		*eggshell(void	*void_info);
 
 // _print.c
-long long	get_time_interval(struct timeval t1, struct timeval t2);
-int		print_error(char *err_msg, int exit_state);
+int			print_error(char *err_msg, int exit_state);
 void		print_routine(t_philo *philo, char *msg);
+
 void		print_param(t_param *param);
-void	print_philo(t_philo *philo);
+void		print_philo(t_philo *philo);
 
 // _utils.c
-int		philo_atoi(const char *str);
-char	*ft_strchr(const char *s, int c);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
+long long	get_time_interval(struct timeval t1, struct timeval t2);
+int			philo_atoi(const char *str);
+char		*philo_strchr(const char *s, int c);
 
 #endif

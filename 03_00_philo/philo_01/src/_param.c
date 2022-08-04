@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 12:06:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 13:37:33 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		init_param(int argc, char **argv, t_param *param);
 int		_check_arg(int argc, char **argv);
 void	_get_param(int argc, char **argv, t_param *param);
-int 	_check_param(int argc, t_param *param);
+int		_check_param(int argc, t_param *param);
 
 int	init_param(int argc, char **argv, t_param *param)
 {
@@ -29,7 +29,7 @@ int	init_param(int argc, char **argv, t_param *param)
 	return (SUCCESS);
 }
 
-int _check_arg(int argc, char **argv)
+int	_check_arg(int argc, char **argv)
 {
 	int	idx1;
 	int	idx2;
@@ -42,7 +42,7 @@ int _check_arg(int argc, char **argv)
 		{
 			// while (ft_strchr(WH_SP, argv[idx1][idx2]))
 			//     idx2++;
-			if (ft_strchr(NUM, argv[idx1][idx2]) == 0)
+			if (philo_strchr(NUM, argv[idx1][idx2]) == 0)
 				return (INVALID);
 		}
 	}
@@ -61,7 +61,7 @@ void	_get_param(int argc, char **argv, t_param *param)
 		param->num_eat = -1;
 }
 
-int 	_check_param(int argc, t_param *param)
+int	_check_param(int argc, t_param *param)
 {
 	if (param->num_philo <= 0)
 		return (INVALID);

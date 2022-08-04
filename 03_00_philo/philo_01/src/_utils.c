@@ -6,15 +6,27 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 12:55:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 13:30:27 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int		philo_atoi(const char *str);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
+long long	get_time_interval(struct timeval t1, struct timeval t2);
+int			philo_atoi(const char *str);
+char		*philo_strchr(const char *s, int c);
+
+long long	get_time_interval(struct timeval t1, struct timeval t2)
+{
+	long long		t1_ms;
+	long long		t2_ms;
+	long long		interval;
+
+	t1_ms = t1.tv_sec * 1000 + t1.tv_usec / 1000;
+	t2_ms = t2.tv_sec * 1000 + t2.tv_usec / 1000;
+	interval = t1_ms - t2_ms;
+	return (interval);
+}
 
 int	philo_atoi(const char *str)
 {
@@ -25,17 +37,17 @@ int	philo_atoi(const char *str)
 	num = 0;
 	sign = 1;
 	ptr = (char *)str;
-	while (*ptr && ft_strchr(WH_SP, *ptr))
+	while (*ptr && philo_strchr(WH_SP, *ptr))
 		ptr++;
 	if (*ptr == '-')
 	{
 		sign = -1;
 		ptr++;
 	}
-	while (*ptr && ft_strchr(NUM, *ptr))
+	while (*ptr && philo_strchr(NUM, *ptr))
 	{
 		num += (*ptr) - '0';
-		if (*(ptr + 1) && ft_strchr(NUM, *(ptr + 1)))
+		if (*(ptr + 1) && philo_strchr(NUM, *(ptr + 1)))
 			num *= 10;
 		ptr++;
 	}
@@ -44,31 +56,23 @@ int	philo_atoi(const char *str)
 	return ((int)num * sign);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*philo_strchr(const char *s, int c)
 {
-	size_t	idx;
-	size_t	s_len;
+	int		len;
 	char	*ptr;
+	int		idx;
 
-	idx = 0;
-	s_len = ft_strlen(s) + 1;
+	len = 0;
+	while (s[len])
+		len++;
+	len++;
 	ptr = (char *)s;
-	while (idx < s_len)
+	idx = -1;
+	while (++idx < len)
 	{
 		if (*ptr == (char)c)
 			return (ptr);
-		idx++;
 		ptr++;
 	}
 	return (0);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
 }
