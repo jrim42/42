@@ -16,6 +16,12 @@ SRC			=	src/philo.c \
 				src/_param.c \
 				src/_routine.c \
 				src/_utils.c
+
+# SRC			=	philo.c \
+# 				_eggshell.c \
+# 				_param.c \
+# 				_routine.c \
+# 				_utils.c
 				
 OBJ			=	$(SRC:.c=.o)
 
