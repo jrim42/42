@@ -6,72 +6,89 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:37:33 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 19:33:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 int		init_param(int argc, char **argv, t_param *param);
-int		_check_arg(int argc, char **argv);
-void	_get_param(int argc, char **argv, t_param *param);
-int		_check_param(int argc, t_param *param);
+int		_get_param(int argc, char **argv, t_param *param);
+int		philo_atoi(const char *str);
+char	*philo_strchr(const char *s, int c);
 
 int	init_param(int argc, char **argv, t_param *param)
 {
 	if (argc < 5 || argc > 6)
 		return (print_error("invalid param num", FAILURE));
-	if (_check_arg(argc, argv) == INVALID)
-		return (print_error("invalid character found", FAILURE));
-	_get_param(argc, argv, param);
-	if (_check_param(argc, param) == INVALID)
+	if (_get_param(argc, argv, param) == INVALID)
 		return (print_error("invalid param", FAILURE));
 	return (SUCCESS);
 }
 
-int	_check_arg(int argc, char **argv)
-{
-	int	idx1;
-	int	idx2;
-
-	idx1 = 0;
-	while (++idx1 < argc)
-	{
-		idx2 = -1;
-		while (argv[idx1][++idx2])
-		{
-			// while (ft_strchr(WH_SP, argv[idx1][idx2]))
-			//     idx2++;
-			if (philo_strchr(NUM, argv[idx1][idx2]) == 0)
-				return (INVALID);
-		}
-	}
-	return (VALID);
-}
-
-void	_get_param(int argc, char **argv, t_param *param)
+int	_get_param(int argc, char **argv, t_param *param)
 {
 	param->num_philo = philo_atoi(argv[1]);
-	param->ms_to_die = philo_atoi(argv[2]);
-	param->ms_to_eat = philo_atoi(argv[3]);
-	param->ms_to_sleep = philo_atoi(argv[4]);
-	if (argc == 6)
-		param->num_eat = philo_atoi(argv[5]);
-	else
-		param->num_eat = -1;
-}
-
-int	_check_param(int argc, t_param *param)
-{
 	if (param->num_philo <= 0)
 		return (INVALID);
-	else if (param->ms_to_die <= 0)
+	param->ms_to_die = philo_atoi(argv[2]);
+	if (param->ms_to_die <= 0)
 		return (INVALID);
-	else if (param->ms_to_eat <= 0)
+	param->ms_to_eat = philo_atoi(argv[3]);
+	if (param->ms_to_eat <= 0)
 		return (INVALID);
-	else if (param->ms_to_sleep <= 0)
+	param->ms_to_sleep = philo_atoi(argv[4]);
+	if (param->ms_to_sleep <= 0)
 		return (INVALID);
-	else if (argc == 6 && param->num_eat <= 0)
-		return (INVALID);
+	if (argc == 6)
+	{
+		param->num_eat = philo_atoi(argv[5]);
+		if (param->num_eat <= 0)
+			return (INVALID);
+	}
+	else
+		param->num_eat = 0;
 	return (VALID);
+}
+
+int	philo_atoi(const char *str)
+{
+	unsigned long	num;
+	char			*ptr;
+
+	num = 0;
+	ptr = (char *)str;
+	while (*ptr)
+	{
+		if (philo_strchr(NUM, *ptr) == 0)
+			return (0);
+		num += (*ptr) - '0';
+		if (*(ptr + 1) && philo_strchr(NUM, *(ptr + 1)))
+			num *= 10;
+		ptr++;
+	}
+	if (num > INT_MAX)
+		return (0);
+	return ((int)num);
+}
+
+char	*philo_strchr(const char *s, int c)
+{
+	int		len;
+	char	*ptr;
+	int		idx;
+
+	len = 0;
+	while (s[len])
+		len++;
+	len++;
+	ptr = (char *)s;
+	idx = -1;
+	while (++idx < len)
+	{
+		if (*ptr == (char)c)
+			return (ptr);
+		ptr++;
+	}
+	return (0);
 }

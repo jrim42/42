@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:37:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 19:35:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <string.h>
 # include <sys/time.h>
 # include <pthread.h>
-# include <limits.h>
 
 # define NUM "0123456789"
 # define WH_SP " \t\r\v\f\n"
+# define INT_MAX 2147483647
 
 # define SUCCESS 1
 # define FAILURE 0
@@ -73,9 +73,9 @@ void		bye_philo(t_info *info);
 
 // _param.c
 int			init_param(int argc, char **argv, t_param *param);
-int			_check_arg(int argc, char **argv);
-void		_get_param(int argc, char **argv, t_param *param);
-int			_check_param(int argc, t_param *param);
+int			_get_param(int argc, char **argv, t_param *param);
+int			philo_atoi(const char *str);
+char		*philo_strchr(const char *s, int c);
 
 // _routine.c
 void		*routine(void *philo_void);
@@ -87,16 +87,10 @@ void		*routine(void *philo_void);
 // _eggshell.c
 void		*eggshell(void	*void_info);
 
-// _print.c
-int			print_error(char *err_msg, int exit_state);
-void		print_routine(t_philo *philo, char *msg);
-
-void		print_param(t_param *param);
-void		print_philo(t_philo *philo);
-
 // _utils.c
 long long	get_time_interval(struct timeval t1, struct timeval t2);
-int			philo_atoi(const char *str);
-char		*philo_strchr(const char *s, int c);
+int			print_error(char *err_msg, int exit_state);
+void		print_routine(t_philo *philo, char *msg);
+void		print_param(t_param *param);
 
 #endif
