@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 00:51:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 02:32:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ static void	create_philo(t_info *info, t_philo *philo)
 	while (++idx < info->param->num_philo)
 	{
 		philo[idx].last_eat = info->birthday;
-		pthread_create(philo[idx].thread, NULL, routine, &philo[idx]);
-		pthread_create(&thread, NULL, eggshell_1, &philo[idx]);
+		pthread_create(philo[idx].thread, NULL, routine, (void *)&philo[idx]);
+		pthread_create(&thread, NULL, eggshell_1, (void *)&philo[idx]);
 		pthread_detach(thread);
 	}
 	if (info->param->num_eat > 0)

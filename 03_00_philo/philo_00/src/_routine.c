@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 00:46:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 02:32:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	*routine(void *void_philo)
 {
 	t_philo *philo;
 
-	philo = void_philo;
-	printf("philo %d is in routine\n", philo->name);
+	philo = (t_philo *)void_philo;
 	if (philo->name % 2 == 0)
 		usleep(philo->info->param->ms_to_eat * 1000);
 	while (philo->info->is_done == UNDONE)
 	{
-		printf("in\n");
 		philo_get_fork(philo);
 		philo_eat(philo);
 		philo_sleep(philo);

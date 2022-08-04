@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 00:31:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 02:22:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@
 typedef struct s_philo
 {
 	int				name;				// 철학자 번호
+	struct timeval	last_eat;			// 마지막으로 식사한 시간
+	int				eat_cnt;			// 철학자가 식사한 횟수, 마지막 인자 처리용
 	pthread_t		*thread;			// 철학자에게 할당된 쓰레드
 	int				fork_left;			// 왼쪽 포크 번호
 	int				fork_right;			// 오른쪽 포크 번호
 	pthread_mutex_t	checker;
-	struct timeval	last_eat;			// 마지막으로 식사한 시간
-	int				eat_cnt;			// 철학자가 식사한 횟수, 마지막 인자 처리용
 	struct s_info	*info;
 }					t_philo;
 
