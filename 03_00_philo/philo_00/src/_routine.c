@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 02:32:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 14:39:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	*routine(void *void_philo)
 		philo_sleep(philo);
 		philo_think(philo);
 	}
-	printf("philo %d is out\n", philo->name);
 	return (NULL);
 }
 

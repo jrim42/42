@@ -45,7 +45,6 @@ void	*philo(void *argv)
 	t_philo	*philo;
 
 	philo = argv;
-	printf("philo %d is in routine\n", philo->n);
 	if (philo->n % 2 == 0)
 		usleep(philo->info->time_to_eat * 1000);
 	while (!philo->info->finish)
@@ -55,6 +54,5 @@ void	*philo(void *argv)
 		sleeping(philo);
 		thinking(philo);
 	}
-	printf("philo %d is out\n", philo->n);
 	return (NULL);
 }
