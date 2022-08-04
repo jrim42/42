@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 19:57:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 23:45:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 long long	get_time_interval(struct timeval t1, struct timeval t2);
 int			print_error(char *err_msg, int error);
 void		print_routine(t_philo *philo, char *msg);
-void		print_param(t_param *param);
 
 long long	get_time_interval(struct timeval t1, struct timeval t2)
 {
@@ -48,16 +47,4 @@ void	print_routine(t_philo *philo, char *msg)
 	if (philo->info->is_done == UNDONE)
 		printf("%llums\t%d\t%s\n", interval, philo->name, msg);
 	pthread_mutex_unlock(&(philo->info->print_mtx));
-}
-
-void	print_param(t_param *param)
-{
-	printf("---------------------\n");
-	printf("  philo  :  %d\n", param->num_philo);
-	printf("   die   :  %d\n", param->ms_to_die);
-	printf("   eat   :  %d\n", param->ms_to_eat);
-	printf("  sleep  :  %d\n", param->ms_to_sleep);
-	if (param->num_eat != -1)
-		printf(" num eat :  %d\n", param->num_eat);
-	printf("---------------------\n");
 }
