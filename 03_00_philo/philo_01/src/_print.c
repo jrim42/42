@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 17:21:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:35:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 15:52:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	print_routine(t_philo *philo, char *msg)
 
 	if (philo->info->is_done == DONE)
 		return ;
-	philo_name = philo->name + 1;
+	// philo_name = philo->name + 1;
+	philo_name = philo->name;
 	pthread_mutex_lock(&(philo->info->philo_mtx));
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, philo->info->birthday);
 	if (philo->info->is_done == UNDONE)
-		printf("%lld\t%d\t%s\n", interval, philo_name, msg);
+		printf("%llums\t%d\t%s\n", interval, philo_name, msg);
 	pthread_mutex_unlock(&(philo->info->philo_mtx));
 }
 

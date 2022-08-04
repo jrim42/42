@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:33:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 15:30:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,28 @@ void	*routine(void *void_philo)
 	philo = (t_philo *)void_philo;
 	info = philo->info;
 	philo->last_eat = info->birthday;
+	// printf("philo %d is in routine\n", philo->name + 1);
 	while (info->is_done == UNDONE)
 	{
 		philo_get_fork(philo);
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
-		usleep(200);
+		usleep(100);
 	}
 	return (NULL);
 }
 
 static void	philo_get_fork(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_left);
-	print_routine(philo, "get the fork on the left side");
-	pthread_mutex_lock(philo->fork_right);
-	print_routine(philo, "get the fork on the right side");
+	if (pthread_mutex_lock(philo->fork_left) == 0)
+		print_routine(philo, "has taken a fork (L)");
+	else 
+		pthread_mutex_unlock(philo->fork_left);
+	if (pthread_mutex_lock(philo->fork_right) == 0)
+		print_routine(philo, "has taken a fork (R)");
+	else 
+		pthread_mutex_unlock(philo->fork_right);
 }
 
 static void	philo_eat(t_philo *philo)
@@ -51,8 +56,8 @@ static void	philo_eat(t_philo *philo)
 
 	info = philo->info;
 	print_routine(philo, "is eating");
-	usleep(info->param.ms_to_eat * 1000);
 	gettimeofday(&philo->last_eat, NULL);
+	usleep(info->param.ms_to_eat * 100);
 	philo->eat_cnt++;
 	if (philo->eat_cnt == info->param.num_eat)
 		info->stuffed_philo++;
@@ -62,11 +67,11 @@ static void	philo_eat(t_philo *philo)
 
 static void	philo_sleep(t_philo *philo)
 {
-	print_routine(philo, "needs some sleep...");
-	usleep(philo->info->param.ms_to_sleep * 1000);
+	print_routine(philo, "is sleeping");
+	usleep(philo->info->param.ms_to_sleep * 100);
 }
 
 static void	philo_think(t_philo *philo)
 {
-	print_routine(philo, "philo thinks, therefore he is...");
+	print_routine(philo, "is thinking");
 }

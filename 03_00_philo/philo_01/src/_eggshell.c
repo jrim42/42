@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 22:25:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:21:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 15:49:06 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*eggshell(void	*void_info)
 	idx = 0;
 	while (info->is_done == UNDONE)
 	{
-		if (info->stuffed_philo == info->param.num_philo)
+		if (info->param.num_philo > 0 && info->stuffed_philo == info->param.num_philo)
 		{
 			pthread_mutex_lock(&(info->philo_mtx));
 			printf("\n*** all philos have got enough meals ***\n");
@@ -38,7 +38,7 @@ void	*eggshell(void	*void_info)
 		if (interval >= philo->info->param.ms_to_die)
 		{
 			pthread_mutex_lock(&(info->philo_mtx));
-			printf("%lld\t%d\t died\n", interval, philo->name + 1);
+			printf("%llums\t%d\tdied\n", interval, philo->name);
 			pthread_mutex_unlock(&(info->philo_mtx));
 			info->is_done = DONE;
 			return (NULL);

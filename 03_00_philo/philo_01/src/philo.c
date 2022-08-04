@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 13:34:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 15:54:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	create_philo(t_info *info, t_philo *philos)
 	{
 		pthread_create(&thread, NULL, routine, (void *)&(philos[idx]));
 		pthread_detach(thread);
-		usleep(info->param.ms_to_eat * 200);
 		idx += 2;
 	}
+	usleep(info->param.ms_to_eat * 500);
 	idx = 0;
 	while (idx < info->param.num_philo)
 	{
