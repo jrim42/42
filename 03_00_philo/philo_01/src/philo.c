@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 15:54:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 20:01:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ int	main(int argc, char **argv)
 
 int	init_info(t_param *param, t_info *info)
 {
-	// fork mutex and array allocation
+	info->is_done = UNDONE;
+	info->stuffed_philo = 0;
 	info->fork_mtx = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->num_philo);
 	if (info->fork_mtx == NULL)
 		return (print_error("cannot allocate memory", FAILURE));
-	// details
-	info->is_done = UNDONE;
-	info->stuffed_philo = 0;
-	pthread_mutex_init(&(info->philo_mtx), NULL);
-	// philos allocation
 	info->philos = (t_philo *)malloc(sizeof(t_philo) * info->param.num_philo);
 	if (info->philos == NULL)
+	{
+		free(info->fork_mtx);
 		return (print_error("cannot allocate memory", FAILURE));
+	}
+	pthread_mutex_init(&(info->print_mtx), NULL);
+	pthread_mutex_init(&(info->philo_mtx), NULL);
+	// why?
+	pthread_mutex_lock(&(info->philo_mtx));
 	return (SUCCESS);
 }
 
@@ -56,13 +59,13 @@ int	init_philo(t_philo *philos, t_param *param, t_info *info)
 	idx = -1;
 	while (++idx < param->num_philo)
 	{
-		philos[idx].name = idx;
+		philos[idx].name = idx + 1;
 		philos[idx].eat_cnt = 0;
 		philos[idx].info = info;
-		if (idx == 0)
-			philos[idx].fork_left = &(info->fork_mtx[param->num_philo - 1]);
+		if (idx == param->num_philo - 1)
+			philos[idx].fork_left = &(info->fork_mtx[0]);
 		else
-			philos[idx].fork_left = &(info->fork_mtx[idx - 1]);
+			philos[idx].fork_left = &(info->fork_mtx[idx + 1]);
 		philos[idx].fork_right = &(info->fork_mtx[idx]);
 		pthread_mutex_init(&info->fork_mtx[idx], NULL);
 	}
@@ -75,7 +78,7 @@ void	create_philo(t_info *info, t_philo *philos)
 	pthread_t	thread;
 
 	gettimeofday(&(info->birthday), NULL);
-	idx = 1;
+	idx = 0;
 	while (idx < info->param.num_philo)
 	{
 		pthread_create(&thread, NULL, routine, (void *)&(philos[idx]));
@@ -83,7 +86,7 @@ void	create_philo(t_info *info, t_philo *philos)
 		idx += 2;
 	}
 	usleep(info->param.ms_to_eat * 500);
-	idx = 0;
+	idx = 1;
 	while (idx < info->param.num_philo)
 	{
 		pthread_create(&thread, NULL, routine, (void *)&(philos[idx]));

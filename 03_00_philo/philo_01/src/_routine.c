@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 15:30:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/04 19:57:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*routine(void *void_philo)
 	philo = (t_philo *)void_philo;
 	info = philo->info;
 	philo->last_eat = info->birthday;
-	// printf("philo %d is in routine\n", philo->name + 1);
 	while (info->is_done == UNDONE)
 	{
 		philo_get_fork(philo);
@@ -43,11 +42,11 @@ static void	philo_get_fork(t_philo *philo)
 	if (pthread_mutex_lock(philo->fork_left) == 0)
 		print_routine(philo, "has taken a fork (L)");
 	else 
-		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(&(philo->info->philo_mtx));
 	if (pthread_mutex_lock(philo->fork_right) == 0)
 		print_routine(philo, "has taken a fork (R)");
 	else 
-		pthread_mutex_unlock(philo->fork_right);
+		pthread_mutex_unlock(&(philo->info->philo_mtx));
 }
 
 static void	philo_eat(t_philo *philo)
