@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 15:13:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 16:25:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*routine(void *void_philo)
 	info = philo->info;
 	gettimeofday(&(philo->last_eat), NULL);
 	if (philo->name % 2 == 0)
-		usleep(info->param.t_eat);
+		usleep(info->param.t_eat * 10);
 	while (info->is_done == UNDONE)
 	{
 		philo_get_fork(philo);
