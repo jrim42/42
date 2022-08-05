@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 13:15:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 15:13:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*routine(void *void_philo)
 	info = philo->info;
 	gettimeofday(&(philo->last_eat), NULL);
 	if (philo->name % 2 == 0)
-		usleep(info->param.ms_to_eat * 10); // eat 기준으로 무언가를 해주는게 어떨까????????
+		usleep(info->param.t_eat);
 	while (info->is_done == UNDONE)
 	{
 		philo_get_fork(philo);
@@ -57,13 +57,14 @@ static void	philo_eat(t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&now, NULL);
-		if (get_time_interval(now, philo->last_eat) >= (long long)info->param.ms_to_eat)
+		if (get_time_interval(now, philo->last_eat) >= \
+			(long long)info->param.t_eat)
 			break ;
 		usleep (10);
 	}
 	gettimeofday(&philo->last_eat, NULL);
 	philo->eat_cnt++;
-	if (philo->eat_cnt == info->param.num_eat)
+	if (philo->eat_cnt == info->param.n_eat)
 		info->stuffed_philo++;
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
@@ -81,7 +82,8 @@ static void	philo_sleep(t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&now, NULL);
-		if (get_time_interval(now, sleep) >= (long long)info->param.ms_to_sleep)
+		if (get_time_interval(now, sleep) >= \
+			(long long)info->param.t_sleep)
 			break ;
 		usleep (10);
 	}

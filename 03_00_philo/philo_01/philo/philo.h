@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 13:23:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 15:03:58 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct s_philo
 
 typedef struct s_param
 {
-	int		num_philo;
-	int		ms_to_die;
-	int		ms_to_eat;
-	int		ms_to_sleep;
-	int		num_eat;
+	int		n_philo;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		n_eat;
 }			t_param;
 
 typedef struct s_info
@@ -85,7 +85,7 @@ void		*routine(void *philo_void);
 // static void	philo_think(t_philo *philo);
 
 // _eggshell.c
-int	eggshell(t_info *info);
+void		eggshell(t_info *info);
 
 // _utils.c
 long long	get_time_interval(struct timeval t1, struct timeval t2);

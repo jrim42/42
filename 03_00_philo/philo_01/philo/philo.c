@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 13:23:11 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 15:08:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 		return (RETURN_ERROR);
 	if (create_philo(&info) == FAILURE)
 		return (print_error("philo error", RETURN_ERROR));
-	if (eggshell(&info) == DONE)
-		bye_philo(&info);
+	eggshell(&info);
+	bye_philo(&info);
 	return (0);
 }
 
@@ -38,10 +38,11 @@ int	init_info(t_param *param, t_info *info)
 {
 	info->is_done = UNDONE;
 	info->stuffed_philo = 0;
-	info->fork_mtx = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->num_philo);
+	info->fork_mtx = \
+		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->n_philo);
 	if (info->fork_mtx == NULL)
 		return (print_error("cannot allocate memory", FAILURE));
-	info->philos = (t_philo *)malloc(sizeof(t_philo) * info->param.num_philo);
+	info->philos = (t_philo *)malloc(sizeof(t_philo) * param->n_philo);
 	if (info->philos == NULL)
 	{
 		free(info->fork_mtx);
@@ -49,7 +50,6 @@ int	init_info(t_param *param, t_info *info)
 	}
 	pthread_mutex_init(&(info->print_mtx), NULL);
 	pthread_mutex_init(&(info->philo_mtx), NULL);
-	// why?
 	pthread_mutex_lock(&(info->philo_mtx));
 	return (SUCCESS);
 }
@@ -59,12 +59,12 @@ int	init_philo(t_philo *philos, t_param *param, t_info *info)
 	int				idx;
 
 	idx = -1;
-	while (++idx < param->num_philo)
+	while (++idx < param->n_philo)
 	{
 		philos[idx].name = idx + 1;
 		philos[idx].eat_cnt = 0;
 		philos[idx].info = info;
-		if (idx == param->num_philo - 1)
+		if (idx == param->n_philo - 1)
 			philos[idx].fork_left = &(info->fork_mtx[0]);
 		else
 			philos[idx].fork_left = &(info->fork_mtx[idx + 1]);
@@ -77,14 +77,13 @@ int	init_philo(t_philo *philos, t_param *param, t_info *info)
 int	create_philo(t_info *info)
 {
 	int			idx;
-	t_philo		philo;
 
 	gettimeofday(&(info->birthday), NULL);
 	idx = 0;
-	while (idx < info->param.num_philo)
+	while (idx < info->param.n_philo)
 	{
-		philo = info->philos[idx];
-		if (pthread_create(&(philo.tid), NULL, routine, (void *)&philo))
+		if (pthread_create(&(info->philos[idx].tid), \
+			NULL, routine, (void *)&info->philos[idx]))
 			return (FAILURE);
 		usleep(100);
 		idx++;
@@ -97,7 +96,7 @@ void	bye_philo(t_info *info)
 	int			idx;
 
 	idx = -1;
-	while (++idx > info->param.num_philo)
+	while (++idx > info->param.n_philo)
 		pthread_mutex_destroy(&info->fork_mtx[idx]);
 	pthread_mutex_destroy(&info->philo_mtx);
 	free(info->philos);

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 22:25:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 13:24:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 15:05:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 int	is_philos_stuffed(t_info *info);
 int	is_philo_dead(t_info *info, t_philo *philo);
 
-int	eggshell(t_info *info)
+void	eggshell(t_info *info)
 {
-	int	idx;
+	int				idx;
 
 	while (info->is_done == UNDONE)
 	{
 		idx = -1;
-		while (++idx < info->param.num_philo)
+		while (++idx < info->param.n_philo)
 		{
 			if (is_philo_dead(info, &(info->philos[idx])) == DONE)
-				return (DONE);
+				return ;
 		}
 		if (is_philos_stuffed(info) == DONE)
-			return (DONE);
+			return ;
 	}
-	return (UNDONE);
+	return ;
 }
 
 int	is_philos_stuffed(t_info *info)
 {
-	if (info->stuffed_philo == info->param.num_philo)
+	if (info->stuffed_philo == info->param.n_philo)
 	{
 		pthread_mutex_lock(&(info->print_mtx));
 		info->is_done = DONE;
@@ -52,7 +52,7 @@ int	is_philo_dead(t_info *info, t_philo *philo)
 
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, philo->last_eat);
-	if (interval >= philo->info->param.ms_to_die)
+	if (interval >= philo->info->param.t_die)
 	{
 		pthread_mutex_lock(&(info->print_mtx));
 		gettimeofday(&now, NULL);
