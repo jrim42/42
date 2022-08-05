@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 23:46:27 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 13:23:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_info
 // _philo.c
 int			init_info(t_param *param, t_info *info);
 int			init_philo(t_philo *philo, t_param *param, t_info *info);
-int			create_philo(t_info *info, t_philo *philo);
+int			create_philo(t_info *info);
 void		bye_philo(t_info *info);
 
 // _param.c
@@ -85,7 +85,7 @@ void		*routine(void *philo_void);
 // static void	philo_think(t_philo *philo);
 
 // _eggshell.c
-void		*eggshell(void	*void_info);
+int	eggshell(t_info *info);
 
 // _utils.c
 long long	get_time_interval(struct timeval t1, struct timeval t2);

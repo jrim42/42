@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 22:25:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 23:48:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 13:24:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,22 @@
 int	is_philos_stuffed(t_info *info);
 int	is_philo_dead(t_info *info, t_philo *philo);
 
-void	*eggshell(void	*void_info)
+int	eggshell(t_info *info)
 {
-	t_info			*info;
-	int				idx;
+	int	idx;
 
-	info = (t_info *)void_info;
 	while (info->is_done == UNDONE)
 	{
 		idx = -1;
 		while (++idx < info->param.num_philo)
 		{
-			if (is_philo_dead(info, &(info->philos[idx])) == 1)
-				return (NULL);
+			if (is_philo_dead(info, &(info->philos[idx])) == DONE)
+				return (DONE);
 		}
-		if (is_philos_stuffed(info) == 1)
-			return (NULL);
+		if (is_philos_stuffed(info) == DONE)
+			return (DONE);
 	}
-	return (NULL);
+	return (UNDONE);
 }
 
 int	is_philos_stuffed(t_info *info)
@@ -40,12 +38,11 @@ int	is_philos_stuffed(t_info *info)
 	if (info->stuffed_philo == info->param.num_philo)
 	{
 		pthread_mutex_lock(&(info->print_mtx));
-		// printf("\n*** all philos have got enough meals ***\n");
 		info->is_done = DONE;
 		pthread_mutex_unlock(&(info->philo_mtx));
-		return (1);
+		return (DONE);
 	}
-	return (0);
+	return (UNDONE);
 }
 
 int	is_philo_dead(t_info *info, t_philo *philo)
@@ -63,7 +60,7 @@ int	is_philo_dead(t_info *info, t_philo *philo)
 		printf("%llums\t%d\tdied\n", interval, philo->name);
 		info->is_done = DONE;
 		pthread_mutex_unlock(&(info->philo_mtx));
-		return (1);
+		return (DONE);
 	}
-	return (0);
+	return (UNDONE);
 }

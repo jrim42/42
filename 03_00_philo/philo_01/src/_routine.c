@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 23:49:24 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 13:15:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void	*routine(void *void_philo)
 static void	philo_get_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
-	// print_routine(philo, "has taken a fork (L)");
 	pthread_mutex_lock(philo->fork_right);
-	// print_routine(philo, "has taken a fork (R)");
 	print_routine(philo, "has taken a fork");
 }
 

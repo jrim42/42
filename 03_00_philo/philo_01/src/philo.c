@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/04 23:43:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/05 13:23:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		init_info(t_param *param, t_info *info);
 int		init_philo(t_philo *philo, t_param *param, t_info *info);
-int		create_philo(t_info *info, t_philo *philo);
+int		create_philo(t_info *info);
 void	bye_philo(t_info *info);
 
 int	main(int argc, char **argv)
@@ -27,9 +27,10 @@ int	main(int argc, char **argv)
 		return (RETURN_ERROR);
 	if (init_philo(info.philos, &(info.param), &info) == FAILURE)
 		return (RETURN_ERROR);
-	if (create_philo(&info, info.philos) == FAILURE)
+	if (create_philo(&info) == FAILURE)
 		return (print_error("philo error", RETURN_ERROR));
-	bye_philo(&info);
+	if (eggshell(&info) == DONE)
+		bye_philo(&info);
 	return (0);
 }
 
@@ -73,24 +74,21 @@ int	init_philo(t_philo *philos, t_param *param, t_info *info)
 	return (SUCCESS);
 }
 
-int	create_philo(t_info *info, t_philo *philos)
+int	create_philo(t_info *info)
 {
 	int			idx;
+	t_philo		philo;
 
-	(void)philos;
-	// printf("-------------------------------------\n");
-	// printf("time\tphilo\tstatus\n");
-	// printf("-------------------------------------\n");
 	gettimeofday(&(info->birthday), NULL);
 	idx = 0;
 	while (idx < info->param.num_philo)
 	{
-		if (pthread_create(&(info->philos[idx].tid), NULL, routine, (void *)&(info->philos[idx])))
+		philo = info->philos[idx];
+		if (pthread_create(&(philo.tid), NULL, routine, (void *)&philo))
 			return (FAILURE);
 		usleep(100);
 		idx++;
 	}
-	eggshell((void *)info);
 	return (SUCCESS);
 }
 
