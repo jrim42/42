@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:21:53 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/06 12:59:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/06 13:02:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // -1 : error 
 
 // get_next_line
-int	get_next_line(char **line);
+int		get_next_line(char **line);
 
 // utils
 int		ft_strlen(char *str);
@@ -68,7 +68,7 @@ int	get_next_line(char **line)
 
 int	ft_strlen(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[len])
@@ -79,14 +79,14 @@ int	ft_strlen(char *str)
 char	*ft_strchr(char *str, int ch)
 {
 	int	len;
-	int i;
+	int	i;
 
 	len = ft_strlen(str) + 1;
 	i = -1;
 	while (++i < len)
 	{
 		if (str[i] == (char)ch)
-			return(str + i);
+			return (str + i);
 	}
 	return (NULL);
 }
@@ -94,7 +94,7 @@ char	*ft_strchr(char *str, int ch)
 char	*ft_strndup(char *str, int len)
 {
 	char	*new_str;
-	int 	i;
+	int		i;
 
 	new_str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!new_str)
