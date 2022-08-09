@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 15:04:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/09 23:29:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	_get_param(int argc, char **argv, t_param *param)
 	param->n_philo = philo_atoi(argv[1]);
 	if (param->n_philo <= 0)
 		return (INVALID);
-	param->t_die = philo_atoi(argv[2]);
-	if (param->t_die <= 0)
+	param->ms_die = philo_atoi(argv[2]);
+	if (param->ms_die <= 0)
 		return (INVALID);
-	param->t_eat = philo_atoi(argv[3]);
-	if (param->t_eat <= 0)
+	param->ms_eat = philo_atoi(argv[3]);
+	if (param->ms_eat <= 0)
 		return (INVALID);
-	param->t_sleep = philo_atoi(argv[4]);
-	if (param->t_sleep <= 0)
+	param->ms_sleep = philo_atoi(argv[4]);
+	if (param->ms_sleep <= 0)
 		return (INVALID);
 	if (argc == 6)
 	{
@@ -47,7 +47,8 @@ int	_get_param(int argc, char **argv, t_param *param)
 			return (INVALID);
 	}
 	else
-		param->n_eat = -1;
+		param->n_eat = INT_MAX;
+		// param->n_eat = -1;
 	return (VALID);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 20:52:33 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/09 23:38:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	init_info(t_param *param, t_info *info)
 		free(info->fork_mtx);
 		return (print_error("cannot allocate memory", FAILURE));
 	}
-	pthread_mutex_init(&(info->print_mtx), NULL);
-	pthread_mutex_init(&(info->philo_mtx), NULL);
-	pthread_mutex_lock(&(info->philo_mtx));
+	pthread_mutex_init(&(info->msg_mtx), NULL);
+	// pthread_mutex_init(&(info->philo_mtx), NULL);
+	// pthread_mutex_lock(&(info->philo_mtx));
 	return (SUCCESS);
 }
 
@@ -64,11 +64,8 @@ int	init_philo(t_philo *philos, t_param *param, t_info *info)
 		philos[idx].name = idx + 1;
 		philos[idx].eat_cnt = 0;
 		philos[idx].info = info;
-		if (idx == param->n_philo - 1)
-			philos[idx].fork_left = &(info->fork_mtx[0]);
-		else
-			philos[idx].fork_left = &(info->fork_mtx[idx + 1]);
-		philos[idx].fork_right = &(info->fork_mtx[idx]);
+		philos[idx].fork_left = &(info->fork_mtx[idx]);
+		philos[idx].fork_right = &(info->fork_mtx[(idx + 1) % param->n_philo]);
 		pthread_mutex_init(&info->fork_mtx[idx], NULL);
 	}
 	return (SUCCESS);
@@ -79,14 +76,13 @@ int	create_philo(t_info *info)
 	int			idx;
 
 	gettimeofday(&(info->birthday), NULL);
-	idx = 0;
-	while (idx < info->param.n_philo)
+	idx = -1;
+	while (++idx < info->param.n_philo)
 	{
 		if (pthread_create(&(info->philos[idx].tid), \
-			NULL, routine, (void *)&info->philos[idx]))
+			NULL, routine, (void *)&(info->philos[idx])))
 			return (FAILURE);
 		usleep(100);
-		idx++;
 	}
 	return (SUCCESS);
 }
@@ -104,8 +100,8 @@ void	bye_philo(t_info *info)
 	idx = -1;
 	while (++idx > info->param.n_philo)
 		pthread_mutex_destroy(&info->fork_mtx[idx]);
-	pthread_mutex_destroy(&info->print_mtx);
-	pthread_mutex_destroy(&info->philo_mtx);
+	pthread_mutex_destroy(&info->msg_mtx);
+	// pthread_mutex_destroy(&info->philo_mtx);
 	free(info->philos);
 	free(info->fork_mtx);
 }

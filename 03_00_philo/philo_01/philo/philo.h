@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/05 16:19:08 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/09 21:44:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ typedef struct s_philo
 typedef struct s_param
 {
 	int		n_philo;
-	int		t_die;
-	int		t_eat;
-	int		t_sleep;
+	int		ms_die;
+	int		ms_eat;
+	int		ms_sleep;
 	int		n_eat;
 }			t_param;
 
@@ -62,7 +62,7 @@ typedef struct s_info
 	struct timeval	birthday;
 	pthread_mutex_t	*fork_mtx;
 	pthread_mutex_t	philo_mtx;
-	pthread_mutex_t	print_mtx;
+	pthread_mutex_t	msg_mtx;
 }					t_info;
 
 // _philo.c

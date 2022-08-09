@@ -24,19 +24,19 @@
 	- 왼쪽 포크와 오른쪽 포크 뮤텍스에 대한 lock
 	- print_routine으로 출력하기
 2. 먹어줄게 / 포크 내려놔줄게
-	- t_eat
+	- ms_eat
 	- print_routine으로 출력하기
 	- 먹은 후에는 last_eat을 갱신해준다
 	- 왼쪽 포크와 오른쪽 포크 뮤텍스에 대한 unlock
 3. 잠자줄게
-	- t_sleep
+	- ms_sleep
 	- print_routine으로 출력하기
 4. 생각해줄게
 	- print_routine으로 출력하기
 ---
 ### 04. monitoring
 1. 죽어줄게
-	- now - last_eat >= t_die 인 경우 철학자는 죽게된다.
+	- now - last_eat >= ms_die 인 경우 철학자는 죽게된다.
 2. 배불러줄게 (num_must_eat 존재하는 경우)
 	- stuffed_philo == n_eat 인 경우 시뮬레이션 종료
 
