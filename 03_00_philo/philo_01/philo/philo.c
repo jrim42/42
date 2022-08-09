@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/09 23:38:59 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 00:34:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (init_philo(info.philos, &(info.param), &info) == FAILURE)
 		return (RETURN_ERROR);
 	if (create_philo(&info) == FAILURE)
-		return (print_error("philo error", RETURN_ERROR));
+		return (RETURN_ERROR);
 	eggshell(&info);
 	bye_philo(&info);
 	return (0);
@@ -37,7 +37,6 @@ int	main(int argc, char **argv)
 int	init_info(t_param *param, t_info *info)
 {
 	info->is_done = UNDONE;
-	info->stuffed_philo = 0;
 	info->fork_mtx = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->n_philo);
 	if (info->fork_mtx == NULL)
@@ -49,8 +48,6 @@ int	init_info(t_param *param, t_info *info)
 		return (print_error("cannot allocate memory", FAILURE));
 	}
 	pthread_mutex_init(&(info->msg_mtx), NULL);
-	// pthread_mutex_init(&(info->philo_mtx), NULL);
-	// pthread_mutex_lock(&(info->philo_mtx));
 	return (SUCCESS);
 }
 
@@ -81,7 +78,7 @@ int	create_philo(t_info *info)
 	{
 		if (pthread_create(&(info->philos[idx].tid), \
 			NULL, routine, (void *)&(info->philos[idx])))
-			return (FAILURE);
+			return (print_error("cannot create philo", FAILURE));
 		usleep(100);
 	}
 	return (SUCCESS);
@@ -101,7 +98,6 @@ void	bye_philo(t_info *info)
 	while (++idx > info->param.n_philo)
 		pthread_mutex_destroy(&info->fork_mtx[idx]);
 	pthread_mutex_destroy(&info->msg_mtx);
-	// pthread_mutex_destroy(&info->philo_mtx);
 	free(info->philos);
 	free(info->fork_mtx);
 }

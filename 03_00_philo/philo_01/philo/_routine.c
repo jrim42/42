@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/09 22:48:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 00:33:06 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ static void	philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->fork_right);
 	gettimeofday(&philo->last_eat, NULL);
 	philo->eat_cnt++;
-	if (philo->eat_cnt == info->param.n_eat)
-		info->stuffed_philo++;
 }
 
 static void	philo_sleep(t_philo *philo)

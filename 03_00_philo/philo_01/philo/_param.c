@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:55:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/09 23:29:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 00:30:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	_get_param(int argc, char **argv, t_param *param)
 	}
 	else
 		param->n_eat = INT_MAX;
-		// param->n_eat = -1;
 	return (VALID);
 }
 

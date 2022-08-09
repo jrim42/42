@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/09 21:44:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 00:31:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ typedef struct s_info
 {
 	t_philo			*philos;
 	t_param			param;
-	int				stuffed_philo;
 	int				is_done;
 	struct timeval	birthday;
 	pthread_mutex_t	*fork_mtx;
-	pthread_mutex_t	philo_mtx;
 	pthread_mutex_t	msg_mtx;
 }					t_info;
 
@@ -79,10 +77,6 @@ char		*philo_strchr(const char *s, int c);
 
 // _routine.c
 void		*routine(void *philo_void);
-// static void	philo_get_fork(t_philo *philo);
-// static void	philo_eat(t_philo *philo);
-// static void	philo_sleep(t_philo *philo);
-// static void	philo_think(t_philo *philo);
 
 // _eggshell.c
 void		eggshell(t_info *info);
