@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/10 00:34:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 17:53:34 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ int	main(int argc, char **argv)
 
 int	init_info(t_param *param, t_info *info)
 {
+	if (param->n_philo == 1)
+	{
+		printf("%dms\t1\tis died\n", param->ms_die);
+		return (FAILURE);
+	}
 	info->is_done = UNDONE;
 	info->fork_mtx = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->n_philo);
@@ -48,6 +53,8 @@ int	init_info(t_param *param, t_info *info)
 		return (print_error("cannot allocate memory", FAILURE));
 	}
 	pthread_mutex_init(&(info->msg_mtx), NULL);
+	pthread_mutex_init(&(info->main_mtx), NULL);
+	pthread_mutex_lock(&(info->main_mtx));
 	return (SUCCESS);
 }
 
@@ -95,9 +102,10 @@ void	bye_philo(t_info *info)
 		usleep(100);
 	}
 	idx = -1;
-	while (++idx > info->param.n_philo)
+	while (++idx < info->param.n_philo)
 		pthread_mutex_destroy(&info->fork_mtx[idx]);
 	pthread_mutex_destroy(&info->msg_mtx);
+	pthread_mutex_destroy(&info->main_mtx);
 	free(info->philos);
 	free(info->fork_mtx);
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/10 00:31:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/10 16:27:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_info
 	struct timeval	birthday;
 	pthread_mutex_t	*fork_mtx;
 	pthread_mutex_t	msg_mtx;
+	pthread_mutex_t	main_mtx;
 }					t_info;
 
 // _philo.c
