@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 21:09:43 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/06 00:43:18 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/16 13:16:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	parse_input(va_list ap, char *input)
 	return (len);
 }
 
-// 서식자 위치
 char	*find_type(char	*input)
 {
 	int	i;
