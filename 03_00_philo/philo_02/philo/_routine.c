@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/17 16:01:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 22:49:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	*routine(void *void_philo)
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
-		if (philo->info->is_done != DONE)
-			usleep(100);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -63,7 +62,11 @@ static void	philo_eat(t_philo *philo)
 
 	info = philo->info;
 	if (info->is_done == DONE)
+	{
+		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(philo->fork_right);
 		return ;
+	}
 	print_routine(philo, "is eating");
 	gettimeofday(&start, NULL);
 	while (1)

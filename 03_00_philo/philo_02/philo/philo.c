@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/17 16:13:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 22:35:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	bye_philo(t_info *info)
 	idx = -1;
 	while (++idx < info->param.n_philo)
 	{
+		// pthread_detach(info->philos[idx].tid);
 		pthread_join(info->philos[idx].tid, NULL);
 		usleep(100);
 	}

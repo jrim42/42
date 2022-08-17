@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/17 17:56:18 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 22:33:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,8 @@ void	print_routine(t_philo *philo, char *msg)
 	if (philo->info->is_done == DONE)
 		return ;
 	pthread_mutex_lock(&(philo->info->msg_mtx));
-	// monitoring관련해련 스레드
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, philo->info->birthday);
-	usleep(100);
 	printf("%llums\t%d\t%s\n", interval, philo->name, msg);
 	pthread_mutex_unlock(&(philo->info->msg_mtx));
-	usleep(100);
 }
