@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:45:20 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/16 22:30:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 13:18:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		is_in_circle(t_circle *cir, float x, float y);
 
 // utils 
 int		ft_strlen(char *str);
-void	ft_putstr(char *str);
 int		print_error(char *msg);
 void	print_map(char **map, t_info info);
 
@@ -125,11 +124,6 @@ int	ft_strlen(char *str)
 	while (str[len])
 		len++;
 	return (len);
-}
-
-void	ft_putstr(char *str)
-{
-	write(1, str, ft_strlen(str));
 }
 
 int	print_error(char *msg)

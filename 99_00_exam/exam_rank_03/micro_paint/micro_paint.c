@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 22:42:02 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/16 22:52:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 13:46:20 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		is_in_rect(t_rect *rect, float x, float y);
 
 // utils 
 int		ft_strlen(char *str);
-void	ft_putstr(char *str);
 int		print_error(char *msg);
 void	print_map(char **map, t_info info);
 
@@ -105,10 +104,10 @@ void	micro_paint(char **map, t_info *info, t_rect *rect)
 
 int	is_in_rect(t_rect *rect, float x, float y)
 {
-	if (((x < rect->x || (rect->x + rect->w< x)) || (y < rect->y)) || (rect->y + rect->h < y))
+	if ((x < rect->x) || (rect->x + rect->w < x) || (y < rect->y) || (rect->y + rect->h < y))
 		return (0);
-	if (((x - rect->x < (float)1) || ((rect->x + rect->w) - x < (float)1)) ||
-		((y - rect->y < (float)1 || ((rect->y + rect->h) - y < (float)1))))
+	if ((x - rect->x < (float)1) || ((rect->x + rect->w) - x < (float)1) ||
+		(y - rect->y < (float)1) || ((rect->y + rect->h) - y < (float)1))
 		return (2);
 	return (1);
 }
@@ -123,11 +122,6 @@ int	ft_strlen(char *str)
 	while (str[len])
 		len++;
 	return (len);
-}
-
-void	ft_putstr(char *str)
-{
-	write(1, str, ft_strlen(str));
 }
 
 int	print_error(char *msg)
