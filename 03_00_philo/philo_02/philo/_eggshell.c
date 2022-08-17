@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 22:25:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/17 22:34:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/18 01:03:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	eggshell(t_info *info)
 		if (min_eat >= info->param.n_eat)
 		{
 			info->is_done = DONE;
-			// pthread_mutex_unlock(&(info->main_mtx));
+			pthread_mutex_unlock(&(info->main_mtx));
 			return ;
 		}
 	}
@@ -54,9 +54,11 @@ int	is_philo_dead(t_info *info, t_philo *philo)
 		pthread_mutex_lock(&(philo->info->msg_mtx));
 		gettimeofday(&now, NULL);
 		interval = get_time_interval(now, info->birthday);
-		printf("\033[0;31m%llums\t%d\tis died\033[0;37m\n", interval, philo->name);
+		printf("%llums\t%d\tis died\n", interval, philo->name);
+		// printf("\033[0;31m%llu\t%d\tis died\033[0;37m\n", interval, philo->name);
+		// printf("\033[0;31m%llums\t%d\tis died\033[0;37m\n", interval, philo->name);
 		// pthread_mutex_unlock(&(philo->info->msg_mtx));
-		// pthread_mutex_unlock(&(info->main_mtx));
+		pthread_mutex_unlock(&(info->main_mtx));
 		return (DONE);
 	}
 	return (UNDONE);

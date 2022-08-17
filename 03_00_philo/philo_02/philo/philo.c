@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/17 22:35:24 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/18 00:56:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,12 @@ void	bye_philo(t_info *info)
 	int			idx;
 
 	idx = -1;
+	// printf("----------------------------------\n");
 	while (++idx < info->param.n_philo)
 	{
 		// pthread_detach(info->philos[idx].tid);
 		pthread_join(info->philos[idx].tid, NULL);
+		// printf("thread\t%d\tjoined\n", idx + 1);
 		usleep(100);
 	}
 	idx = -1;
