@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/16 15:27:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/17 16:01:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	*routine(void *void_philo)
 		philo_eat(philo);
 		philo_sleep(philo);
 		philo_think(philo);
-		usleep(100);
+		if (philo->info->is_done != DONE)
+			usleep(100);
 	}
 	return (NULL);
 }
