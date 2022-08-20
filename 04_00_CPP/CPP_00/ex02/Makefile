@@ -13,11 +13,11 @@ RM			=	rm -f
 SRC			=	Account.cpp \
 				tests.cpp
 				
-OBJ			=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.cpp=.o)
 
 all : $(NAME) 
 
-%.o : %.c
+%.o : %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
