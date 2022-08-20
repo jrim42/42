@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:14:23 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 20:17:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 20:19:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int	main(void)
 	std::cout << "str by ptr : " << *stringPTR << std::endl;
 	std::cout << "str by ref : " << stringREF << std::endl;
 	std::cout << "------------------------------" << std::endl;    
-
 }
