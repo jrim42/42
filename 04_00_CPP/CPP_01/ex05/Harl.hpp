@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 22:15:02 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 22:29:24 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 22:33:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ class Harl
 		void	warning(void);
 		void	error(void);
 		t_level	level[4];
-		
 	
 	public:
 		Harl(void);
