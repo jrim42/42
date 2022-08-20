@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 19:21:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 19:41:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,27 @@ std::string Contact::get_nickname(void)
 
 void	Contact::add_contact(void)
 {
-	std::cout << "----------------------" << std::endl;
-	std::cout << "first name : ";
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "  first name   : ";
 	std::cin >> this->first_name;
-	std::cout << "last name : ";
+	std::cout << "   last name   : ";
 	std::cin >> this->last_name;
-	std::cout << "nickname : ";
+	std::cout << "   nickname    : ";
 	std::cin >> this->nickname;
-	std::cout << "phone number : ";
+	std::cout << " phone number  : ";
 	std::cin >> this->phone_num;
 	std::cout << "darkest secret : ";
 	std::cin >> this->dark_secret;
-	std::cout << "--- contact created ---" << std::endl;
+	std::cout << "---------- contact created -----------" << std::endl;
+}
+
+void	Contact::display_contact(void)
+{
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "  first name   : " << this->first_name << std::endl;
+	std::cout << "   last name   : " << this->last_name << std::endl;
+	std::cout << "   nickname    : " << this->nickname << std::endl;
+	std::cout << " phone number  : " << this->phone_num << std::endl;
+	std::cout << "darkest secret : " << this->dark_secret << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
 }

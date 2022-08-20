@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:01 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 18:47:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 19:32:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class Contact
 		// std::string get_phone_num(void);
 		// std::string get_dark_secret(void);
 		void	add_contact(void);
+		void	display_contact(void);
 
 		Contact(void);
 		Contact(std::string first_name,

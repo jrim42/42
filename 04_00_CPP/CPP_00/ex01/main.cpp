@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 14:41:22 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 19:21:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 19:25:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(void)
 			phonebook.add_contact();
 		else if (cmd == "SEARCH")
 			phonebook.search_contact();
-		else
-			std::cout << "worng command. try again." << std::endl;
+		// else
+		// 	std::cout << "wrong command. try again." << std::endl;
 	}
 	return (0);
 }
