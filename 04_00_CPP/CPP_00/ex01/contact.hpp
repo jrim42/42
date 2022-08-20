@@ -1,36 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.hpp                                      :+:      :+:    :+:   */
+/*   contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:01 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 19:13:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 18:47:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
-#include <iomanip>
-#include "contact.hpp"
+#include <iostream>
+#include <string>
 
-class PhoneBook
+class Contact 
 {
 	private:
-		Contact	contacts[8];
-		int		length;
+		std::string	first_name;
+		std::string	last_name;
+		std::string	nickname;
+		std::string	phone_num;
+		std::string	dark_secret;
 
 	public:
-
-		PhoneBook(void);
+		std::string	get_first_name(void);
+		std::string	get_last_name(void);
+		std::string get_nickname(void);
+		// std::string get_phone_num(void);
+		// std::string get_dark_secret(void);
 		void	add_contact(void);
-		void	search_contact(void);
-		void	display_contact_head(void);
-		void	display_contact_info(void);
-		void	display_contact_field(std::string content);
-		~PhoneBook(void);
+
+		Contact(void);
+		Contact(std::string first_name,
+				std::string	last_name,
+				std::string	nickname,
+				std::string	phone_num,
+				std::string	dark_secret);
+		~Contact(void);
 };
 
 #endif

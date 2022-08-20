@@ -10,7 +10,9 @@ CC			=	clang++
 CFLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 
-SRC			=	phonebook.cpp
+SRC			=	main.cpp \
+				contact.cpp \
+				phonebook.cpp \
 				
 OBJ			=	$(SRC:.c=.o)
 
