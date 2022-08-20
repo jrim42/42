@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 22:16:25 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 22:37:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/20 22:52:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	Harl::init_harl(void)
 	level[3].f_ptr = &Harl::error;
 }
 
-void	Harl::complain(std::string level_name)
+void	Harl::complain(std::string input)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (level[i].name == level_name)
+		if (level[i].name == input)
 			(this->*(level[i].f_ptr))();
 	}
 }
