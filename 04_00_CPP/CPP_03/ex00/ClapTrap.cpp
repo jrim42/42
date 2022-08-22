@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:18:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 19:50:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/22 12:37:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,28 @@
 
 ClapTrap::ClapTrap(): _name("none"), _hit(10), _energy(10), _attack(0)
 {
-	std::cout << GRY << "(default constructor)" << DFT << std::endl;
+	std::cout << GRY << "(ClapTrap: default constructor)" << DFT << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hit(10), _energy(10), _attack(0)
 {
-	std::cout << GRY << "(constructor with name)" << DFT << std::endl;
-}
-
-ClapTrap::ClapTrap(ClapTrap const &ref):
-	_name(ref._name), _hit(ref._hit), _energy(ref._energy), _attack(ref._attack)
-{
-	std::cout << GRY << "(copy constructor)" << DFT << std::endl;
+	std::cout << GRY << "(ClapTrap: constructor with name)" << DFT << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << GRY << "(destructor)" << DFT << std::endl;
+	std::cout << GRY << "(ClapTrap: destructor)" << DFT << std::endl;
+}
+
+//---------------------- operator -----------------------//
+
+ClapTrap & ClapTrap::operator=(ClapTrap const & ref)
+{
+	this->_name = ref._name;
+	this->_hit = ref._hit;
+	this->_energy = ref._energy;
+	this->_attack = ref._attack;
+	return (*this);
 }
 
 //---------------------- actions -----------------------//
@@ -47,7 +52,7 @@ void	ClapTrap::attack(std::string const & target)
 void	ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << "ClapTrap " << _name 
-		<< " has got " << amount << " points of damage!" << std::endl;
+		<< " has got " << amount << " points of damage! ";
 	if (amount >= _energy)
 	{
 		_energy = 0;
@@ -56,7 +61,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	else
 	{
 		_energy -= amount;
-		std::cout << _energy << " energy points are left for " << _name << std::endl;
+		std::cout << _energy << " energy points left." << std::endl;
 	}
 }
 

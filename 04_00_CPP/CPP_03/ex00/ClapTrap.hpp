@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:56 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 19:45:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/08/22 12:23:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ class ClapTrap
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
-		ClapTrap(ClapTrap const &ref);
 		~ClapTrap();
+
+		ClapTrap & operator=(ClapTrap const & ref);
 
 		void			attack(std::string const & target);
 		void			takeDamage(unsigned int amount);
