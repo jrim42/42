@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:46:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/27 16:01:06 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/01 20:07:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_info
 	t_philo			*philos;
 	t_param			param;
 	int				is_done;
+	int				start;
 	struct timeval	birthday;
 	pthread_mutex_t	*fork_mtx;
 	pthread_mutex_t	msg_mtx;
@@ -86,6 +87,7 @@ void		*routine(void *philo_void);
 // _eggshell.c
 void		monitor(t_info *info);
 int			is_philo_dead(t_info *info, t_philo *philo);
+int			is_philo_full(t_info *info, int min_eat);
 
 // _utils.c
 long long	get_time_interval(struct timeval t1, struct timeval t2);

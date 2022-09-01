@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 21:36:13 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/27 15:50:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/01 20:09:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ static int	philo_get_fork(t_info *info, t_philo *philo)
 		return (DEAD);
 	pthread_mutex_lock(philo->fork_left);
 	print_routine(philo, "has taken a fork");
-	if (is_philo_dead(info, philo) == DEAD)
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		return (DEAD);
-	}
 	pthread_mutex_lock(philo->fork_right);
 	print_routine(philo, "has taken a fork");
 	if (is_philo_dead(info, philo) == DEAD)

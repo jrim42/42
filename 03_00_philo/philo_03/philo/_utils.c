@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/27 16:00:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/01 19:51:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,13 @@ void	print_routine(t_philo *philo, char *msg)
 	struct timeval	now;
 
 	info = philo->info;
-	if (is_philo_dead(info, philo) == DEAD)
+	pthread_mutex_lock(&(info->main_mtx));
+	if (info->is_done == DONE)
+	{
+		pthread_mutex_unlock(&(info->main_mtx));
 		return ;
+	}
+	pthread_mutex_unlock(&(info->main_mtx));
 	pthread_mutex_lock(&(info->msg_mtx));
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, info->birthday);

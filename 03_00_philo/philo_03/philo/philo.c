@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/27 15:51:59 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/01 20:09:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_info(t_param *param, t_info *info)
 {
 	if (param->n_philo == 1)
 	{
+		printf("%dms\t1\thas taken a fork\n", 0);
 		printf("%dms\t1\tdied\n", param->ms_die);
 		return (FAILURE);
 	}
