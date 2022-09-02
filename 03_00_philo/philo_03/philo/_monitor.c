@@ -49,27 +49,20 @@ int	is_philo_dead(t_info *info, t_philo *philo)
 	long long		interval;
 
 	pthread_mutex_lock(&(info->main_mtx));
-	if (info->is_done == DONE)
+	if (philo->is_dead == DEAD || info->is_done == DONE)
 	{
 		pthread_mutex_unlock(&(info->main_mtx));
 		return (DONE);
 	}
 	pthread_mutex_unlock(&(info->main_mtx));
 	pthread_mutex_lock(&(philo->eat_mtx));
-	if (philo->is_dead != DEAD)
+	gettimeofday(&now, NULL);
+	interval = get_time_interval(now, philo->last_eat);
+	pthread_mutex_unlock(&(philo->eat_mtx));
+	if (interval >= philo->info->param.ms_die)
 	{
-		gettimeofday(&now, NULL);
-		interval = get_time_interval(now, philo->last_eat);
-		if (interval >= philo->info->param.ms_die)
-		{
-			philo->is_dead = DEAD;
-			print_dead(philo, info);
-			pthread_mutex_unlock(&(philo->eat_mtx));
-			pthread_mutex_lock(&(info->main_mtx));
-			info->is_done = DONE;
-			pthread_mutex_unlock(&(info->main_mtx));
-			return (DEAD);
-		}
+		print_dead(philo, info);
+		return (DEAD);
 	}
 	pthread_mutex_unlock(&(philo->eat_mtx));
 	return (ALIVE);

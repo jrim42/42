@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 14:12:06 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/01 19:51:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/02 20:23:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 long long	get_time_interval(struct timeval t1, struct timeval t2);
 int			print_error(char *err_msg, int error);
 void		print_routine(t_philo *philo, char *msg);
+void		print_dead(t_philo *philo, t_info *info);
 
 long long	get_time_interval(struct timeval t1, struct timeval t2)
 {
@@ -42,7 +43,7 @@ void	print_routine(t_philo *philo, char *msg)
 
 	info = philo->info;
 	pthread_mutex_lock(&(info->main_mtx));
-	if (info->is_done == DONE)
+	if (philo->is_dead == DEAD || info->is_done == DONE)
 	{
 		pthread_mutex_unlock(&(info->main_mtx));
 		return ;
@@ -60,6 +61,10 @@ void	print_dead(t_philo *philo, t_info *info)
 	struct timeval	now;
 	long long		interval;
 
+	pthread_mutex_lock(&(info->main_mtx));
+	philo->is_dead = DEAD;
+	info->is_done = DONE;
+	pthread_mutex_unlock(&(info->main_mtx));
 	pthread_mutex_lock(&(info->msg_mtx));
 	gettimeofday(&now, NULL);
 	interval = get_time_interval(now, info->birthday);

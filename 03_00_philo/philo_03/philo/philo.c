@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:48:40 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/01 20:09:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/02 20:33:53 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	main(int argc, char **argv)
 
 int	init_info(t_param *param, t_info *info)
 {
-	if (param->n_philo == 1)
-	{
-		printf("%dms\t1\thas taken a fork\n", 0);
-		printf("%dms\t1\tdied\n", param->ms_die);
-		return (FAILURE);
-	}
 	info->is_done = UNDONE;
 	info->fork_mtx = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * param->n_philo);

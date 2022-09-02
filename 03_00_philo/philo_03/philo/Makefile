@@ -7,8 +7,8 @@ BLU			= 	\033[0;36m
 DFT			= 	\033[0;37m
 
 CC			=	gcc
-# CFLAGS		=	-Wall -Werror -Wextra
-CFLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
+CFLAGS		=	-Wall -Werror -Wextra
+# CFLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
 AR			=	ar rcs
 RM			=	rm -f
 
