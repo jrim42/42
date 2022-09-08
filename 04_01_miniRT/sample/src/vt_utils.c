@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:08:31 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 17:13:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/08 19:23:32 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    vt_set(t_vt *vec, double x, double y, double z)
 
 double  vt_len(t_vt vec)
 {
-    return (sqrt(vlength2(vec)));
+    return (sqrt(vt_len_sq(vec)));
 }
 
 double  vt_len_sq(t_vt vec)

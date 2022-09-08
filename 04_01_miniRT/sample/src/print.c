@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace.h                                            :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:10:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 19:22:28 by jrim             ###   ########.fr       */
+/*   Created: 2022/09/08 19:20:41 by jrim              #+#    #+#             */
+/*   Updated: 2022/09/08 19:21:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRACE_H
-# define TRACE_H
+#include "../include/print.h"
 
-# include "structures.h"
-# include "utils.h"
-
-t_ray	ray(t_pt orig, t_vt dir);
-t_pt	ray_at(t_ray *ray, double t);
-t_ray	ray_primary(t_cam *cam, double u, double v);
-t_rgb	ray_color(t_ray *ray);
-
-#endif
+// [0,1] 로 되어있는 rgb 값을 각각 [0,255]에 맵핑 해서 출력.
+void    write_color(t_rgb pixel_color)
+{
+    printf("%d %d %d\n", (int)(255.999 * pixel_color.x),
+                        (int)(255.999 * pixel_color.y),
+                        (int)(255.999 * pixel_color.z));
+}
