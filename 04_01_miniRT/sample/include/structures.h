@@ -6,12 +6,17 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 17:20:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:42:34 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# define FALSE 0
+# define TRUE 1
+
+typedef int t_bool;
 
 //---------------------- coords ----------------------//
 struct s_coord3
@@ -24,6 +29,14 @@ struct s_coord3
 typedef struct s_coord3 t_vt;
 typedef struct s_coord3 t_pt;
 typedef struct s_coord3 t_rgb;
+
+//---------------------- sphere ----------------------//
+typedef struct  s_sph
+{
+    t_pt    center;
+    double  rad;
+    double  rad_sq;
+} t_sph;
 
 //----------------------- ray -----------------------//
 typedef struct  s_ray

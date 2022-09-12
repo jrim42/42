@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   object_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:18:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 15:45:58 by jrim             ###   ########.fr       */
+/*   Created: 2022/09/12 15:41:33 by jrim              #+#    #+#             */
+/*   Updated: 2022/09/12 15:58:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#include "../include/structures.h"
+#include "../include/scene.h"
 
-# include "structures.h"
-# include "utils.h"
+t_sph	sphere_init(t_pt center, double radius)
+{
+	t_sph sph;
 
-t_cnvs	canvas_init(int width, int height);
-t_cam	camera_init(t_cnvs *canvas, t_pt orig);
-
-t_sph	sphere_init(t_pt center, double radius);
-
-#endif
+	sph.center = center;
+	sph.rad = radius;
+	sph.rad_sq = radius * radius;
+	return (sph);
+}

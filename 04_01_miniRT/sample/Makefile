@@ -20,6 +20,8 @@ INC			=	include/print.h \
 SRC			=	src/canvas.c \
 				src/print.c \
 				src/ray.c \
+				src/hit.c \
+				src/object_create.c \
 				src/vt_utils.c \
 				main/main_cnvs.c
 				

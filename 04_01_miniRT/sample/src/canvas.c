@@ -6,13 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:21:15 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 19:26:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 15:56:12 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/scene.h"
+#include "../include/trace.h"
 
-t_cnvs	canvas(int width, int height)
+t_cnvs	canvas_init(int width, int height)
 {
 	t_cnvs	cnvs;
 
@@ -22,7 +23,7 @@ t_cnvs	canvas(int width, int height)
 	return (cnvs);
 }
 
-t_cam	camera(t_cnvs *cnvs, t_pt orig)
+t_cam	camera_init(t_cnvs *cnvs, t_pt orig)
 {
 	t_cam	cam;
 	double	focal_len;
@@ -53,11 +54,13 @@ t_ray	ray_primary(t_cam *cam, double u, double v)
 }
 
 //광선이 최종적으로 얻게된 픽셀의 색상 값을 리턴.
-t_rgb    ray_color(t_ray *r)
+t_rgb    ray_color(t_ray *ray, t_sph *sph)
 {
     double  t;
 
-    t = 0.5 * (r->dir.y + 1.0);
+	if (hit_sphere(sph, ray))
+		return (rgb_init(1, 0, 0));
+    t = 0.5 * (ray->dir.y + 1.0);
     // (1-t) * 흰색 + t * 하늘색
     return (vt_plus(vt_multi(rgb_init(1, 1, 1), 1.0 - t), vt_multi(rgb_init(0.5, 0.7, 1.0), t)));
 }
