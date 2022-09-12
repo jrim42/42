@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:22:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 20:34:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,23 @@ typedef struct s_coord3 t_vt;   // 벡터 구조체
 typedef struct s_coord3 t_pt;   // 3차원 좌표계 구조체
 typedef struct s_coord3 t_rgb;  // rgb 색상값 구조체
 
-//---------------------- sphere ----------------------//
+//---------------------- objects ----------------------//
 typedef struct  s_sph
 {
     t_pt    center;
     double  rad;
     double  rad_sq;
 } t_sph;
+
+typedef int     t_obj_type;
+# define SPH 0
+
+typedef struct  s_obj       // obj list
+{
+    t_obj_type  type;
+    void        *element;   // 각 도혀의 데이터가 저장되는 곳
+    void        *next;
+}               t_obj;
 
 //----------------------- ray -----------------------//
 typedef struct  s_ray

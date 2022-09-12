@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:11:18 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:30:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 20:52:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_ray	ray_primary(t_cam *cam, double u, double v)
     return (ray);
 }
 
-t_rgb    ray_color(t_ray *ray, t_sph *sph)
+t_rgb    ray_color(t_ray *ray, t_obj *obj)
 {
     double  t;
     // t_vt    norm;
@@ -50,7 +50,7 @@ t_rgb    ray_color(t_ray *ray, t_sph *sph)
 
     rec.tmin = 0;
     rec.tmax = INFINITY;
-    if (hit_sphere(sph, ray, &rec))
+    if (hit(obj, ray, &rec))
         return (vt_multi(vt_plus(rec.norm, rgb_init(1, 1, 1)), 0.5));
     else
     {

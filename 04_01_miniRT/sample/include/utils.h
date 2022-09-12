@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:28:35 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 17:10:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 20:52:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,9 @@ double  vt_dot(t_vt vec, t_vt v2);
 t_vt    vt_cross(t_vt v1, t_vt v2);
 t_vt	vt_max(t_vt v1, t_vt v2);
 t_vt	vt_min(t_vt v1, t_vt v2);
+
+//------------------------ obj list ------------------------//
+void	obj_add(t_obj **list, t_obj *new);
+t_obj	*obj_last(t_obj *list);
 
 #endif

@@ -6,36 +6,45 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:51:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:29:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 20:44:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
-// double      hit_sphere(t_sph *sp, t_ray *ray)
-// {
-// 	t_vt  oc; //방향벡터로 나타낸 구의 중심.
-// 	//a, b, c는 각각 t에 관한 2차 방정식의 계수
-// 	double  a;
-// 	double  b;
-// 	double  c;
-// 	double  discrim; //판별식
-
-// 	oc = vt_minus(ray->orig, sp->center);
-// 	a = vt_dot(ray->dir, ray->dir);
-// 	b = 2.0 * vt_dot(oc, ray->dir);
-// 	c = vt_dot(oc, oc) - sp->rad_sq;
-// 	discrim = b * b - 4 * a * c;
-
-// 	// 판별식이 0보다 크다면 광선이 구를 hit한 것!
-// 	if (discrim < 0) // 판별식이 0보다 작을 때 : 실근 없을 때,
-// 		return (-1.0);
-// 	else
-// 		return ((-b - sqrt(discrim)) / (2.0 * a)); // 두 근 중 작은 근
-// }
-
-t_bool      hit_sphere(t_sph *sph, t_ray *ray, t_hit *rec)
+t_bool      hit(t_obj *obj, t_ray *ray, t_hit *rec)
 {
+    t_bool	hit_anything;
+    t_hit	tmp_rec;
+
+    tmp_rec = *rec; 		// tmp_rec의 tmin, tmax 값 초기화를 위해.
+    hit_anything = FALSE;
+    while(obj)
+    {
+        if (hit_obj(obj, ray, &tmp_rec))
+        {
+            hit_anything = TRUE;
+            tmp_rec.tmax = tmp_rec.t;
+            *rec = tmp_rec;
+        }
+        obj = obj->next;
+    }
+    return (hit_anything);
+}
+
+t_bool	hit_obj(t_obj *obj, t_ray *ray, t_hit *rec)
+{
+    t_bool  hit_result;
+
+    hit_result = FALSE;
+    if (obj->type == SPH)
+        hit_result = hit_sphere(obj, ray, rec); //hit_sphere의 첫번째 인자도 t_sphere *에서 t_object *로 수정해주자.
+    return (hit_result);
+}
+
+t_bool	hit_sphere(t_obj *obj, t_ray *ray, t_hit *rec)
+{
+	t_sph	*sph;
 	t_vt	oc; //방향벡터로 나타낸 구의 중심.
 	//a, b, c는 각각 t에 관한 2차 방정식의 계수
 	double  a;
@@ -45,6 +54,7 @@ t_bool      hit_sphere(t_sph *sph, t_ray *ray, t_hit *rec)
 	double	sqrt_discrim;
 	double	root;
 
+	sph = (t_sph *)obj->element;
 	oc = vt_minus(ray->orig, sph->center);
 	a = vt_len_sq(ray->dir);
 	half_b = vt_dot(oc, ray->dir);

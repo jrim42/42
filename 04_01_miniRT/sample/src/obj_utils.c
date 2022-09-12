@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   obj_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 17:18:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 20:55:07 by jrim             ###   ########.fr       */
+/*   Created: 2022/09/12 20:47:31 by jrim              #+#    #+#             */
+/*   Updated: 2022/09/12 20:48:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#include "../include/miniRT.h"
 
-# include "structures.h"
-# include "utils.h"
+void	obj_add(t_obj **list, t_obj *new)
+{
+    t_obj    *cur;
 
-t_cnvs	canvas_init(int width, int height);
-t_cam	camera_init(t_cnvs *canvas, t_pt orig);
+    if (*list == NULL)
+    {
+        *list = new;
+        return ;
+    }
+    cur = *list;
+    while (cur->next)
+        cur = cur->next;
+    cur->next = new;
+}
 
-t_obj	*object_init(t_obj_type type, void *element);
-t_sph	*sphere_init(t_pt center, double radius);
-
-#endif
+t_obj    *obj_last(t_obj *list)
+{
+    if (list == NULL)
+        return (NULL);
+    while (list->next)
+        list = list->next;
+    return (list);
+}

@@ -21,7 +21,8 @@ SRC			=	src/canvas.c \
 				src/print.c \
 				src/ray.c \
 				src/hit.c \
-				src/object_create.c \
+				src/obj_create.c \
+				src/obj_utils.c \
 				src/vt_utils.c \
 				main/main_cnvs.c
 				
