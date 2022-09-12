@@ -6,11 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:08:31 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 19:23:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 18:30:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/utils.h"
+#include "../include/miniRT.h"
 
 t_pt    pt_init(double x, double y, double z)
 {

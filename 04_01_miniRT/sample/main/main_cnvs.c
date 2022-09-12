@@ -6,13 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:18:12 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:09:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 18:29:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/scene.h"
-#include "../include/trace.h"
-#include "../include/print.h"
+#include "../include/miniRT.h"
 
 int main(void)
 {

@@ -6,12 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:21:15 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 16:03:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 18:30:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/scene.h"
-#include "../include/trace.h"
+#include "../include/miniRT.h"
 
 t_cnvs	canvas_init(int width, int height)
 {

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object_create.c                                    :+:      :+:    :+:   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 15:41:33 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:30:06 by jrim             ###   ########.fr       */
+/*   Created: 2022/09/12 18:28:22 by jrim              #+#    #+#             */
+/*   Updated: 2022/09/12 18:29:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/miniRT.h"
+#ifndef MINIRT_H
+# define MINIRT_H
 
-t_sph	sphere_init(t_pt center, double radius)
-{
-	t_sph sph;
+# include "./print.h"
+# include "./scene.h"
+# include "./structures.h"
+# include "./trace.h"
+# include "./utils.h"
 
-	sph.center = center;
-	sph.rad = radius;
-	sph.rad_sq = radius * radius;
-	return (sph);
-}
+#endif

@@ -6,11 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:20:41 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/08 19:21:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 18:30:09 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/print.h"
+#include "../include/miniRT.h"
 
 // [0,1] 로 되어있는 rgb 값을 각각 [0,255]에 맵핑 해서 출력.
 void    write_color(t_rgb pixel_color)
