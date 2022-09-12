@@ -6,11 +6,20 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:51:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 20:44:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 21:43:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
+
+t_hit	record_init(void)
+{
+    t_hit    rec;
+
+    rec.tmin = EPSILON;
+    rec.tmax = INFINITY;
+    return (rec);
+}
 
 t_bool      hit(t_obj *obj, t_ray *ray, t_hit *rec)
 {
@@ -75,6 +84,7 @@ t_bool	hit_sphere(t_obj *obj, t_ray *ray, t_hit *rec)
 	rec->t = root;
 	rec->p = ray_at(ray, root);
 	rec->norm = vt_div(vt_minus(rec->p, sph->center), sph->rad); // 정규화된 법선 벡터.
+	rec->albedo = obj->albedo;
 	set_face_normal(ray, rec); // rec의 법선벡터와 광선의 방향벡터를 비교해서 앞면인지 뒷면인지 t_bool 값으로 저장.
 	return (TRUE);
 }

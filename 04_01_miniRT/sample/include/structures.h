@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 20:34:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 21:41:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct  s_obj       // obj list
     t_obj_type  type;
     void        *element;   // 각 도혀의 데이터가 저장되는 곳
     void        *next;
+    t_rgb       albedo;
 }               t_obj;
 
 //----------------------- ray -----------------------//
@@ -74,7 +75,20 @@ typedef struct  s_cnvs
     double      aspect_ratio;   //가로-세로 비율
 }               t_cnvs;
 
+typedef struct  s_scene
+{
+    t_cnvs      cnvs;
+    t_cam       cam;
+    t_obj       *world;
+    t_obj       *light;
+    t_rgb       ambient; // 8.4에서 설명할 요소
+    t_ray       ray;
+    t_hit       rec;
+}               t_scene;
+
 //---------------------- hit ----------------------//
+# define EPSILON 1e-6
+
 typedef struct  s_hit
 {
     t_pt        p;              //교점의 좌표
@@ -85,6 +99,17 @@ typedef struct  s_hit
     double      tmin;
     double      tmax;
     t_bool      front_face;
+    t_rgb       albedo;
 }               t_hit;
+
+//-------------------- lighting --------------------//
+# define LIGHT_PT 1
+
+typedef struct  s_light
+{
+    t_pt        orig;
+    t_rgb       light_color;
+    double      bright_ratio;
+}               t_light;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:11:18 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 20:52:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 21:44:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ t_ray	ray_primary(t_cam *cam, double u, double v)
     // left_bottom + u * horizontal + v * vertical - origin 의 단위 벡터.
     ray.dir = vt_unit(vt_minus(vt_plus(vt_plus(cam->left_bot, vt_multi(cam->hori, u)), vt_multi(cam->verti, v)), cam->orig));
     return (ray);
+}
+
+t_rgb    ray_color(t_scene *scene)
+{
+    double  t;
+    t_vt    n;
+
+    //광선이 구에 적중하면(광선과 구가 교점이 있고, 교점이 카메라 앞쪽이라면!)
+    scene->rec = record_init();
+    if (hit(scene->world, &scene->ray, &scene->rec))
+        return (phong_lighting(scene)); //phong_lighting 함수는 8.4에서 설명한다. 이제 법선 벡터를 매핑해서 얻은 색이 아닌, 앞으로 작성할 phong_lighting 함수의 결과값을 반환한다!
+    else
+    {
+        //ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.
+        t = 0.5 * (scene->ray.dir.y + 1.0);
+        // (1-t) * 흰색 + t * 하늘색
+        return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
+    }
 }
 
 t_rgb    ray_color(t_ray *ray, t_obj *obj)
