@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:11:18 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 16:24:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 16:29:27 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ t_rgb    ray_color(t_ray *ray, t_sph *sph)
 {
     double  t;
     t_vt    norm;
+    t_hit   rec;
 
     t = hit_sphere(sph, ray);
+    rec.tmin = 0;
+    rec.tmax = INFINITY;
+    if (hit_sphere(sph, ray, &rec))
+        return (vt_multi(vt_plus(rec.norm, rgb_init(1, 1, 1)), 0.5));
     if (t > 0.0)    // ray가 sph에 적중한 경우
     {
         norm = vt_unit(vt_minus(ray_at(ray, t), sph->center));

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 15:42:34 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/12 16:27:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,16 @@ typedef struct  s_cnvs
     int         height;         //canvas height;
     double      aspect_ratio;   //종횡비
 }               t_cnvs;
+
+//---------------------- hit ----------------------//
+typedef struct  s_hit
+{
+    t_pt        p;              //교점의 좌표
+    t_vt        norm;           //교점에서의 법선
+    double      t;              //광선의 원점과 교점 사이의 거리
+    double      tmin;
+    double      tmax;
+    t_bool      front_face;
+}               t_hit;
 
 #endif
