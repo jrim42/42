@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 14:40:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:21:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct  s_scene
 
 //-------------------- lighting --------------------//
 # define LIGHT_PT 1
+# define LUMEN 3
 
 typedef struct  s_light
 {

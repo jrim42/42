@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:28:57 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 15:11:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:24:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_scene *scene_init(void)
     // malloc 할당 실패 시, 실습에서는 return NULL로 해두었지만, 적절한 에러 처리가 필요하다.
     if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
         return (NULL);
-    scene->cnvs = canvas_init(400, 300);
+    scene->cnvs = canvas_init(600, 450);
     scene->cam = camera_init(&scene->cnvs, pt_init(0, 0, 0));
     world = object_init(SPH, sphere_init(pt_init(-2, 0, -5), 2), rgb_init(0.5, 0, 0)); // world 에 구1 추가
     obj_add(&world, object_init(SPH, sphere_init(pt_init(2, 0, -5), 2), rgb_init(0, 0.5, 0))); // world 에 구2 추가
