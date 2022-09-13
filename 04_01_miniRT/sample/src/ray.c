@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:11:18 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 21:44:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:11:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_ray	ray_primary(t_cam *cam, double u, double v)
 t_rgb    ray_color(t_scene *scene)
 {
     double  t;
-    t_vt    n;
+    // t_vt    n;
 
     //광선이 구에 적중하면(광선과 구가 교점이 있고, 교점이 카메라 앞쪽이라면!)
     scene->rec = record_init();
@@ -56,28 +56,28 @@ t_rgb    ray_color(t_scene *scene)
         //ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.
         t = 0.5 * (scene->ray.dir.y + 1.0);
         // (1-t) * 흰색 + t * 하늘색
-        return (vplus(vmult(color3(1, 1, 1), 1.0 - t), vmult(color3(0.5, 0.7, 1.0), t)));
-    }
-}
-
-t_rgb    ray_color(t_ray *ray, t_obj *obj)
-{
-    double  t;
-    // t_vt    norm;
-    t_hit   rec;
-
-    rec.tmin = 0;
-    rec.tmax = INFINITY;
-    if (hit(obj, ray, &rec))
-        return (vt_multi(vt_plus(rec.norm, rgb_init(1, 1, 1)), 0.5));
-    else
-    {
-        //ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.
-        t = 0.5 * (ray->dir.y + 1.0);
-        // (1-t) * 흰색 + t * 하늘색
         return (vt_plus(vt_multi(rgb_init(1, 1, 1), 1.0 - t), vt_multi(rgb_init(0.5, 0.7, 1.0), t)));
     }
 }
+
+// t_rgb    ray_color(t_ray *ray, t_obj *obj)
+// {
+//     double  t;
+//     // t_vt    norm;
+//     t_hit   rec;
+
+//     rec.tmin = 0;
+//     rec.tmax = INFINITY;
+//     if (hit(obj, ray, &rec))
+//         return (vt_multi(vt_plus(rec.norm, rgb_init(1, 1, 1)), 0.5));
+//     else
+//     {
+//         //ray의 방향벡터의 y 값을 기준으로 그라데이션을 주기 위한 계수.
+//         t = 0.5 * (ray->dir.y + 1.0);
+//         // (1-t) * 흰색 + t * 하늘색
+//         return (vt_plus(vt_multi(rgb_init(1, 1, 1), 1.0 - t), vt_multi(rgb_init(0.5, 0.7, 1.0), t)));
+//     }
+// }
 
 // t_rgb    ray_color(t_ray *ray, t_sph *sph)
 // {

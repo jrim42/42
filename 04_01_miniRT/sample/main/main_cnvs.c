@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:18:12 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 21:28:31 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:09:55 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int main(void)
     //Scene setting;
     cnvs = canvas_init(400, 300);
     cam = camera_init(&cnvs, pt_init(0, 0, 0));
-    world = object_init(SPH, sphere_init(pt_init(-2, 0, -5), 2)); // world 에 구1 추가
-    obj_add(&world, object_init(SPH, sphere_init(pt_init(2, 0, -5), 2))); // world 에 구2 추가
-    obj_add(&world, object_init(SPH, sphere_init(pt_init(0, -1000, 0), 990))); // world 에 구3 추가
+    world = object_init(SPH, sphere_init(pt_init(-2, 0, -5), 2), rgb_init(0.5, 0, 0)); // world 에 구1 추가
+    obj_add(&world, object_init(SPH, sphere_init(pt_init(2, 0, -5), 2), rgb_init(0, 0.5, 0))); // world 에 구2 추가
+    obj_add(&world, object_init(SPH, sphere_init(pt_init(0, -1000, 0), 990), rgb_init(1, 1, 1))); // world 에 구3 추가
 
     // 랜더링
     // P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값

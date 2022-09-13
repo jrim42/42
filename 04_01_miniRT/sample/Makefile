@@ -24,6 +24,7 @@ SRC			=	src/canvas.c \
 				src/obj_create.c \
 				src/obj_utils.c \
 				src/vt_utils.c \
+				src/phong.c \
 				main/main_scene.c
 				
 OBJ			=	$(SRC:.c=.o)

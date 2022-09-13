@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 21:41:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 14:40:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ typedef struct  s_ray
     t_vt        dir;
 }               t_ray;
 
+//---------------------- hit ----------------------//
+# define EPSILON 1e-6
+
+typedef struct  s_hit
+{
+    t_pt        p;              //교점의 좌표
+    t_vt        norm;           //교점에서의 법선
+    double      t;              //광선의 원점과 교점 사이의 거리
+    // tmin과 tmax의 값은 각각 0과 INFINITY로 오브젝트가 카메라의 뒤에 있거나(t < 0), 
+    // 오브젝트가 카메라로부터 너무 멀 경우를 고려해주기 위함이다
+    double      tmin;
+    double      tmax;
+    t_bool      front_face;
+    t_rgb       albedo;
+}               t_hit;
+
 //---------------------- scene ----------------------//
 typedef struct  s_cam
 {
@@ -85,22 +101,6 @@ typedef struct  s_scene
     t_ray       ray;
     t_hit       rec;
 }               t_scene;
-
-//---------------------- hit ----------------------//
-# define EPSILON 1e-6
-
-typedef struct  s_hit
-{
-    t_pt        p;              //교점의 좌표
-    t_vt        norm;           //교점에서의 법선
-    double      t;              //광선의 원점과 교점 사이의 거리
-    // tmin과 tmax의 값은 각각 0과 INFINITY로 오브젝트가 카메라의 뒤에 있거나(t < 0), 
-    // 오브젝트가 카메라로부터 너무 멀 경우를 고려해주기 위함이다
-    double      tmin;
-    double      tmax;
-    t_bool      front_face;
-    t_rgb       albedo;
-}               t_hit;
 
 //-------------------- lighting --------------------//
 # define LIGHT_PT 1

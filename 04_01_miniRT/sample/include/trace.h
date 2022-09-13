@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:10:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 21:44:37 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:11:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ t_bool      hit_obj(t_obj *obj, t_ray *ray, t_hit *rec);
 t_bool      hit_sphere(t_obj *obj, t_ray *ray, t_hit *rec);
 // t_bool      hit_sphere(t_sph *sph, t_ray *ray, t_hit *rec);
 void        set_face_normal(t_ray *ray, t_hit *rec);
+
+t_rgb		phong_lighting(t_scene *scene);
+t_vt		reflect(t_vt v, t_vt n);
+t_rgb		point_light_get(t_scene *scene, t_light *light);
 
 #endif
