@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:10:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 15:11:42 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 15:26:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void        set_face_normal(t_ray *ray, t_hit *rec);
 t_rgb		phong_lighting(t_scene *scene);
 t_vt		reflect(t_vt v, t_vt n);
 t_rgb		point_light_get(t_scene *scene, t_light *light);
+
+t_bool		in_shadow(t_obj *objs, t_ray ray, double light_len);
 
 #endif
