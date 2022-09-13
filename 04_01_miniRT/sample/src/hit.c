@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:51:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 21:43:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 18:50:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ t_bool	hit_obj(t_obj *obj, t_ray *ray, t_hit *rec)
     hit_result = FALSE;
     if (obj->type == SPH)
         hit_result = hit_sphere(obj, ray, rec); //hit_sphere의 첫번째 인자도 t_sphere *에서 t_object *로 수정해주자.
+	else if (obj->type == PLN)
+		hit_result = hit_plane(obj, ray, rec);
+	else if (obj->type == CYL)
+		hit_result = hit_cylinder(obj, ray, rec);
     return (hit_result);
 }
 
@@ -86,6 +90,29 @@ t_bool	hit_sphere(t_obj *obj, t_ray *ray, t_hit *rec)
 	rec->norm = vt_div(vt_minus(rec->p, sph->center), sph->rad); // 정규화된 법선 벡터.
 	rec->albedo = obj->albedo;
 	set_face_normal(ray, rec); // rec의 법선벡터와 광선의 방향벡터를 비교해서 앞면인지 뒷면인지 t_bool 값으로 저장.
+	return (TRUE);
+}
+
+t_bool	hit_plane(t_obj *obj, t_ray *ray, t_hit *rec)
+{
+	t_plane	*pln;
+	double	numer;
+	double	denom;
+	double	root;
+
+	pln = (t_plane *)obj->element;
+	denom = vt_dot(ray->dir, pln->dir);
+	if (fabs(denom) < EPSILON)
+		return (FALSE);
+	numer = vt_dot(vt_minus(pln->center, ray->orig), pln->dir);
+	root = numer / denom;
+	if (root < rec->tmin || root > rec->tmax)
+		return (FALSE);
+	rec->t = root;
+	rec->p = ray_at(ray, root);
+	rec->norm = pln->dir;
+	set_face_normal(ray, rec);
+	rec->albedo = obj->albedo;
 	return (TRUE);
 }
 

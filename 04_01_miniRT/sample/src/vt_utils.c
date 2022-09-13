@@ -6,11 +6,18 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:08:31 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/12 18:30:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 18:51:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
+
+//
+void    vt_print(t_vt *vec)
+{
+    printf("(%lf, %lf, %lf)\n", vec->x, vec->y, vec->z);
+}
+//
 
 t_pt    pt_init(double x, double y, double z)
 {

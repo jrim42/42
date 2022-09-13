@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 15:21:35 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/13 16:25:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,24 @@ typedef struct  s_sph
     double  rad_sq;
 } t_sph;
 
+typedef struct  s_plane
+{
+    t_pt    center;     // 평면의 어느 한 지점 
+    t_vt    dir;        // 평면이 어떻게 기울어져 있는지
+} t_plane;
+
+typedef struct  s_cyl
+{
+    t_pt    center;     // 평면의 어느 한 지점 
+    t_vt    dir;        // 평면이 어떻게 기울어져 있는지
+    double  diam;
+    double  height;
+} t_cyl;
+
 typedef int     t_obj_type;
 # define SPH 0
+# define PLN 1
+# define CYL 2
 
 typedef struct  s_obj       // obj list
 {
