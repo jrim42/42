@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:51:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 18:50:42 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/14 17:49:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,24 @@ t_bool	hit_sphere(t_obj *obj, t_ray *ray, t_hit *rec)
 	double  half_b;
 	double  c;
 	double  discrim; //판별식
-	double	sqrt_discrim;
+	double	sqrt_d;
 	double	root;
 
 	sph = (t_sph *)obj->element;
 	oc = vt_minus(ray->orig, sph->center);
+	
 	a = vt_len_sq(ray->dir);
 	half_b = vt_dot(oc, ray->dir);
 	c = vt_len_sq(oc) - sph->rad_sq;
 	discrim = half_b * half_b - a * c;
 	
-	
 	if (discrim < 0)			// 판별식이 0보다 작다 == 실근이 존재하지 않는다.
 		return (FALSE);
-	sqrt_discrim = sqrt(discrim);
-	root = (-half_b - sqrt_discrim) / a;
+	sqrt_d = sqrt(discrim);
+	root = (-half_b - sqrt_d) / a;
 	if (root < rec->tmin || rec->tmax < root)
 	{
-		root = (-half_b + sqrt_discrim) / a;
+		root = (-half_b + sqrt_d) / a;
 		if (root < rec->tmin || rec->tmax < root)
 			return (FALSE);
 	}

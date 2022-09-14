@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:16:21 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 20:58:07 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/14 18:16:19 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int		hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double height)
 	const t_cyl		*cyl = obj->element;
 	const double	rad = cyl->diam / 2;
 	const t_vt		cap_center = vt_plus(cyl->center, vt_multi(cyl->dir, height));
-	const double 	root = vt_dot(vt_minus(cap_center, ray->orig), cyl->dir);
+	const double	denom = vt_dot(ray->dir, cyl->dir);
+	const double 	numer = vt_dot(vt_minus(cap_center, ray->orig), cyl->dir);
+	const double	root = numer / denom;
     const double 	diameter = vt_len(vt_minus(cap_center, ray_at(ray, root)));
 
 	if (fabs(rad) < fabs(diameter))
@@ -67,10 +69,8 @@ int		hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double height)
 t_bool	hit_cylinder_side(t_obj *obj, t_ray *ray, t_hit *rec)
 {
 	t_cyl	*cyl;
-	t_vt	ray_vec;
-	t_vt	cyl_vec;
-	t_vt	to_center;
-	double	rad;
+	t_vt	to_center;	// 방향벡터로 나타내는 원기둥의 아래쪽 cap의 center
+	double	rad;		// cap의 반지름
 
 	double	a;
 	double	half_b;
@@ -82,15 +82,14 @@ t_bool	hit_cylinder_side(t_obj *obj, t_ray *ray, t_hit *rec)
 	double	hit_height;
 
 	cyl = (t_cyl *)obj->element;
-	ray_vec = ray->dir;
-	cyl_vec = cyl->dir;
 	rad = cyl->diam / 2;
 	to_center = vt_minus(ray->orig, cyl->center);
 
-	a = vt_len_sq(vt_cross(ray_vec, cyl_vec));
-	half_b = vt_dot(vt_cross(ray_vec, cyl_vec), vt_cross(to_center, cyl_vec));
-	c = vt_len_sq(vt_cross(to_center, cyl_vec)) - pow(rad, 2);
+	a = vt_len_sq(vt_cross(ray->dir, cyl->dir));
+	half_b = vt_dot(vt_cross(ray->dir, cyl->dir), vt_cross(to_center, cyl->dir));
+	c = vt_len_sq(vt_cross(to_center, cyl->dir)) - rad * rad;
 	discrim = half_b * half_b - a * c;
+	
 	if (discrim < 0)
 		return (FALSE);
 	sqrt_d = sqrt(discrim);
@@ -106,6 +105,7 @@ t_bool	hit_cylinder_side(t_obj *obj, t_ray *ray, t_hit *rec)
 
 	rec->t = root;
 	rec->p = ray_at(ray, root);
+	// rec->norm = cyl->dir;
 	rec->norm = get_cyl_norm(cyl, rec->p, hit_height);
 	set_face_normal(ray, rec);
 	rec->albedo = obj->albedo;

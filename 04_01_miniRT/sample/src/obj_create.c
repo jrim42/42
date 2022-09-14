@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:41:33 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 19:13:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/14 16:52:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_cyl *cyl_init(t_pt center, t_vt dir, double diam, double height)
     if (!(cyl = (t_cyl *)malloc(sizeof(t_cyl))))
         return (NULL);
     cyl->center = center;
+    // cyl->dir = dir;
     cyl->dir = vt_unit(dir);
     cyl->diam = diam;
     cyl->height = height;
