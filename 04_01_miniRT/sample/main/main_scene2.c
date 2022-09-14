@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:28:57 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/14 19:46:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/14 20:48:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@ t_scene *scene_init(void)
     scene->cnvs = canvas_init(1200, 800);
     // scene->cnvs = canvas_init(400, 300);
     scene->cam = camera_init(&scene->cnvs, pt_init(0, 0, 0));
-    world = object_init(PLN, plane_init(pt_init(-1, -2, -1), vt_init(0, 1, 0)), rgb_init(0.2, 0.5, 0.3));
+    world = object_init(PLN, plane_init(pt_init(-1, -2, -1), vt_init(0, 1, 0)), rgb_init(0.4, 0.4, 0.6));
     // obj_add(&world, object_init(PLN, plane_init(pt_init(0, 0, 0), vt_init(0, 0, 1)), rgb_init(0.2, 0.3, 0.3))); // world 에 구2 추가
-    // obj_add(&world, object_init(SPH, sphere_init(pt_init(-2, 0, -3), 1), rgb_init(0.9, 0.4, 0.1))); // world 에 구2 추가
-    // obj_add(&world, object_init(SPH, sphere_init(pt_init(-1, 1, -5), 1), rgb_init(0.2, 0.4, 0.9))); // world 에 구2 추가
-    // obj_add(&world, object_init(SPH, sphere_init(pt_init(2, -1, -3), 1), rgb_init(0.9, 0.9, 0.2))); // world 에 구2 추가
-    // obj_add(&world, object_init(PLN, plane_init(pt_init(3, 0, -5), vt_init(-1, 1, 0)), rgb_init(0.2, 0.3, 0.3))); // world 에 구2 추가
-    obj_add(&world, object_init(CYL, cyl_init(pt_init(2, 0, -5), vt_init(1, 0, 2), 3, 4), rgb_init(0.3, 0.2, 0.8))); // world 에 구2 추가
-    obj_add(&world, object_init(CYL, cyl_init(pt_init(-2, 0, -4), vt_init(-1, 1, 0), 2, 5), rgb_init(0.4, 0.6, 0.3))); // world 에 구2 추가
+    obj_add(&world, object_init(SPH, sphere_init(pt_init(-2, 0, -3), 1), rgb_init(0.9, 0.4, 0.1))); // world 에 구2 추가
+    obj_add(&world, object_init(SPH, sphere_init(pt_init(-1, 2, -5), 1), rgb_init(0.2, 0.4, 0.9))); // world 에 구2 추가
+    obj_add(&world, object_init(SPH, sphere_init(pt_init(1, -1, -3), 1), rgb_init(0.9, 0.9, 0.2))); // world 에 구2 추가
+    obj_add(&world, object_init(PLN, plane_init(pt_init(3, 0, -5), vt_init(-1, 1, 0)), rgb_init(0.2, 0.3, 0.3))); // world 에 구2 추가
+    obj_add(&world, object_init(CYL, cyl_init(pt_init(2, 0, -5), vt_init(1, 0, 4), 3, 4), rgb_init(0.3, 0.2, 0.8))); // world 에 구2 추가
+    // obj_add(&world, object_init(CYL, cyl_init(pt_init(-2, 0, -2), vt_init(0, 1, 0), 0.8, 2), rgb_init(0.5, 0.5, 0.1))); // world 에 구2 추가
+    obj_add(&world, object_init(CYL, cyl_init(pt_init(-2, 1, -4), vt_init(-1, 1, 0), 2, 4), rgb_init(0.4, 0.6, 0.3))); // world 에 구2 추가
     scene->world = world;
-    lights = object_init(LIGHT_PT, light_point(pt_init(0, 1, 0), rgb_init(1, 1, 1), 0.5), rgb_init(0, 0, 0)); // 더미 albedo
+    lights = object_init(LIGHT_PT, light_point(pt_init(0, 3, 0), rgb_init(1, 1, 1), 0.5), rgb_init(0, 0, 0)); // 더미 albedo
     // lights = object_init(LIGHT_PT, light_point(pt_init(-5, 2, 10), rgb_init(1, 1, 1), 0.5), rgb_init(0, 0, 0)); // 더미 albedo
     scene->light = lights;
     ka = 0.1; 

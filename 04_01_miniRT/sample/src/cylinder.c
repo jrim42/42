@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:16:21 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/14 18:16:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/14 20:35:18 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,20 @@ int		cyl_bound(t_cyl *cyl, t_vt at)
 
 t_vt	get_cyl_norm(t_cyl *cyl, t_vt at, double hit_height)
 {
-	t_pt	hit_center;
-	t_vt	norm;
+	// t_pt	hit_center;
+	// t_vt	norm;
 
-	hit_center = vt_plus(cyl->center, vt_multi(cyl->dir, hit_height));
-	norm = vt_minus(at, hit_center);
+	// hit_center = vt_plus(cyl->center, vt_multi(cyl->dir, -hit_height));
+	// norm = vt_minus(at, hit_center);
+	// return (vt_unit(norm));
+
+	t_vt	norm;
+	t_vt	tmp;
+
+	if (hit_height)
+		;
+	tmp = vt_minus(at, cyl->center);
+	norm = vt_minus(tmp, vt_multi(cyl->dir, vt_dot(cyl->dir, tmp)));
 	return (vt_unit(norm));
 }
 
