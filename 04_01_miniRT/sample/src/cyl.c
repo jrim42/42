@@ -6,14 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:22:43 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/15 16:01:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/15 20:46:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/miniRT.h"
 
 t_bool	hit_cylinder(t_obj *obj, t_ray *ray, t_hit *rec);
-t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double half_h);
+t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, int mode);
 t_bool	hit_cylinder_side(t_obj *obj, t_ray *ray, t_hit *rec);
 t_bool	cyl_side_root(t_cyl *cyl, t_ray *ray, t_hit *rec, double *root);
 t_bool	cyl_bound(t_cyl *cyl, t_vt at);
@@ -26,13 +26,13 @@ t_bool	hit_cylinder(t_obj *obj, t_ray *ray, t_hit *rec)
 
 	cyl = obj->element;
 	result = 0;
-	result += hit_cylinder_cap(obj, ray, rec, cyl->height / 2);
-	result += hit_cylinder_cap(obj, ray, rec, -(cyl->height / 2));
+	result += hit_cylinder_cap(obj, ray, rec, CYL_CAP_TOP);
+	result += hit_cylinder_cap(obj, ray, rec, CYL_CAP_BOT);
 	result += hit_cylinder_side(obj, ray, rec);
 	return (result);
 }
 
-t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double half_h)
+t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, int mode)
 {
 	// 각 오브젝트 구조체에 albedo 담을 예정
 	// 그러면 함수 호출할 때 t_cyl로 받아오면 됨.
@@ -43,8 +43,10 @@ t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double half_h)
     double 	diameter;
 
 	cyl = obj->element;
-	
-	cap_center = vt_plus(cyl->center, vt_multi(cyl->dir, half_h));
+	if (mode == CYL_CAP_TOP)
+		cap_center = cyl->cap_top;
+	else
+		cap_center = cyl->cap_bot;
 	cap_rad = cyl->diam / 2;
 	// numer = vt_dot(vt_minus(cap_center, ray->orig), cyl->dir);
 	// denom = vt_dot(ray->dir, cyl->dir);
@@ -62,7 +64,7 @@ t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, double half_h)
 	rec->t = root;
 	rec->p = ray_at(ray, root);
 	rec->tmax = rec->t;
-	if (0 < half_h)
+	if (mode == CYL_CAP_TOP)
 		rec->norm = cyl->dir;
 	else
 		rec->norm = vt_minus_self(cyl->dir);
@@ -91,16 +93,16 @@ t_bool	hit_cylinder_side(t_obj *obj, t_ray *ray, t_hit *rec)
 
 t_bool	cyl_side_root(t_cyl *cyl, t_ray *ray, t_hit *rec, double *root)
 {	
-	t_vt	bottom_center;	// 방향벡터로 나타내는 원기둥의 아래쪽 cap의 center
+	t_vt	to_center;	// 방향벡터로 나타내는 원기둥의 아래쪽 cap의 center
 	double	a;
 	double	half_b;
 	double	c;
 	double	discrim;
 
-	bottom_center = vt_minus(ray->orig, cyl->center);
+	to_center = vt_minus(ray->orig, cyl->center);
 	a = vt_len_sq(vt_cross(ray->dir, cyl->dir));
-	half_b = vt_dot(vt_cross(ray->dir, cyl->dir), vt_cross(bottom_center, cyl->dir));
-	c = vt_len_sq(vt_cross(bottom_center, cyl->dir)) - pow(cyl->diam / 2, 2);
+	half_b = vt_dot(vt_cross(ray->dir, cyl->dir), vt_cross(to_center, cyl->dir));
+	c = vt_len_sq(vt_cross(to_center, cyl->dir)) - pow(cyl->diam / 2, 2);
 	discrim = half_b * half_b - a * c;
 	if (discrim < 0)
 		return (FALSE);

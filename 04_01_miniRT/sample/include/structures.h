@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/13 20:45:53 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/15 20:06:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@ typedef struct  s_plane
     t_vt    dir;        // 평면이 어떻게 기울어져 있는지
 } t_plane;
 
+# define CYL_CAP_TOP 0
+# define CYL_CAP_BOT 1
+
 typedef struct  s_cyl
 {
     t_pt    center;      
     t_vt    dir;        
     double  diam;
+	double	rad;
     double  height;
+    t_pt    cap_top;
+    t_pt    cap_bot;
 } t_cyl;
 
 typedef int     t_obj_type;
