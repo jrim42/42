@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:28:57 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/17 14:28:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/18 14:48:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_scene *scene_init(void)
 
     if(!(scene = (t_scene *)malloc(sizeof(t_scene))))
         return (NULL);
-    scene->cnvs = canvas_init(1600, 900);
+    scene->cnvs = canvas_init(1024, 768);
     // scene->cnvs = canvas_init(400, 300);
     scene->cam = camera_init(&scene->cnvs, pt_init(0, 0, 0));
     world = object_init(PLN, plane_init(pt_init(0, -3, 0), vt_init(0, 1, 0)), rgb_init(0.5, 0.9, 0.5 ));

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:22:43 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/15 20:46:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/18 15:23:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_vt	cyl_norm(t_cyl *cyl, t_vt at);
 
 t_bool	hit_cylinder(t_obj *obj, t_ray *ray, t_hit *rec)
 {
-	t_cyl	*cyl;
+	// t_cyl	*cyl;
 	int		result;
 
-	cyl = obj->element;
+	// cyl = obj->element;
 	result = 0;
 	result += hit_cylinder_cap(obj, ray, rec, CYL_CAP_TOP);
 	result += hit_cylinder_cap(obj, ray, rec, CYL_CAP_BOT);
@@ -47,12 +47,12 @@ t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, int mode)
 		cap_center = cyl->cap_top;
 	else
 		cap_center = cyl->cap_bot;
-	cap_rad = cyl->diam / 2;
-	// numer = vt_dot(vt_minus(cap_center, ray->orig), cyl->dir);
-	// denom = vt_dot(ray->dir, cyl->dir);
+	cap_rad = cyl->diameter / 2;
+	// numer = vt_dot(vt_minus(cap_center, ray->orig), cyl->normal);
+	// denom = vt_dot(ray->dir, cyl->normal);
 	// root = numer / denom;
-	root = vt_dot(vt_minus(cap_center, ray->orig), cyl->dir) /
-			vt_dot(ray->dir, cyl->dir);
+	root = vt_dot(vt_minus(cap_center, ray->orig), cyl->normal) /
+			vt_dot(ray->dir, cyl->normal);
 			
 	diameter = vt_len(vt_minus(cap_center, ray_at(ray, root)));
 	
@@ -65,9 +65,9 @@ t_bool	hit_cylinder_cap(t_obj *obj, t_ray *ray, t_hit *rec, int mode)
 	rec->p = ray_at(ray, root);
 	rec->tmax = rec->t;
 	if (mode == CYL_CAP_TOP)
-		rec->norm = cyl->dir;
+		rec->norm = cyl->normal;
 	else
-		rec->norm = vt_minus_self(cyl->dir);
+		rec->norm = vt_minus_self(cyl->normal);
 	set_face_normal(ray, rec);
 	rec->albedo = obj->albedo;
 	return (TRUE);
@@ -99,10 +99,10 @@ t_bool	cyl_side_root(t_cyl *cyl, t_ray *ray, t_hit *rec, double *root)
 	double	c;
 	double	discrim;
 
-	to_center = vt_minus(ray->orig, cyl->center);
-	a = vt_len_sq(vt_cross(ray->dir, cyl->dir));
-	half_b = vt_dot(vt_cross(ray->dir, cyl->dir), vt_cross(to_center, cyl->dir));
-	c = vt_len_sq(vt_cross(to_center, cyl->dir)) - pow(cyl->diam / 2, 2);
+	to_center = vt_minus(ray->orig, cyl->point);
+	a = vt_len_sq(vt_cross(ray->dir, cyl->normal));
+	half_b = vt_dot(vt_cross(ray->dir, cyl->normal), vt_cross(to_center, cyl->normal));
+	c = vt_len_sq(vt_cross(to_center, cyl->normal)) - pow(cyl->diameter / 2, 2);
 	discrim = half_b * half_b - a * c;
 	if (discrim < 0)
 		return (FALSE);
@@ -121,7 +121,7 @@ t_bool	cyl_bound(t_cyl *cyl, t_vt at)
 	double	hit_height;
 	double	max_height;
 
-	hit_height = vt_dot(vt_minus(at, cyl->center), cyl->dir);
+	hit_height = vt_dot(vt_minus(at, cyl->point), cyl->normal);
 	max_height = cyl->height / 2;
 	if (fabs(hit_height) > max_height)
 		return (FALSE);
@@ -133,7 +133,7 @@ t_vt	cyl_norm(t_cyl *cyl, t_vt at)
 	t_vt	norm;
 	t_vt	tmp;
 
-	tmp = vt_minus(at, cyl->center);
-	norm = vt_minus(tmp, vt_multi(cyl->dir, vt_dot(cyl->dir, tmp)));
+	tmp = vt_minus(at, cyl->point);
+	norm = vt_minus(tmp, vt_multi(cyl->normal, vt_dot(cyl->normal, tmp)));
 	return (vt_unit(norm));
 }

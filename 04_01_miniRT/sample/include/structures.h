@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:07:00 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/15 20:06:11 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/18 14:59:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,27 @@ typedef struct  s_plane
 # define CYL_CAP_TOP 0
 # define CYL_CAP_BOT 1
 
+// typedef struct  s_cyl
+// {
+//     t_pt    center;      
+//     t_vt    dir;        
+//     double  diam;
+// 	double	rad;
+//     double  height;
+//     t_pt    cap_top;
+//     t_pt    cap_bot;
+// } t_cyl;
+
 typedef struct  s_cyl
 {
-    t_pt    center;      
-    t_vt    dir;        
-    double  diam;
+    t_pt    point;      
+    t_vt    normal;        
+    double  diameter;
 	double	rad;
     double  height;
     t_pt    cap_top;
     t_pt    cap_bot;
+    t_rgb   albedo;
 } t_cyl;
 
 typedef int     t_obj_type;

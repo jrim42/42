@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:41:33 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/15 20:06:58 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/18 15:00:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,31 @@ t_cyl *cyl_init(t_pt center, t_vt dir, double diam, double height)
 
     if (!(cyl = (t_cyl *)malloc(sizeof(t_cyl))))
         return (NULL);
-    cyl->center = center;
-    cyl->dir = vt_unit(dir);
-    cyl->diam = diam;
+    cyl->point = center;
+    cyl->normal = vt_unit(dir);
+    cyl->diameter = diam;
     cyl->height = height;
-    cyl->rad = cyl->diam / 2;
-	cyl->cap_top = vt_plus(cyl->center, vt_multi(cyl->dir, cyl->height / 2));
-	cyl->cap_bot = vt_plus(cyl->center, vt_multi(cyl->dir, -(cyl->height / 2)));
+    cyl->rad = cyl->diameter / 2;
+	cyl->cap_top = vt_plus(cyl->point, vt_multi(cyl->normal, cyl->height / 2));
+	cyl->cap_bot = vt_plus(cyl->point, vt_multi(cyl->normal, -(cyl->height / 2)));
     return (cyl);
 }
+
+// t_cyl *cyl_init(t_pt center, t_vt dir, double diam, double height)
+// {
+//     t_cyl *cyl;
+
+//     if (!(cyl = (t_cyl *)malloc(sizeof(t_cyl))))
+//         return (NULL);
+//     cyl->center = center;
+//     cyl->dir = vt_unit(dir);
+//     cyl->diam = diam;
+//     cyl->height = height;
+//     cyl->rad = cyl->diam / 2;
+// 	cyl->cap_top = vt_plus(cyl->center, vt_multi(cyl->dir, cyl->height / 2));
+// 	cyl->cap_bot = vt_plus(cyl->center, vt_multi(cyl->dir, -(cyl->height / 2)));
+//     return (cyl);
+// }
 
 t_light *light_point(t_pt orig, t_rgb color, double bright_ratio)
 {
