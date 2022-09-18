@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:28:57 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/15 21:00:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/17 14:28:04 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ t_scene *scene_init(void)
     scene->cnvs = canvas_init(1600, 900);
     // scene->cnvs = canvas_init(400, 300);
     scene->cam = camera_init(&scene->cnvs, pt_init(0, 0, 0));
-    // world = object_init(PLN, plane_init(pt_init(0, 3, 0), vt_init(0, 1, 0)), rgb_init(0.5, 0.9, 0.5 ));
+    world = object_init(PLN, plane_init(pt_init(0, -3, 0), vt_init(0, 1, 0)), rgb_init(0.5, 0.9, 0.5 ));
     // obj_add(&world, object_init(SPH, sphere_init(pt_init(-2, 0, -3), 1), rgb_init(0.9, 0.4, 0.1))); // world 에 구2 추가
     // obj_add(&world, object_init(SPH, sphere_init(pt_init(-1, 2, -5), 1), rgb_init(0.2, 0.4, 0.9))); // world 에 구2 추가
     // obj_add(&world, object_init(SPH, sphere_init(pt_init(1, -1, -3), 1), rgb_init(0.9, 0.9, 0.2))); // world 에 구2 추가
     // obj_add(&world, object_init(PLN, plane_init(pt_init(3, 0, -5), vt_init(-1, 1, 0)), rgb_init(0.2, 0.3, 0.3))); // world 에 구2 추가
-    world = object_init(CYL, cyl_init(pt_init(-2, 0, -4), vt_init(0, 1, 1), 2, 4), rgb_init(0.8, 0.6, 0.2)); // world 에 구2 추가
+    // world = object_init(CYL, cyl_init(pt_init(-2, 0, -4), vt_init(0, 1, 1), 2, 4), rgb_init(0.8, 0.6, 0.2)); // world 에 구2 추가
     // obj_add(&world, object_init(CYL, cyl_init(pt_init(-2, 0, -4), vt_init(0, 1, 1), 2, 4), rgb_init(0.8, 0.6, 0.2))); // world 에 구2 추가
-    obj_add(&world, object_init(CYL, cyl_init(pt_init(2, 0, -5), vt_init(1, 0, 4), 3, 4), rgb_init(0.3, 0.2, 0.8))); // world 에 구2 추가
-    obj_add(&world, object_init(CYL, cyl_init(pt_init(0, 3, -10), vt_init(0, 0.7, -0.5), 3, 4), rgb_init(0.6, 0.2, 0.3))); // world 에 구2 추가
+    obj_add(&world, object_init(CYL, cyl_init(pt_init(0, 0, -3), vt_init(0, 1, -1), 1.2, 2), rgb_init(0.3, 0.2, 0.8))); // world 에 구2 추가
+    // obj_add(&world, object_init(CYL, cyl_init(pt_init(0, 3, -10), vt_init(0, 0.7, -0.5), 3, 4), rgb_init(0.6, 0.2, 0.3))); // world 에 구2 추가
     // obj_add(&world, object_init(CYL, cyl_init(pt_init(3, 0, -3), vt_init(0, 1, 0), 1, 2), rgb_init(0.6, 0.4, 0.1))); // world 에 구2 추가
     // obj_add(&world, object_init(CYL, cyl_init(pt_init(1.5, 0, -3), vt_init(0, 1, 0), 1, 2), rgb_init(0.6, 0.4, 0.1))); // world 에 구2 추가
     // obj_add(&world, object_init(CYL, cyl_init(pt_init(-0, 0, -3), vt_init(0, 1, 0), 1, 2), rgb_init(0.6, 0.4, 0.1))); // world 에 구2 추가
