@@ -1,25 +1,33 @@
 #include "minirt.h"
 
-t_vt	vmult(t_vt vec, double t)
+t_vt	vplus(t_vt vec, t_vt vec2)
 {
-	vec.x *= t;
-	vec.y *= t;
-	vec.z *= t;
+	vec.x += vec2.x;
+	vec.y += vec2.y;
+	vec.z += vec2.z;
 	return (vec);
 }
 
-t_vt	vmult_(t_vt vec, t_vt vec2)
+t_vt	vplus_(t_vt vec, double x, double y, double z)
 {
-	vec.x *= vec2.x;
-	vec.y *= vec2.y;
-	vec.z *= vec2.z;
+	vec.x += x;
+	vec.y += y;
+	vec.z += z;
 	return (vec);
 }
 
-t_vt	vdivide(t_vt vec, double t)
+t_vt	vminus(t_vt vec, t_vt vec2)
 {
-	vec.x *= 1 / t;
-	vec.y *= 1 / t;
-	vec.z *= 1 / t;
+	vec.x -= vec2.x;
+	vec.y -= vec2.y;
+	vec.z -= vec2.z;
+	return (vec);
+}
+
+t_vt	vminus_(t_vt vec, double x, double y, double z)
+{
+	vec.x -= x;
+	vec.y -= y;
+	vec.z -= z;
 	return (vec);
 }
