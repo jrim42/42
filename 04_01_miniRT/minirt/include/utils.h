@@ -32,6 +32,6 @@ t_vt		vdivide(t_vt vec, double t);
 double		vdot(t_vt vec, t_vt vec2);
 t_vt		vcross(t_vt vec, t_vt vec2);
 t_vt		vunit(t_vt vec);
-// t_vt		vmin(t_vt vec1, t_vt vec2);
+t_vt	vmin(t_vt vec1, t_vt vec2);
 
 #endif

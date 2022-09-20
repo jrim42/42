@@ -28,6 +28,7 @@ bool	ft_plane_hit(const t_pl *data, t_ray *ray, t_hit *rec);
 bool	ft_is_cylinder_type(const char *type);
 bool	ft_cylinder_setup(t_obj *objects, char *const *tbl);
 int		ft_cylinder_hit(t_cy*cy, t_ray *ray, t_hit *rec);
+
 bool	hit_cylinder(t_cy*obj, t_ray *ray, t_hit *rec);
 bool	hit_cylinder_cap(t_cy*cyl, t_ray *ray, t_hit *rec, int mode);
 bool	cyl_cap_root(t_cy*cyl, t_ray *ray, t_hit *rec, double *root);

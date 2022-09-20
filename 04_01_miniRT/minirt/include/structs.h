@@ -170,4 +170,11 @@ typedef struct s_cy
 	t_cl		albedo;
 }	t_cy;
 
+//------------------- limits --------------------
+enum e_limit
+{
+	LOWER_LIMIT,
+	UPPER_LIMIT
+};
+
 #endif
