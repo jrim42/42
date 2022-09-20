@@ -23,3 +23,14 @@ t_vt	vdivide(t_vt vec, double t)
 	vec.z *= 1 / t;
 	return (vec);
 }
+
+t_vt	vmin(t_vt vec1, t_vt vec2)
+{
+	if (vec1.x > vec2.x)
+		vec1.x = vec2.x;
+	if (vec1.y > vec2.y)
+		vec1.y = vec2.y;
+	if (vec1.z > vec2.z)
+		vec1.z = vec2.z;
+	return (vec1);
+}
