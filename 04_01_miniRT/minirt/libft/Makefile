@@ -62,10 +62,10 @@ CFLAGS := -Wall -Wextra -Werror
 all : $(NAME)
 
 clean :
-	$(RM) *.o
+	@$(RM) *.o
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re :
 	@make fclean

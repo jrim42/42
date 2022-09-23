@@ -41,6 +41,7 @@ static t_cl	ft_get_specular(t_ray *ray, t_hit *rec, t_light *light, t_vt light_d
     ks = 0.5;
     spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
     specular = vmult(vmult(light->light_color, ks), spec);
+	return (specular);
 }
 
 t_cl		ft_point_light_get(t_ray *ray, t_hit *rec, t_scene *scene, t_obj *objects)
@@ -55,7 +56,7 @@ t_cl		ft_point_light_get(t_ray *ray, t_hit *rec, t_scene *scene, t_obj *objects)
 	light_dir = vminus(scene->lights.origin, rec->p);
     light_len = vlength(light_dir);
     light_ray = ft_ray(vplus(rec->p, vmult(rec->normal, EPSILON)), light_dir);
-    if (in_shadow(objects, light_ray, light_len))
+    if (ft_is_in_shadow(objects, light_ray, light_len))
         return (color3(0,0,0));
     light_dir = vunit(light_dir);
     diffuse = ft_get_diffuse(rec, &scene->lights, light_dir);

@@ -9,6 +9,9 @@ static void	ft_write_color(t_img *img, int j, int i, const t_cl *clr)
 	dst = img->data + (j * img->line_length + i * bytes_per_pixel);
 	trgb = ft_trgb(0, 255.999 * clr->x, 255.999 * clr->y, 255.999 * clr->z);
 	*(unsigned int *)dst = trgb;
+	// printf("%d %d %d\n", (int)(255.999 * clr->x),
+    //                     (int)(255.999 * clr->y),
+    //                     (int)(255.999 * clr->z));
 }
 
 t_ray	ft_make_ray(t_graphic *g, double u, double v)
@@ -31,16 +34,20 @@ void	ft_graphic_render(t_graphic *g, t_img *img)
 	t_ray		ray;
 	t_cl		color;
 
-	i = -1;
-	while (++i < g->scene.canvas.width)
+	j = g->scene.canvas.height;
+	while (--j >= 0)
 	{
-		j = -1;
-		while (++j < g->scene.canvas.height)
+		i = -1;
+		while (++i < g->scene.canvas.width)
 		{
 			dp.u = (double)i / (g->scene.canvas.width - 1);
 			dp.v = (double)j / (g->scene.canvas.height - 1);
+			// ray = ft_ray_primary(&g->scene.camera, dp.v, dp.u);
 			ray = ft_make_ray(g, dp.u, dp.v);
 			color = ft_ray_color(&ray, &(g->scene), &(g->objs));
+			// printf("%d %d %d\n", (int)(255.999 * color.x),
+            //             (int)(255.999 * color.y),
+            //             (int)(255.999 * color.z));
 			ft_write_color(img, g->scene.canvas.height - j - 1, i, &color);
 		}
 	}

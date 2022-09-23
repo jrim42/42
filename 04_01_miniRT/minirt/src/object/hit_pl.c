@@ -6,10 +6,10 @@ bool	ft_plane_hit(const t_pl *pl, t_ray *ray, t_hit *rec)
 	double	denom;
 	double	root;
 
-	denom = vt_dot(ray->dir, pl->normal);
+	denom = vdot(ray->dir, pl->normal);
 	if (fabs(denom) < EPSILON)
 		return (false);
-	numer = vt_dot(vt_minus(pl->point, ray->orig), pl->normal);
+	numer = vdot(vminus(pl->point, ray->orig), pl->normal);
 	root = numer / denom;
 	if (root < rec->t_min || root > rec->t_max)
 		return (false);

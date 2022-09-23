@@ -3,15 +3,13 @@
 
 # include "structs.h"
 
-/*
-typedef struct s_scene
-{
-	t_canvas	canvas;
-	t_camera	camera;
-	t_light		lights;
-	t_ambient	ambient;
-}	t_scene;
-*/
+//------------------- graphic --------------------
+void	ft_graphic_init(t_graphic *g);
+void	ft_graphic_destroy(t_graphic *g);
+bool	ft_graphic_error(t_graphic *g, const char *errmsg);
+bool	ft_graphic_setup(t_graphic *g, const char *scenefile);
+void	ft_graphic_render(t_graphic *g, t_img *img);
+t_ray	ft_make_ray(t_graphic *g, double u, double v);
 
 //------------------- scene --------------------
 bool	ft_is_scene_type(const char *type);

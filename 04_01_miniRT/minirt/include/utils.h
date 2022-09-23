@@ -5,6 +5,9 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
+//------------------- main --------------------
+bool	ft_args_check(int argc, char *argv[]);
+
 //------------------- utils --------------------
 void	ft_tblclear(char ***tbl);
 int		ft_gnl_without_newline(int fd, char **line);
