@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:21 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 15:00:22 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/24 15:19:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,36 @@ char	*ft_strdup(char *str)
 	return (new);
 }
 
-void free_all(t_base *ptr)
+void ft_lstadd_back(t_info **info, t_info *new)
 {
-	t_base *temp;
+    t_info *temp;
+
+	if (!(*info))
+		*info = new;
+	else
+	{
+		temp = *info;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new;
+		new->prev = temp;
+	}
+}
+
+void free_all(t_info *info)
+{
+	t_info *temp;
 	int i;
 
-	while (ptr)
+	while (info)
 	{
-		temp = ptr->next;
+		temp = info->next;
 		i = 0;
-		while (i < ptr->size)
-			free(ptr->argv[i++]);
-		free(ptr->argv);
-		free(ptr);
-		ptr = temp;
+		while (i < info->size)
+			free(info->argv[i++]);
+		free(info->argv);
+		free(info);
+		info = temp;
 	}
-	ptr = NULL;
+	info = NULL;
 }
