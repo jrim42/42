@@ -6,11 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 15:23:43 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/24 17:20:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "microshell.h"
+#include "microsh.h"
 
 int msh_parse(t_info **info, char **argv)
 {

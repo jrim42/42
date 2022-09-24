@@ -6,11 +6,11 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 15:22:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/24 17:20:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "microshell.h"
+#include "microsh.h"
 
 void msh_exec(t_info *ptr, char **env)
 {
@@ -48,26 +48,32 @@ void exec_cmd(t_info *tmp, char **env)
 	pid = fork();
 	if (pid < 0)
 		exit_fatal();
-	else if (pid == 0) //child
+	else if (pid == 0)
+		exec_child(tmp, env);
+	else
+		exec_parent(tmp, pid, &status, pipe_open);
+}
+
+void exec_parent(t_info *tmp, pid_t pid, int *status, int pipe_open)
+{
+	waitpid(pid, status, 0);
+	if (pipe_open)
 	{
-		if (tmp->type == TYPE_PIPE && dup2(tmp->fd[STDOUT], STDOUT) < 0)
-			exit_fatal();
-		if (tmp->prev && tmp->prev->type == TYPE_PIPE && dup2(tmp->prev->fd[STDIN], STDIN) < 0)
-			exit_fatal();
-		if ((execve(tmp->argv[0], tmp->argv, env)) < 0)
-			exit_execve(tmp->argv[0]);
-		exit(EXIT_SUCCESS);
+		close(tmp->fd[STDOUT]);
+		if (!tmp->next || tmp->type == TYPE_BREAK)
+			close(tmp->fd[STDIN]);
 	}
-	else //parent
-	{
-		waitpid(pid, &status, 0);
-		if (pipe_open)
-		{
-			close(tmp->fd[STDOUT]);
-			if (!tmp->next || tmp->type == TYPE_BREAK)
-				close(tmp->fd[STDIN]);
-		}
-		if (tmp->prev && tmp->prev->type == TYPE_PIPE)
-			close(tmp->prev->fd[STDIN]);
-	}
+	if (tmp->prev && tmp->prev->type == TYPE_PIPE)
+		close(tmp->prev->fd[STDIN]);
+}
+
+void exec_child(t_info *tmp, char **env)
+{
+	if (tmp->type == TYPE_PIPE && dup2(tmp->fd[STDOUT], STDOUT) < 0)
+			exit_fatal();
+	if (tmp->prev && tmp->prev->type == TYPE_PIPE && dup2(tmp->prev->fd[STDIN], STDIN) < 0)
+		exit_fatal();
+	if ((execve(tmp->argv[0], tmp->argv, env)) < 0)
+		exit_execve(tmp->argv[0]);
+	exit(EXIT_SUCCESS);
 }

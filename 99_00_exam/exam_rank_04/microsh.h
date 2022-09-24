@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   microshell.h                                       :+:      :+:    :+:   */
+/*   microsh.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:02:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 15:24:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/24 17:18:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MICROSHELL_H
-# define MICROSHELL_H
+#ifndef MICROSH_H
+# define MICROSH_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -45,6 +45,8 @@ int 	check_end_type(char *argv);
 //--------------------- execute ---------------------
 void 	msh_exec(t_info *ptr, char **env);
 void 	exec_cmd(t_info *tmp, char **env);
+void 	exec_parent(t_info *tmp, pid_t pid, int *status, int pipe_open);
+void 	exec_child(t_info *tmp, char **env);
 
 //---------------------- exit -----------------------
 void	exit_fatal(void);

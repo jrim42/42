@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   microshell.c                                       :+:      :+:    :+:   */
+/*   microsh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:02:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 15:22:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/09/24 17:20:44 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "microshell.h"
+#include "microsh.h"
 
 int main(int argc, char **argv, char **env)
 {
@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **env)
 		if (strcmp(argv[i], ";") != 0)
 		{
 			i += msh_parse(&info, &argv[i]);
-			if (argv[i])
+			if (!argv[i])
 				break;
 		}
 		i++;
