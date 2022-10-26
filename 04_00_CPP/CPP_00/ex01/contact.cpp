@@ -6,11 +6,13 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:30:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 19:41:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/26 20:15:20 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contact.hpp"
+
+//----------------- constructor/distructor-----------------//
 
 Contact::Contact(void)
 {
@@ -34,6 +36,7 @@ Contact::~Contact(void)
 {
 }
 
+//------------------------ getter -------------------------//
 std::string	Contact::get_first_name(void)
 {
 	return (this->first_name);
@@ -42,7 +45,6 @@ std::string	Contact::get_first_name(void)
 std::string	Contact::get_last_name(void)
 {
 	return (this->last_name);
-
 }
 
 std::string Contact::get_nickname(void)
@@ -50,6 +52,7 @@ std::string Contact::get_nickname(void)
 	return (this->nickname);
 }
 
+//---------------------------------------------------------//
 void	Contact::add_contact(void)
 {
 	std::cout << "-------------------------------------" << std::endl;
@@ -63,7 +66,8 @@ void	Contact::add_contact(void)
 	std::cin >> this->phone_num;
 	std::cout << "darkest secret : ";
 	std::cin >> this->dark_secret;
-	std::cout << "---------- contact created -----------" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "contact created." << std::endl;
 }
 
 void	Contact::display_contact(void)
