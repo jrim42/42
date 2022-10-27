@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/27 20:03:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/27 20:07:39 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int cnt_argv_size(char **argv)
     int i;
 	
 	i = 0;
-    while (argv[i] && strcmp(argv[i], "|") != 0 && strcmp(argv[i], ";") != 0)
+    while (argv[i] && strcmp(argv[i], "|") && strcmp(argv[i], ";"))
         i++;
     return (i);
 }

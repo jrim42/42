@@ -23,9 +23,9 @@
 # define STDOUT		1
 # define STDERR		2
 
-# define TYPE_END	0
-# define TYPE_PIPE	1
-# define TYPE_BREAK	2
+# define TYPE_END	3
+# define TYPE_PIPE	4
+# define TYPE_BREAK	5
 
 # define ERR_FATAL	0
 # define ERR_EXECVE 1

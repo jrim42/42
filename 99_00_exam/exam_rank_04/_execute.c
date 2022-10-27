@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:32 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/27 20:03:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/27 21:30:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,14 @@ void exec_parent(t_info *tmp, pid_t pid, int *status, int pipe_open)
 
 void exec_child(t_info *tmp, char **env)
 {
-	if (tmp->type == TYPE_PIPE && dup2(tmp->fd[STDOUT], STDOUT) < 0)
+	if (tmp->type == TYPE_PIPE 
+		&& dup2(tmp->fd[STDOUT], STDOUT) < 0)
 		msh_err(ERR_FATAL, NULL);
-	if (tmp->prev && tmp->prev->type == TYPE_PIPE && dup2(tmp->prev->fd[STDIN], STDIN) < 0)
+	if (tmp->prev 
+		&& tmp->prev->type == TYPE_PIPE 
+		&& dup2(tmp->prev->fd[STDIN], STDIN) < 0)
 		msh_err(ERR_FATAL, NULL);
-	if ((execve(tmp->argv[0], tmp->argv, env)) < 0)
+	if (execve(tmp->argv[0], tmp->argv, env) < 0)
 		msh_err(ERR_EXECVE, tmp->argv[0]);
 	exit(EXIT_SUCCESS);
 }
