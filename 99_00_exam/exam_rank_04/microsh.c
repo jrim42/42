@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:02:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 17:20:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/27 18:14:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int main(int argc, char **argv, char **env)
 {
-	t_info *info;
-	int i;
+	t_info	*info;
+	int 	i;
 
 	if (argc == 1)
 		return (0);

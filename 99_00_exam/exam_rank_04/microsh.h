@@ -60,4 +60,5 @@ char	*ft_strdup(char *str);
 void 	ft_lstadd_back(t_info **info, t_info *new);
 void 	free_all(t_info *info);
 
+//---------------------------------------------------
 #endif
