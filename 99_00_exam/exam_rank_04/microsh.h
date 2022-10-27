@@ -23,9 +23,14 @@
 # define STDOUT		1
 # define STDERR		2
 
-# define TYPE_END	3
-# define TYPE_PIPE	4
-# define TYPE_BREAK	5
+# define TYPE_END	0
+# define TYPE_PIPE	1
+# define TYPE_BREAK	2
+
+# define ERR_FATAL	0
+# define ERR_EXECVE 1
+# define ERR_CD_1	2
+# define ERR_CD_2	3
 
 typedef struct s_info
 {
@@ -36,6 +41,9 @@ typedef struct s_info
 	struct s_info	*prev;
     struct s_info	*next;
 } 					t_info;
+
+//---------------------- main -----------------------
+int		msh_err(int err_type, char *str);
 
 //---------------------- parse ----------------------
 int 	msh_parse(t_info **info, char **argv);
@@ -48,17 +56,10 @@ void 	exec_cmd(t_info *tmp, char **env);
 void 	exec_parent(t_info *tmp, pid_t pid, int *status, int pipe_open);
 void 	exec_child(t_info *tmp, char **env);
 
-//---------------------- exit -----------------------
-void	exit_fatal(void);
-void	exit_execve(char *str);
-int		exit_cd_1(void);
-int		exit_cd_2(char *str);
-
 //---------------------- utils ----------------------
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 void 	ft_lstadd_back(t_info **info, t_info *new);
 void 	free_all(t_info *info);
 
-//---------------------------------------------------
 #endif

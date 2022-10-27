@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:02:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/27 18:14:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/27 20:03:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,35 @@ int main(int argc, char **argv, char **env)
 	if (info)
 		msh_exec(info, env);
 	free_all(info);
+	return (0);
+}
+
+int	msh_err(int err_type, char *str)
+{
+	if (err_type == ERR_FATAL)
+	{
+		write(STDERR, "error: fatal\n", ft_strlen("error: fatal\n"));
+		exit(EXIT_FAILURE);
+	}
+	else if (err_type == ERR_EXECVE)
+	{
+		write(STDERR, "error: cannot execute ", ft_strlen("error: cannot execute "));
+		write(STDERR, str, ft_strlen(str));
+		write(STDERR, "\n", 1);
+		exit(EXIT_FAILURE);
+	} 
+	else if (err_type == ERR_CD_1)
+	{
+		write(STDERR, "error: cd: bad arguments\n", ft_strlen("error: cd: bad arguments\n"));
+		return (EXIT_FAILURE);
+	}
+	else if (err_type == ERR_CD_2)
+	{
+		write(STDERR, "error: cd: cannot change directory to ", ft_strlen("error: cd: cannot change directory to "));
+		write(STDERR, str, ft_strlen(str));
+		write(STDERR, "\n", 1);
+		return (EXIT_FAILURE);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:36 by jrim              #+#    #+#             */
-/*   Updated: 2022/09/24 17:20:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/27 20:03:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ int msh_parse(t_info **info, char **argv)
 
 	size = cnt_argv_size(argv);
 	new  = (t_info *)malloc(sizeof(t_info));
-    if (!(new))
-        exit_fatal();
 	new->argv = (char **)malloc(sizeof(char *) * (size + 1));
-    if (!(new->argv))
-        exit_fatal();
+    if (!(new) || !(new->argv))
+        msh_err(ERR_FATAL, NULL);
     new->size = size;
 	new->next = NULL;
 	new->prev = NULL;

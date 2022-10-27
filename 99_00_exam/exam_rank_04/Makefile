@@ -14,7 +14,6 @@ RM			=	rm -f
 SRC			=	microsh.c \
 				_parse.c \
 				_execute.c \
-				_exit.c \
 				_utils.c
 				
 OBJ			=	$(SRC:.c=.o)
