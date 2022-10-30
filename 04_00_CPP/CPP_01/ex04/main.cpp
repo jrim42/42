@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:47:46 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 21:05:01 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/31 00:02:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	main(int argc, char **argv)
 {
 	std::ifstream	infile;
 	std::ofstream	outfile;
-	std::string		outfile_name;
+	std::string		of_name;
 	std::string		content;
-	int				idx;
+	size_t			idx;
 
+	//-------------- input error handling --------------//
 	if (argc != 4)
 	{
-		std::cout << "error: wrong usage" << std::endl;
+		std::cout << "error: bad arguments" << std::endl;
 		return (1);
 	}
 
@@ -37,9 +38,9 @@ int	main(int argc, char **argv)
 	}
 
 	//---------------- creating outfile ----------------//
-	outfile_name = argv[1];
-	outfile_name.append(".replace");
-	outfile.open(outfile_name);
+	of_name = argv[1];
+	of_name.append(".replace");
+	outfile.open(of_name);
 	if (outfile.is_open() == false)
 	{
 		std::cout << "error: file creation failed" << std::endl;
@@ -51,18 +52,17 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		std::getline(infile, content);
+		idx = 0;
 		while (1)
 		{
-			idx = content.find(argv[2]);
-			// find에 의해 발견되지 못하면 -1을 리턴한다 - std::string::npos
-			if (idx == -1)
-			{
-				outfile << content;
+			idx = content.find(argv[2], idx);
+			if (idx == std::string::npos)
 				break ;
-			}
-			outfile << content.substr(0, idx) << argv[3];
-			content = content.substr(idx + std::strlen(argv[2]));
+			content.erase(idx, std::strlen(argv[2]));
+			content.insert(idx, argv[3]);
+			idx += std::strlen(argv[3]);
 		}
+		outfile << content;
 		if (infile.eof())
 			break;
 		outfile << std::endl;
