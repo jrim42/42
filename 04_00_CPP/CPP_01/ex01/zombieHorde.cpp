@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:59:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 20:09:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/30 17:33:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 Zombie	*zombieHorde(int N, std::string name)
 {
-	Zombie	*zombies;
-	int		idx;
+	Zombie	*zombies = new Zombie[N];
 
-	zombies = new Zombie[N];
-	idx = -1;
-	while (++idx < N)
-		zombies[idx].set_name(name + std::to_string(idx));
+	for (int idx = 0; idx < N; idx++)
+		zombies[idx].setName(name + std::to_string(idx + 1));
 	return (zombies);
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:49:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/30 17:20:31 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/30 17:25:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Zombie
 	public:
 		Zombie(std::string name);
 		~Zombie(void);
+		
 		void	announce(void);
 };
 
