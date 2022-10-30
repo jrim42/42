@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 22:16:25 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/31 00:27:25 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/31 00:38:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	Harl::info(void)
 void	Harl::warning(void)
 {
 	std::cout 	<< YLW
-				<<  "I think I deserve to have some extra bacon for free. "
+				<< "I think I deserve to have some extra bacon for free. "
 				<< "I've been coming for years whereas you started working here since last month." 
 				<< DFT << std::endl;
 }
