@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/27 23:19:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/30 17:20:43 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <ctime>
 #include <iostream>
 
-//-------------- constructor/distructor ----------------//
+//-------------- constructor/destructor ----------------//
 Account::Account( int initial_deposit )
 {
 	_accountIndex = _nbAccounts;
