@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:31:01 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/26 20:12:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/31 12:29:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@
 class Contact 
 {
 	private:
-		std::string	first_name;
-		std::string	last_name;
-		std::string	nickname;
-		std::string	phone_num;
-		std::string	dark_secret;
+		std::string	f_name;
+		std::string	l_name;
+		std::string	n_name;
+		std::string	p_num;
+		std::string	secret;
 
 	public:
 		Contact(void);
-		Contact(std::string first_name,
-				std::string	last_name,
-				std::string	nickname,
-				std::string	phone_num,
-				std::string	dark_secret);
+		Contact(std::string f_name,
+				std::string	l_name,
+				std::string	n_name,
+				std::string	p_num,
+				std::string	secret);
 		~Contact(void);
 
-		std::string	get_first_name(void);
-		std::string	get_last_name(void);
-		std::string get_nickname(void);
-		void		add_contact(void);
-		void		display_contact(void);
+		std::string	getFirstName(void);
+		std::string	getLastName(void);
+		std::string getNickname(void);
+		void		setContact(void);
+		void		displayContact(void);
 };
 
 #endif

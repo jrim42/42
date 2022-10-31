@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:41:34 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/26 20:29:33 by jrim             ###   ########.fr       */
+/*   Updated: 2022/10/31 12:33:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ PhoneBook::~PhoneBook(void)
 }
 
 //---------------------------------------------------------//
-void	PhoneBook::add_contact(void)
+void	PhoneBook::addContact(void)
 {
-	Contact new_contact;
+	Contact	new_contact;
 
-	new_contact.add_contact();
+	new_contact.setContact();
 	this->contacts[length % 8] = new_contact;
 	this->length++;
 }
 
-void	PhoneBook::search_contact(void)
+void	PhoneBook::searchContact(void)
 {
 	int idx;
 
@@ -42,15 +42,15 @@ void	PhoneBook::search_contact(void)
 		std::cout << "this phonebook is empty" << std::endl;
 		return ;
 	}
-	this->display_contact_head();
-	this->display_contact_info();
-	idx = get_contact_idx();
-	this->contacts[idx].display_contact();
+	this->displayContactHead();
+	this->displayContactInfo();
+	idx = getContactIdx();
+	this->contacts[idx].displayContact();
 	std::cin.clear();
 	std::cin.ignore(256, '\n');
 }
 
-int		PhoneBook::get_contact_idx(void)
+int		PhoneBook::getContactIdx(void)
 {
 	int	idx;
 
@@ -61,13 +61,13 @@ int		PhoneBook::get_contact_idx(void)
 		std::cout << "wrong index. try again." << std::endl;
 		std::cin.clear();
 		std::cin.ignore(256, '\n');
-		return (get_contact_idx());
+		return (getContactIdx());
 	}
 	return (idx - 1);
 }
 
 //---------------------------------------------------------//
-void	PhoneBook::display_contact_head(void)
+void	PhoneBook::displayContactHead(void)
 {
 	std::cout << std::right << std::setw(5) << "index";
     std::cout << "|";
@@ -80,26 +80,26 @@ void	PhoneBook::display_contact_head(void)
     std::cout << std::endl; 
 }
 
-void PhoneBook::display_contact_info(void)
+void PhoneBook::displayContactInfo(void)
 {
 	Contact contact;
 
-	for(int i = 0; i < this->length; i++)
+	for (int i = 0; i < this->length; i++)
 	{
 		contact = this->contacts[i];
 		std::cout << std::right << std::setw(5) << i + 1;
     	std::cout << "|";
-		display_contact_field(contact.get_first_name());
+		displayContactField(contact.getFirstName());
     	std::cout << "|";
-		display_contact_field(contact.get_last_name());
+		displayContactField(contact.getLastName());
 		std::cout << "|";
-		display_contact_field(contact.get_nickname());
+		displayContactField(contact.getNickname());
 		std::cout << "|";
 		std::cout << std::endl;
 	}
 }
 
-void PhoneBook::display_contact_field(std::string content)
+void PhoneBook::displayContactField(std::string content)
 {
 	if (content.length() > 10)
 		content = content.substr(0,9) + ".";
