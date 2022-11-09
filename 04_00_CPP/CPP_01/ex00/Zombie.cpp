@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:49:46 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/30 17:36:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/09 19:09:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 //-------------- constructor/destructor ----------------//
 Zombie::Zombie(std::string name)
 {
+	// std::cout << GRY << "(constructor: " << name << ")" << DFT << std::endl;
 	this->name = name;
 }
 
 Zombie::~Zombie(void)
 {
 	std::cout << RED << this->name << " is gone..." << DFT << std::endl;
+	// std::cout << GRY << "(destructor: " << this->name << ")" << DFT << std::endl;
 }
 
 //---------------------- announce ----------------------//
 void	Zombie::announce(void)
 {
-	std::cout << this->name << ": " << "BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

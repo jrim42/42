@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:52:27 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/20 19:53:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/09 17:37:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 Zombie	*newZombie(std::string name)
 {
-	Zombie *zombie = new Zombie(name);
-	return (zombie);
+	Zombie *zom = new Zombie(name);
+	return (zom);
 }
