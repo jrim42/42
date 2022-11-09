@@ -8,6 +8,7 @@ DFT			= 	\033[0;37m
 
 CC			=	clang++
 CFLAGS		=	-Wall -Werror -Wextra
+# CFLAGS		=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
 SRC			=	main.cpp
