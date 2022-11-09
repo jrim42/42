@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:21:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/30 22:51:42 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/09 20:19:04 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
 		club.setType("some other type of club");
 		bob.attack();
 	}
-
+	std::cout << "------------------------------------------------" << std::endl;
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
@@ -33,7 +33,6 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-	// std::cout << std::endl;
 	// system("leaks weapon | grep leaked");
 	return (0);
 }

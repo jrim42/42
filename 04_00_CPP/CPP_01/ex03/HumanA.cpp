@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:27:08 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/30 22:52:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/09 20:40:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 //-------------- constructor/destructor ----------------//
 HumanA::HumanA(std::string name, Weapon &weapon) : name(name), weapon(weapon)
 {
+	// std::cout << GRY << "(humanA: constructor: " << name << ")" << DFT << std::endl;
 }
 
 HumanA::~HumanA(void)
 {
+	// std::cout << GRY << "(humanA: destructor: " << this->name << ")" << DFT << std::endl;
 }
 
 //------------------------ utils -----------------------//
