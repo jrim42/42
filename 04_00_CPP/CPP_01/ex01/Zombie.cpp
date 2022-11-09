@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:49:46 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/09 19:20:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/09 19:29:07 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //-------------- constructor/destructor ----------------//
 Zombie::Zombie(void)
 {
-	// std::cout << GRY << "(constructor)" << DFT << std::endl;
+	// std::cout << GRY << "(default constructor)" << DFT << std::endl;
 }
 
 Zombie::Zombie(std::string name)
