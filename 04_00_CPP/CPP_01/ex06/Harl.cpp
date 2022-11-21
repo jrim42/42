@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 22:16:25 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/31 00:38:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 18:37:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,7 @@
 //-------------- constructor/destructor ----------------//
 Harl::Harl(void)
 {
-	init_harl();
-}
-
-Harl::~Harl(void)
-{
-}
-
-//------------------------ init ------------------------//
-void	Harl::init_harl(void)
-{
+	// std::cout << GRY << "(Harl: constructor)" << DFT << std::endl;
 	complains[0].level = "DEBUG";
 	complains[0].f_ptr = &Harl::debug;
 	complains[1].level = "INFO";
@@ -33,6 +24,11 @@ void	Harl::init_harl(void)
 	complains[2].f_ptr = &Harl::warning;
 	complains[3].level = "ERROR";
 	complains[3].f_ptr = &Harl::error;
+}
+
+Harl::~Harl(void)
+{
+	// std::cout << GRY << "(Harl: destructor)" << DFT << std::endl;
 }
 
 //----------------------- complain ---------------------//
@@ -67,7 +63,9 @@ void	Harl::complain(std::string level)
 
 void	Harl::something_else(void)
 {
-	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	std::cout 	<< GRY 
+				<< "[ Probably complaining about insignificant problems ]" 
+				<< DFT << std::endl;
 }
 
 void	Harl::debug(void)
@@ -81,14 +79,14 @@ void	Harl::info(void)
 {
 	std::cout 	<< GRN << "[ INFO ]" << DFT << std::endl;
 	std::cout 	<< "I cannot believe adding extra bacon costs more money.\n"
-				<< "You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
+				<< "You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!" << std::endl;
 }
 
 void	Harl::warning(void)
 {
 	std::cout 	<< YLW << "[ WARNING ]" << DFT << std::endl;
 	std::cout 	<< "I think I deserve to have some extra bacon for free.\n"
-				<< "I’ve been coming for years whereas you started working here since last month." << std::endl;
+				<< "I've been coming for years whereas you started working here since last month." << std::endl;
 }
 
 void	Harl::error(void)
