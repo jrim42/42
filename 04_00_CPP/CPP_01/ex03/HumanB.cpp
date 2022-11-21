@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:26:20 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/09 20:40:25 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:45:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ HumanB::HumanB(std::string name): name(name), weapon(NULL)
 
 HumanB::~HumanB(void)
 {
-	// std::cout << GRY << "(humanA: destructor: " << this->name << ")" << DFT << std::endl;
+	// std::cout << GRY << "(humanB: destructor: " << this->name << ")" << DFT << std::endl;
 }
 
 //------------------------ utils -----------------------//
@@ -29,7 +29,7 @@ void	HumanB::setWeapon(Weapon &weapon)
 	this->weapon = &weapon;
 }
 
-void	HumanB::attack(void)
+void	HumanB::attack(void) const
 {
 	std::cout << BLU << this->name << DFT << " attacks with his ";
 	if (this->weapon == NULL)

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:22:38 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/09 20:08:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:24:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ class Weapon
 		Weapon(std::string type);
 		~Weapon(void);
 		
-		const std::string	&getType(void);
-		void	setType(std::string type);
+		const std::string	&getType(void) const;
+		void	setType(const std::string type);
 };
 
 #endif

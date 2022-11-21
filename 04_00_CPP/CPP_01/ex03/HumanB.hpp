@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:27:16 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/30 22:48:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:26:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class HumanB
 		~HumanB(void);
 		
 		void	setWeapon(Weapon &weapon);
-		void	attack(void);
+		void	attack(void) const;
 };
 
 #endif

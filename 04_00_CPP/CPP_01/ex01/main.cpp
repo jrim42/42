@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 19:48:23 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/09 19:25:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:13:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	main(void)
 		zombies[idx].announce();
     
 	delete [] zombies;
-	system("leaks zombieHorde | grep leaked");
+	// system("leaks zombieHorde | grep leaked");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:47:46 by jrim              #+#    #+#             */
-/*   Updated: 2022/10/31 00:02:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:31:22 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int	main(int argc, char **argv)
 	
 	infile.close();
 	outfile.close();
+	// system("leaks no_more_sed | grep leaked");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 20:27:08 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/09 20:40:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/21 19:27:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ HumanA::~HumanA(void)
 }
 
 //------------------------ utils -----------------------//
-void	HumanA::attack(void)
+void	HumanA::attack(void) const
 {
 	std::cout 	<< RED << this->name << DFT << " attacks with his " 
-				<< RED << weapon.getType() << DFT << std::endl;
+				<< RED << this->weapon.getType() << DFT << std::endl;
 }
