@@ -6,39 +6,41 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 16:30:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 16:35:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
+//-------------- orthodox canonical form ----------------//
 Fixed::Fixed(void)
 {
+	std::cout << GRY << "Default constructor called" << DFT << std::endl;
 	this->value = 0;
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &ref)
 {
-	std::cout << "Copy constructor called" << std::endl;
-	(*this) = ref;
+	std::cout << GRY << "Copy constructor called" << DFT << std::endl;
+	this->value = ref.getRawBits();
 }
 
-Fixed &Fixed::operator=(Fixed const &ref)
+Fixed& Fixed::operator=(Fixed const &ref)
 {
-	std::cout << "Assignation operation called" << std::endl;
-	value = ref.getRawBits();
+	std::cout << GRY << "Copy assignment operator called" << DFT << std::endl;
+	this->value = ref.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << GRY << "Destructor called" << DFT << std::endl;
 }
 
+//--------------------- getter/setter -------------------//
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	std::cout << GRY << "getRawBits member function called" << DFT << std::endl;
 	return (this->value);
 }
 
