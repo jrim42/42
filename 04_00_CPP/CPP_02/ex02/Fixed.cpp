@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/22 17:13:00 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 21:26:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ Fixed::Fixed(const float value)
 	this->value = roundf(value * (1 << this->bits));
 }
 
-Fixed::Fixed(const Fixed &ref)
+Fixed::Fixed(const Fixed& ref)
 {
 	// std::cout << GRY << "Copy constructor called" << DFT << std::endl;
 	this->value = ref.getRawBits();
 }
 
-Fixed& Fixed::operator=(Fixed const &ref)
+Fixed& Fixed::operator=(const Fixed& ref)
 {
 	// std::cout << GRY << "Copy assignment operator called" << DFT << std::endl;
 	this->value = ref.getRawBits();
@@ -74,52 +74,52 @@ float	Fixed::toFloat(void) const
 }
 
 //--------------------- operators ---------------------//
-bool	Fixed::operator>(Fixed const &ref) const
+bool	Fixed::operator>(Fixed const& ref) const
 {
 	return (this->value > ref.value);
 }
 
-bool	Fixed::operator<(Fixed const &ref) const
+bool	Fixed::operator<(Fixed const& ref) const
 {
 	return (this->value < ref.value);
 }
 
-bool	Fixed::operator>=(Fixed const &ref) const
+bool	Fixed::operator>=(Fixed const& ref) const
 {
 	return (this->value >= ref.value);
 }
 
-bool	Fixed::operator<=(Fixed const &ref) const
+bool	Fixed::operator<=(Fixed const& ref) const
 {
 	return (this->value <= ref.value);
 }
 
-bool	Fixed::operator==(Fixed const &ref) const
+bool	Fixed::operator==(Fixed const& ref) const
 {
 	return (this->value == ref.value);
 }
 
-bool	Fixed::operator!=(Fixed const &ref) const
+bool	Fixed::operator!=(Fixed const& ref) const
 {
 	return (this->value != ref.value);
 }
 
-Fixed	Fixed::operator+(Fixed const &ref) const
+Fixed	Fixed::operator+(Fixed const& ref) const
 {
 	return (Fixed(this->toFloat() + ref.toFloat()));
 }
 
-Fixed	Fixed::operator-(Fixed const &ref) const
+Fixed	Fixed::operator-(Fixed const& ref) const
 {
 	return (Fixed(this->toFloat() - ref.toFloat()));
 }
 
-Fixed	Fixed::operator*(Fixed const &ref) const
+Fixed	Fixed::operator*(Fixed const& ref) const
 {
 	return (Fixed(this->toFloat() * ref.toFloat()));
 }
 
-Fixed	Fixed::operator/(Fixed const &ref) const
+Fixed	Fixed::operator/(Fixed const& ref) const
 {
 	return (Fixed(this->toFloat() / ref.toFloat()));
 }
@@ -157,28 +157,28 @@ Fixed	Fixed::operator--(int)
 }
 
 //--------------------- min & max ---------------------//
-Fixed &	Fixed::min(Fixed &num1, Fixed &num2)
+Fixed&	Fixed::min(Fixed& num1, Fixed& num2)
 {
 	if (num1 < num2)
 		return (num1);
 	return (num2);
 }
 
-Fixed const & Fixed::min(Fixed const &num1, Fixed const &num2)
+Fixed const& Fixed::min(Fixed const& num1, Fixed const& num2)
 {
 	if (num1 < num2)
 		return (num1);
 	return (num2);
 }
 
-Fixed &	Fixed::max(Fixed &num1, Fixed &num2)
+Fixed&	Fixed::max(Fixed& num1, Fixed& num2)
 {
 	if (num1 > num2)
 		return (num1);
 	return (num2);
 }
 
-Fixed const & Fixed::max(Fixed const &num1, Fixed const &num2)
+Fixed const& Fixed::max(Fixed const& num1, Fixed const& num2)
 {
 	if (num1 > num2)
 		return (num1);
@@ -186,7 +186,7 @@ Fixed const & Fixed::max(Fixed const &num1, Fixed const &num2)
 }
 
 //------------------- insertion operator ----------------//
-std::ostream& operator<<(std::ostream &out, const Fixed &fixed)
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 {
 	// std::cout << GRY << "(insertion operator called) " << DFT;
 	out << fixed.toFloat();
