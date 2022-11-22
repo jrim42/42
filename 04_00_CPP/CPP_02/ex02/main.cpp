@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:20:33 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 17:15:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 17:09:25 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main( void )
 
 	std::cout << "---------------------------------------" << std::endl;
 	std::cout << "  a : " << a << std::endl;
-	std::cout << "++a : " <<  ++a << std::endl;
+	std::cout << "++a : " << ++a << std::endl;
 	std::cout << "  a : " << a << std::endl;
 	std::cout << "a++ : " << a++ << std::endl;
 	std::cout << "  a : " << a << std::endl;

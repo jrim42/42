@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/22 17:04:32 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 17:10:10 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ Fixed::Fixed(void)
 Fixed::Fixed(int num)
 {
 	std::cout << BLU << "Int" << DFT << " constructor called" << std::endl;
-	this->value = num << this->bits;}
+	this->value = num << this->bits;
+}
 
 Fixed::Fixed(const float value)
 {
