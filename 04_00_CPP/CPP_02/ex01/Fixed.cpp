@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/22 17:10:10 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 17:25:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ Fixed::Fixed(const float value)
 	this->value = roundf(value * (1 << this->bits));
 }
 
-Fixed::Fixed(const Fixed &ref)
+Fixed::Fixed(const Fixed& ref)
 {
 	std::cout << GRY << "Copy constructor called" << DFT << std::endl;
 	this->value = ref.getRawBits();
 }
 
-Fixed& Fixed::operator=(Fixed const &ref)
+Fixed& Fixed::operator=(const Fixed& ref)
 {
 	std::cout << GRY << "Copy assignment operator called" << DFT << std::endl;
 	this->value = ref.getRawBits();
@@ -73,7 +73,7 @@ float	Fixed::toFloat(void) const
 }
 
 //------------------- insertion operator ----------------//
-std::ostream& operator<<(std::ostream &out, const Fixed &fixed)
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 {
 	// std::cout << GRY << "(insertion operator called) " << DFT;
 	out << fixed.toFloat();
