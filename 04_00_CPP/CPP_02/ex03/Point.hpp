@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:18:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/22 12:01:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 15:41:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include <iostream>
 # include "Fixed.hpp"
-
-# define RED "\033[0;31m"
-# define GRN "\033[0;32m"
-# define YLW "\033[0;33m"
-# define BLU "\033[0;36m"
-# define DFT "\033[0;37m"
-# define GRY "\033[0;30m"
 
 class Point
 {

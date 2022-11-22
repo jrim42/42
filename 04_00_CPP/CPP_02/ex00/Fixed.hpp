@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:21:39 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 16:24:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/22 15:40:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define FIXED_HPP
 
 # include <iostream>
+
+# define RED "\033[0;31m"
+# define GRN "\033[0;32m"
+# define YLW "\033[0;33m"
+# define BLU "\033[0;36m"
+# define GRY "\033[90m"
+# define DFT "\033[0;37m"
 
 class Fixed 
 {
