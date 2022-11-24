@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/22 17:25:23 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/23 17:38:00 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Fixed::Fixed(void)
 	this->value = 0;
 }
 
-Fixed::Fixed(int num)
+Fixed::Fixed(const int num)
 {
 	std::cout << BLU << "Int" << DFT << " constructor called" << std::endl;
 	this->value = num << this->bits;
@@ -34,7 +34,7 @@ Fixed::Fixed(const float value)
 Fixed::Fixed(const Fixed& ref)
 {
 	std::cout << GRY << "Copy constructor called" << DFT << std::endl;
-	this->value = ref.getRawBits();
+	*this = ref;
 }
 
 Fixed& Fixed::operator=(const Fixed& ref)
@@ -64,12 +64,12 @@ void	Fixed::setRawBits(int const raw)
 //---------------------- converter ----------------------//
 int 	Fixed::toInt(void) const
 {
-	return (value >> bits);
+	return (this->value >> this->bits);
 }
 
 float	Fixed::toFloat(void) const
 {
-	return (float(value) / (1 << bits));
+	return (float(this->value) / (1 << this->bits));
 }
 
 //------------------- insertion operator ----------------//

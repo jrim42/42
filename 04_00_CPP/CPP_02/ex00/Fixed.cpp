@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/22 17:24:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/23 17:37:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Fixed::Fixed(void)
 Fixed::Fixed(const Fixed& ref)
 {
 	std::cout << GRY << "Copy constructor called" << DFT << std::endl;
-	this->value = ref.getRawBits();
+	*this = ref;
 }
 
 Fixed& Fixed::operator=(const Fixed& ref)
