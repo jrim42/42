@@ -6,99 +6,118 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/21 17:14:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/25 13:12:14 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-//------------- constructor and destructor -------------//
-
+//-------------- orthodox canonical form ----------------//
 Fixed::Fixed(void)
 {
 	this->value = 0;
 }
 
-Fixed::Fixed(const int value)
+Fixed::Fixed(const int num)
 {
-	Fixed::value = value << bits;
+	this->value = num << this->bits;
 }
 
 Fixed::Fixed(const float value)
 {
-	Fixed::value = roundf(value * (1 << bits));
+	this->value = roundf(value * (1 << this->bits));
 }
 
-Fixed::Fixed(const Fixed &ref)
+Fixed::Fixed(const Fixed& ref)
 {
-	(*this) = ref;
+	this->value = ref.getRawBits();
+}
+
+Fixed& Fixed::operator=(const Fixed& ref)
+{
+	this->value = ref.getRawBits();
+	return (*this);
 }
 
 Fixed::~Fixed(void)
 {
 }
 
-//--------------------- operators ---------------------//
-
-Fixed & Fixed::operator=(Fixed const &ref)
+//--------------------- getter/setter -------------------//
+int Fixed::getRawBits(void) const
 {
-	value = ref.getRawBits();
-	return (*this);
+	return (this->value);
 }
 
-bool	Fixed::operator>(Fixed const &ref) const
+void	Fixed::setRawBits(int const raw)
+{
+	this->value = raw;
+}
+
+//---------------------- converter ---------------------//
+int 	Fixed::toInt(void) const
+{
+	return (value >> bits);
+}
+
+float	Fixed::toFloat(void) const
+{
+	return (float(value) / (1 << bits));
+}
+
+//--------------------- operators ---------------------//
+bool	Fixed::operator>(const Fixed& ref) const
 {
 	return (this->value > ref.value);
 }
 
-bool	Fixed::operator<(Fixed const &ref) const
+bool	Fixed::operator<(const Fixed& ref) const
 {
 	return (this->value < ref.value);
 }
 
-bool	Fixed::operator>=(Fixed const &ref) const
+bool	Fixed::operator>=(const Fixed& ref) const
 {
 	return (this->value >= ref.value);
 }
 
-bool	Fixed::operator<=(Fixed const &ref) const
+bool	Fixed::operator<=(const Fixed& ref) const
 {
 	return (this->value <= ref.value);
 }
 
-bool	Fixed::operator==(Fixed const &ref) const
+bool	Fixed::operator==(const Fixed& ref) const
 {
 	return (this->value == ref.value);
 }
 
-bool	Fixed::operator!=(Fixed const &ref) const
+bool	Fixed::operator!=(const Fixed& ref) const
 {
 	return (this->value != ref.value);
 }
 
-Fixed	Fixed::operator+(Fixed const &ref) const
+Fixed	Fixed::operator+(const Fixed& ref) const
 {
 	return (Fixed(this->toFloat() + ref.toFloat()));
 }
 
-Fixed	Fixed::operator-(Fixed const &ref) const
+Fixed	Fixed::operator-(const Fixed& ref) const
 {
 	return (Fixed(this->toFloat() - ref.toFloat()));
 }
 
-Fixed	Fixed::operator*(Fixed const &ref) const
+Fixed	Fixed::operator*(const Fixed& ref) const
 {
 	return (Fixed(this->toFloat() * ref.toFloat()));
 }
 
-Fixed	Fixed::operator/(Fixed const &ref) const
+Fixed	Fixed::operator/(const Fixed& ref) const
 {
 	return (Fixed(this->toFloat() / ref.toFloat()));
 }
 
-Fixed &	Fixed::operator++(void)
+Fixed&	Fixed::operator++(void)
 {
-	// std::cout << GRY << "(pre-increment called) " << DFT;
 	this->value++;
 	return (*this);
 }
@@ -107,12 +126,11 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed	tmp(*this);
 
-	// std::cout << GRY << "(post-increment called) " << DFT;
 	this->value++;
 	return (tmp);
 }
 
-Fixed & Fixed::operator--(void)
+Fixed& Fixed::operator--(void)
 {
 	this->value--;
 	return (*this);
@@ -126,60 +144,38 @@ Fixed	Fixed::operator--(int)
 	return (tmp);
 }
 
-std::ostream & operator<<(std::ostream &out, const Fixed &fixed)
+//--------------------- min & max ---------------------//
+Fixed&	Fixed::min(Fixed& num1, Fixed& num2)
+{
+	if (num1 < num2)
+		return (num1);
+	return (num2);
+}
+
+const Fixed& Fixed::min(const Fixed& num1, const Fixed& num2)
+{
+	if (num1 < num2)
+		return (num1);
+	return (num2);
+}
+
+Fixed&	Fixed::max(Fixed& num1, Fixed& num2)
+{
+	if (num1 > num2)
+		return (num1);
+	return (num2);
+}
+
+const Fixed& Fixed::max(const Fixed& num1, const Fixed& num2)
+{
+	if (num1 > num2)
+		return (num1);
+	return (num2);
+}
+
+//------------------- insertion operator ----------------//
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 {
 	out << fixed.toFloat();
 	return (out);
-}
-
-//--------------------- min & max ---------------------//
-
-Fixed &	Fixed::min(Fixed &num1, Fixed &num2)
-{
-	if (num1 < num2)
-		return (num1);
-	return (num2);
-}
-
-Fixed const & Fixed::min(Fixed const &num1, Fixed const &num2)
-{
-	if (num1 < num2)
-		return (num1);
-	return (num2);
-}
-
-Fixed &	Fixed::max(Fixed &num1, Fixed &num2)
-{
-	if (num1 > num2)
-		return (num1);
-	return (num2);
-}
-
-Fixed const & Fixed::max(Fixed const &num1, Fixed const &num2)
-{
-	if (num1 > num2)
-		return (num1);
-	return (num2);
-}
-
-//-----------------------------------------------------//
-
-int Fixed::getRawBits(void) const
-{
-	return (this->value);
-}
-
-void	Fixed::setRawBits(int const raw)
-{
-	this->value = raw;
-}
-
-int 	Fixed::toInt(void) const
-{
-	return (value >> bits);
-}
-
-float	Fixed::toFloat(void) const
-{
-	return (float(value) / (1 << bits));
 }

@@ -6,14 +6,12 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:20:33 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/22 12:04:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/25 13:23:37 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Point.hpp"
-
-bool	bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main( void ) 
 {
