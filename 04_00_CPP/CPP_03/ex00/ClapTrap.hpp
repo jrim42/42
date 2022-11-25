@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:56 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/22 12:23:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/25 21:57:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define GRN "\033[0;32m"
 # define YLW "\033[0;33m"
 # define BLU "\033[0;36m"
+# define GRY "\033[90m"
 # define DFT "\033[0;37m"
-# define GRY "\033[0;30m"
 
 class ClapTrap
 {
@@ -31,13 +31,13 @@ class ClapTrap
 		unsigned int	_attack;
 
 	public:
-		ClapTrap();
+		ClapTrap(void);
 		ClapTrap(std::string name);
-		~ClapTrap();
+		ClapTrap(const ClapTrap& ref);
+		ClapTrap& operator=(const ClapTrap& ref);
+		~ClapTrap(void);
 
-		ClapTrap & operator=(ClapTrap const & ref);
-
-		void			attack(std::string const & target);
+		void			attack(const std::string& target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
 		unsigned int	getDamage(void);
