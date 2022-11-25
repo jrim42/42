@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 16:24:54 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/23 17:38:00 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/25 18:37:11 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int 	Fixed::toInt(void) const
 
 float	Fixed::toFloat(void) const
 {
-	return (float(this->value) / (1 << this->bits));
+	return (static_cast<float>(this->value) / (1 << this->bits));
 }
 
 //------------------- insertion operator ----------------//

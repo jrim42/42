@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 17:18:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/25 13:23:35 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/25 17:19:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 class Point
 {
 	private:
-		const Fixed _x;
-		const Fixed _y;
+		const Fixed x;
+		const Fixed y;
 	
 	public:
 		Point(void);
@@ -29,8 +29,8 @@ class Point
 		Point& operator=(const Point& ref);
 		~Point(void);
 
-		Fixed	get_x(void) const;
-		Fixed	get_y(void) const;
+		Fixed	getX(void) const;
+		Fixed	getY(void) const;
 		
 };
 
