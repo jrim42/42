@@ -6,14 +6,13 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:01:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/22 12:35:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/26 18:04:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-//------------- constructor and destructor -------------//
-
+//-------------- orthodox canonical form ----------------//
 ScavTrap::ScavTrap(): ClapTrap(), _keeper(false)
 {
 	std::cout << GRY << "(ScavTrap: default constructor)" << DFT << std::endl;
@@ -24,80 +23,70 @@ ScavTrap::ScavTrap(): ClapTrap(), _keeper(false)
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name), _keeper(false)
 {
-	std::cout << GRY << "(ScavTrap: constructor with name)" << DFT << std::endl;
+	std::cout << GRY << "(ScavTrap: constructor: " << this->_name << ")" << DFT << std::endl;
 	this->_hit = 100;
 	this->_energy = 50;
 	this->_attack = 20;
 }
 
-ScavTrap::~ScavTrap()
+ScavTrap::ScavTrap(const ScavTrap& ref)
 {
-	std::cout << GRY << "(ScavTrap: destructor)" << DFT << std::endl;
+	std::cout << GRY << "(ScavTrap: copy constructor)" << DFT << std::endl;
+	*this = ref;
 }
 
-//---------------------- operator -----------------------//
-
-ScavTrap & ScavTrap::operator=(ScavTrap const & ref)
+ScavTrap& ScavTrap::operator=(const ScavTrap& ref)
 {
-	ClapTrap::operator=(ref);
+	std::cout << GRY << "(ScavTrap: copy asignment)" << DFT << std::endl;
+	this->_name = ref._name;
+	this->_hit = ref._hit;
+	this->_energy = ref._energy;
+	this->_attack = ref._attack;
 	return (*this);
 }
 
-//---------------------- actions -----------------------//
+ScavTrap::~ScavTrap()
+{
+	std::cout << GRY << "(ScavTrap: destructor: " << this->_name << ")" << DFT << std::endl;
+}
 
+//------------------------ utils ------------------------//
 void	ScavTrap::attack(std::string const & target)
 {
-	std::cout << "ScavTrap " << _name 
-		<< " attacks " << target 
-		<< ", causing " << _attack << " points of damage!" << std::endl;
+	if (this->_energy == 0 || this->_hit == 0)
+		std::cout	<< "ScavTrap " << this->_name << " cannot attack " << target << "..." << std::endl;
+	else
+	{
+		std::cout	<< "ScavTrap " << this->_name << " attacks " << target << ", causing " 
+					<< RED << this->_attack << DFT << " points of damage!" << std::endl;
+		this->_energy--;
+	}
 }
 
 void	ScavTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ScavTrap " << _name 
-		<< " has got " << amount << " points of damage! ";
-	if (amount >= _energy)
+	std::cout 	<< "ScavTrap " << this->_name << " has got " 
+				<< RED << amount << DFT << " points of damage! ";
+	if (amount >= this->_hit)
 	{
-		_energy = 0;
-		std::cout << "RIP, " << _name << "..." << std::endl;
+		this->_hit = 0;
+		std::cout << "RIP, " << this->_name << "..." << std::endl;
 	}
 	else
 	{
-		_energy -= amount;
-		std::cout << _energy << " energy points left." << std::endl;
+		this->_hit -= amount;
+		std::cout << RED << this->_hit << DFT << " hit points left." << std::endl;
 	}
 }
-
-void	ScavTrap::beRepaired(unsigned int amount)
-{
-	std::cout << "ScavTrap " << _name 
-		<< " has been repaired of " << amount 
-		<< " points of energy!" << std::endl;
-	if (_energy == 0)
-	{
-		_energy = amount;
-		std::cout << "ScavTrap " << _name << " has come back alive with " 
-			<< _energy << " of energy points" << std::endl; 
-	}
-	else
-	{
-		_energy += amount;
-		std::cout << "ScavTrap " << _name << " has gained " << amount << " of energy points, " 
-			<< "now having " << _energy << " of energy points." << std::endl;
-
-	}
-}
-
-unsigned int	ScavTrap::getDamage(void)
-{
-	return (_attack);
-}
-
 
 void	ScavTrap::guardGuate(void)
 {
-	if (_energy == 0)
-		return ;
-	std::cout << "ScavTrap " << _name << " is now in a gate keeper mode" << std::endl;
-	this->_keeper = true;
+	if (this->_hit == 0)
+		std::cout	<< "ScavTrap " << this->_name << " cannot enter gate keeper mode..." << std::endl;
+	else
+	{
+		std::cout 	<< "ScavTrap " << _name << " is now in a "
+					<< RED << "gate keeper mode" << DFT << std::endl;		
+		this->_keeper = true;
+	}
 }

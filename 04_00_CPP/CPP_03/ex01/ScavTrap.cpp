@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:01:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/26 17:49:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/26 18:04:03 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	ScavTrap::takeDamage(unsigned int amount)
 
 void	ScavTrap::guardGuate(void)
 {
-	if (this->_energy == 0 || this->_hit == 0)
+	if (this->_hit == 0)
 		std::cout	<< "ScavTrap " << this->_name << " cannot enter gate keeper mode..." << std::endl;
 	else
 	{
-		std::cout << "ScavTrap " << _name << " is now in a gate keeper mode" << std::endl;
+		std::cout 	<< "ScavTrap " << _name << " is now in a "
+					<< RED << "gate keeper mode" << DFT << std::endl;
 		this->_keeper = true;
-		this->_energy--;
 	}
 }
