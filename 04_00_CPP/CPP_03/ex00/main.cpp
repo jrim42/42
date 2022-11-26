@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/25 21:56:39 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/26 17:02:28 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	main(void)
 {
-	ClapTrap	p1("\033[0;31mA\033[0;37m");
-	ClapTrap	p2("\033[0;32mB\033[0;37m");
-	ClapTrap	p3("\033[0;36mC\033[0;37m");
-
+	ClapTrap	p1("A");
+	ClapTrap	p2("B");
+	
 	std::cout << "---------------------------------------------------" << std::endl;
-	p1.attack("\033[0;32mB\033[0;37m");
-	p2.takeDamage(p1.getDamage());
+	p2.attack("A");
+	p1.takeDamage(p2.getDamage());
+	p1.beRepaired(1);
 	std::cout << "---------------------------------------------------" << std::endl;
-	p2.attack("\033[0;31mA\033[0;37m");
-	p1.takeDamage(p3.getDamage());
-	std::cout << "---------------------------------------------------" << std::endl;
-	p3.beRepaired(3);
+	p1.takeDamage(6);
+	p1.takeDamage(7);
+	p1.attack("B");
+	p1.beRepaired(3);
 	std::cout << "---------------------------------------------------" << std::endl;
 	return (0);
 }
