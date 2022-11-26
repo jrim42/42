@@ -6,14 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:48 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/22 12:21:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/26 17:30:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-#define NAME1 "\033[0;31mS1\033[0;37m"
-#define NAME2 "\033[0;36mS2\033[0;37m"
+#define NAME1 "S1"
+#define NAME2 "S2"
 
 int	main(void)
 {
