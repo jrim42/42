@@ -6,40 +6,38 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:34:08 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/24 14:38:06 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 01:31:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
-//------------- constructor and destructor -------------//
-
+//-------------- orthodox canonical form ----------------//
 WrongCat::WrongCat(void) : WrongAnimal()
 {
-	std::cout << GRY << "(WrongCat: default constructor)" << DFT << std::endl;
-	_type = "wrong cat";
+	// std::cout << GRY << "(WrongCat: default constructor)" << DFT << std::endl;
+	this->type = "WrongCat";
 }
 
-WrongCat::WrongCat(const WrongCat & ref) : WrongAnimal()
+WrongCat::WrongCat(const WrongCat& ref)
 {
-	std::cout << GRY << "(WrongCat: copy constructor)" << DFT << std::endl;
-	_type = ref.getType();
+	// std::cout << GRY << "(WrongCat: copy constructor)" << DFT << std::endl;
+	*this = ref;
+}
+
+WrongCat& WrongCat::operator=(const WrongCat& ref)
+{
+	type = ref.type;
+	return (*this);
 }
 
 WrongCat::~WrongCat(void)
 {
-	std::cout << GRY << "(WrongCat: destructor)" << DFT << std::endl;
+	// std::cout << GRY << "(WrongCat: destructor)" << DFT << std::endl;
 }
 
-//------------------------------------------------------//
-
-WrongCat & WrongCat::operator=(WrongCat const & ref)
-{
-	_type = ref._type;
-	return (*this);
-}
-
+//------------------------ utils ------------------------//
 void	WrongCat::makeSound(void) const
 {
-	std::cout << "wrong meow..." << std::endl;
+	std::cout << "woem... woem..." << GRY << "(something wrong...)" << DFT << std::endl;
 }

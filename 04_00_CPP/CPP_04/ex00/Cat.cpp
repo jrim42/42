@@ -6,39 +6,37 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:24:45 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/24 14:35:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 01:26:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-//------------- constructor and destructor -------------//
-
+//-------------- orthodox canonical form ----------------//
 Cat::Cat(void) : Animal()
 {
-	std::cout << GRY << "(Cat: default constructor)" << DFT << std::endl;
-	_type = "cat";
+	// std::cout << GRY << "(Cat: default constructor)" << DFT << std::endl;
+	this->type = "Cat";
 }
 
-Cat::Cat(const Cat & ref) : Animal()
+Cat::Cat(const Cat& ref)
 {
-	std::cout << GRY << "(Cat: copy constructor)" << DFT << std::endl;
-	_type = ref.getType();
+	// std::cout << GRY << "(Cat: copy constructor)" << DFT << std::endl;
+	*this = ref;
+}
+
+Cat& Cat::operator=(const Cat& ref)
+{
+	type = ref.type;
+	return (*this);
 }
 
 Cat::~Cat(void)
 {
-	std::cout << GRY << "(Cat: destructor)" << DFT << std::endl;
+	// std::cout << GRY << "(Cat: destructor)" << DFT << std::endl;
 }
 
-//------------------------------------------------------//
-
-Cat & Cat::operator=(Cat const & ref)
-{
-	_type = ref._type;
-	return (*this);
-}
-
+//------------------------ utils ------------------------//
 void	Cat::makeSound(void) const
 {
 	std::cout << "meow... meow..." << std::endl;

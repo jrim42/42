@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:33:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/24 14:33:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 01:28:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ class WrongCat : public WrongAnimal
 {
 	public:
 		WrongCat(void);
-		WrongCat(const WrongCat & ref);
+		WrongCat(const WrongCat& ref);
+		WrongCat& operator=(const WrongCat& ref);
 		~WrongCat(void);
-		
-		WrongCat & 	operator=(WrongCat const & ref);
 
 		void	makeSound(void) const;
 };
