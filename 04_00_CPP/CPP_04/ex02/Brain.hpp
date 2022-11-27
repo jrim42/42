@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:24:21 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 01:36:33 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 01:51:57 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Brain
 		Brain(void);
 		Brain(const Brain& ref);
 		Brain& operator=(const Brain& ref);
-		virtual ~Brain(void);
+		~Brain(void);
 
 		std::string	getIdea(const int& idx) const;
 };
