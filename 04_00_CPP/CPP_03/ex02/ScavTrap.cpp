@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 20:01:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/26 18:04:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/27 15:17:01 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ ScavTrap::~ScavTrap()
 }
 
 //------------------------ utils ------------------------//
-void	ScavTrap::attack(std::string const & target)
+void	ScavTrap::attack(const std::string& target)
 {
 	if (this->_energy == 0 || this->_hit == 0)
 		std::cout	<< "ScavTrap " << this->_name << " cannot attack " << target << "..." << std::endl;

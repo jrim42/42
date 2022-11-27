@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 12:40:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/26 18:03:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/27 15:16:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ FragTrap::FragTrap(const FragTrap& ref)
 	*this = ref;
 }
 
-FragTrap & FragTrap::operator=(FragTrap const & ref)
+FragTrap & FragTrap::operator=(const FragTrap& ref)
 {
 	std::cout << GRY << "(FragTrap: copy asignment)" << DFT << std::endl;
 	this->_name = ref._name;
@@ -51,7 +51,7 @@ FragTrap::~FragTrap()
 }
 
 //------------------------ utils ------------------------//
-void	FragTrap::attack(std::string const & target)
+void	FragTrap::attack(const std::string& target)
 {
 	if (this->_energy == 0 || this->_hit == 0)
 		std::cout	<< "FragTrap " << this->_name << " cannot attack " << target << "..." << std::endl;
@@ -82,7 +82,7 @@ void	FragTrap::takeDamage(unsigned int amount)
 void	FragTrap::highFivesGuys(void)
 {
 	if (this->_hit == 0)
-		std::cout	<< "FragTrap " << this->_name << " cannot request positive highfive..." << std::endl;
+		std::cout	<< "FragTrap " << this->_name << " cannot request positive high fives..." << std::endl;
 	else
 		std::cout 	<< RED << "positive high fives " << DFT
 					<< "request from FragTrap " << _name << "!" << std::endl;

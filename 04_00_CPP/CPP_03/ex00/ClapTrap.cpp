@@ -6,14 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:18:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/26 17:02:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/27 14:58:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 //-------------- orthodox canonical form ----------------//
-ClapTrap::ClapTrap(void): _name("none"), _hit(10), _energy(10), _attack(0)
+ClapTrap::ClapTrap(void): _name("unknown"), _hit(10), _energy(10), _attack(0)
 {
 	std::cout << GRY << "(ClapTrap: default constructor)" << DFT << std::endl;
 }
@@ -81,7 +81,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		this->_hit += amount;
 		std::cout	<< "ClapTrap " << this->_name << " has been repaired of " 
-					<< RED << amount << DFT << " points of energy,\nnow having "
+					<< RED << amount << DFT << " points, now having "
 					<< RED << this->_hit << DFT << " of hit points." << std::endl; 
 		this->_energy--;
 	}

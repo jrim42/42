@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:18:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/26 17:02:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/27 14:52:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		this->_hit += amount;
 		std::cout	<< "ClapTrap " << this->_name << " has been repaired of " 
-					<< RED << amount << DFT << " points of energy,\nnow having "
+					<< RED << amount << DFT << " points, now having "
 					<< RED << this->_hit << DFT << " of hit points." << std::endl; 
 		this->_energy--;
 	}
