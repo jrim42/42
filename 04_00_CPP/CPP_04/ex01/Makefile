@@ -6,8 +6,8 @@ YLW			=	\033[0;33m
 BLU			= 	\033[0;36m
 DFT			= 	\033[0;37m
 
-CC			=	clang++
-CFLAGS		=	-Wall -Werror -Wextra
+CC			=	c++
+CFLAGS		=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
 SRC			=	main.cpp \

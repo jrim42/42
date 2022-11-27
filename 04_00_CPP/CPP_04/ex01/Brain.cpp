@@ -6,48 +6,45 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 20:24:24 by jrim              #+#    #+#             */
-/*   Updated: 2022/08/24 20:50:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 01:39:18 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Brain.hpp"
 
-//------------- constructor and destructor -------------//
-
+//-------------- orthodox canonical form ----------------//
 Brain::Brain(void) 
 {
-	std::cout << GRY << "(Brain: default constructor)" << DFT << std::endl;
+	// std::cout << GRY << "(Brain: default constructor)" << DFT << std::endl;
 	for (int i = 0; i < 100; i++)
-		_ideas[i] = "...";
+		this->ideas[i] = "...";
 }
 
-Brain::Brain(const Brain & ref) 
+Brain::Brain(const Brain& ref) 
 {
-	std::cout << GRY << "(Brain: copy constructor)" << DFT << std::endl;
+	// std::cout << GRY << "(Brain: copy constructor)" << DFT << std::endl;
+	*this = ref;
+}
+
+Brain& Brain::operator=(const Brain& ref)
+{
 	for (int i = 0; i < 100; i++)
-		_ideas[i] = ref.getIdea(i);
+		this->ideas[i] = ref.getIdea(i);
+	return (*this);
 }
 
 Brain::~Brain(void) 
 {
-	std::cout << GRY << "(Brain: destructor)" << DFT << std::endl;
+	// std::cout << GRY << "(Brain: destructor)" << DFT << std::endl;
 }
 
-//------------------------------------------------------//
-
-Brain & Brain::operator=(Brain const & ref)
+//------------------------ utils ------------------------//
+std::string	Brain::getIdea(const int& idx) const
 {
-	for (int i = 0; i < 100; i++)
-		_ideas[i] = ref.getIdea(i);
-	return (*this);
+	return (this->ideas[idx]);
 }
 
-std::string	Brain::getIdea(const int & idx) const
-{
-	return (_ideas[idx]);
-}
-
-std::ostream& operator<<(std::ostream & out, const Brain & brain)
+std::ostream& operator<<(std::ostream& out, const Brain& brain)
 {
 	for (int i = 0; i < 100; i++)
 		std::cout << (i + 1) << "th idea : " << brain.getIdea(i) << std::endl;
