@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:56 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 12:37:04 by jrim             ###   ########.fr       */
+/*   Updated: 2022/11/28 12:48:05 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ class Bureaucrat
 				const char	*what(void) const throw();
 		};
 };
+
+std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
 
 #endif
