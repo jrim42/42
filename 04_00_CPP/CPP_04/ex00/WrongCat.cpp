@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:34:08 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 01:31:40 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/21 01:53:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ WrongCat::~WrongCat(void)
 //------------------------ utils ------------------------//
 void	WrongCat::makeSound(void) const
 {
-	std::cout << "woem... woem..." << GRY << "(something wrong...)" << DFT << std::endl;
 }

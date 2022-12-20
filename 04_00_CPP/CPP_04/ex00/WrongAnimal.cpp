@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:15:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 01:23:11 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/21 01:54:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ std::string		WrongAnimal::getType(void) const
 
 void	WrongAnimal::makeSound(void) const
 {
+	std::cout << "..." << GRY << " (something's wrong...)" << DFT << std::endl;
 }

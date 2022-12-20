@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:13:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 01:22:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/21 01:53:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class WrongAnimal
 		virtual ~WrongAnimal(void);
 
 		std::string		getType(void) const;
-		virtual void	makeSound(void) const;
+		void	makeSound(void) const;
 };
 
 #endif
