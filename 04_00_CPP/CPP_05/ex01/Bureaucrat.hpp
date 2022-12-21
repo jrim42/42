@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:56 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 12:47:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/21 23:04:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ class Bureaucrat
 		const std::string&	getName(void) const;
 		int					getGrade(void) const;
 
+		void  increaseGrade(void);
+		void  decreaseGrade(void);
+
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -48,6 +51,8 @@ class Bureaucrat
 			public:
 				const char	*what(void) const throw();
 		};
+
+		void	signForm(void);
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);
