@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 13:05:16 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/21 22:58:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ class Form
 	private:
 		const std::string	_name;
 		bool				_signed;
-		int					_s_grade;
-		int					_e_grade;
+		const int			_s_grade;
+		const int			_e_grade;
 
 	public:
 		Form(void);
