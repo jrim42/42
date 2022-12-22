@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/22 15:36:11 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 22:43:30 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int main(void)
 			delete animals[i];
 	}
 	std::cout << CONTOUR << std::endl;
-	// system("leaks Brains | grep leaked");
+	// system("leaks ex01 | grep leaked");
 	return (0);
 }

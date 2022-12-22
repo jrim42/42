@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:15:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/11/28 01:20:09 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 22:47:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,4 @@ Animal::~Animal(void)
 std::string		Animal::getType(void) const
 {
 	return (this->type);
-}
-
-void	Animal::makeSound(void) const
-{
 }

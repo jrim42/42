@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/22 21:27:42 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 22:48:17 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@ int main(void)
 
 	i->makeSound();
 	j->makeSound();
+	
+	delete i;
+	delete j;
+	// std::cout << CONTOUR << std::endl;
+	// system("leaks ex02 | grep leaked");
 	return (0);
 }

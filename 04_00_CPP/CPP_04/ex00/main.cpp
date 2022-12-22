@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/22 14:53:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 22:48:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int main(void)
 {
 	{
 		const Animal* meta = new Animal();
-		const Animal* j = new Dog();
 		const Animal* i = new Cat();
+		const Animal* j = new Dog();
 		
-		std::cout << "type of j: " << j->getType() << " " << std::endl;
 		std::cout << "type of i: " << i->getType() << " " << std::endl;
+		std::cout << "type of j: " << j->getType() << " " << std::endl;
+		meta->makeSound();
 		i->makeSound();		//will output the cat sound
 		j->makeSound();		//will output the dog sound
-		meta->makeSound();
 
 		delete j;
 		delete i;
@@ -46,6 +46,7 @@ int main(void)
 		delete w;
 		delete w_meta;	
 	}
-	// system("leaks Animals | grep leaked");
+	std::cout << CONTOUR << std::endl;
+	// system("leaks ex00 | grep leaked");
 	return (0);
 }
