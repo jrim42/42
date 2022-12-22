@@ -1,4 +1,4 @@
-NAME		=	Brains2
+NAME		=	ex02
 
 RED			=	\033[0;31m
 GRN			= 	\033[0;32m

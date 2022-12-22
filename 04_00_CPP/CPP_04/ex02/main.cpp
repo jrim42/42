@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/21 01:50:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 21:27:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 int main(void)
 {
 	// Animal *err = new Animal();		// wrong!
+	Animal	*i = new Cat();
+	Animal	*j = new Dog();
 
+	i->makeSound();
+	j->makeSound();
 	return (0);
 }
