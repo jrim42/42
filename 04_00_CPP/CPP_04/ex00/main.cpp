@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/21 01:55:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/22 14:53:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int main(void)
 		const Animal* j = new Dog();
 		const Animal* i = new Cat();
 		
-		std::cout << "type of j : " << j->getType() << " " << std::endl;
-		std::cout << "type of i : " << i->getType() << " " << std::endl;
-		i->makeSound(); //will output the cat sound!
-		j->makeSound();
+		std::cout << "type of j: " << j->getType() << " " << std::endl;
+		std::cout << "type of i: " << i->getType() << " " << std::endl;
+		i->makeSound();		//will output the cat sound
+		j->makeSound();		//will output the dog sound
 		meta->makeSound();
 
 		delete j;
@@ -40,11 +40,12 @@ int main(void)
 		const WrongAnimal* w_meta = new WrongAnimal();
 		const WrongAnimal* w = new WrongCat();
 
-		std::cout << "type of w : " << w->getType() << " " << std::endl;
-		w->makeSound(); //will output the cat sound!
+		std::cout << "type of w: " << w->getType() << " " << std::endl;
+		w->makeSound(); 	//will output wrong sound
 		
 		delete w;
 		delete w_meta;	
 	}
+	// system("leaks Animals | grep leaked");
 	return (0);
 }
