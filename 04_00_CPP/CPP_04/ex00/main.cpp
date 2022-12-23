@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/22 22:48:08 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/23 11:37:13 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ int main(void)
 		const WrongAnimal* w = new WrongCat();
 
 		std::cout << "type of w: " << w->getType() << " " << std::endl;
-		w->makeSound(); 	//will output wrong sound
+		w_meta->makeSound(); 	//will output wrong sound
+		w->makeSound(); 		//will output wrong sound
 		
 		delete w;
 		delete w_meta;	
 	}
-	std::cout << CONTOUR << std::endl;
+	// std::cout << CONTOUR << std::endl;
 	// system("leaks ex00 | grep leaked");
 	return (0);
 }

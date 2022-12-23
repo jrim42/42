@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:03:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/22 22:43:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/23 11:43:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int main(void)
 				animals[i] = new Dog();
 		}
 		for (int i = 0; i < 10; i++)
-		animals[i]->makeSound();
+			animals[i]->makeSound();
 		
 		for (int i = 0; i < 10; i++)
 			delete animals[i];
 	}
-	std::cout << CONTOUR << std::endl;
+	// std::cout << CONTOUR << std::endl;
 	// system("leaks ex01 | grep leaked");
 	return (0);
 }
