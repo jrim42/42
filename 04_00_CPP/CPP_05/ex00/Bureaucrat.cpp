@@ -58,6 +58,29 @@ int	Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
+//----------------------- grades ------------------------//
+void  Bureaucrat::increaseGrade(void)
+{
+	if (this->_grade > 1)
+	{
+		this->_grade -= 1;
+		std::cout << GRY << "(Bureaucrat: increaseGrade)" << DFT << std::endl;
+	}
+	else
+		throw GradeTooHighException();
+}
+
+void  Bureaucrat::decreaseGrade(void)
+{
+	if (this->_grade < 150)
+	{
+		this->_grade += 1;
+		std::cout << GRY << "(Bureaucrat: decreaseGrade)" << DFT << std::endl;
+	}
+	else
+		throw GradeTooLowException();
+}
+
 //---------------------- exception ----------------------//
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
@@ -73,6 +96,6 @@ const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
 {
 	out	<< b.getName() << ", bureaucrat grade " 
-		<< BLU << b.getGrade() << DFT << "." << std::endl;
+		<< b.getGrade() << "." << std::endl;
 	return (out);
 }
