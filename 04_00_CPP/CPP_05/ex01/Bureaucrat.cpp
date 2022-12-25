@@ -37,7 +37,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& ref)
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& ref)
 {
-	// std::cout << GRY << "(Bureaucrat: copy asignment)" << DFT << std::endl;
+	// std::cout << GRY << "(Bureaucrat: copy assignment)" << DFT << std::endl;
 	// this->_name = ref._name;
 	this->_grade = ref._grade;
 	return (*this);

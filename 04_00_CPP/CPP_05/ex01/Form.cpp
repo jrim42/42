@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 14:55:24 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 15:48:52 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ Form::Form(const Form& ref)
 
 Form& Form::operator=(const Form& ref)
 {
-	// std::cout << GRY << "(Form: copy asignment)" << DFT << std::endl;
+	// std::cout << GRY << "(Form: copy assignment)" << DFT << std::endl;
 	if (this != &ref) {}
 	return (*this);
 }
