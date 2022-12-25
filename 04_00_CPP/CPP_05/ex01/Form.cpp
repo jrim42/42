@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 14:45:07 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 14:55:24 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	Form::beSigned(const Bureaucrat& b)
 //--------------------- insertion -----------------------//
 std::ostream& operator<<(std::ostream& out, const Form& f)
 {
-	out	<< f.getName() << "(signed:" << std::boolalpha << f.getSigned()
+	out	<< f.getName() << ", signed: " << std::boolalpha << f.getSigned()
 		<< ", sign grade: " << f.getSignGrade()
 		<< ", execute grade: " << f.getExecGrade() << std::endl;
 	return (out);
