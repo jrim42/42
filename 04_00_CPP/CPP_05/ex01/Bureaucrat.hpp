@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:17:56 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/23 16:40:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 14:44:29 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define BLU "\033[0;36m"
 # define GRY "\033[90m"
 # define DFT "\033[0;37m"
+
+class Form;
 
 class Bureaucrat
 {
@@ -52,7 +54,7 @@ class Bureaucrat
 				const char	*what(void) const throw();
 		};
 
-		void	signForm(void);
+		void	signForm(Form& f);
 };
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b);

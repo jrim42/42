@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/23 17:02:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 14:44:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FORM_HPP
 
 # include <iostream>
-# include "Bureaucrat.hpp"
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
@@ -23,17 +22,19 @@
 # define GRY "\033[90m"
 # define DFT "\033[0;37m"
 
+class Bureaucrat;
+
 class Form
 {
 	private:
 		const std::string	_name;
-		bool				_signed;
+		bool				_sign;
 		const int			_s_grade;
 		const int			_e_grade;
 
 	public:
 		Form(void);
-		// Form(std::string name, bool signed, int s_grade, int e_grade);
+		Form(std::string name, int s_grade, int e_grade);
 		Form(const Form& ref);
 		Form& operator=(const Form& ref);
 		~Form(void);
@@ -53,9 +54,14 @@ class Form
 			public:
 				const char	*what(void) const throw();
 		};
+		class AlreadySignedException : public std::exception
+		{
+			public:
+				const char	*what(void) const throw();
+		};
 
-		void	beSigned(Bureaucrat b);
-		void	signForm(Bureaucrat b);
+		void	checkGrade(int grade, int min, int max) const;
+		void	beSigned(const Bureaucrat& b);
 };
 
 std::ostream& operator<<(std::ostream& out, const Form& f);

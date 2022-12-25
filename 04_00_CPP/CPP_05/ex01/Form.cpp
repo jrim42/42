@@ -6,36 +6,47 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/23 18:15:07 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 14:45:07 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 //-------------- orthodox canonical form ----------------//
-Form::Form(void) : _name("unknown"), _signed(false), _s_grade(1), _e_grade(1)
+Form::Form(void) 
+	: _name("unknown"),
+	  _sign(false),
+	  _s_grade(150), 
+	  _e_grade(150)
 {
 	// std::cout << GRY << "(Form: default constructor)" << DFT << std::endl;
 }
 
-// Form::Form(std::string name, bool signed, int s_grade, int e_grade)
-// {
-// 	// std::cout << GRY << "(Form: constructor: " << this->_name << ")" << DFT << std::endl;
-// }
+Form::Form(std::string name, int s_grade, int e_grade)
+	: _name(name), 
+	  _sign(false),
+	  _s_grade(s_grade), 
+	  _e_grade(e_grade)
+{
+	// std::cout << GRY << "(Form: constructor: " << this->_name << ")" << DFT << std::endl;
+	checkGrade(this->_s_grade, 1, 150);
+	checkGrade(this->_e_grade, 1, 150);
+}
 
-Form::Form(const Form& ref)
+Form::Form(const Form& ref) 
+	: _name(ref._name),
+	  _sign(false),
+	  _s_grade(ref._s_grade), 
+	  _e_grade(ref._e_grade)
 {
 	// std::cout << GRY << "(Form: copy constructor)" << DFT << std::endl;
-	*this = ref;
 }
 
 Form& Form::operator=(const Form& ref)
 {
 	// std::cout << GRY << "(Form: copy asignment)" << DFT << std::endl;
-	// this->_name = ref._name;
-	this->_signed = ref._signed;
-	this->_s_grade = ref._s_grade;
-	this->_e_grade = ref._e_grade;
+	if (this != &ref) {}
 	return (*this);
 }
 
@@ -52,7 +63,7 @@ const std::string&	Form::getName(void) const
 
 bool	Form::getSigned(void) const
 {
-	return (this->_signed);
+	return (this->_sign);
 }
 
 int	Form::getSignGrade(void) const
@@ -66,25 +77,38 @@ int	Form::getExecGrade(void) const
 }
 
 //---------------------- exception ----------------------//
+void	Form::checkGrade(int grade, int min, int max) const
+{
+	if (grade < min)
+		throw GradeTooHighException();
+	else if (grade > max)
+		throw GradeTooLowException();
+}
+
 const char *Form::GradeTooHighException::what(void) const throw()
 {
-	return ("Error: Grade Too High");
+	return ("Error: Form: Grade Too High");
 }
 
 const char *Form::GradeTooLowException::what(void) const throw()
 {
-	return ("Error: Grade Too Low");
+	return ("Error: Form: Grade Too Low");
+}
+
+const char *Form::AlreadySignedException::what(void) const throw()
+{
+	return ("Error: Form: Already Signed");
 }
 
 //----------------------- utils -------------------------//
-void	Form::beSigned(Bureaucrat b)
+void	Form::beSigned(const Bureaucrat& b)
 {
-
-}
-
-void	Form::signForm(Bureaucrat b)
-{
-	
+	if (this->getSigned() == true)
+		throw AlreadySignedException();
+	else if (b.getGrade() <= this->_s_grade)
+		this->_sign = true;
+	else
+		throw GradeTooLowException();
 }
 
 //--------------------- insertion -----------------------//

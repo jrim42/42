@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 //-------------- orthodox canonical form ----------------//
 Bureaucrat::Bureaucrat(void) : _name("unknown"), _grade(150)
@@ -84,18 +85,27 @@ void  Bureaucrat::decreaseGrade(void)
 //---------------------- exception ----------------------//
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	return ("Error: Grade Too High");
+	return ("Error: Bureaucrat: Grade Too High");
 }
 
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	return ("Error: Grade Too Low");
+	return ("Error: Bureaucrat: Grade Too Low");
 }
 
 //--------------------- signForm -----------------------//
-void	Bureaucrat::signForm(void)
+void	Bureaucrat::signForm(Form& f)
 {
-	
+	try
+	{
+		f.beSigned(*this);
+		std::cout << this->_name << "signed" << f.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout 	<< this->_name << "couldn't sign" << f.getName() 
+					<< "because" << e.what() << std::endl;
+	}
 }
 
 //--------------------- insertion -----------------------//
