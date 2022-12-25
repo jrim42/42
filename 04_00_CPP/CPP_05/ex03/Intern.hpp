@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:10:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:58:26 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 17:16:35 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class Intern
 
 		AForm*	makeForm(std::string name, std::string target);
 
-		class FormatNouFoundException : public std::exception
+		class FormatNotFoundException : public std::exception
 		{
 			public:
 				const char	*what(void) const throw();
