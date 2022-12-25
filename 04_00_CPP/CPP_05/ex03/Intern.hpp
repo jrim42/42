@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:10:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/21 23:13:12 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/25 16:58:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define INTERN_HPP
 
 # include <iostream>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
@@ -27,14 +27,17 @@ class Intern
 {
 	public:
 		Intern(void);
-		Intern(std::string name, int grade);
 		Intern(const Intern& ref);
 		Intern& operator=(const Intern& ref);
 		~Intern(void);
 
-		Form*	makeForm(std::string name, std::string target);
-};
+		AForm*	makeForm(std::string name, std::string target);
 
-std::ostream& operator<<(std::ostream& out, const Intern& b);
+		class FormatNouFoundException : public std::exception
+		{
+			public:
+				const char	*what(void) const throw();
+		};
+};
 
 #endif
