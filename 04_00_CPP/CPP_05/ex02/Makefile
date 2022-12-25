@@ -1,4 +1,4 @@
-NAME		=	Forms
+NAME		=	ex02
 
 RED			=	\033[0;31m
 GRN			= 	\033[0;32m
@@ -12,7 +12,7 @@ RM			=	rm -f
 
 SRC			=	main.cpp \
 				Bureaucrat.cpp \
-				Form.cpp \
+				AForm.cpp \
 				ShrubberyCreationForm.cpp \
 				RobotomyRequestForm.cpp \
 				PresidentialPardonForm.cpp \
