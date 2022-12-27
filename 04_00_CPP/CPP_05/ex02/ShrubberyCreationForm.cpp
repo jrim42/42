@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:34:16 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:17:44 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:41:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,36 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& b) const
 		throw NotSignedException();
 	if (this->getExecGrade() < b.getGrade())
 		throw GradeTooLowException();
-	std::cout << "createShrubbery" << std::endl;
-	// this->createShrubbery();
+
+	std::cout << GRY << "(ShrubberyCreationForm is excuted)" << DFT << std::endl;
+	std::string		filename;
+	std::string		content;
+	std::ifstream	infile;
+	std::ofstream	outfile;
+
+	filename = this->getTarget() + "_shrubbery";
+	infile.open("ASCIItree.txt");
+	if (infile.is_open() == false)
+	{
+		std::cout << "Error: File Open Failed" << std::endl;
+		return ;
+	}
+	outfile.open(filename);
+	if (outfile.is_open() == false)
+	{
+		std::cout << "Error: File Creation Failed" << std::endl;
+		infile.close();
+		return ;
+	}
+	while (1)
+	{
+		std::getline(infile, content);
+		outfile << content;
+		if (infile.eof())
+			break;
+		outfile << std::endl;
+	}
+	outfile.close();
 }
 
 void 	ShrubberyCreationForm::createShrubbery(void)

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:20:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:20:30 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:24:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
-# include <fstream>
 
 class PresidentialPardonForm : public AForm
 {

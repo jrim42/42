@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:18:31 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:19:46 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:27:15 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "AForm.hpp"
 # include "Bureaucrat.hpp"
-# include <fstream>
+# include <ctime>
+# include <cstdlib>
 
 class RobotomyRequestForm : public AForm
 {

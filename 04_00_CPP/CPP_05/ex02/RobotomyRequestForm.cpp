@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:19:41 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 14:47:21 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,12 @@ void	RobotomyRequestForm::execute(const Bureaucrat& b) const
 		throw NotSignedException();
 	if (this->getExecGrade() < b.getGrade())
 		throw GradeTooLowException();
-	std::cout << "requestRobotomy" << std::endl;
+
+	std::cout << GRY << "(RobotomyRequestForm is excuted)" << DFT << std::endl;
+	int tmp = (std::rand() % 2); 
+	std::cout << "DRRRRRRRRRRRRR... ";
+	if (tmp)
+		std::cout << getTarget() << " has been successfully robotomized." << std::endl;
+	else
+		std::cout << "robotomy failed..." << std::endl;
 }
