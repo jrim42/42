@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:58:58 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 15:42:17 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 17:37:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define CONVERTER_HPP
 
 # include <iostream>
+# include <limits.h>
+# include <cmath>
+# include <float.h>
+# include <ctype.h>
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
@@ -29,7 +33,8 @@ class Converter
         int         _ival;
         double      _dval;
         float       _fval;
-        char        _cval;    
+        char        _cval;
+		bool		_flag;
 
 	public:
 		Converter(void);
@@ -48,6 +53,11 @@ class Converter
 		void	setDoubleValue(double val);
 		void	setFloatValue(float val);
 		void	setCharValue(char val);
+
+		void	toIntValue(void);
+		void	toDoubleValue(void);
+		void	toFloatValue(void);
+		void	toCharValue(void);
 };
 
 std::ostream& operator<<(std::ostream& out, const Converter& c);

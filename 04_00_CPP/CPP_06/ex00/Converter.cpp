@@ -6,14 +6,14 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:59:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 15:41:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 17:36:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Converter.hpp"
 
 //-------------- orthodox canonical form ----------------//
-Converter::Converter(void) : _val(NULL)
+Converter::Converter(void) : _val(NULL), _flag(false)
 {
 	// std::cout << GRY << "(Converter: default constructor)" << DFT << std::endl;
 }
@@ -31,6 +31,7 @@ Converter& Converter::operator=(const Converter& ref)
 	this->_dval = ref._dval;
 	this->_fval = ref._fval;
 	this->_cval = ref._cval;
+	this->_flag = ref._flag;
 	return (*this);
 }
 
@@ -89,6 +90,49 @@ void	Converter::setFloatValue(float val)
 void	Converter::setCharValue(char val)
 {
     this->_cval = val;
+}
+
+//--------------------- converter -----------------------//
+void	Converter::toIntValue(void)
+{ 
+	std::cout << "int: ";
+	if (this->_flag || std::isnan(this->_val) || this->_val > INT_MAX)
+		std::cout << "impossible";
+	else
+		std::cout << static_cast<int>(this->_val);
+	std::cout << std::endl;
+}
+
+void	Converter::toDoubleValue(void)
+{
+	std::cout << "double: ";
+	if (this->_flag || std::isnan(this->_val))
+		std::cout << "nan";
+	else
+		std::cout << static_cast<double>(this->_val);
+	std::cout << std::endl;
+}
+
+void	Converter::toFloatValue(void)
+{
+	std::cout << "float: ";
+	if (this->_flag || std::isnan(this->_val) || this->_val > FLT_MAX)
+		std::cout << "nanf";
+	else
+		std::cout << static_cast<float>(this->_val) << 'f';
+	std::cout << std::endl;
+}
+
+void	Converter::toCharValue(void)
+{
+	std::cout << "char: ";
+	if (this->_flag || std::isnan(this->_val))
+		std::cout << "impossible";
+	else if (isprint(this->_val) == false)
+		std::cout << "Non displayable";
+	else
+		std::cout << static_cast<char>(this->_val);
+	std::cout << std::endl;
 }
 
 //--------------------- insertion -----------------------//
