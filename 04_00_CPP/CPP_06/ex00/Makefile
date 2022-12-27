@@ -1,4 +1,4 @@
-NAME		=	ex00
+NAME		=	convert
 
 RED			=	\033[0;31m
 GRN			= 	\033[0;32m
@@ -10,7 +10,7 @@ CC			=	c++
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
-SRC			=	
+SRC			=	Converter.cpp \
 				
 OBJ			=	$(SRC:.cpp=.o)
 
