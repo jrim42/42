@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:24:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 17:16:31 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 16:05:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ AForm*	Intern::makeForm(std::string name, std::string target)
 
 	forms[0] = new ShrubberyCreationForm(target);
 	forms[1] = new RobotomyRequestForm(target);
-	forms[2] = new PresidentPardonForm(target);
+	forms[2] = new PresidentialPardonForm(target);
 	
 	for (int i = 0; i < 3; i++)
 	{

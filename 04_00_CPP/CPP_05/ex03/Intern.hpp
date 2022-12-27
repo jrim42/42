@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:10:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 17:16:35 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/27 16:05:23 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <iostream>
 # include "AForm.hpp"
+# include "PresidentialPardonForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "ShrubberyCreationForm.hpp"
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
