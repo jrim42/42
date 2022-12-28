@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:18:31 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 14:27:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:41:46 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 class RobotomyRequestForm : public AForm
 {
-	private:
-
 	public:
 		RobotomyRequestForm(void);
 		RobotomyRequestForm(std::string target);

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 15:54:58 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:46:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class AForm
 		bool				_sign;
 		const int			_s_grade;
 		const int			_e_grade;
-		const std::string	_target;
+		std::string			_target;
 
 	public:
 		AForm(void);
