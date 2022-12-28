@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 14:47:21 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:50:49 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& ref)
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& ref)
 {
 	// std::cout << GRY << "(RobotomyRequestForm: copy assignment)" << DFT << std::endl;
-	if (this != &ref) {}
+	if (this == &ref)
+		return (*this);
 	return (*this);
 }
 
@@ -51,7 +52,6 @@ void	RobotomyRequestForm::execute(const Bureaucrat& b) const
 	if (this->getExecGrade() < b.getGrade())
 		throw GradeTooLowException();
 
-	std::cout << GRY << "(RobotomyRequestForm is excuted)" << DFT << std::endl;
 	int tmp = (std::rand() % 2); 
 	std::cout << "DRRRRRRRRRRRRR... ";
 	if (tmp)

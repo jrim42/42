@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:30:17 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:19:00 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:42:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 class ShrubberyCreationForm : public AForm
 {
-	private:
-		void 	createShrubbery(void);
-
 	public:
 		ShrubberyCreationForm(void);
 		ShrubberyCreationForm(std::string target);

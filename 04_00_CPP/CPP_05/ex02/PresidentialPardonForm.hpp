@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:20:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 14:24:51 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:41:42 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 class PresidentialPardonForm : public AForm
 {
-	private:
-
 	public:
 		PresidentialPardonForm(void);
 		PresidentialPardonForm(std::string target);

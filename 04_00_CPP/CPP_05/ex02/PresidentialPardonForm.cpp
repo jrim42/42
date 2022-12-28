@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 14:44:50 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:50:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& ref
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& ref)
 {
 	// std::cout << GRY << "(PresidentialPardonForm: copy assignment)" << DFT << std::endl;
-	if (this != &ref) {}
+	if (this == &ref)
+		return (*this);
 	return (*this);
 }
 
@@ -51,6 +52,5 @@ void	PresidentialPardonForm::execute(const Bureaucrat& b) const
 	if (this->getExecGrade() < b.getGrade())
 		throw GradeTooLowException();
 
-	std::cout << GRY << "(PresidentialPardonForm is excuted)" << DFT << std::endl;
 	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
