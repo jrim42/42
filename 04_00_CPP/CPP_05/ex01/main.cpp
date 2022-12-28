@@ -6,26 +6,38 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:41:44 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 16:27:19 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:24:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-#define CONTOUR "---------------------------------------" 
+#define CONTOUR "------------------------------------------------------" 
 
 int main(void)
 {
 	{
 		try
 		{
-			Form	formA("A", 1, 151);
+			// Form	test("A", 1, 151);
+			// Form	test("A", 0, 75);
+			Form	test("A", 16, 31);
+			std::cout << test;
 		}
 		catch(std::exception& e)
 		{
 			std::cout << RED << e.what() << DFT << std::endl;
 		}
+	}
+	std::cout << CONTOUR << std::endl;
+	{
+		Form	test("A", 16, 31);
+		Form	copy1;
+
+		std::cout << copy1;
+		copy1 = test;
+		std::cout << copy1;
 	}
 	std::cout << CONTOUR << std::endl;
 	{

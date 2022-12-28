@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/25 15:48:52 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:21:36 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ Form::Form(const Form& ref)
 Form& Form::operator=(const Form& ref)
 {
 	// std::cout << GRY << "(Form: copy assignment)" << DFT << std::endl;
-	if (this != &ref) {}
+	if (this == &ref)
+		return (*this);
 	return (*this);
 }
 
@@ -114,8 +115,12 @@ void	Form::beSigned(const Bureaucrat& b)
 //--------------------- insertion -----------------------//
 std::ostream& operator<<(std::ostream& out, const Form& f)
 {
-	out	<< f.getName() << ", signed: " << std::boolalpha << f.getSigned()
-		<< ", sign grade: " << f.getSignGrade()
-		<< ", execute grade: " << f.getExecGrade() << std::endl;
+	out	<< f.getName();
+	if (f.getSigned() == true)
+		out << ", signed ";
+	else
+		out << ", unsigned ";
+	out	<< "(sign grade: " << f.getSignGrade()
+		<< ", execute grade: " << f.getExecGrade() << ")" << std::endl;
 	return (out);
 }
