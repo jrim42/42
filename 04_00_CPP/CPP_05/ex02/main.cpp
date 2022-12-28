@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 22:40:47 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:36:03 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 18:14:38 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int main(void)
 	{
 		std::cerr << RED << e.what() << DFT << std::endl;
 	}
+	// system("leaks ex02 | grep leaked");
 	return (0);
 }

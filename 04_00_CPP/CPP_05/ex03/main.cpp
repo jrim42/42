@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 22:41:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:24:05 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 18:14:45 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int main(void)
         someRandomBureaucrat.signForm(*rrf);
         someRandomBureaucrat.executeForm(*rrf);
     }
+	// system("leaks ex03 | grep leaked");
 	return (0);
 }
