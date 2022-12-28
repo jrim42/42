@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   converter.cpp                                      :+:      :+:    :+:   */
+/*   Converter.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:59:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 17:36:16 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 20:09:02 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Converter.hpp"
 
 //-------------- orthodox canonical form ----------------//
-Converter::Converter(void) : _val(NULL), _flag(false)
+Converter::Converter(void) : _val(NULL), _flag(true)
 {
 	// std::cout << GRY << "(Converter: default constructor)" << DFT << std::endl;
 }
@@ -26,6 +26,8 @@ Converter::Converter(const Converter& ref)
 
 Converter& Converter::operator=(const Converter& ref)
 {
+	if (this == &ref)
+		return (*this);
 	this->_val = ref._val;
 	this->_ival = ref._ival;
 	this->_dval = ref._dval;
@@ -41,106 +43,83 @@ Converter::~Converter(void)
 }
 
 //------------------------ getter -----------------------//
-std::string&    Converter::getRawValue(void) const
+std::string    Converter::getRawValue(void) const
 {
-
+	return (this->_val);
 }
 
 int Converter::getIntValue(void) const
 {
-
+	return (this->_ival);
 }
 
 double  Converter::getDoubleValue(void) const
 {
-
+	return (this->_dval);
 }
 
 float   Converter::getFloatValue(void) const
 {
-
+	return (this->_fval);
 }
 
 char    Converter::getCharValue(void) const
 {
-
+	return (this->_cval);
 }
 
-//------------------------ setter -----------------------//
-void	Converter::setRawValue(std::string val)
+bool	Converter::getFlag(void) const
 {
-    this->_val = val;
-}
-
-void	Converter::setIntValue(int val)
-{
-    this->_ival = val;
-}
-
-void	Converter::setDoubleValue(double val)
-{
-    this->_dval = val;
-}
-
-void	Converter::setFloatValue(float val)
-{
-    this->_fval = val;
-}
-
-void	Converter::setCharValue(char val)
-{
-    this->_cval = val;
+	return (this->_flag);
 }
 
 //--------------------- converter -----------------------//
-void	Converter::toIntValue(void)
+int	Converter::toIntValue(void)
 { 
-	std::cout << "int: ";
-	if (this->_flag || std::isnan(this->_val) || this->_val > INT_MAX)
-		std::cout << "impossible";
-	else
-		std::cout << static_cast<int>(this->_val);
-	std::cout << std::endl;
+	return (static_cast<int>(this->_dval));
 }
 
-void	Converter::toDoubleValue(void)
+double	Converter::toDoubleValue(void)
 {
-	std::cout << "double: ";
-	if (this->_flag || std::isnan(this->_val))
-		std::cout << "nan";
-	else
-		std::cout << static_cast<double>(this->_val);
-	std::cout << std::endl;
+	return (static_cast<double>(this->_dval));
 }
 
-void	Converter::toFloatValue(void)
+float	Converter::toFloatValue(void)
 {
-	std::cout << "float: ";
-	if (this->_flag || std::isnan(this->_val) || this->_val > FLT_MAX)
-		std::cout << "nanf";
-	else
-		std::cout << static_cast<float>(this->_val) << 'f';
-	std::cout << std::endl;
+	return (static_cast<float>(this->_dval));
 }
 
-void	Converter::toCharValue(void)
+char	Converter::toCharValue(void)
 {
-	std::cout << "char: ";
-	if (this->_flag || std::isnan(this->_val))
-		std::cout << "impossible";
-	else if (isprint(this->_val) == false)
-		std::cout << "Non displayable";
-	else
-		std::cout << static_cast<char>(this->_val);
-	std::cout << std::endl;
+	return (static_cast<char>(this->_dval));
 }
 
 //--------------------- insertion -----------------------//
 std::ostream& operator<<(std::ostream& out, const Converter& c)
 {
-    out << "char: " << c.getCharValue() << std::endl;
-	out << "int: " << c.getIntValue() << std::endl;
-	out << "float: " << c.getFloatValue() << std::endl;
-	out << "double: " << c.getDoubleValue() << std::endl;
+    printChar(out, c);
+    printInt(out, c);
+    printFloat(out, c);
+    printDouble(out, c);
 	return (out);
+}
+
+static void 	printInt(std::ostream& out, const Converter& c)
+{
+
+}
+
+static void 	printDouble(std::ostream& out, const Converter& c)
+{
+
+}
+
+static void 	printFloat(std::ostream& out, const Converter& c)
+{
+
+}
+
+static void 	printChar(std::ostream& out, const Converter& c)
+{
+
 }
