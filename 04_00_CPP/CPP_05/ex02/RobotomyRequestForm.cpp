@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:15:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 19:50:51 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	RobotomyRequestForm::execute(const Bureaucrat& b) const
 	if (this->getExecGrade() < b.getGrade())
 		throw GradeTooLowException();
 
-	int tmp = (std::rand() % 2); 
+	int tmp;
+
+	std::srand(time(NULL));
+	tmp = (std::rand() % 2); 
 	std::cout << "DRRRRRRRRRRRRR... ";
 	if (tmp)
 		std::cout 	<< BLU << this->getTarget() << DFT
