@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:41:44 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 14:50:48 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 15:05:56 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int main(void)
 		try
 		{
 			Bureaucrat test("test", 151);
+			// Bureaucrat test("test", 0);
+			// Bureaucrat test("test", 75);
+			std::cout << test;
 		}
 		catch (std::exception& e)
 		{
