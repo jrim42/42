@@ -6,8 +6,8 @@ YLW			=	\033[0;33m
 BLU			= 	\033[0;36m
 DFT			= 	\033[0;37m
 
-CC			=	c++
-CFLAGS		=	-Wall -Werror -Wextra -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
 SRC			=	main.cpp \
@@ -22,10 +22,10 @@ OBJ			=	$(SRC:.cpp=.o)
 all : $(NAME) 
 
 %.o : %.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ)
+	@$(CXX) -o $(NAME) $(OBJ)
 	@echo "$(NAME) is $(GRN)ready$(DFT)"
 
 clean :

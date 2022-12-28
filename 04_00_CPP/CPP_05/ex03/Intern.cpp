@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:24:59 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/27 16:05:36 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:21:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ AForm*	Intern::makeForm(std::string name, std::string target)
 	for (int i = 0; i < 3; i++)
 	{
 		if (name == forms[i]->getName())
+		{
+			std::cout << "Intern creates " << forms[i]->getName() << std::endl;
 			return (forms[i]);
+		}
 	}
+	std::cout 	<< "Intern cannot make " << name << " because ";
 	throw FormatNotFoundException();
 }
 

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:34:16 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:50:57 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:33:08 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,6 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& b) const
 		outfile << std::endl;
 	}
 	outfile.close();
+	std::cout 	<< BLU << this->getTarget() << DFT
+				<< "_shrubbery has been successfully created." << std::endl;
 }

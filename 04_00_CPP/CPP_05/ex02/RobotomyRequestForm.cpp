@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:50:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:15:48 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	RobotomyRequestForm::execute(const Bureaucrat& b) const
 	int tmp = (std::rand() % 2); 
 	std::cout << "DRRRRRRRRRRRRR... ";
 	if (tmp)
-		std::cout << getTarget() << " has been successfully robotomized." << std::endl;
+		std::cout 	<< BLU << this->getTarget() << DFT
+					<< " has been successfully robotomized." << std::endl;
 	else
 		std::cout << "robotomy failed..." << std::endl;
 }
