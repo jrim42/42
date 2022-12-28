@@ -64,7 +64,7 @@ void  Bureaucrat::increaseGrade(void)
 	if (this->_grade > 1)
 	{
 		this->_grade -= 1;
-		std::cout << GRY << "(Bureaucrat: increaseGrade)" << DFT << std::endl;
+		// std::cout << GRY << "(Bureaucrat: increaseGrade)" << DFT << std::endl;
 	}
 	else
 		throw GradeTooHighException();
@@ -75,7 +75,7 @@ void  Bureaucrat::decreaseGrade(void)
 	if (this->_grade < 150)
 	{
 		this->_grade += 1;
-		std::cout << GRY << "(Bureaucrat: decreaseGrade)" << DFT << std::endl;
+		// std::cout << GRY << "(Bureaucrat: decreaseGrade)" << DFT << std::endl;
 	}
 	else
 		throw GradeTooLowException();
@@ -84,12 +84,12 @@ void  Bureaucrat::decreaseGrade(void)
 //---------------------- exception ----------------------//
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	return ("Error: Grade Too High");
+	return ("Error: Bureaucrat: Grade Too High");
 }
 
 const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	return ("Error: Grade Too Low");
+	return ("Error: Bureaucrat: Grade Too Low");
 }
 
 //--------------------- insertion -----------------------//
