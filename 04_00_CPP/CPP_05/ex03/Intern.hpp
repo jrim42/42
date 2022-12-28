@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:10:50 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:36:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:38:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ class Intern
 		class FormatNotFoundException : public std::exception
 		{
 			public:
-				const char	*what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 };
 

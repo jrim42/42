@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:46:49 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:38:54 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ class AForm
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				const char	*what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				const char	*what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 		class AlreadySignedException : public std::exception
 		{
 			public:
-				const char	*what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 		class NotSignedException : public std::exception
 		{
 			public:
-				const char	*what(void) const throw();
+				virtual const char	*what(void) const throw();
 		};
 };
 
