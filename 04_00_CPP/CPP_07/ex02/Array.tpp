@@ -1,5 +1,3 @@
-#include <iostream>
-
 //-------------- orthodox canonical form ----------------//
 template <typename T>
 Array<T>::Array(void) : _len(0), _content(NULL)
