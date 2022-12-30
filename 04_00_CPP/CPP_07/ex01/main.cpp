@@ -1,23 +1,41 @@
 #include "iter.hpp"
 
+#define CONTOUR "---------------------------------------" 
+
 int main(void) 
 {
-    std::string s[3] = { "aaa", "bbb", "ccc" };
-    int i[6] = { 0 , 1, 2, 3, 4, 5 };
-    double d[9] = { 0.0, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8};
-    char c[12] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l' };
-
-    std::cout << "String Iteration\t: ";
-    iter(s, sizeof(s) / sizeof(*s), print);
+    {
+        std::cout << GRY << "(case 1: int array)" << DFT << std::endl;
+        int arr[5] = {0, 1, 2, 3, 4};
+        iter(arr, 5, display);
+        std::cout << std::endl;
+        iter(arr, 5, increment);
+        iter(arr, 5, display);
+    }
+	std::cout << "\n" << CONTOUR << std::endl;
+    {
+        std::cout << GRY << "(case 2: double array)" << DFT << std::endl;
+        double  arr[5] = {-5.3, -1.7, 0.0, 2.4, 4.6};
+        iter(arr, 5, display);
+        std::cout << std::endl;
+        iter(arr, 5, increment);
+        iter(arr, 5, display);
+    }
+	std::cout << "\n" << CONTOUR << std::endl;
+    {
+        std::cout << GRY << "(case 3: char array)" << DFT << std::endl;
+        char    arr[5] = {'a', 'b', 'c', 'd', 'e'};
+        iter(arr, 5, display);
+        std::cout << std::endl;
+        iter(arr, 5, increment);
+        iter(arr, 5, display);
+    }
+	std::cout << "\n" << CONTOUR << std::endl;
+    {
+        std::cout << GRY << "(case 4: string array)" << DFT << std::endl;
+        std::string arr[5] = {"libft", "gnl", "ft_printf", "born2beroot", "exam"};
+        iter(arr, 5, display);
+    }
     std::cout << std::endl;
-    std::cout << "Int Iteration\t\t: ";
-    iter(i, sizeof(i) / sizeof(*i), print);
-    std::cout << std::endl;
-    std::cout << "Double Iteration\t: ";
-    iter(d, sizeof(d) / sizeof(*d), print);
-    std::cout << std::endl;
-    std::cout << "Char Iteration\t\t: ";
-    iter(c, sizeof(c) / sizeof(*c), print);
-    std::cout << std::endl;
-    return 0;
+    return (0);
 }
