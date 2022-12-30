@@ -10,7 +10,9 @@ CC			=	c++
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
-SRC			=	
+SRC			=	main.cpp \
+				Base.cpp \
+				Random.cpp \
 				
 OBJ			=	$(SRC:.cpp=.o)
 
