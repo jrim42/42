@@ -1,20 +1,27 @@
 #ifndef ARRAY_HPP
-#define ARRAY_HPP
+# define ARRAY_HPP
 
-#include <cstddef>
-#include <exception>
-#include <iostream>
+# include <cstddef>
+# include <exception>
+# include <iostream>
+
+# define RED "\033[0;31m"
+# define GRN "\033[0;32m"
+# define YLW "\033[0;33m"
+# define BLU "\033[0;36m"
+# define GRY "\033[90m"
+# define DFT "\033[0;37m"
 
 template <typename T>
 class Array 
 {
 	private:
-		std::size_t	_len;
-		T			*_content;
+		unsigned int	_len;
+		T				*_content;
 
 	public:
 		Array(void);
-		Array(std::size_t len);
+		Array(unsigned int len);
 		Array(const Array& ref);
 		Array& operator=(const Array& ref);
 		~Array(void);
@@ -25,9 +32,9 @@ class Array
 				virtual const char	*what(void) const throw();
 		};
 
-		size_t		size(void) const;
-		T& 			operator[](std::size_t i);
-		const T& 	operator[](std::size_t i) const;
+		unsigned int	size(void) const;
+		T& 				operator[](unsigned int i);
+		const T& 		operator[](unsigned int i) const;
 };
 
 # include "Array.tpp"
