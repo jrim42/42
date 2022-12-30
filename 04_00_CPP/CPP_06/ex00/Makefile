@@ -10,7 +10,8 @@ CC			=	c++
 CFLAGS		=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
-SRC			=	Converter.cpp \
+SRC			=	main.cpp \
+				Converter.cpp \
 				
 OBJ			=	$(SRC:.cpp=.o)
 
