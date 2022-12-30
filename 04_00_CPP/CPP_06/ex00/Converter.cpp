@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:59:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 20:09:02 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/30 14:54:59 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Converter::Converter(const Converter& ref)
 
 Converter& Converter::operator=(const Converter& ref)
 {
+	// std::cout << GRY << "(Converter: copy assignment)" << DFT << std::endl;
 	if (this == &ref)
 		return (*this);
 	this->_val = ref._val;
