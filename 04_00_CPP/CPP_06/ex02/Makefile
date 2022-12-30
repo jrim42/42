@@ -12,7 +12,6 @@ RM			=	rm -f
 
 SRC			=	main.cpp \
 				Base.cpp \
-				Random.cpp \
 				
 OBJ			=	$(SRC:.cpp=.o)
 

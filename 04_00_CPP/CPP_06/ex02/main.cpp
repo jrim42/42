@@ -2,13 +2,10 @@
 
 int main(void) 
 {
-    for (int i = 0 ; i < 10 ; ++i) 
-    {
-        Base* base = generate();
-        identify(base);
-        identify(*base);
-        std::cout << std::endl;
-        delete base;
-    }
+    Base* base = generate();
+    identify(base);
+    identify(*base);
+    delete base;
+    // system("leaks ex02 | grep leaked");
     return (0);
 }

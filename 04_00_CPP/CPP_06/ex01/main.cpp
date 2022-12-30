@@ -7,15 +7,15 @@ int main(int argc, char **argv)
 	uintptr_t   ptr;
 
 	if (argc != 2)
-		return (1);
+    {
+        std::cout << "Error: Wrong Input Format" << std::endl;
+        return (0);
+    }
 	d1.setName(argv[1]);
-	std::cout << "d1 : " << d1.getName() << std::endl;
-
+	std::cout << " d1 : " << d1.getName() << std::endl;
 	ptr = serialize(&d1);
 	std::cout << "ptr : " << ptr << std::endl;
-
 	d2 = deserialize(ptr);
-	std::cout << "d2 : " << d2->getName() << std::endl;
-
+	std::cout << " d2 : " << d2->getName() << std::endl;
 	return (0);
 }

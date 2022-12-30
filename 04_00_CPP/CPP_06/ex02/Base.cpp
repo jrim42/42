@@ -6,29 +6,31 @@ Base::~Base(void)
 	// std::cout << GRY << "(Base: destructor)" << DFT << std::endl;
 }
 
-
 //----------------------- utils -------------------------//
 Base* generate(void) 
 {
-	int opt = static_cast<int>(Random::randr(0.0, 10.0)) / 3;
-	switch (opt) 
+	int	tmp;
+	std::srand(time(NULL));
+	tmp = std::rand() % 3;
+	switch (tmp) 
 	{
 		case 0:
-			std::cout << "Answer is A" << std::endl;
-			return new A();
+			std::cout << GRY << "(A is generated)" << DFT << std::endl;
+			return (new A());
 		case 1:
-			std::cout << "Answer is B" << std::endl;
-			return new B();
+			std::cout << GRY << "(B is generated)" << DFT << std::endl;
+			return (new B());
 		case 2:
-			std::cout << "Answer is C" << std::endl;
-			return new C();
+			std::cout << GRY << "(C is generated)" << DFT << std::endl;
+			return (new C());
 		default:
-			return NULL;
+			return (NULL);
   	}
 }
 
 void identify(Base* p) 
 {
+	std::cout << GRY << "(pointer) " << DFT;
 	if (dynamic_cast<A*>(p))
 		std::cout << "A" << std::endl;
 	else if (dynamic_cast<B*>(p))
@@ -37,7 +39,7 @@ void identify(Base* p)
 		std::cout << "C" << std::endl;
 }
 
-static bool try_cast(const Base& p, const std::string& s) 
+static bool tryCasting(const Base& p, const std::string& s) 
 {
 	try 
 	{
@@ -49,12 +51,14 @@ static bool try_cast(const Base& p, const std::string& s)
 			(void)dynamic_cast<const C&>(p);
 		std::cout << s << std::endl;
 	} 
-	catch (std::exception&) {}
-	return false;
+	catch (std::exception&) 
+	{}
+	return (false);
 }
 
 void identify(const Base& p) 
 {
-	if (try_cast(p, "A") || try_cast(p, "B") || try_cast(p, "C"))
-    	return;
+	std::cout << GRY << "(reference) " << DFT;
+	if (tryCasting(p, "A") || tryCasting(p, "B") || tryCasting(p, "C"))
+    	return ;
 }
