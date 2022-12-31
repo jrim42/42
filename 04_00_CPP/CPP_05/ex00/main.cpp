@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:41:44 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 15:05:56 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:40:40 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 int main(void)
 {
+	std::cout << CONTOUR << std::endl;
 	{
+		std::cout << GRY << "(test 1: constructor)" << DFT << std::endl;
 		try
 		{
-			Bureaucrat test("test", 151);
-			// Bureaucrat test("test", 0);
-			// Bureaucrat test("test", 75);
-			std::cout << test;
+			// Bureaucrat test1("a", 151);
+			// Bureaucrat test1("a", 0);
+			Bureaucrat test1("a", 75);
+			std::cout << test1;
 		}
 		catch (std::exception& e)
 		{
@@ -31,15 +33,16 @@ int main(void)
 	}
 	std::cout << CONTOUR << std::endl;
 	{
-		Bureaucrat	a("a", 3);
-		int			cnt = 3;
+		std::cout << GRY << "(test 2: grade increment)" << DFT << std::endl;
+		Bureaucrat	test2("b", 3);
 		
-		while (cnt--)
+		std::cout << test2;
+		for (int i = 0; i < 3; i++)
 		{
-			std::cout << a;
 			try
 			{
-				a.increaseGrade();
+				test2.increaseGrade();
+				std::cout << test2;
 			}
 			catch (std::exception& e)
 			{

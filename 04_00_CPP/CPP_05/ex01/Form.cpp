@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:26:31 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:50:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	Form::getExecGrade(void) const
 }
 
 //---------------------- exception ----------------------//
-void	Form::checkGrade(int grade, int min, int max) const
+void	Form::checkGrade(int grade, int highest, int lowest) const
 {
-	if (grade < min)
+	if (grade < highest)
 		throw GradeTooHighException();
-	else if (grade > max)
+	else if (grade > lowest)
 		throw GradeTooLowException();
 }
 

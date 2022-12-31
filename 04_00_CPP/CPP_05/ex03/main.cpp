@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 22:41:05 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 18:14:45 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:32:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-#define CONTOUR "------------------------------------------------------" 
-
 int main(void)
 {
+	std::cout << CONTOUR << std::endl;
     {
-        Intern      someRandomIntern;
+		std::cout << GRY << "(test 1: form making)" << DFT << std::endl;
+        Intern      someIntern;
         AForm*      wrongForm;
 
         try
         {
-            wrongForm = someRandomIntern.makeForm("someRandomForm", "Bender");
+            wrongForm = someIntern.makeForm("bla", "Bender");
         }
         catch (std::exception & e)
         {
@@ -35,13 +35,14 @@ int main(void)
     }
 	std::cout << CONTOUR << std::endl;
     {
-        Bureaucrat  someRandomBureaucrat("Marvin", 1);
-        Intern      someRandomIntern;
+		std::cout << GRY << "(test 2: form executing)" << DFT << std::endl;
+        Bureaucrat  someBureaucrat("Marvin", 1);
+        Intern      someIntern;
         AForm*      rrf;
         
-        rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");    
-        someRandomBureaucrat.signForm(*rrf);
-        someRandomBureaucrat.executeForm(*rrf);
+        rrf = someIntern.makeForm("RRF", "Bender");    
+        someBureaucrat.signForm(*rrf);
+        someBureaucrat.executeForm(*rrf);
     }
 	// system("leaks ex03 | grep leaked");
 	return (0);

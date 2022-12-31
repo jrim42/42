@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:34:16 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:33:08 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:21:34 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 //-------------- orthodox canonical form ----------------//
 ShrubberyCreationForm::ShrubberyCreationForm(void) 
-	: AForm("ShrubberyCreationForm", 145, 137, "undefined")
+	: AForm("SCF", 145, 137, "undefined")
 {
 	// std::cout << GRY << "(ShrubberyCreationForm: default constructor)" << DFT << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-	: AForm("ShrubberyCreationForm", 145, 137, target)
+	: AForm("SCF", 145, 137, target)
 {
 	// std::cout << GRY << "(ShrubberyCreationForm: constructor)" << DFT << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& ref) 
+	: AForm("SCF", 145, 137, ref.getTarget())
 {
 	// std::cout << GRY << "(ShrubberyCreationForm: copy constructor)" << DFT << std::endl;
-	*this = ref;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& ref)
@@ -36,6 +36,8 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	// std::cout << GRY << "(ShrubberyCreationForm: copy assignment)" << DFT << std::endl;
 	if (this == &ref)
 		return (*this);
+	this->setTarget(ref.getTarget());
+	this->setSigned(ref.getSigned());
 	return (*this);
 }
 
@@ -59,13 +61,13 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& b) const
 	infile.open("ASCIItree.txt");
 	if (infile.is_open() == false)
 	{
-		std::cout << "Error: File Open Failed" << std::endl;
+		std::cout << RED << "Error: File Open Failed" << DFT << std::endl;
 		return ;
 	}
 	outfile.open(this->getTarget() + "_shrubbery");
 	if (outfile.is_open() == false)
 	{
-		std::cout << "Error: File Creation Failed" << std::endl;
+		std::cout << RED << "Error: File Creation Failed" << DFT << std::endl;
 		infile.close();
 		return ;
 	}
@@ -77,6 +79,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& b) const
 			break;
 		outfile << std::endl;
 	}
+	infile.close();
 	outfile.close();
 	std::cout 	<< BLU << this->getTarget() << DFT
 				<< "_shrubbery has been successfully created." << std::endl;

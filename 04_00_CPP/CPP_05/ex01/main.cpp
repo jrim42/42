@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:41:44 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 18:16:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:49:26 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 
 int main(void)
 {
+	std::cout << CONTOUR << std::endl;
 	{
+		std::cout << GRY << "(test 1: constructor)" << DFT << std::endl;
 		try
 		{
 			// Form	test("A", 1, 151);
@@ -32,24 +34,14 @@ int main(void)
 	}
 	std::cout << CONTOUR << std::endl;
 	{
-		Form	test("A", 16, 31);
-		Form	copy1;
-
-		std::cout << copy1;
-		copy1 = test;
-		std::cout << copy1;
-	}
-	std::cout << CONTOUR << std::endl;
-	{
+		std::cout << GRY << "(test 2: sign grade)" << DFT << std::endl;
 		Bureaucrat	a("a", 4);
 		Form		A("A", 3, 1);
-		int			cnt = 3;
 
 		std::cout << A;
-		while (cnt--)
+		for (int i = 0; i < 3; i++)
 		{
-			std::cout << std::endl;
-			std::cout << a;
+			std::cout << "\n" << a;
 			try
 			{
 				a.signForm(A);

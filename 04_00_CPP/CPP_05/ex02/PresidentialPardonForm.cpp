@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:16:09 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:26:15 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:17:50 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 //-------------- orthodox canonical form ----------------//
 PresidentialPardonForm::PresidentialPardonForm(void) 
-	: AForm("PresidentialPardonForm", 25, 5, "undefined")
+	: AForm("PPF", 25, 5, "undefined")
 {
 	// std::cout << GRY << "(PresidentialPardonForm: default constructor)" << DFT << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-	: AForm("PresidentialPardonForm", 25, 5, target)
+	: AForm("PPF", 25, 5, target)
 {
 	// std::cout << GRY << "(PresidentialPardonForm: constructor)" << DFT << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& ref) 
+	: AForm("PPF", 25, 5, ref.getTarget())
 {
 	// std::cout << GRY << "(PresidentialPardonForm: copy constructor)" << DFT << std::endl;
-	*this = ref;
 }
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& ref)
@@ -36,6 +36,8 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	// std::cout << GRY << "(PresidentialPardonForm: copy assignment)" << DFT << std::endl;
 	if (this == &ref)
 		return (*this);
+	this->setTarget(ref.getTarget());
+	this->setSigned(ref.getSigned());
 	return (*this);
 }
 

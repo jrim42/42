@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 22:40:47 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 18:14:38 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:17:16 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,33 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-#define CONTOUR "---------------------------------------" 
-
 int main(void)
 {
 	try
 	{
-		Bureaucrat 				b("Marvin", 20);
-		// Bureaucrat 				b("Marvin", 1);
-		ShrubberyCreationForm 	form_s("t1");
-		RobotomyRequestForm 	form_r("t2");
-		PresidentialPardonForm 	form_p("t3");
+		Bureaucrat 				b("Tim", 20);
+		// Bureaucrat 				b("Ben", 1);
+		ShrubberyCreationForm 	scf("t1");
+		RobotomyRequestForm 	rrf("t2");
+		PresidentialPardonForm 	ppf("t3");
 
-		std::cout << b << std::endl;
-		std::cout << form_r;
-		std::cout << form_s;
-		std::cout << form_p << std::endl;
+		std::cout << CONTOUR << std::endl;
+		std::cout << b ;
+		std::cout << rrf << scf << ppf;
+	
+		std::cout << CONTOUR << std::endl;
+		b.executeForm(scf);
+		b.signForm(scf);
+		b.executeForm(scf);
 
-		b.executeForm(form_s);
-		b.signForm(form_s);
-		b.executeForm(form_s);
+		std::cout << CONTOUR << std::endl;
+		b.signForm(rrf);
+		b.signForm(rrf);
+		b.executeForm(rrf);
 
-		std::cout << std::endl;
-		b.signForm(form_r);
-		b.signForm(form_r);
-		b.executeForm(form_r);
-
-		std::cout << std::endl;
-		b.signForm(form_p);
-		b.executeForm(form_p);
+		std::cout << CONTOUR << std::endl;
+		b.signForm(ppf);
+		b.executeForm(ppf);
 	}
 	catch (std::exception & e)
 	{

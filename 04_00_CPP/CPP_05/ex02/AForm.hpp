@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:04 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 17:38:54 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:14:41 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define BLU "\033[0;36m"
 # define GRY "\033[90m"
 # define DFT "\033[0;37m"
+
+# define CONTOUR "-------------------------------------------------------------" 
 
 class Bureaucrat;
 
@@ -45,11 +47,14 @@ class AForm
 		int					getSignGrade(void) const;
 		int					getExecGrade(void) const;
 		const std::string&	getTarget(void) const;
+		
+		void	setTarget(const std::string& target);	
+		void	setSigned(const bool sign);
 
 		void			beSigned(const Bureaucrat& b);
 		virtual void	execute(const Bureaucrat& b) const = 0;
 
-		void	checkGrade(int grade, int min, int max) const;
+		void	checkGrade(int grade, int highest, int lowest) const;
 
 		class GradeTooHighException : public std::exception
 		{

@@ -6,7 +6,7 @@
 /*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:47:07 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/28 16:31:47 by jrim             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:14:47 by jrim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,17 @@ const std::string&	AForm::getTarget(void) const
 	return (this->_target);
 }
 
+//----------------------- setter ------------------------//
+void	AForm::setTarget(const std::string& target)
+{
+	this->_target = target;
+}
+
+void	AForm::setSigned(const bool sign)
+{
+	this->_sign = sign;
+}
+
 //----------------------- utils -------------------------//
 void	AForm::beSigned(const Bureaucrat& b)
 {
@@ -99,11 +110,11 @@ void	AForm::beSigned(const Bureaucrat& b)
 }
 
 //---------------------- exception ----------------------//
-void	AForm::checkGrade(int grade, int min, int max) const
+void	AForm::checkGrade(int grade, int highest, int lowest) const
 {
-	if (grade < min)
+	if (grade < highest)
 		throw GradeTooHighException();
-	else if (grade > max)
+	else if (grade > lowest)
 		throw GradeTooLowException();
 }
 
