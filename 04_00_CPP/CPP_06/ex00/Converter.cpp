@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Converter.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 14:59:03 by jrim              #+#    #+#             */
-/*   Updated: 2022/12/30 18:02:00 by jrim             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Converter.hpp"
 
 //-------------- orthodox canonical form ----------------//
@@ -20,11 +8,13 @@ Converter::Converter(void) : _raw(NULL), _dval(0.0), _flag(true)
 
 Converter::Converter(std::string raw) : _raw(raw), _dval(0.0), _flag(true)
 {
+	// std::cout << GRY << "(Converter: constructor)" << DFT << std::endl;
 	try 
 	{
 		char *ptr = NULL;
 		*(const_cast<double*>(&_dval)) = std::strtod(_raw.c_str(), &ptr);
-		if (_dval == 0.0 && (_raw[0] != '-' && _raw[0] != '+' && !std::isdigit(_raw[0])))
+		if (_dval == 0.0 && 
+			(_raw[0] != '-' && _raw[0] != '+' && !std::isdigit(_raw[0])))
 			throw std::bad_alloc();
 		if (*ptr && std::strcmp(ptr, "f"))
 			throw std::bad_alloc();
