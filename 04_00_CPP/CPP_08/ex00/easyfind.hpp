@@ -21,7 +21,7 @@ typename T::iterator	easyfind(T& container, int value)
 
 	iter = std::find(container.begin(), container.end(), value);
 	if (iter == container.end()) 
-		throw std::runtime_error("Error: value not found in container");
+		throw std::runtime_error("Error: Value Not Found");
 	return (iter);
 }
 
