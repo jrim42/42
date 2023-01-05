@@ -1,8 +1,18 @@
-#ifndef DATA_HPP
-#define DATA_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 19:07:49 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/03 19:34:00 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <cstdint>
-# include <string>
+#ifndef DATA_HPP
+# define DATA_HPP
+
 # include <iostream>
 
 # define RED "\033[0;31m"
@@ -31,6 +41,5 @@ class Data
 uintptr_t		serialize(Data* ptr);
 Data*			deserialize(uintptr_t raw);
 std::ostream& 	operator<<(std::ostream& o, const Data& ptr);
-void 			print(uintptr_t raw);
 
 #endif

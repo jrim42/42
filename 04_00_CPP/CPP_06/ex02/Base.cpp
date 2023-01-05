@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 19:07:57 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/03 19:33:27 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Base.hpp"
 
 //-------------------------------------------------------//
@@ -39,26 +51,28 @@ void identify(Base* p)
 		std::cout << "C" << std::endl;
 }
 
-static bool tryCasting(const Base& p, const std::string& s) 
-{
-	try 
-	{
-		if (s == "A")
-			(void)dynamic_cast<const A&>(p);
-		else if (s == "B")
-			(void)dynamic_cast<const B&>(p);
-		else if (s == "C")
-			(void)dynamic_cast<const C&>(p);
-		std::cout << s << std::endl;
-	} 
-	catch (std::exception&) 
-	{}
-	return (false);
-}
-
-void identify(const Base& p) 
+void identify(Base& p) 
 {
 	std::cout << GRY << "(reference) " << DFT;
-	if (tryCasting(p, "A") || tryCasting(p, "B") || tryCasting(p, "C"))
-    	return ;
+	try 
+	{
+		A &a = dynamic_cast<A&>(p);
+		static_cast<void>(a);
+		std::cout << "A" << std::endl;
+	} 
+	catch (std::exception&) {}
+	try 
+	{
+		B &b = dynamic_cast<B&>(p);
+		static_cast<void>(b);
+		std::cout << "B" << std::endl;
+	} 
+	catch (std::exception&) {}
+	try 
+	{
+		C &c = dynamic_cast<C&>(p);
+		static_cast<void>(c);
+		std::cout << "C" << std::endl;
+	} 
+	catch (std::exception&) {}
 }

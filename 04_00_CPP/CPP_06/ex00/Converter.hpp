@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 19:04:07 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/03 19:04:07 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONVERTER_HPP
 # define CONVERTER_HPP
 
@@ -5,8 +17,7 @@
 # include <iomanip>
 # include <climits>
 # include <cmath>
-# include <float.h>
-# include <ctype.h>
+# include <cctype>
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"

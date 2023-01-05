@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Data.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 19:07:47 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/03 19:30:05 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Data.hpp"
 
 //-------------- orthodox canonical form ----------------//
@@ -46,7 +58,7 @@ void	Data::setName(const std::string& name)
 //------------------------- utils -----------------------//
 uintptr_t serialize(Data* ptr) 
 {
- 	 return (reinterpret_cast<uintptr_t>(ptr));
+	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
 Data* deserialize(uintptr_t raw) 
@@ -60,13 +72,4 @@ std::ostream& operator<<(std::ostream& out, const Data& d)
 	out	<< "addr: " << &d << std::endl;
 	out << "name: " << d.getName() << std::endl;
 	return (out);
-}
-
-void print(uintptr_t raw) 
-{
-	Data *ptr = deserialize(raw);
-  	if (!ptr)
-    	return ;
-	std::cout	<< "addr: " << ptr << std::endl;
-	std::cout	<< "name: " << ptr->getName() << std::endl;
 }

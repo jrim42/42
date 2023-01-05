@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Converter.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 19:04:04 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/03 19:04:05 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Converter.hpp"
 
 //-------------- orthodox canonical form ----------------//
@@ -11,12 +23,13 @@ Converter::Converter(std::string raw) : _raw(raw), _dval(0.0), _flag(true)
 	// std::cout << GRY << "(Converter: constructor)" << DFT << std::endl;
 	try 
 	{
-		char *ptr = NULL;
-		*(const_cast<double*>(&_dval)) = std::strtod(_raw.c_str(), &ptr);
-		if (_dval == 0.0 && 
-			(_raw[0] != '-' && _raw[0] != '+' && !std::isdigit(_raw[0])))
+		const char	*nptr = _raw.c_str();
+		char 		*endptr = NULL;
+
+		_dval = std::strtod(nptr, &endptr);
+		if (*endptr && std::strcmp(endptr, "f"))
 			throw std::bad_alloc();
-		if (*ptr && std::strcmp(ptr, "f"))
+		else if (_dval == 0.0 && (_raw[0] != '+' && _raw[0] != '-' && !std::isdigit(_raw[0])))
 			throw std::bad_alloc();
   	} 
   	catch (std::exception&) 
@@ -89,6 +102,8 @@ static void 	printChar(std::ostream& out, Converter& c)
 	out << "char: ";
   	if (std::isnan(c.getDoubleValue()) || std::isinf(c.getDoubleValue()))
     	out << "impossible" << std::endl;
+	else if (c.getDoubleValue() > CHAR_MAX || c.getDoubleValue() < CHAR_MIN)
+    	out << "impossible" << std::endl;
   	else if (std::isprint(c.toCharValue()))
     	out << "'" << c.toCharValue() << "'" << std::endl;
   	else
@@ -100,6 +115,10 @@ static void 	printInt(std::ostream& out, Converter& c)
 	out << "int: ";
   	if (std::isnan(c.getDoubleValue()) || std::isinf(c.getDoubleValue()))
     	out << "impossible" << std::endl;
+	else if (c.getDoubleValue() > INT_MAX)
+    	out << "overflow" << std::endl;
+	else if (c.getDoubleValue() < INT_MIN)
+    	out << "underflow" << std::endl;
   	else
     	out << c.toIntValue() << std::endl;
 }
@@ -109,6 +128,10 @@ static void 	printFloat(std::ostream& out, Converter& c)
 	out << "float: ";
   	if (std::isnan(c.getDoubleValue()) || std::isinf(c.getDoubleValue()))
    		out << std::showpos << c.toFloatValue() << "f" << std::endl;
+	else if (c.getDoubleValue() > __FLT_MAX__)
+		out << "overflow" << std::endl;
+	else if (c.getDoubleValue() < -__FLT_MAX__)
+    	out << "underflow" << std::endl;
   	else if (c.toFloatValue() == static_cast<int64_t>(c.toFloatValue()))
 		out << c.toFloatValue() << ".0f" << std::endl;
 	else
