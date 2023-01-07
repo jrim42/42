@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 15:19:13 by jrim              #+#    #+#             */
+/*   Updated: 2023/01/05 16:30:43 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Array.hpp"
 
@@ -31,6 +43,8 @@ int main(int, char**)
         test[0] = 4242;
         std::cout << test[0] << std::endl;
         std::cout << "copy : " << copy[0] << std::endl;
+        copy = test;
+        std::cout << "copy : " << copy[0] << std::endl;
     }
 	std::cout << CONTOUR << std::endl;
     for (int i = 0; i < MAX_VAL; i++)
@@ -51,7 +65,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << RED << e.what() << DFT << '\n';
     }
     // content change: case 2
     try
@@ -61,7 +75,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << RED << e.what() << DFT << '\n';
     }
     // content change: case 3
     try
@@ -71,7 +85,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << RED << e.what() << DFT << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
