@@ -10,14 +10,15 @@
 
 # include <functional>
 # include <memory>
-# include "./pair.hpp"
+# include <utility> // pair header (tmp)
+// # include "./pair.hpp"
 # include "./random_access_iterator.hpp"
 # include "./reverse_iterator.hpp"
 
 namespace ft 
 {
 	template <typename U, typename V, class Compare = std::less<U>,
-				class Allocator = std::allocator<ft::pair<const U, V>>>
+				class Allocator = std::allocator<std::pair<const U, V>>>
 	class map 
 	{
 		private:
@@ -67,7 +68,7 @@ namespace ft
 
 			// allocator
 				// get_allocator
-}; // end of class map
+	}; // end of class map
 
 // comparison operator
 // swap

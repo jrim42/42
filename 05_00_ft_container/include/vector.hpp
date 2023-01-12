@@ -77,7 +77,7 @@ namespace ft
             }
             size_type   capacity() const
             {
-                return (static_cast<size_type>(_c_end - _begin);)
+                return (static_cast<size_type>(_cap_end - _begin);)
             }
             bool        empty()
             {
@@ -132,22 +132,23 @@ namespace ft
     };
 }  // end of namespace ft
 
+// comparison operator
 template <typename T, class Allocator>
-bool operator==(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool    operator==(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 template <typename T, class Allocator>
-bool operator!=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool    operator!=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 template <typename T, class Allocator>
-bool operator>(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool    operator>(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 template <typename T, class Allocator>
-bool operator>=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool    operator>=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 template <typename T, class Allocator>
-bool operator<(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool     operator<(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 template <typename T, class Allocator>
-bool operator<=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
+bool    operator<=(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);
 
 #endif
