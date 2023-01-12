@@ -130,7 +130,7 @@ namespace ft
                 // _construct
                 // _destruct
     };
-}
+}  // end of namespace ft
 
 template <typename T, class Allocator>
 bool operator==(const ft::vector<T, Allocator>& x, const ft::vector<T, Allocator>& y);

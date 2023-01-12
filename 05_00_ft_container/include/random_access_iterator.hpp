@@ -1,8 +1,8 @@
 #ifndef RANDOM_ACCESS_ITERATOR_HPP
 # define RANDOM_ACCESS_ITERATOR_HPP
 
-#include <iterator>
-#include "./iterator_traits.hpp"
+# include <iterator>
+# include "./iterator_traits.hpp"
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
@@ -72,7 +72,7 @@ namespace ft
 				return tmp;
 			}
 
-			/* arithmetic operators */
+			// arithmetic operators
 			random_access_iterator operator+(difference_type n) const 
 			{
 				return random_access_iterator(_ptr + n);
@@ -91,9 +91,9 @@ namespace ft
 				_ptr -= n;
 				return *this;
 			}
-	};
+	}; // end of class random_access_operator
 
-	// operators
+	// comparison operators
 	template <typename T1, typename T2>
 	bool operator==(const random_access_iterator<T1>& a,
 					const random_access_iterator<T2>& b) 
@@ -136,6 +136,7 @@ namespace ft
 		return a.base() >= b.base();
 	}
 
+	// arithmetic operators
 	template <typename T>
 	random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n,
 										const random_access_iterator<T>& ite) 
@@ -149,6 +150,6 @@ namespace ft
 	{
 		return a.base() - b.base();
 	}
-}
+}  // end of namespace ft
 
 #endif

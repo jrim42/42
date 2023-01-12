@@ -54,6 +54,6 @@ namespace ft
             friend bool operator>(const stack& a, const stack& b)   { return (a.c > b.c); }
             friend bool operator>=(const stack& a, const stack& b)  { return (a.c >= b.c); }
     };
-}
+}  // end of namespace ft
 
 #endif
