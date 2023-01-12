@@ -6,6 +6,8 @@
 # include <exception>
 # include <stdexcept>
 
+# include "./random_access_iterator.hpp"
+
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
 # define YLW "\033[0;33m"
@@ -121,8 +123,12 @@ namespace ft
             void        clear();
 
             // allocator
-
+            allocator_type get_allocator(void) const    {return __alloc;}
+            
             // memory
+                // _init
+                // _construct
+                // _destruct
     };
 }
 

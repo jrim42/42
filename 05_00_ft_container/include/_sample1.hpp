@@ -5,10 +5,10 @@
 #include <limits>
 #include <memory>
 #include <stdexcept>
-#include "./algorithm.hpp"
 #include "./iterator_traits.hpp"
 #include "./random_access_iterator.hpp"
 #include "./reverse_iterator.hpp"
+#include "./algorithm.hpp"
 #include "./type_traits.hpp"
 
 namespace ft {
