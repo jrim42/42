@@ -43,10 +43,11 @@ namespace ft
 				_ptr = ite.base();
 				return *this;
 			}
-			iterator_type base(void) const { return _ptr; }
-			pointer operator->(void) const { return _ptr; }
-			reference operator*(void) const { return *_ptr; }
-			reference operator[](difference_type n) const { return _ptr[n]; }
+
+			iterator_type base(void) const 					{ return _ptr; }
+			pointer operator->(void) const 					{ return _ptr; }
+			reference operator*(void) const 				{ return *_ptr; }
+			reference operator[](difference_type n) const	{ return _ptr[n]; }
 
 			// increment & decrement
 			random_access_iterator& operator++(void) 
@@ -109,20 +110,6 @@ namespace ft
 	}
 
 	template <typename T1, typename T2>
-	bool operator<(const random_access_iterator<T1>& a,
-				   const random_access_iterator<T2>& b) 
-	{
-		return a.base() < b.base();
-	}
-
-	template <typename T1, typename T2>
-	bool operator<=(const random_access_iterator<T1>& a,
-					const random_access_iterator<T2>& b) 
-	{
-		return a.base() <= b.base();
-	}
-
-	template <typename T1, typename T2>
 	bool operator>(const random_access_iterator<T1>& a,
 				   const random_access_iterator<T2>& b) 
 	{
@@ -134,6 +121,20 @@ namespace ft
 					const random_access_iterator<T2>& b) 
 	{
 		return a.base() >= b.base();
+	}
+
+	template <typename T1, typename T2>
+	bool operator<(const random_access_iterator<T1>& a,
+				   const random_access_iterator<T2>& b) 
+	{
+		return a.base() < b.base();
+	}
+
+	template <typename T1, typename T2>
+	bool operator<=(const random_access_iterator<T1>& a,
+					const random_access_iterator<T2>& b) 
+	{
+		return a.base() <= b.base();
 	}
 
 	// arithmetic operators
