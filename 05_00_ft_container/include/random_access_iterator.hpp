@@ -92,7 +92,7 @@ namespace ft
 				_ptr -= n;
 				return *this;
 			}
-	}; // end of class random_access_operator
+	}; // end of class random_access_iterator
 
 	// comparison operators
 	template <typename T1, typename T2>

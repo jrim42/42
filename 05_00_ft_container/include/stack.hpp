@@ -1,8 +1,8 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-// # include "vector.hpp"
-# include <vector>
+# include "vector.hpp"
+// # include <vector>
 
 # define RED "\033[0;31m"
 # define GRN "\033[0;32m"
