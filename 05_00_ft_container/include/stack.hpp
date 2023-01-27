@@ -13,8 +13,8 @@
 
 namespace ft
 {
-    // template <typename T, class Container = ft::vector<T>>
-    template <typename T, class Container = std::vector<T>>
+    template <typename T, class Container = ft::vector<T>>
+    // template <typename T, class Container = std::vector<T>>
     class stack
     {
         protected:
