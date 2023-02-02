@@ -44,8 +44,14 @@ namespace ft
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
             
-            vector(const allocator_type& alloc = allocator_type());
-            vector(const vector& ref);
+            vector(const allocator_type& alloc = allocator_type())
+            {
+                //
+            }
+            vector(const vector& ref)
+            {
+                //
+            }
             vector& operator=(const vector& ref)
             {
                 if (this != &ref)
@@ -54,15 +60,15 @@ namespace ft
             ~vector(void) {};
 
             // iterators
-            iterator                begin()         {return (iterator(_begin));}
-            iterator                end()           {return (iterator(_end));}
-            const_iterator          begin() const   {return (const_iterator(_begin));}
-            const_iterator          end() const     {return (const_iterator(_begin));}
+            iterator                begin()         { return iterator(_begin); }
+            iterator                end()           { return iterator(_end); }
+            const_iterator          begin() const   { return const_iterator(_begin); }
+            const_iterator          end() const     { return const_iterator(_begin); }
             
-            reverse_iterator        rbegin()        {return (reverse_iterator(end()));}
-            reverse_iterator        rend()          {return (reverse_iterator(end()));}
-            const_reverse_iterator  rbegin() const  {return (reverse_iterator(begin()));}
-            const_reverse_iterator  rend() const    {return (reverse_iterator(begin()));}
+            reverse_iterator        rbegin()        { return reverse_iterator(end()); }
+            reverse_iterator        rend()          { return reverse_iterator(end()); }
+            const_reverse_iterator  rbegin() const  { return reverse_iterator(begin()); }
+            const_reverse_iterator  rend() const    { return reverse_iterator(begin()); }
 
             // size
             size_type   size() cosnt
@@ -92,7 +98,7 @@ namespace ft
             // access operator
                 // data
             reference       operator[](size_type n)         { return _begin[n]; }
-            const_reference operator[](size_type n) const;  { return _begin[n]; }
+            const_reference operator[](size_type n) const   { return _begin[n]; }
             reference       at(size_type n)
             {
                 if (n >= size())
@@ -105,25 +111,65 @@ namespace ft
                     throw std::out_of_range("Error: Out of Range");
                 return (_begin[n]);
             }
+            
             reference       front()         {return (*_begin);}
             const_reference front() const   {return (*_begin);}
             reference       back()          {return *(end - 1);}
             const_reference back() const    {return *(end - 1);}
 
             // modifiers
-            void        assign();
-            void        push_back(value_type& x)
-            void        push_back(const value_type& x);
-            void        pop_back();
-            iterator    insert(const_iterator pos, const value_type& x);
-            iterator    insert(const_iterator pos, value_type& x);
-            iterator    erase(const_iterator pos);
-            iterator    erase(const_iterator begin, const_iterator end);
-            void        swap(vector &v);
-            void        clear();
+            void        assign()
+            {
+
+            }
+
+            void        push_back(value_type& val)
+            {
+            }
+
+            void        push_back(const value_type& val)
+            {
+
+            }
+
+            void        pop_back()
+            {
+
+            }
+
+            iterator    insert(const_iterator pos, const value_type& x)
+            {
+
+            }
+
+            iterator    insert(const_iterator pos, value_type& x)
+            {
+
+            }
+
+            iterator    erase(const_iterator pos)
+            {
+
+            }
+
+            iterator    erase(const_iterator begin, const_iterator end)
+            {
+
+            }
+
+            void        swap(vector &v)
+            {
+
+            }
+
+            void        clear()
+            {
+
+            }
+
 
             // allocator
-            allocator_type get_allocator(void) const    {return __alloc;}
+            allocator_type get_allocator(void) const    { return _alloc; }
             
             // memory
                 // _init

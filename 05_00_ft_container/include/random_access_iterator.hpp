@@ -25,9 +25,9 @@ namespace ft
 			
 			typedef typename ft::iterator_traits<iterator_type>::value_type 		value_type;
 			typedef typename ft::iterator_traits<iterator_type>::difference_type 	difference_type;
+			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
 			typedef typename ft::iterator_traits<iterator_type>::pointer 			pointer;
 			typedef typename ft::iterator_traits<iterator_type>::reference 			reference;
-			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
 
 			// constructor & destructor
 			random_access_iterator(void): _ptr(ft::nil) {}
@@ -139,15 +139,17 @@ namespace ft
 
 	// arithmetic operators
 	template <typename T>
-	random_access_iterator<T> operator+(typename random_access_iterator<T>::difference_type n,
-										const random_access_iterator<T>& ite) 
+	random_access_iterator<T> operator+
+		(typename random_access_iterator<T>::difference_type n,
+		 const random_access_iterator<T>& ite) 
 	{
 		return random_access_iterator<T>(ite.base() + n);
 	}
 
 	template <typename T1, typename T2>
-	typename random_access_iterator<T1>::difference_type operator-(const random_access_iterator<T1>& a,
-																   const random_access_iterator<T2>& b) 
+	typename random_access_iterator<T1>::difference_type operator-
+		(const random_access_iterator<T1>& a,
+		 const random_access_iterator<T2>& b) 
 	{
 		return a.base() - b.base();
 	}

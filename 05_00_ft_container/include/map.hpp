@@ -10,9 +10,9 @@
 
 # include <functional>
 # include <memory>
-# include <utility> // pair header (tmp)
-// # include "./pair.hpp"
-# include "./bst.hpp"
+// # include <utility> // pair header (tmp)
+# include "./pair.hpp"
+# include "./rbtree.hpp"
 # include "./random_access_iterator.hpp"
 # include "./reverse_iterator.hpp"
 
@@ -22,14 +22,14 @@ namespace ft
 				class Allocator = std::allocator<std::pair<const U, V>>>
 	class map 
 	{
-		typedef U	key_type;
-		typedef V 	mapped_type;
-		typedef ft::pair<const U, V> value_type;
-		typedef Compare key_compare;
+		typedef U						key_type;
+		typedef V 						mapped_type;
+		typedef ft::pair<const U, V>	value_type;
+		typedef Compare 				key_compare;
 
-		typedef Allocator	allocator_type;
-		typedef typename allocator_type::template rebind<value_type>::other type_allocator;
-		typedef std::allocator_traits<type_allocator> type_traits;
+		typedef Allocator													allocator_type;
+		typedef typename allocator_type::template rebind<value_type>::other	type_allocator;
+		typedef std::allocator_traits<type_allocator> 						type_traits;
 
 		typedef typename allocator_type::reference       reference;
 		typedef typename allocator_type::const_reference const_reference;
@@ -45,9 +45,9 @@ namespace ft
 		typedef ft::reverse_iterator<const_iterator> 	const_reverse_iterator;
 
 		private:
-			key_compare		_key;
-			value_compare	_val;
-			ft::bst<value_type, key_type, value_compare, allocator> _bst;
+			key_compare		key;
+			value_compare	val;
+			ft::rbtree<value_type, key_type, value_compare, allocator>	tree;
 
 		public:
 			// members

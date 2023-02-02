@@ -12,6 +12,9 @@
 
 namespace ft
 {
+    // nil??
+    struct nil {};
+
     // enable_if
     template <bool cond, typename T = void>
     struct enable_if {};

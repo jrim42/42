@@ -28,8 +28,10 @@ namespace ft
             typedef typename container_type::size_type          size_type;
 
             // OCCF
-            stack(const container_type& container = container_type()) : c(container) {}
-            stack(const stack& ref) : c(ref.c) {}
+            stack(const container_type& container = container_type()) 
+                : c(container) {}
+            stack(const stack& ref) 
+                : c(ref.c) {}
             ~stack(void) {}
             stack& operator=(const stack& ref) 
             {
