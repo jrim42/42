@@ -342,7 +342,6 @@ namespace ft
                 postorder(target->right);
             }
 
-
         public:
             // constructor & destructor
             rbtree()
