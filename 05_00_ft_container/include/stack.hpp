@@ -13,29 +13,30 @@
 
 namespace ft
 {
-    template <typename T, class Container = ft::vector<T>>
+    template <typename T, class Container = ft::vector<T> >
     class stack
     {
-        protected:
-            container_type  c;
-
         public:
             typedef Container                                   container_type;
             typedef typename container_type::value_type         value_type;
             typedef typename container_type::reference          reference;
             typedef typename container_type::const_reference    const_reference;
             typedef typename container_type::size_type          size_type;
+        
+        protected:
+            container_type  c;
 
+        public:
             // OCCF
-            stack(const container_type& container = container_type()) 
+            explicit stack(const container_type& container = container_type()) 
                 : c(container) {}
             stack(const stack& ref) 
                 : c(ref.c) {}
             ~stack(void) {}
             stack& operator=(const stack& ref) 
             {
-                if (this != &s)
-                    c = s.c;
+                if (this != &ref)
+                    c = ref.c;
                 return (*this);
             }
 
@@ -50,10 +51,10 @@ namespace ft
             // boolean operators
             friend bool operator==(const stack& a, const stack& b)  { return (a.c == b.c); }
             friend bool operator!=(const stack& a, const stack& b)  { return (a.c != b.c); }
-            friend bool operator<(const stack& a, const stack& b)   { return (a.c < b.c); }
-            friend bool operator<=(const stack& a, const stack& b)  { return (a.c <= b.c); }
             friend bool operator>(const stack& a, const stack& b)   { return (a.c > b.c); }
             friend bool operator>=(const stack& a, const stack& b)  { return (a.c >= b.c); }
+            friend bool operator<(const stack& a, const stack& b)   { return (a.c < b.c); }
+            friend bool operator<=(const stack& a, const stack& b)  { return (a.c <= b.c); }
     }; // end of class stack
 }  // end of namespace ft
 

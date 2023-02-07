@@ -8,40 +8,101 @@
 # define T_GRY "\033[90m"
 # define T_DFT "\033[0;37m"
 
+# define R 1;
+# define B 0; 
+
 # include <iostream>
+# include <memory>
+# include "./pair.hpp"
+# include "./iterator_traits.hpp"
+# include "./type_traits.hpp"
 
 namespace ft 
 {
-    enum Color
-    {
-        R,
-        B
-    };
-
     template <typename T>
-    struct Node
-    {
-        T       key;
-        Node    *left;
-        Node    *right;
-        Node    *parent;
-        Color   color;
-    };
+    struct treeNode
+    { 
+        typedef T       value_type;
+        typedef bool    Color;
+
+        value_type	val;
+        Color   	color;
+        Node    	*left;
+        Node    	*right;
+        Node    	*parent;
+    
+		// OCCF
+		treeNode(void)
+			: val(0), color(0), left(0), right(0), parent(0) {}
+		treeNode(const value_type& _val)
+			: val(_val), color(0), left(0), right(0), parent(0) {}
+		treeNode(const treeNode& ref)
+			: val(ref.val), color(ref.color), left(ref.left), right(ref.right), parent(ref.parent) {}
+		~treeNode(void) {}
+
+		treeNode&	operator=(const treeNode& ref)
+		{
+			if (this != &ref)
+			{
+				val = ref.val;
+				color = ref.color;
+				right = ref.right;
+				left = ref.left;
+				parent = ref.parent;
+			}
+			return *this;
+		}
+	}; // end of treeNode
     // node 구조체 생성 후 색은 black으로 초기화, 모든 자식들은 0로 초기화
-
-    template <typename T>
-    class treeNode
-    {
-        // Node를 여기로...
-    }; // end of treeNode
 
     template <typename U, typename V>
     class treeIter
     {
+		public:
+			typedef U 				value_type;
+			typedef V* 				iterator_type;
+			typedef value_type* 	pointer;
+			typedef value_type& 	reference;
+
+			typedef typename ft::iterator_traits<iterator_type>::difference_type	difference_type;
+			typedef typename ft::iterator_traits<iterator_type>::value_type 		node_type;
+			typedef typename ft::iterator_traits<iterator_type>::pointer 			NodePtr;
+			typedef typename ft::iterator_traits<iterator_type>::reference 			node_reference;
+			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
+		
+		private:
+			NodePtr	curPtr;
+			NodePtr	nilPtr;
+
+		public:
+			// OCCF
+			treeIter(void)
+				: curPtr(0), nilPtr(0) {}
+			treeIter(NodePtr _cur, NodePtr _nil)
+				: curPtr(_cur), nilPtr(_nil) {}
+			treeIter(const treeIter& ref)
+				: curPtr(ref.curPtr), nilPtr(ref.nilPtr) {}
+			~treeIter(void) {}
+
+			treeIter& operator=(const treeIter& ref)
+			{
+				if (this != &ref)
+				{
+					curPtr = ref.curPtr;
+					nilPtr = ref.nilPtr;
+				}
+				return *this;
+			}
+
+			// access
+			NodePtr		base(void) const 	{ return curPtr; }
+			pointer 	operator->(void) const	{ return &curPtr->val; }
+			reference 	operator*(void) const	{ return curPtr->val; }
+			
 
     }; // end of treeIter
 
-    template <typename T, class Key, class Comp, class Allocator>
+    template <typename T, typename Key, typename Comp, typename Allocator>
     class rbtree
     {
         typedef T       value_type;
@@ -49,7 +110,7 @@ namespace ft
         typedef Comp    compare_type;
 
         typedef treeNode<value_type>                    node_type;
-        typedef treeNode<value_type>*                   node_pointer;
+        typedef treeNode<value_type>*                   NodePtr;
         typedef treeIter<value_type, node_type>         iterator;
         typedef treeIter<const value_type, node_type>   const_iterator;
 
@@ -60,12 +121,13 @@ namespace ft
         typedef std::size_t         size_type;
         typedef std::ptrdiff_t      difference_type;
 
-        typedef Node<T>*            NodePtr;
-
         private:    
-            NodePtr     root;  // root node는 항상  black
-            NodePtr     tail;  // 끝에 해당하는 노드로 항상 black
-            size_type   cnt;
+			NodePtr			_begin;
+			NodePtr			_end;
+            NodePtr			_nil;
+			compare_type	_comp;
+			allocator_type	_alloc;
+			size_type 		_size;
 
             // key 값이 있는지 검사하는 함수
             NodePtr isKey(T _key)
@@ -373,7 +435,8 @@ namespace ft
 
         public:
             // constructor & destructor
-            rbtree()
+            rbtree(const compare_type& comp, const allocator_type& alloc)
+				: 
             {
                 this->tail = new Node<T>();
                 this->tail->color = B;
