@@ -6,7 +6,11 @@
 # include <exception>
 # include <stdexcept>
 
+# include "./compare.hpp"
 # include "./random_access_iterator.hpp"
+# include "./reverse_iterator.hpp"
+# include "./iterator_traits.hpp"
+# include "./type_traits"
 
 # define T_RED "\033[0;31m"
 # define T_GRN "\033[0;32m"
@@ -43,7 +47,34 @@ namespace ft
             typedef ft::random_access_iterator<const value_type>    const_iterator;
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
-            
+
+        private:
+            void    _init()
+            {
+
+            }
+
+            void    _construct()
+            {
+
+            }
+
+            void    _construct()
+            {
+
+            }
+
+            void    _destruct()
+            {
+
+            }
+
+            void    _destruct()
+            {
+                
+            }
+
+        public:
             vector(const allocator_type& alloc = allocator_type())
             {
                 //
@@ -73,23 +104,32 @@ namespace ft
             // size
             size_type   size() cosnt
             {
-                return (static_cast<size_type>(_end - _begin);)
+                return static_cast<size_type>(_end - _begin);
             }
             size_type   max_size() const
             {
+                // return 
             }
-            void        resize(size_type size)
+            void        resize(size_type _size)
             {
+                if (size() > _size)
+                {
+                    size_type   diff = size() - _size;
+                    
+                }
+                else if (size() < _size)
+                {
+
+                }
+                
             }
             size_type   capacity() const
             {
-                return (static_cast<size_type>(_cap_end - _begin);)
+                return static_cast<size_type>(_cap_end - _begin);
             }
             bool        empty()
             {
-                if (_begin == _end)
-                    return (true);
-                return (false);
+                return (_begin == _end);
             }
             void        reserve(size_type size)
             {
