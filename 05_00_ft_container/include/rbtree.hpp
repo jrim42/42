@@ -22,21 +22,50 @@ namespace ft
     struct Node
     {
         T       key;
-        Node    *left = nullptr;
-        Node    *right = nullptr;
-        Node    *parent = nullptr;
-        Color   color = B;
+        Node    *left;
+        Node    *right;
+        Node    *parent;
+        Color   color;
     };
-    // node 구조체 생성 후 색은 black으로 초기화, 모든 자식들은 nullptr로 초기화
+    // node 구조체 생성 후 색은 black으로 초기화, 모든 자식들은 0로 초기화
 
     template <typename T>
+    class treeNode
+    {
+        // Node를 여기로...
+    }; // end of treeNode
+
+    template <typename U, typename V>
+    class treeIter
+    {
+
+    }; // end of treeIter
+
+    template <typename T, class Key, class Comp, class Allocator>
     class rbtree
     {
-        typedef Node<T> *NodePtr;
+        typedef T       value_type;
+        typedef Key     key_type;
+        typedef Comp    compare_type;
+
+        typedef treeNode<value_type>                    node_type;
+        typedef treeNode<value_type>*                   node_pointer;
+        typedef treeIter<value_type, node_type>         iterator;
+        typedef treeIter<const value_type, node_type>   const_iterator;
+
+        typedef Allocator                                                   allocator_type;
+        typedef typename allocator_type::template rebind<node_type>::other  node_allocator;
+        typedef std::allocator_traits<node_allocator>                       node_traits;
+
+        typedef std::size_t         size_type;
+        typedef std::ptrdiff_t      difference_type;
+
+        typedef Node<T>*            NodePtr;
 
         private:    
-            NodePtr root;  // root node는 항상  black
-            NodePtr tail;  // 끝에 해당하는 노드로 항상 black
+            NodePtr     root;  // root node는 항상  black
+            NodePtr     tail;  // 끝에 해당하는 노드로 항상 black
+            size_type   cnt;
 
             // key 값이 있는지 검사하는 함수
             NodePtr isKey(T _key)
@@ -56,12 +85,12 @@ namespace ft
             void    insert(T _key)
             {
                 NodePtr a = this->root;
-                NodePtr b = nullptr;
-                NodePtr c = new Node();
+                NodePtr b = 0;
+                NodePtr c = new Node<T>();
 
                 c->key = _key;
                 c->color = R;
-                c->parent = nullptr;
+                c->parent = 0;
                 c->left = this->tail;
                 c->right = this->tail;
 
@@ -73,7 +102,7 @@ namespace ft
                 }
                 c->parent = b;
 
-                if (b == nullptr)
+                if (b == 0)
                     this->root = c;
                 else if (c->key > b->key)
                     b->right = c;
@@ -81,14 +110,14 @@ namespace ft
                     b->left = c;
 
                 // c가 root node라면
-                if (c->parent == nullptr)
+                if (c->parent == 0)
                 {
                     c->color = B;
                     return ;
                 }
                 // c의 부모노드가 root라면 fix up 필요없이 red로 붙여주면 된다.
-                if (c->parent->parent != nullptr)
-                    this->insertFix(c)
+                if (c->parent->parent != 0)
+                    this->insertFix(c);
                 return ;
             }
 
@@ -103,7 +132,7 @@ namespace ft
                     bool    side = (n->parent == gp->left) ? true : false; // 왼쪽이면 1, 오른쪽이면 0
 
                     // case 1
-                    if (u && u->color == RED)
+                    if (u && u->color == R)
                     {
                         n->parent->color = B;
                         u->color = B;
@@ -199,13 +228,13 @@ namespace ft
                         // case 2
                         if (s->left->color == B && s->right->color == B)
                         {
-                            s->color == RED;
+                            s->color == R;
                             x = x->parent;                            
                         }
                         else
                         {
                             // case 3
-                            if (s->right->color = B)
+                            if (s->right->color == B)
                             {
                                 s->left->color = B;
                                 s->color = R;
@@ -234,13 +263,13 @@ namespace ft
                         // case 2
                         if (s->left->color == B && s->right->color == B)
                         {
-                            s->color == RED;
+                            s->color == R;
                             x = x->parent;                            
                         }
                         else
                         {
                             // case 3
-                            if (s->left->color = B)
+                            if (s->left->color == B)
                             {
                                 s->right->color = B;
                                 s->color = R;
@@ -263,8 +292,8 @@ namespace ft
             // 삭제 시 이용, 삭제할 노드의 자식 노드를 부모노드에게 연결해주는 함수
             void    transplant(NodePtr n1, NodePtr n2)
             {
-                if (n1->parent == nullptr)
-                    root = v;
+                if (n1->parent == 0)
+                    root = n2;
                 else if (n1 == n1->parent->left)
                     n1->parent->left = n2;
                 else
@@ -346,23 +375,17 @@ namespace ft
             // constructor & destructor
             rbtree()
             {
-                this->tail = new Node();
+                this->tail = new Node<T>();
                 this->tail->color = B;
-                this->tail->left = nullptr;
-                this->tail->right = nullptr;
-                this->tail->parent = nullptr;
+                this->tail->left = 0;
+                this->tail->right = 0;
+                this->tail->parent = 0;
                 this->root = this->tail; 
             }
 
-            rbtree(const rbtree& ref)
-            {
+            // rbtree(const rbtree& ref){}
 
-            }
-
-            rbtree& operator=(const rbtree& ref)
-            {
-                
-            }
+            // rbtree& operator=(const rbtree& ref){}
 
             ~rbtree() {};
 
@@ -374,7 +397,7 @@ namespace ft
                 return (x);
             }
             
-            NodePtr getMax(NodePtr node)
+            NodePtr getMax(NodePtr x)
             {
                 while (x->right != this->tail)
                     x = x->right;

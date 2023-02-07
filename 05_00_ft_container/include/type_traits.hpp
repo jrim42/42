@@ -13,7 +13,19 @@
 namespace ft
 {
     // nil??
-    struct nil {};
+    // struct nil {};
+    const class nullptr_t 
+    {
+        private:
+            void operator&(void) const;
+
+        public:
+            template <typename T>
+            operator T*(void) const { return 0; }
+
+        template <typename T, typename U>
+            operator T U::*(void) const { return 0; }
+    } nil = {};
 
     // enable_if
     template <bool cond, typename T = void>
@@ -36,7 +48,7 @@ namespace ft
     struct remove_cv<volatile T> { typedef T type; };
 
     template <typename T>
-    struct remove_cv<const volatile T> { typedef T type; };
+    struct remove_cv<const volatile T> { typedef T type; }; 
 
     // integral constant
     template <typename T, T v>
@@ -95,7 +107,6 @@ namespace ft
 
     template <>
     struct is_integral<bool> : public is_integral_base<true, unsigned char> {};
-
 } // namespace ft
 
 #endif

@@ -21,7 +21,6 @@
 
 namespace ft
 {
-    // template <typename T, class Container = ft::vector<T>>
     template <typename T, class Allocator = std::allocator<T>>
     class vector
     {
@@ -210,22 +209,33 @@ namespace ft
 
             iterator	erase(const_iterator _pos)
             {
-				
+				size_type   diff = _pos - begin();
+                iterator    it = _begin + diff;
+                std::copy(it + 1, _end, it);
+                _destruct(1);
+                return it;
             }
 
-            iterator	erase(const_iterator begin, const_iterator end)
+            iterator	erase(const_iterator first, const_iterator last)
             {
-
+                size_type   _size = std::distance(first, last);
+                std::copy(last, end(), first);
+                _destruct(_size);
+                return first;
             }
 
             void	swap(vector &v)
             {
+                std::swap(_begin, v._begin);
+                std::swap(_end, v._end);
+                std::swap(_c_end, v._c_end);
+                std::swap(_alloc, v._alloc);
 
             }
 
             void	clear()
             {
-
+                _destruct(_begin);
             }
 
             // allocator

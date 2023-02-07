@@ -16,8 +16,8 @@ namespace ft
     struct Node
     {
         T       value;
-        Node    *left = nullptr;
-        Node    *right = nullptr;
+        Node    *left = 0;
+        Node    *right = 0;
     };
 
     template <typename T>
@@ -29,7 +29,7 @@ namespace ft
 
             void    inorder(Node<T> *cur)
             {
-                if (cur != nullptr)
+                if (cur != 0)
                 {	
                     inorder(cur->left);
                     cout << cur->value << " ";
@@ -51,7 +51,7 @@ namespace ft
 
             Node<T> *removeSeq(Node<T> *node, T value)
             {
-                if (node == nullptr) 
+                if (node == 0) 
                     return node;
                 else if (node->value >_vaule)
                     node->left = RemoveSeqence(node->left, _vaule);
@@ -60,17 +60,17 @@ namespace ft
                 else
                 {
                     Node<T>* ptr = node;
-                    if (node->right==nullptr && node->left==nullptr)
+                    if (node->right==0 && node->left==0)
                     {
                         delete node;
-                        node = nullptr;
+                        node = 0;
                     }
-                    else if (node->right == nullptr)
+                    else if (node->right == 0)
                     {
                         node = node->left;
                         delete ptr;
                     }
-                    else if (node->left == nullptr)
+                    else if (node->left == 0)
                     {
                         node = node->right;
                         delete ptr;
@@ -86,23 +86,23 @@ namespace ft
             }
 
         public:
-            bst() : root(nullptr) {};
+            bst() : root(0) {};
             ~bst() {};
 
             void addNode(T _value)
             {
                 Node<T>* node = new Node<T>();
-                Node<T>* tmpRoot = nullptr;
+                Node<T>* tmpRoot = 0;
 
                 node->value = _value;
 
-                if (root == nullptr)
+                if (root == 0)
                     root = node;
                 else
                 {
                     Node<T>* ptr = root;
 
-                    while (ptr != nullptr)
+                    while (ptr != 0)
                     {
                         tmpRoot = ptr;
                         if (node->value < ptr->value)
@@ -124,9 +124,9 @@ namespace ft
             bool searchValue(T _value)
             {
                 Node<T>* ptr = root;
-                Node<T>* tmpRoot = nullptr;
+                Node<T>* tmpRoot = 0;
 
-                while (ptr!=nullptr)
+                while (ptr!=0)
                 {
                     if (ptr->value == _value)
                         return true;

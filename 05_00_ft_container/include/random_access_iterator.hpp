@@ -17,9 +17,6 @@ namespace ft
 	class random_access_iterator: 
 		public std::iterator<std::random_access_iterator_tag, T> 
 	{
-		private:
-			pointer	_ptr;
-
 		public:
 			typedef T* 	iterator_type;
 			
@@ -29,6 +26,10 @@ namespace ft
 			typedef typename ft::iterator_traits<iterator_type>::pointer 			pointer;
 			typedef typename ft::iterator_traits<iterator_type>::reference 			reference;
 
+		private:
+			pointer	_ptr;
+
+		public:
 			// constructor & destructor
 			random_access_iterator(void): _ptr(ft::nil) {}
 			random_access_iterator(T* pointer) : _ptr(pointer) {}
