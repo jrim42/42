@@ -7,7 +7,7 @@
 	#include <vector>
 	namespace ft = std;
 #else
-	// #include "../include/map.hpp"
+	#include "../include/map.hpp"
 	#include "../include/stack.hpp"
 	#include "../include/vector.hpp"
 #endif
@@ -16,12 +16,13 @@
 
 #define MAX_RAM 4294967296
 #define BUFFER_SIZE 4096
+#define CONTOUR "-------------------------------------------------"
+
 struct Buffer
 {
 	int idx;
 	char buff[BUFFER_SIZE];
 };
-
 
 #define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
@@ -55,13 +56,19 @@ int main(int argc, char** argv) {
 	const int seed = atoi(argv[1]);
 	srand(seed);
 
+	//=================================================================//
+	std::cout << CONTOUR << std::endl;
+	std::cout << T_GRY << "basic: construction" << T_DFT << std::endl;
 	ft::vector<std::string> vector_str;
 	ft::vector<int> vector_int;
 	ft::stack<int> stack_int;
 	ft::vector<Buffer> vector_buffer;
 	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	// ft::map<int, int> map_int;
+	ft::map<int, int> map_int;
 
+	//=================================================================//
+	std::cout << CONTOUR << std::endl;
+	std::cout <<  T_GRY << "vector (1): push_back" << T_DFT << std::endl;
 	for (int i = 0; i < COUNT; i++)
 	{
 		vector_buffer.push_back(Buffer());
@@ -71,8 +78,11 @@ int main(int argc, char** argv) {
 		const int idx = rand() % COUNT;
 		vector_buffer[idx].idx = 5;
 	}
+
+	std::cout << T_GRY << "vector (2): swap" << T_DFT << std::endl;
 	ft::vector<Buffer>().swap(vector_buffer);
 
+	std::cout << T_GRY << "vector (3): at" << T_DFT << std::endl;
 	try
 	{
 		for (int i = 0; i < COUNT; i++)
@@ -86,12 +96,16 @@ int main(int argc, char** argv) {
 	{
 		//NORMAL ! :P
 	}
-	
+
+	//=================================================================//
+	std::cout << CONTOUR << std::endl;
+	std::cout <<  T_GRY << "map (1): insert" << T_DFT << std::endl;
 	// for (int i = 0; i < COUNT; ++i)
 	// {
 	// 	map_int.insert(ft::make_pair(rand(), rand()));
 	// }
 
+	std::cout <<  T_GRY << "map (2): access" << T_DFT << std::endl;
 	// int sum = 0;
 	// for (int i = 0; i < 10000; i++)
 	// {
@@ -103,10 +117,15 @@ int main(int argc, char** argv) {
 	// {
 	// 	ft::map<int, int> copy = map_int;
 	// }
-std::cout << "4" << std::endl;
+
+	//=================================================================//
+	std::cout << CONTOUR << std::endl;
+	std::cout << T_GRY << "stack (1): push" << T_DFT << std::endl;
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
 		iterable_stack.push(letter);
+
+	std::cout << T_GRY << "stack (2): iterator" << T_DFT << std::endl;
 	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
 	{
 		std::cout << *it;
