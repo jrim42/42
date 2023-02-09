@@ -1,5 +1,5 @@
-#ifndef MAP_HPP
-# define MAP_HPP
+#ifndef MAP2_HPP
+# define MAP2_HPP
 
 # define T_RED "\033[0;31m"
 # define T_GRN "\033[0;32m"
@@ -15,6 +15,7 @@
 # include "./random_access_iterator.hpp"
 # include "./reverse_iterator.hpp"
 
+/*
 namespace ft 
 {
 	template <typename Key, typename T, class Compare = std::less<Key>,
@@ -175,66 +176,39 @@ namespace ft
 			// functions : find, count, bound, equal_range
 			iterator		find(const key_type& key) 
 			{
-				if (this->count(key))
-					return iterator(this->findNode(_nil->right, key)); 
-				else
-					return this->end();
+				return _tree.find(key);
 			}
 			const_iterator	find(const key_type& key) const 
 			{
-				if (this->count(key))
-					return const_iterator(this->findNode(_nil->right, key)); 
-				else
-					return this->end();
+				return _tree.find(key);
 			}
 			size_type		count(const key_type& key) const 
 			{
-				size_type	cnt = 0;
-				for (const_iterator it = this->begin(); it != this->end(); it++)
-				{
-					if (this->isEqual(key, it->first))
-						cnt++;
-				}
-				return cnt;
+				return !(find(key) == end());
 			}
 			iterator		lower_bound(const key_type& key) 
 			{
-				iterator	it = this->begin();
-				while (this->comp(it->first, key) && it != this->end())
-					it++;
-				return it;
+				return _tree.lower_bound(key);
 			}
 			const_iterator	lower_bound(const key_type& key) const 
 			{
-				const_iterator	it = this->begin();
-				while (this->comp(it->first, key) && it != this->end())
-					it++;
-				return it;
+				return _tree.lower_bound(key);
 			}
 			iterator 		upper_bound(const key_type& key) 
 			{
-				iterator	it = this->begin();
-				while (this->comp(it->first, key) == false && it != this->end())
-					it++;
-				return it;
+				return _tree.upper_bound(key);
 			}
 			const_iterator	upper_bound(const key_type& key) const 
 			{
-				const_iterator	it = this->begin();
-				while (this->comp(it->first, key) == false && it != this->end())
-					it++;
-				return it;
+				return _tree.upper_bound(key);
 			}
-			
 			ft::pair<iterator, iterator>				equal_range(const key_type& key) 
 			{
-				return ft::make_pair(this->lower_bound(key), 
-									 this->upper_bound(key));
+				return _tree.equal_range(key);
 			}
 			ft::pair<const_iterator, const_iterator>	equal_range(const key_type& key) const 
 			{
-				return ft::make_pair(this->lower_bound(key), 
-									 this->upper_bound(key));
+				return _tree.equal_range(key);
 			}
 
 			// allocator
@@ -242,10 +216,6 @@ namespace ft
 			{
 				return _tree.get_allocator();
 			}
-
-		private:
-			treeNode	*findNode(rbtree cur, const key_type& k) const;
-			bool	isEqual();
 	}; // end of class map
 
 // comparison operator: ==, !=, <, <=, >, >=
@@ -300,5 +270,5 @@ void swap(ft::map<Key, T, Compare, Allocator>& x,
 }
 
 } // end of namespace ft
-
+*/
 #endif

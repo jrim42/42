@@ -1,5 +1,5 @@
-#ifndef BST_HPP
-# define BST_HPP
+#ifndef _BST_HPP
+# define _BST_HPP
 
 # define T_RED "\033[0;31m"
 # define T_GRN "\033[0;32m"
