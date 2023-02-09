@@ -5,6 +5,7 @@
 # include <memory>
 # include <exception>
 # include <stdexcept>
+# include <iostream>
 
 # include "./compare.hpp"
 # include "./random_access_iterator.hpp"
@@ -41,7 +42,7 @@ namespace ft
             
             typedef ft::random_access_iterator<value_type>          iterator;
             typedef ft::random_access_iterator<const value_type>    const_iterator;
-            typedef ft::reverse_iterator<iterator>                  reverse_iterator;
+            typedef ft::reverse_iterator<iterator>                reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
         private:
@@ -53,8 +54,7 @@ namespace ft
         public:
             // OCCF
             explicit vector(const allocator_type& alloc = allocator_type())
-                : _begin(ft::nil), _end(ft::nil), _c_end(ft::nil), _alloc(alloc) {
-				};
+                : _begin(NULL), _end(NULL), _c_end(NULL), _alloc(alloc) {};
             explicit vector(size_type _size, const value_type& value = value_type(), const allocator_type& alloc = allocator_type())
                 : _alloc(alloc)
             {
@@ -136,41 +136,49 @@ namespace ft
             {
                 return static_cast<size_type>(_c_end - _begin);
             }
-            bool        empty()
+            bool    empty()
             {
                 return (_begin == _end);
             }
+
             void        reserve(size_type _size)
             {
-                if (_size <= size() || _size <= capacity())
+                if (_size > this->max_size())
+                    throw std::out_of_range("Error: ft::vector: Out Of Range");
+                if (this->capacity() >= _size)
                     return;
-                if (_size < capacity() * 2)
-                    _size = capacity() * 2;
+
+                pointer     pre_begin = this->_begin;
+                pointer     pre_end = this->_end;
+                size_type   pre_cap = this->capacity();
+
+                this->_begin = this->_alloc.allocate(_size);
+                this->_c_end = this->_begin + _size;
+                this->_end = this->_begin;
+
+                for (pointer ptr = pre_begin ; ptr != pre_end; ptr++)
+                    this->_alloc.construct(this->_end++, *ptr);
                 
-                pointer begin = _alloc.allocate(_size);
-                std::uninitialized_copy(_begin, _end, begin);
-                _destruct(_begin);
-                _alloc.deallocate(_begin, capacity());
-                _begin = begin;
-                _end = _begin + size();
-                _c_end = _begin + _size;
-
+                for (size_type len = pre_end - pre_begin ; len > 0; len--)
+                    this->_alloc.destroy(--pre_end);
+                
+                this->_alloc.deallocate(pre_begin, pre_cap);
             }
-
-            // access operator
+            
+            // // access operator
                 // data
             reference       operator[](size_type n)         { return _begin[n]; }
             const_reference operator[](size_type n) const   { return _begin[n]; }
             reference       at(size_type n)
             {
                 if (n >= size())
-                    throw std::out_of_range("Error: Out of Range");
+                    throw std::out_of_range("Error: ft::vector: Out of Range");
                 return (_begin[n]);
             }
             const_reference at(size_type n) const
             {
                 if (n >= size())
-                    throw std::out_of_range("Error: Out of Range");
+                    throw std::out_of_range("Error: ft::vector: Out of Range");
                 return (_begin[n]);
             }
             
@@ -203,18 +211,13 @@ namespace ft
             {
 				if (this->_c_end == this->_end) 
 				{
-					size_type capacity =
-						(this->size() == 0) ? 1 : (this->_c_end - this->_begin) * 2;
+					size_type	capacity = (this->size() == 0) ? 1 : (this->_c_end - this->_begin) * 2;
 					this->reserve(capacity);
 				}
-				this->_alloc.construct(this->_end++, _val);
-
-				// size_type	_size = size() + 1;
-				// if (capacity() < _size)
-				// 	reserve(_size);
+				// this->_alloc.construct(this->_end++, _val);
 				// _alloc.construct(_end++, _val);
-				// // _construct(1);
-				// *(_end - 1) = _val;
+				_construct(1);
+				*(_end - 1) = _val;
             }
 
             void	pop_back(void)
@@ -287,39 +290,30 @@ namespace ft
             void    _init(size_type _size)
             {
                 if (_size > max_size())
-                    throw std::length_error("Error: Too Big Allocation");
+                    throw std::length_error("Error: ft::vector: Too Big Allocation");
                 _begin = _alloc.allocate(_size);
                 _end = _begin;
                 _c_end = _begin + _size;
             }
             void    _construct(size_type _size)
             {
-				std::cout << "here" << std::endl;
 				while (_size--)
                     _alloc.construct(_end++);
-				std::cout << "bye" << std::endl;
-                // for ( ; _size > 0; _end++, _size--)
-                    // _alloc.construct(_end);
             }
             void    _construct(size_type _size, T _val)
             {
 				while (_size--)
                     _alloc.construct(_end++, _val);
-                // for ( ; _size > 0; _end++, _size--)
-                // {
-                //     _alloc.construct(_end);
-                //     *(_end) = _val;
-                // }
             }
             void    _destruct(size_type _size)
             {
-                for ( ; _size > 0; _end++, _size--)
-                    _alloc.destroy(_end);
+				while (_size--)
+                    _alloc.destroy(_end++);
             }
             void    _destruct(pointer ptr)
             {
-                for ( ; _end != ptr && _end--; )
-                    _alloc.destroy(_end);
+				while (_end != ptr)
+                    _alloc.destroy(_end--);
             }
     }; // end of class vector
 
