@@ -8,8 +8,8 @@
 # define T_GRY "\033[90m"
 # define T_DFT "\033[0;37m"
 
-# define R 1;
-# define B 0; 
+# define R 1
+# define B 0
 
 # include <iostream>
 # include <memory>
@@ -17,109 +17,29 @@
 # include "./iterator_traits.hpp"
 # include "./type_traits.hpp"
 
+# include "./rbnode.hpp"
+
 namespace ft 
 {
-    template <typename T>
-    struct treeNode
-    { 
-        typedef T       value_type;
-        typedef bool    Color;
-
-        value_type	val;
-        Color   	color;
-        Node    	*left;
-        Node    	*right;
-        Node    	*parent;
-    
-		// OCCF
-		treeNode(void)
-			: val(0), color(0), left(0), right(0), parent(0) {}
-		treeNode(const value_type& _val)
-			: val(_val), color(0), left(0), right(0), parent(0) {}
-		treeNode(const treeNode& ref)
-			: val(ref.val), color(ref.color), left(ref.left), right(ref.right), parent(ref.parent) {}
-		~treeNode(void) {}
-
-		treeNode&	operator=(const treeNode& ref)
-		{
-			if (this != &ref)
-			{
-				val = ref.val;
-				color = ref.color;
-				right = ref.right;
-				left = ref.left;
-				parent = ref.parent;
-			}
-			return *this;
-		}
-	}; // end of treeNode
-    // node 구조체 생성 후 색은 black으로 초기화, 모든 자식들은 0로 초기화
-
-    template <typename U, typename V>
-    class treeIter
-    {
-		public:
-			typedef U 				value_type;
-			typedef V* 				iterator_type;
-			typedef value_type* 	pointer;
-			typedef value_type& 	reference;
-
-			typedef typename ft::iterator_traits<iterator_type>::difference_type	difference_type;
-			typedef typename ft::iterator_traits<iterator_type>::value_type 		node_type;
-			typedef typename ft::iterator_traits<iterator_type>::pointer 			NodePtr;
-			typedef typename ft::iterator_traits<iterator_type>::reference 			node_reference;
-			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
-		
-		private:
-			NodePtr	curPtr;
-			NodePtr	nilPtr;
-
-		public:
-			// OCCF
-			treeIter(void)
-				: curPtr(0), nilPtr(0) {}
-			treeIter(NodePtr _cur, NodePtr _nil)
-				: curPtr(_cur), nilPtr(_nil) {}
-			treeIter(const treeIter& ref)
-				: curPtr(ref.curPtr), nilPtr(ref.nilPtr) {}
-			~treeIter(void) {}
-
-			treeIter& operator=(const treeIter& ref)
-			{
-				if (this != &ref)
-				{
-					curPtr = ref.curPtr;
-					nilPtr = ref.nilPtr;
-				}
-				return *this;
-			}
-
-			// access
-			NodePtr		base(void) const 	{ return curPtr; }
-			pointer 	operator->(void) const	{ return &curPtr->val; }
-			reference 	operator*(void) const	{ return curPtr->val; }
-			
-
-    }; // end of treeIter
-
     template <typename T, typename Key, typename Comp, typename Allocator>
     class rbtree
     {
-        typedef T       value_type;
-        typedef Key     key_type;
-        typedef Comp    compare_type;
+		public: 
+			typedef T       value_type;
+			typedef Key     key_type;
+			typedef Comp    compare_type;
 
-        typedef treeNode<value_type>                    node_type;
-        typedef treeNode<value_type>*                   NodePtr;
-        typedef treeIter<value_type, node_type>         iterator;
-        typedef treeIter<const value_type, node_type>   const_iterator;
+			typedef treeNode<value_type>                    node_type;
+			typedef treeNode<value_type>*                   NodePtr;
+			typedef treeIter<value_type, node_type>         iterator;
+			typedef treeIter<const value_type, node_type>   const_iterator;
 
-        typedef Allocator                                                   allocator_type;
-        typedef typename allocator_type::template rebind<node_type>::other  node_allocator;
-        typedef std::allocator_traits<node_allocator>                       node_traits;
+			typedef Allocator                                                   allocator_type;
+			typedef typename allocator_type::template rebind<node_type>::other  node_allocator;
+			typedef std::allocator_traits<node_allocator>                       node_traits;
 
-        typedef std::size_t         size_type;
-        typedef std::ptrdiff_t      difference_type;
+			typedef std::size_t         size_type;
+			typedef std::ptrdiff_t      difference_type;
 
         private:    
 			NodePtr			_begin;
@@ -132,7 +52,7 @@ namespace ft
             // key 값이 있는지 검사하는 함수
             NodePtr isKey(T _key)
             {
-                NodePtr ptr = root;
+                NodePtr ptr = _begin;
                 NodePtr parent = NULL;
 
                 while (ptr != NULL && ptr->key != _key)
@@ -146,7 +66,7 @@ namespace ft
             // 삽입 함수
             void    insert(T _key)
             {
-                NodePtr a = this->root;
+                NodePtr a = this->_begin;
                 NodePtr b = 0;
                 NodePtr c = new Node<T>();
 
@@ -165,19 +85,19 @@ namespace ft
                 c->parent = b;
 
                 if (b == 0)
-                    this->root = c;
+                    this->_begin = c;
                 else if (c->key > b->key)
                     b->right = c;
                 else
                     b->left = c;
 
-                // c가 root node라면
+                // c가 _begin node라면
                 if (c->parent == 0)
                 {
                     c->color = B;
                     return ;
                 }
-                // c의 부모노드가 root라면 fix up 필요없이 red로 붙여주면 된다.
+                // c의 부모노드가 _begin라면 fix up 필요없이 red로 붙여주면 된다.
                 if (c->parent->parent != 0)
                     this->insertFix(c);
                 return ;
@@ -186,8 +106,8 @@ namespace ft
             // 삽입 후 규칙이 깨졌을 경우 재조정하는 함수
             void    insertFix(NodePtr n)
             {
-                // root 노드가 아니고 부모노드의 색이 red라면
-                while (n != this->root && n->parent->color == R)
+                // _begin 노드가 아니고 부모노드의 색이 red라면
+                while (n != this->_begin && n->parent->color == R)
                 {
                     NodePtr gp = n->parent->parent;
                     NodePtr u = (n->parent == gp->left) ? gp->right : gp->left;
@@ -216,11 +136,11 @@ namespace ft
                         side ? this->rotateRight(gp) : this->rotateLeft(gp);
                     }
                 }
-                this->root->color = B;
+                this->_begin->color = B;
             }
 
             // 삭제 함수
-            bool    remove(T _key)
+            bool    erase(T _key)
             {
                 NodePtr z = isKey(_key);
                 
@@ -263,18 +183,18 @@ namespace ft
                     }
                     delete z;
                     if (originalColor == B)
-                        removeFix(x);
+                        eraseFix(x);
                 }
                 return (true);
             }
 
             // 삭제 후 규칙이 깨졌을 경우 재조정하는 함수
-            void    removeFix(NodePtr x)
+            void    eraseFix(NodePtr x)
             {
                 NodePtr s;  // sibling node
 
-                // root이러나 double Black이 깨질 때까지
-                while (x != this->root && x->color == B)
+                // _begin이러나 double Black이 깨질 때까지
+                while (x != this->_begin && x->color == B)
                 {
                     if (x == x->parent->left)   // x가 p의 왼쪽 자식인 경우
                     {
@@ -308,7 +228,7 @@ namespace ft
                             x->parent->color = B;
                             s->right->color = B;
                             rotateLeft(x->parent);
-                            x = root;
+                            x = _begin;
                         }
                     }
                     else    // x가 p의 오른쪽 자식인 경우
@@ -343,19 +263,19 @@ namespace ft
                             x->parent->color = B;
                             s->left->color = B;
                             rotateRight(x->parent);
-                            x = root;
+                            x = _begin;
                         }
                     }
                 } 
                 x->color = B;
-                root->color = B;
+                _begin->color = B;
             }
 
             // 삭제 시 이용, 삭제할 노드의 자식 노드를 부모노드에게 연결해주는 함수
             void    transplant(NodePtr n1, NodePtr n2)
             {
                 if (n1->parent == 0)
-                    root = n2;
+                    _begin = n2;
                 else if (n1 == n1->parent->left)
                     n1->parent->left = n2;
                 else
@@ -374,7 +294,7 @@ namespace ft
                     y->left->parent = x;
                 y->parent = x->parent;
                 if (!x->parent)
-                    root = y;
+                    _begin = y;
                 else if (x == x->parent->left)
                     x->parent->left = y;
                 else
@@ -396,7 +316,7 @@ namespace ft
                 }
                 x->parent = y->parent;
                 if (!y->parent)
-                    root = x;
+                    _begin = x;
                 else if (y == y->parent->left)
                     y->parent->left = x;
                 else
@@ -404,9 +324,6 @@ namespace ft
                 y->parent = x;
                 x->right = y;
             }
-
-            // print 함수
-            void    display();
 
             // 순회 함수
             void    inorder(NodePtr target)
@@ -436,14 +353,14 @@ namespace ft
         public:
             // constructor & destructor
             rbtree(const compare_type& comp, const allocator_type& alloc)
-				: 
+				: _comp(comp), _alloc(alloc), _size(size_type())
             {
-                this->tail = new Node<T>();
-                this->tail->color = B;
-                this->tail->left = 0;
-                this->tail->right = 0;
-                this->tail->parent = 0;
-                this->root = this->tail; 
+                _nil = _alloc.allocate(1);
+				_alloc.construcct(_nil, value_type());
+				_nil->color = B;
+				_nil->parent = _nil;
+				_nil->left = _nil;
+				_nil->right = _nil;
             }
 
             // rbtree(const rbtree& ref){}
