@@ -73,7 +73,7 @@ bool __is_black_color(const NodePtr& ptr) {
 }
 
 template <class NodePtr>
-bool __is_red_color(const NodePtr& ptr) {
+bool isRed(const NodePtr& ptr) {
   return !ptr->__is_black;
 }
 
@@ -86,7 +86,7 @@ NodePtr __get_min_node(NodePtr ptr, NodePtr nil) {
 }
 
 template <class NodePtr>
-NodePtr __get_max_node(NodePtr ptr, NodePtr nil) {
+NodePtr getMaxNode(NodePtr ptr, NodePtr nil) {
   while (ptr->__right != nil) {
     ptr = ptr->__right;
   }
@@ -94,7 +94,7 @@ NodePtr __get_max_node(NodePtr ptr, NodePtr nil) {
 }
 
 template <class NodePtr>
-NodePtr __get_next_node(NodePtr ptr, NodePtr nil) {
+NodePtr getNextNode(NodePtr ptr, NodePtr nil) {
   if (ptr->__right != nil) {
     return __get_min_node(ptr->__right, nil);
   }
@@ -107,7 +107,7 @@ NodePtr __get_next_node(NodePtr ptr, NodePtr nil) {
 template <class NodePtr>
 NodePtr __get_prev_node(NodePtr ptr, NodePtr nil) {
   if (ptr->__left != nil) {
-    return __get_max_node(ptr->__left, nil);
+    return getMaxNode(ptr->__left, nil);
   }
   while (!__is_right_child(ptr)) {
     ptr = ptr->__parent;
@@ -116,7 +116,7 @@ NodePtr __get_prev_node(NodePtr ptr, NodePtr nil) {
 }
 
 template <typename U, typename V, class Comp>
-bool __is_equal(const U& u, const V& v, Comp comp) {
+bool isEqual(const U& u, const V& v, Comp comp) {
   return !comp(u, v) && !comp(v, u);
 }
 
@@ -158,7 +158,7 @@ class __tree_iterator {
 
   /* increment & decrement */
   __tree_iterator& operator++(void) {
-    __cur = ft::__get_next_node(__cur, __nil);
+    __cur = ft::getNextNode(__cur, __nil);
     return *this;
   }
   __tree_iterator& operator--(void) {
@@ -293,14 +293,14 @@ class __rbtree {
   /* modifiers */
   ft::pair<iterator, bool> insert(const value_type& value) {
     node_pointer ptr = __search_parent(value);
-    if (ptr != __end && __is_equal(ptr->__value, value, __comp)) {
+    if (ptr != __end && isEqual(ptr->__value, value, __comp)) {
       return ft::make_pair(iterator(ptr, __nil), false);
     }
     return ft::make_pair(iterator(__insert_internal(value, ptr), __nil), true);
   }
   iterator insert(iterator position, const value_type& value) {
     node_pointer ptr = __search_parent(value, position.base());
-    if (ptr != __end && __is_equal(ptr->__value, value, __comp)) {
+    if (ptr != __end && isEqual(ptr->__value, value, __comp)) {
       return iterator(ptr, __nil);
     }
     return iterator(__insert_internal(value, ptr), __nil);
@@ -472,7 +472,7 @@ class __rbtree {
     return ptr;
   }
   void __insert_fixup(node_pointer ptr) {
-    while (__is_red_color(ptr->__parent)) {
+    while (isRed(ptr->__parent)) {
       if (__is_left_child(ptr->__parent)) {
         __insert_fixup_left(ptr);
       } else {
@@ -483,7 +483,7 @@ class __rbtree {
   }
   void __insert_fixup_left(node_pointer& ptr) {
     node_pointer uncle = ptr->__parent->__parent->__right;
-    if (__is_red_color(uncle)) {
+    if (isRed(uncle)) {
       ptr->__parent->__is_black = true;
       uncle->__is_black = true;
       uncle->__parent->__is_black = false;
@@ -500,7 +500,7 @@ class __rbtree {
   }
   void __insert_fixup_right(node_pointer& ptr) {
     node_pointer uncle = ptr->__parent->__parent->__left;
-    if (__is_red_color(uncle)) {
+    if (isRed(uncle)) {
       ptr->__parent->__is_black = true;
       uncle->__is_black = true;
       uncle->__parent->__is_black = false;
@@ -563,7 +563,7 @@ class __rbtree {
   }
   void __remove_fixup_left(node_pointer& ptr) {
     node_pointer sibling = ptr->__parent->__right;
-    if (__is_red_color(sibling)) {
+    if (isRed(sibling)) {
       sibling->__is_black = true;
       ptr->__parent->__is_black = false;
       __rotate_left(ptr->__parent);
@@ -578,7 +578,7 @@ class __rbtree {
       __rotate_right(sibling);
       sibling = ptr->__parent->__right;
     }
-    if (__is_red_color(sibling->__right)) {
+    if (isRed(sibling->__right)) {
       sibling->__is_black = __is_black_color(ptr->__parent);
       ptr->__parent->__is_black = true;
       sibling->__right->__is_black = true;
@@ -588,7 +588,7 @@ class __rbtree {
   }
   void __remove_fixup_right(node_pointer& ptr) {
     node_pointer sibling = ptr->__parent->__left;
-    if (__is_red_color(sibling)) {
+    if (isRed(sibling)) {
       sibling->__is_black = true;
       ptr->__parent->__is_black = false;
       __rotate_right(ptr->__parent);
@@ -603,7 +603,7 @@ class __rbtree {
       __rotate_left(sibling);
       sibling = ptr->__parent->__left;
     }
-    if (__is_red_color(sibling->__left)) {
+    if (isRed(sibling->__left)) {
       sibling->__is_black = __is_black_color(ptr->__parent);
       ptr->__parent->__is_black = true;
       sibling->__left->__is_black = true;
