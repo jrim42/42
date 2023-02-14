@@ -1,9 +1,9 @@
-#ifndef CIRCLE_05_FT_CONTAINERS_MAP_HPP_
-#define CIRCLE_05_FT_CONTAINERS_MAP_HPP_
+#ifndef FT_CONTAINERS_MAP_HPP_
+#define FT_CONTAINERS_MAP_HPP_
 
 #include <functional>
 #include <memory>
-#include "./algorithm.hpp"
+// #include "./algorithm.hpp"
 #include "./pair.hpp"
 #include "./random_access_iterator.hpp"
 #include "./rbtree.hpp"

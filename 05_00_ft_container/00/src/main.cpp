@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	ft::stack<int> stack_int;
 	ft::vector<Buffer> vector_buffer;
 	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	// ft::map<int, int> map_int;
+	ft::map<int, int> map_int;
 
 	//=================================================================//
 	std::cout << CONTOUR << std::endl;

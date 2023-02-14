@@ -17,10 +17,189 @@
 # include "./iterator_traits.hpp"
 # include "./type_traits.hpp"
 
-# include "./rbnode.hpp"
+// # include "./rbnode.hpp"
+// # include "./rbiter.hpp"
 
 namespace ft 
 {
+    typedef bool        Color;
+
+    template <typename T>
+    struct rbnode
+    { 
+        typedef T           value_type;
+        typedef rbnode<T> 	NodePtr;
+
+        value_type  val;
+        Color   	color;
+        NodePtr		left;
+        NodePtr		right;
+        NodePtr		parent;
+    
+		// OCCF
+		rbnode(void)
+			: val(value_type()), color(B), left(NULL), right(NULL), parent(NULL) {}
+		rbnode(const value_type& _val)
+			: val(_val), color(B), left(NULL), right(NULL), parent(NULL) {}
+		rbnode(const rbnode& ref)
+			: val(ref.val), color(ref.color), left(ref.left), right(ref.right), parent(ref.parent) {}
+		~rbnode(void) {}
+
+		rbnode&	operator=(const rbnode& ref)
+		{
+			if (this != &ref)
+			{
+				val = ref.val;
+				color = ref.color;
+				right = ref.right;
+				left = ref.left;
+				parent = ref.parent;
+			}
+			return *this;
+		}
+
+		static NodePtr	getNodeMin(NodePtr x)
+		{
+			while (x->left != 0)
+				x = x->left;
+			return x;
+		}
+		static NodePtr	getNodeMax(NodePtr x)
+		{
+			while (x->right != 0)
+				x = x->right;
+			return x;
+		}
+	}; // end of rbnode struct
+
+    template <typename U, typename V>
+    class rbiter
+    {
+		public:
+			typedef U 				value_type;
+			typedef V* 				iterator_type;
+			typedef value_type* 	pointer;
+			typedef value_type& 	reference;
+
+			typedef typename ft::rbnode<value_type>*	NodePtr;
+			// typedef typename ft::iterator_traits<iterator_type>::pointer 			ndoe_ptr;
+			// typedef typename ft::iterator_traits<iterator_type>::value_type 		node_type;
+			// typedef typename ft::iterator_traits<iterator_type>::reference 			node_reference;
+			// typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
+			// typedef typename ft::iterator_traits<iterator_type>::difference_type	difference_type;
+		
+		private:
+			NodePtr	_node;
+			NodePtr	_cur;
+			NodePtr	_nil;
+
+		public:
+			// OCCF
+			rbiter(void)
+				: _cur(0), _nil(0) {}
+			rbiter(NodePtr _cur, NodePtr _nil)
+				: _cur(_cur), _nil(_nil) {}
+			rbiter(const rbiter& ref)
+				: _cur(ref._cur), _nil(ref._nil) {}
+			~rbiter(void) {}
+
+			rbiter& operator=(const rbiter& ref)
+			{
+				if (this != &ref)
+				{
+					_cur = ref._cur;
+					_nil = ref._nil;
+				}
+				return *this;
+			}
+
+			// access
+			NodePtr		base(void) const 		{ return _cur; }
+			pointer 	operator->(void) const	{ return &_cur->val; }
+			reference 	operator*(void) const	{ return _cur->val; }
+
+            // 아직 안 함 // increment & decrement
+            void	_increase_rbiter(void)
+			{
+				if (_node->right != 0) 
+				{
+					_node = _node->right;
+					while (_node->left != 0)
+						_node = _node->left;
+				}
+				else 
+				{
+					NodePtr tmp = _node->parent;
+					while (_node == tmp->right) 
+					{
+						_node = tmp;
+						tmp = tmp->parent;
+					}
+					if (_node->right != tmp)
+						_node = tmp;
+				}
+			}
+			void	_decrease_rbiter(void)
+			{
+				if (_node->color == R &&
+					_node->parent->parent == _node)
+					_node = _node->right;
+				else if (_node->left != 0) 
+				{
+					NodePtr tmp = _node->left;
+					while (tmp->right != 0)
+						tmp = tmp->right;
+					_node = tmp;
+				}
+				else 
+				{
+					NodePtr tmp = _node->parent;
+					while (_node == tmp->left) 
+					{
+						_node = tmp;
+						tmp = tmp->parent;
+					}
+					_node = tmp;
+				}
+			}
+            rbiter&	operator++(void) 
+            {
+                _increase_rbiter();
+				return *this;
+            }
+            rbiter&	operator--(void) 
+            {
+				_decrease_rbiter();
+				return *this;
+            }
+            rbiter	operator++(int) 
+            {
+				rbiter	tmp = *this;
+                _increase_rbiter();
+				return tmp;
+            }
+            rbiter	operator--(int) 
+            {
+				rbiter	tmp = *this;
+                _decrease_rbiter();
+				return tmp;
+            }
+
+			
+    }; // end of rbiter
+
+    template <typename U, typename V>
+    bool operator==(const rbiter<U, V>& a, const rbiter<U, V>& b)
+    {
+        return a._node == b._node;
+    }
+
+    template <typename U, typename V>
+    bool operator!=(const rbiter<U, V>& a, const rbiter<U, V>& b)
+    {
+        return !(a._node == b._node);
+    }
+
     template <typename T, typename Key, typename Comp, typename Allocator>
     class rbtree
     {
@@ -29,10 +208,10 @@ namespace ft
 			typedef Key     key_type;
 			typedef Comp    compare_type;
 
-			typedef treeNode<value_type>                    node_type;
-			typedef treeNode<value_type>*                   NodePtr;
-			typedef treeIter<value_type, node_type>         iterator;
-			typedef treeIter<const value_type, node_type>   const_iterator;
+			typedef rbnode<value_type>                    node_type;
+			typedef rbnode<value_type>*                   NodePtr;
+			typedef rbiter<value_type, node_type>         iterator;
+			typedef rbiter<const value_type, node_type>   const_iterator;
 
 			typedef Allocator                                                   allocator_type;
 			typedef typename allocator_type::template rebind<node_type>::other  node_allocator;
@@ -68,7 +247,7 @@ namespace ft
             {
                 NodePtr a = this->_begin;
                 NodePtr b = 0;
-                NodePtr c = new Node<T>();
+                NodePtr c = new rbnode<T>();
 
                 c->key = _key;
                 c->color = R;
@@ -327,7 +506,7 @@ namespace ft
 
             // 순회 함수
             void    inorder(NodePtr target)
-            {
+            { 
                 if (target == this->tail)
                     return ;
                 inorder(target->left);

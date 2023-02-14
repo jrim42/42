@@ -15,7 +15,6 @@
 # include "./random_access_iterator.hpp"
 # include "./reverse_iterator.hpp"
 
-/*
 namespace ft 
 {
 	template <typename Key, typename T, class Compare = std::less<Key>,
@@ -28,16 +27,13 @@ namespace ft
 			typedef ft::pair<const Key, T>	value_type;
 			typedef Compare 				key_compare;
 
-			typedef Allocator													allocator_type;
-			// typedef typename allocator_type::template rebind<value_type>::other	type_allocator;
-			// typedef std::allocator_traits<type_allocator> 						type_traits;
-
-			typedef typename allocator_type::reference       	reference;
-			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::pointer         	pointer;
 			typedef typename allocator_type::const_pointer   	const_pointer;
+			typedef typename allocator_type::reference       	reference;
+			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::size_type       	size_type;
 			typedef typename allocator_type::difference_type 	difference_type;
+			typedef Allocator									allocator_type;
 
 			class value_compare 
 				: public std::binary_function<value_type, value_type, bool>
@@ -176,39 +172,66 @@ namespace ft
 			// functions : find, count, bound, equal_range
 			iterator		find(const key_type& key) 
 			{
-				return _tree.find(key);
+				if (this->count(key))
+					return iterator(this->findNode(_nil->right, key)); 
+				else
+					return this->end();
 			}
 			const_iterator	find(const key_type& key) const 
 			{
-				return _tree.find(key);
+				if (this->count(key))
+					return const_iterator(this->findNode(_nil->right, key)); 
+				else
+					return this->end();
 			}
 			size_type		count(const key_type& key) const 
 			{
-				return !(find(key) == end());
+				size_type	cnt = 0;
+				for (const_iterator it = this->begin(); it != this->end(); it++)
+				{
+					if (this->isEqual(key, it->first))
+						cnt++;
+				}
+				return cnt;
 			}
 			iterator		lower_bound(const key_type& key) 
 			{
-				return _tree.lower_bound(key);
+				iterator	it = this->begin();
+				while (this->comp(it->first, key) && it != this->end())
+					it++;
+				return it;
 			}
 			const_iterator	lower_bound(const key_type& key) const 
 			{
-				return _tree.lower_bound(key);
+				const_iterator	it = this->begin();
+				while (this->comp(it->first, key) && it != this->end())
+					it++;
+				return it;
 			}
 			iterator 		upper_bound(const key_type& key) 
 			{
-				return _tree.upper_bound(key);
+				iterator	it = this->begin();
+				while (this->comp(it->first, key) == false && it != this->end())
+					it++;
+				return it;
 			}
 			const_iterator	upper_bound(const key_type& key) const 
 			{
-				return _tree.upper_bound(key);
+				const_iterator	it = this->begin();
+				while (this->comp(it->first, key) == false && it != this->end())
+					it++;
+				return it;
 			}
+			
 			ft::pair<iterator, iterator>				equal_range(const key_type& key) 
 			{
-				return _tree.equal_range(key);
+				return ft::make_pair(this->lower_bound(key), 
+									 this->upper_bound(key));
 			}
 			ft::pair<const_iterator, const_iterator>	equal_range(const key_type& key) const 
 			{
-				return _tree.equal_range(key);
+				return ft::make_pair(this->lower_bound(key), 
+									 this->upper_bound(key));
 			}
 
 			// allocator
@@ -216,6 +239,10 @@ namespace ft
 			{
 				return _tree.get_allocator();
 			}
+
+		private:
+			treeNode	*findNode(rbtree cur, const key_type& k) const;
+			bool	isEqual();
 	}; // end of class map
 
 // comparison operator: ==, !=, <, <=, >, >=
@@ -270,5 +297,5 @@ void swap(ft::map<Key, T, Compare, Allocator>& x,
 }
 
 } // end of namespace ft
-*/
+
 #endif

@@ -94,6 +94,7 @@ namespace ft
     template <>
     struct is_integral_base<std::uint64_t> : public true_type {};
 
+    // is_integral
     template <typename T>
     struct is_integral : public is_integral_base<typename remove_cv<T>::type> {};
 } // namespace ft

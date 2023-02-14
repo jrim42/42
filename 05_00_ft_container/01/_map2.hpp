@@ -1,5 +1,5 @@
-#ifndef MAP_HPP
-# define MAP_HPP
+#ifndef MAP2_HPP
+# define MAP2_HPP
 
 # define T_RED "\033[0;31m"
 # define T_GRN "\033[0;32m"
@@ -27,16 +27,13 @@ namespace ft
 			typedef ft::pair<const Key, T>	value_type;
 			typedef Compare 				key_compare;
 
-			typedef Allocator													allocator_type;
-			// typedef typename allocator_type::template rebind<value_type>::other	type_allocator;
-			// typedef std::allocator_traits<type_allocator> 						type_traits;
-
-			typedef typename allocator_type::reference       	reference;
-			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::pointer         	pointer;
 			typedef typename allocator_type::const_pointer   	const_pointer;
+			typedef typename allocator_type::reference       	reference;
+			typedef typename allocator_type::const_reference 	const_reference;
 			typedef typename allocator_type::size_type       	size_type;
 			typedef typename allocator_type::difference_type 	difference_type;
+			typedef Allocator									allocator_type;
 
 			class value_compare 
 				: public std::binary_function<value_type, value_type, bool>
