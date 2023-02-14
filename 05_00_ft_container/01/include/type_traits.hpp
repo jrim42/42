@@ -64,35 +64,18 @@ namespace ft
     typedef integral_constant<bool, false>  false_type;
 
     // is_integral_base
-    template <typename>
+    template <typename> 
     struct is_integral_base : public false_type {};
-
-    template <>
-    struct is_integral_base<bool> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::int8_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::int16_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::int32_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::int64_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::uint8_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::uint16_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::uint32_t> : public true_type {};
-
-    template <>
-    struct is_integral_base<std::uint64_t> : public true_type {};
+    
+    template <> struct is_integral_base<bool>           : public true_type {};
+    template <> struct is_integral_base<std::int8_t>    : public true_type {};
+    template <> struct is_integral_base<std::int16_t>   : public true_type {};
+    template <> struct is_integral_base<std::int32_t>   : public true_type {};
+    template <> struct is_integral_base<std::int64_t>   : public true_type {};
+    template <> struct is_integral_base<std::uint8_t>   : public true_type {};
+    template <> struct is_integral_base<std::uint16_t>  : public true_type {};
+    template <> struct is_integral_base<std::uint32_t>  : public true_type {};
+    template <> struct is_integral_base<std::uint64_t>  : public true_type {};
 
     // is_integral
     template <typename T>
