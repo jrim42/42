@@ -19,7 +19,7 @@
 namespace ft 
 {
 	template <typename Key, typename T, class Compare = std::less<Key>,
-				class Allocator = std::allocator<std::pair<const Key, T> > >
+				class Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map 
 	{
 		public:
@@ -40,17 +40,25 @@ namespace ft
 				: public std::binary_function<value_type, value_type, bool>
 			{
 				protected:
-					key_compare	comp;
+					key_compare	_comp;
 
 				public:
 					// constructor & destructor
-					value_compare(key_compare kc) : comp(kc) {}
+					value_compare(key_compare kc) : _comp(kc) {}
 					~value_compare(void) {}
 
 					// operator
-					bool operator()(const key_type& x, const value_type& y) const
+					bool operator()(const value_type& x, const value_type& y) const
 					{
-						return comp(x, y.first);
+						return _comp(x.first, y.first);
+					}
+					bool operator()(const value_type& x, const key_type& y) const 
+					{
+						return _comp(x.first, y);
+					}
+					bool operator()(const key_type& x, const value_type& y) const 
+					{
+						return _comp(x, y.first);
 					}
 			}; // end of class value_compare
 
