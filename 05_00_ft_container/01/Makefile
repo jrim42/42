@@ -10,7 +10,8 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 RM			=	rm -f
 
-SRC			=	src/main.cpp \
+SRC			=	src/test_vector.cpp \
+				# src/main.cpp \
 				
 OBJ			=	$(SRC:.cpp=.o)
 

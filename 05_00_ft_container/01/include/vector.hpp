@@ -225,51 +225,69 @@ namespace ft
 
             void	pop_back(void)
             {
-				_destruct(1);
+				// _destruct(1);
+                _alloc.destroy(--_end);
             }
 
             iterator	insert(const_iterator _pos, const value_type& _val)
             {
-				size_type	diff = _pos - begin();
-				if (capacity() < size() + 1)
-					reserve(size() + 1);
-
-				iterator	it = _begin + diff;
-				_construct(1);
-				std::copy_backward(it, _end - 1, _end);
-				*it = _val;
-				return it;
+				difference_type diff = _pos - begin();
+                if (capacity() < size() + 1) {
+                reserve(size() + 1);
+                }
+                pointer ptr = _begin + diff;
+                _construct(1);
+                std::copy_backward(ptr, _end - 1, _end);
+                *ptr = _val;
+                return iterator(ptr);
             }
 
-            void	insert(const_iterator _pos, size_type _size, value_type& _val)
+            void	insert(iterator _pos, size_type _size, value_type& _val)
             {
-				size_type	diff = _pos - begin();
+				difference_type	diff = _pos - begin();
 				if (capacity() < size() + _size)
 					reserve(size() + _size);
 
-				iterator	it = _begin + diff;
+				pointer ptr = _begin + diff;
 				_construct(_size);
-				std::copy_backward(it, _end - _size, _end);
+				std::copy_backward(ptr, _end - _size, _end);
 				for (size_type i = 0; i < _size; i++)
-					*(it + i) = _val;
+					*(ptr + i) = _val;
             }
 
-            iterator	erase(const_iterator _pos)
+            template <class iIter>
+            void insert(const_iterator _pos, iIter first, iIter last,
+                        typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = ft::nil) 
             {
-				size_type   diff = _pos - begin();
-                iterator    it = _begin + diff;
-                std::copy(it + 1, _end, it);
-                _destruct(1);
-                return it;
+                difference_type n = std::distance(first, last);
+                difference_type diff = _pos - begin();
+                if (capacity() < size() + n)
+                    reserve(size() + n);
+                pointer ptr = _begin + diff;
+                _construct(n);
+                std::copy_backward(ptr, _end - n, _end);
+                for (iIter i = first ; i != last ; i++, ptr++)
+                    *ptr = *i;
             }
 
-            iterator	erase(const_iterator first, const_iterator last)
+            // erase(value)
+            iterator	erase(iterator pos) 
             {
-                size_type   _size = std::distance(first, last);
-                std::copy(last, end(), first);
-                _destruct(_size);
+                _alloc.destroy(pos.base());
+                std::uninitialized_copy(pos.base() + 1, _end, pos.base());
+                _alloc.destroy(_end--);
+                return pos;
+		    }
+
+            // erase(range)
+            iterator	erase(iterator first, iterator last) 
+            {
+                pointer ptr = std::copy(last.base(), _end, first.base());
+                while (ptr != _end)
+                    _alloc.destroy(ptr++);
+                _end -= last - first;
                 return first;
-            }
+		    }
 
             void	swap(vector &v)
             {
@@ -323,6 +341,17 @@ namespace ft
             {
 				while (_end != ptr)
                     _alloc.destroy(_end--);
+            }
+            void    _destruct(void)
+            {
+                if (_begin) 
+                {
+                    pointer	i = _begin;
+                    while (i != _end)
+                        _alloc.destroy(i++);
+                    _alloc.deallocate(_begin, _c_end - _begin);
+                    _begin = _end = _c_end = 0;
+			    }
             }
     }; // end of class vector
 
