@@ -42,7 +42,7 @@ namespace ft
             
             typedef ft::random_access_iterator<value_type>          iterator;
             typedef ft::random_access_iterator<const value_type>    const_iterator;
-            typedef ft::reverse_iterator<iterator>                reverse_iterator;
+            typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
         private:
@@ -61,18 +61,18 @@ namespace ft
                 _init(_size);
                 _construct(_size, value);
             };
-			// template < class InputIterator >
-			// vector(InputIterator first, InputIterator last,
-			// 		const allocator_type& alloc = allocator_type(),
-			// 		typename ft::enable_if<
-			// 			!ft::is_integral< InputIterator >::value >::type* = ft::nil)
-			// 	: _alloc(alloc) {
-			// 	size_type n = last - first;
-			// 	this->_begin = this->_alloc.allocate(n);
-			// 	this->_c_end = this->_begin + n;
-			// 	this->_end = this->_begin;
-			// 	while (n--) this->_alloc.construct(this->_end++, *first++);
-			// };
+			template < class iIter >
+			vector(iIter first, iIter last, const allocator_type& alloc = allocator_type(),
+				   typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = ft::nil)
+				: _alloc(alloc) 
+            {
+				size_type n = last - first;
+				this->_begin = this->_alloc.allocate(n);
+				this->_c_end = this->_begin + n;
+				this->_end = this->_begin;
+				while (n--) 
+                    this->_alloc.construct(this->_end++, *first++);
+			};
             vector(const vector& ref)
             {
                 size_type   _size = ref.size();
@@ -101,8 +101,8 @@ namespace ft
             const_iterator          end() const     { return const_iterator(_begin); }
             
             reverse_iterator        rbegin()        { return reverse_iterator(end()); }
-            reverse_iterator        rend()          { return reverse_iterator(end()); }
-            const_reverse_iterator  rbegin() const  { return reverse_iterator(begin()); }
+            reverse_iterator        rend()          { return reverse_iterator(begin()); }
+            const_reverse_iterator  rbegin() const  { return reverse_iterator(end()); }
             const_reverse_iterator  rend() const    { return reverse_iterator(begin()); }
 
             // size
@@ -115,21 +115,26 @@ namespace ft
                 return std::min<size_type>
                     (std::numeric_limits<size_type>::max(), type_traits::max_size(type_allocator()));
             }
+
             void        resize(size_type _size, value_type _val = value_type())
             {
-                size_type   diff;
+                size_type	_cs = size();
 
-                if (size() > _size)
+                if (_cs < _size)
                 {
-                    diff = size() - _size;
-                    _destruct(diff);
-                }
-                else if (size() < _size)
-                {
-                    diff = _size - size();
-                    if (capacity() < _size)
+                    if (capacity() * 2 < _size)
                         reserve(_size);
-                    _construct(diff, _val);
+                    else if	(capacity() < _size)
+                        reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
+                    std::uninitialized_fill(_end, _begin + _size, _val);
+                    _end = _begin + _size;
+                }
+                else if (_cs > _size) 
+                {
+                    pointer	it = _begin + _size;
+                    while (it != _end)
+                        _alloc.destroy(it++);
+                    _end = _begin + _size;
                 }
             }
             size_type   capacity() const
@@ -214,8 +219,6 @@ namespace ft
 					size_type	capacity = (this->size() == 0) ? 1 : (this->_c_end - this->_begin) * 2;
 					this->reserve(capacity);
 				}
-				// this->_alloc.construct(this->_end++, _val);
-				// _alloc.construct(_end++, _val);
 				_construct(1);
 				*(_end - 1) = _val;
             }
@@ -270,11 +273,17 @@ namespace ft
 
             void	swap(vector &v)
             {
-                std::swap(_begin, v._begin);
-                std::swap(_end, v._end);
-                std::swap(_c_end, v._c_end);
-                std::swap(_alloc, v._alloc);
+                pointer tmp_begin = v._begin;
+                pointer tmp_end = v._end;
+                pointer tmp_c_end = v._c_end;
 
+                v._begin = _begin;
+                v._end = _end;
+                v._c_end = _c_end;
+
+                _begin = tmp_begin;
+                _end = tmp_end;
+                _c_end = tmp_c_end;
             }
 
             void	clear()

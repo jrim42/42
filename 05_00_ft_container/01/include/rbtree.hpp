@@ -778,7 +778,6 @@ namespace ft
 			return ft::make_pair(const_iterator(tmp, _nil), const_iterator(tmp, _nil));
 		}
 	};
-
 }  // namespace ft
 
 #endif
