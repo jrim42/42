@@ -13,13 +13,6 @@
 # include "./iterator_traits.hpp"
 # include "./type_traits"
 
-# define T_RED "\033[0;31m"
-# define T_GRN "\033[0;32m"
-# define T_YLW "\033[0;33m"
-# define T_BLU "\033[0;36m"
-# define T_GRY "\033[90m"
-# define T_DFT "\033[0;37m"
-
 namespace ft
 {
     template <typename T, class Allocator = std::allocator<T> >
@@ -141,7 +134,7 @@ namespace ft
             {
                 return static_cast<size_type>(_c_end - _begin);
             }
-            bool    empty()
+            bool    empty() const
             {
                 return (_begin == _end);
             }
