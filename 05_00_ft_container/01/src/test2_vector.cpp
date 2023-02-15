@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include "../include/vector.hpp"
+#include "../include/ft_container.hpp"
 #include <sys/time.h>
 
 const std::string GREEN = "\x1B[1;32m";
@@ -12,17 +10,22 @@ const std::string RESET = "\033[0m";
 using std::cout;
 using std::endl;
 
-#if 0
-	#define NAMESPACE ft
-	#define NSNAME "ft"
-#else
+#if 0 //CREATE A REAL STL EXAMPLE
+	#include <map>
+	#include <stack>
+	#include <vector>
 	#define NAMESPACE std
-	#define NSNAME "std"
+    #define TYPE "std"
+#else
+	#include "../include/map.hpp"
+	#include "../include/stack.hpp"
+	#include "../include/vector.hpp"
+	#define NAMESPACE ft
+    #define TYPE "ft"
 #endif
 
-int	main()
+void	test2_vector(void)
 {
-	cout << NSNAME << endl;
 	cout << REDD + "==========" + "constructor" + "==========" + RESET << endl;
 	{
 		// constructors used in the same order as described above:
@@ -389,5 +392,4 @@ int	main()
 			}
 		}
 	}
-	return 0;
 }
