@@ -235,11 +235,9 @@ void	test2_vector(void)
 		NAMESPACE::vector<int> myvector (3,100);
 		NAMESPACE::vector<int>::iterator it;
 
-		int val = 300;
 		it = myvector.begin();
-		val = 200;
-		it = myvector.insert ( it , val );
-		myvector.insert (it,2,val);
+		it = myvector.insert ( it , 300 );
+		myvector.insert (it,2,200);
 
 		// "it" no longer valid, get a new one:
 		it = myvector.begin();
