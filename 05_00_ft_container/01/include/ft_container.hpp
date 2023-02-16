@@ -22,7 +22,7 @@ const std::string RESET = "\033[0m";
 using std::cout;
 using std::endl;
 
-# if 1 //CREATE A REAL STL EXAMPLE
+# if 0 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>

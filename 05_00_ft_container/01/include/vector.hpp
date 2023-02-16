@@ -210,10 +210,10 @@ namespace ft
 
             void	push_back(const value_type& _val)
             {
-				if (this->_c_end == this->_end) 
+				if (_c_end == _end) 
 				{
-					size_type	capacity = (this->size() == 0) ? 1 : (this->_c_end - this->_begin) * 2;
-					this->reserve(capacity);
+					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
+					reserve(cap);
 				}
 				_construct(1);
 				*(_end - 1) = _val;
@@ -221,29 +221,41 @@ namespace ft
 
             void	pop_back(void)
             {
-				// _destruct(1);
                 _alloc.destroy(--_end);
             }
 
-            iterator	insert(const_iterator _pos, const value_type& _val)
+            // insert (value)
+            iterator	insert(iterator _pos, const value_type& _val)
             {
 				difference_type diff = _pos - begin();
-                if (capacity() < size() + 1) {
-                reserve(size() + 1);
-                }
+                // insert(_pos, 1, _val);
+
+                if (_c_end == _end) 
+				{
+					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
+					reserve(cap);
+				}
+                if (capacity() < size() + 1) 
+                    reserve(size() + 1);
                 pointer ptr = _begin + diff;
                 _construct(1);
                 std::copy_backward(ptr, _end - 1, _end);
                 *ptr = _val;
                 return iterator(ptr);
+                return (_begin + diff);
             }
 
+            // insert (fill)
             void	insert(iterator _pos, size_type _size, const value_type& _val)
             {
-				difference_type	diff = _pos - begin();
+				difference_type	diff =  _pos - begin();
+                if (_c_end == _end) 
+				{
+					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
+					reserve(cap);
+				}
 				if (capacity() < size() + _size)
 					reserve(size() + _size);
-
 				pointer ptr = _begin + diff;
 				_construct(_size);
 				std::copy_backward(ptr, _end - _size, _end);
@@ -251,12 +263,18 @@ namespace ft
 					*(ptr + i) = _val;
             }
 
+            // insert (iter)
             template <class iIter>
             void insert(const_iterator _pos, iIter first, iIter last,
                         typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = ft::nil) 
             {
-                difference_type n = std::distance(first, last);
+                size_type n = size_type(last - first);
                 difference_type diff = _pos - begin();
+                if (_c_end == _end) 
+				{
+					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
+					reserve(cap);
+				}
                 if (capacity() < size() + n)
                     reserve(size() + n);
                 pointer ptr = _begin + diff;
@@ -290,16 +308,17 @@ namespace ft
                 if (this == &v)
                     return ;
 
-                pointer tmp_begin = v._begin;
-                pointer tmp_end = v._end;
-                pointer tmp_c_end = v._c_end;
+                pointer	tmp_begin = _begin;
+                pointer	tmp_end = _end;
+                pointer	tmp_c_end = _c_end;
 
-                v._begin = _begin;
-                v._end = _end;
-                v._c_end = _c_end;
-                _begin = tmp_begin;
-                _end = tmp_end;
-                _c_end = tmp_c_end;
+                _begin = v._begin;
+                _end = v._end;
+                _c_end = v._c_end;
+
+                v._begin = tmp_begin;
+                v._end = tmp_end;
+                v._c_end = tmp_c_end;
             }
 
             void	clear()
