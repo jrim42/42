@@ -47,12 +47,15 @@ namespace ft
         public:
             // OCCF
             explicit vector(const allocator_type& alloc = allocator_type())
-                : _begin(NULL), _end(NULL), _c_end(NULL), _alloc(alloc) {};
+                : _begin(ft::nil), _end(ft::nil), _c_end(ft::nil), _alloc(alloc) {};
             explicit vector(size_type _size, const value_type& value = value_type(), const allocator_type& alloc = allocator_type())
                 : _alloc(alloc)
             {
-                _init(_size);
-                _construct(_size, value);
+				this->_begin = this->_alloc.allocate(_size);
+				this->_end = this->_begin;
+				this->_c_end = this->_begin + _size;
+				while (_size--) 
+                    this->_alloc.construct(this->_end++, value);
             };
 			template < class iIter >
 			vector(iIter first, iIter last, const allocator_type& alloc = allocator_type(),
@@ -91,7 +94,7 @@ namespace ft
             iterator                begin()         { return iterator(_begin); }
             iterator                end()           { return iterator(_end); }
             const_iterator          begin() const   { return const_iterator(_begin); }
-            const_iterator          end() const     { return const_iterator(_begin); }
+            const_iterator          end() const     { return const_iterator(_end); }
             
             reverse_iterator        rbegin()        { return reverse_iterator(end()); }
             reverse_iterator        rend()          { return reverse_iterator(begin()); }
@@ -235,7 +238,7 @@ namespace ft
                 return iterator(ptr);
             }
 
-            void	insert(iterator _pos, size_type _size, value_type& _val)
+            void	insert(iterator _pos, size_type _size, const value_type& _val)
             {
 				difference_type	diff = _pos - begin();
 				if (capacity() < size() + _size)
@@ -284,6 +287,9 @@ namespace ft
 
             void	swap(vector &v)
             {
+                if (this == &v)
+                    return ;
+
                 pointer tmp_begin = v._begin;
                 pointer tmp_end = v._end;
                 pointer tmp_c_end = v._c_end;
@@ -291,7 +297,6 @@ namespace ft
                 v._begin = _begin;
                 v._end = _end;
                 v._c_end = _c_end;
-
                 _begin = tmp_begin;
                 _end = tmp_end;
                 _c_end = tmp_c_end;
@@ -375,7 +380,7 @@ namespace ft
     bool    operator<=(const ft::vector<T, Allocator>& x, 
                     const ft::vector<T, Allocator>& y)
     {
-        return (x == y || x < y);
+        return !(y < x);
     }
 
     template <typename T, class Allocator>
@@ -389,7 +394,7 @@ namespace ft
     bool    operator>=(const ft::vector<T, Allocator>& x, 
                     const ft::vector<T, Allocator>& y)
     {
-        return (x == y || x > y);
+        return !(x < y);
     }
 
     // swap
