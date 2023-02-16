@@ -356,7 +356,7 @@ namespace ft
     // comparison operator
     template <typename T, class Allocator>
     bool    operator==(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return (x.size() == y.size() &&
                 ft::equal(x.begin(), x.end(), y.begin()));
@@ -364,35 +364,35 @@ namespace ft
 
     template <typename T, class Allocator>
     bool    operator!=(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return !(x == y);
     }
 
     template <typename T, class Allocator>
     bool    operator<(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
     }
 
     template <typename T, class Allocator>
     bool    operator<=(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return !(y < x);
     }
 
     template <typename T, class Allocator>
     bool     operator>(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return !(x <= y);
     }
 
     template <typename T, class Allocator>
     bool    operator>=(const ft::vector<T, Allocator>& x, 
-                    const ft::vector<T, Allocator>& y)
+                       const ft::vector<T, Allocator>& y)
     {
         return !(x < y);
     }
