@@ -215,8 +215,7 @@ namespace ft
 					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
 					reserve(cap);
 				}
-				_construct(1);
-				*(_end - 1) = _val;
+                _alloc.construct(_end++, _val);
             }
 
             void	pop_back(void)
