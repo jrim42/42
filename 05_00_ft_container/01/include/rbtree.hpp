@@ -16,7 +16,7 @@
 
 namespace ft 
 {
-	// rbnode
+	//============================ rbnode ============================//
 	template <typename T>
 	struct rbnode 
 	{
@@ -27,15 +27,15 @@ namespace ft
 		rbnode*		_left;
 		rbnode*		_right;
 		value_type	_val;
-		Color		_color;  // is_black
+		Color		_color;
 
 		// constructor & destructor
 		rbnode(void)
 			: _parent(NULL), _left(NULL), _right(NULL), 
-			  _val(value_type()), _color(Color()) {}
-		rbnode(const value_type& value)
+			  _val(value_type()), _color(BLACK) {}
+		rbnode(const value_type& val)
 			: _parent(NULL), _left(NULL), _right(NULL), 
-			  _val(value), _color(Color()) {}
+			  _val(val), _color(BLACK) {}
 		rbnode(const rbnode& ref)
 			: _parent(ref._parent), _left(ref._left), _right(ref._right),
 			  _val(ref._val), _color(ref._color) {}
@@ -104,7 +104,7 @@ namespace ft
 	{
 		if (ptr->_left != nil) 
 			return getMaxNode(ptr->_left, nil);
-		while (!getDirection(ptr)) 
+		while (getDirection(ptr) == LEFT) 
 			ptr = ptr->_parent;
 		return ptr->_parent;
 	}
@@ -115,7 +115,7 @@ namespace ft
 		return !comp(u, v) && !comp(v, u);
 	}
 
-	// rbiter
+	//============================ rbiter ============================//
 	template <typename U, typename V>
 	class rbiter 
 	{
@@ -163,55 +163,49 @@ namespace ft
 			// increment & decrement
 			rbiter& operator++(void) 
 			{
-				_cur = ft::getNextNode(_cur, _nil);
+				_cur = getNextNode(_cur, _nil);
 				return *this;
 			}
 			rbiter& operator--(void) 
 			{
-				_cur = ft::getPrevNode(_cur, _nil);
+				_cur = getPrevNode(_cur, _nil);
 				return *this;
 			}
 			rbiter operator++(int) 
 			{
-				rbiter tmp(*this);
+				rbiter	tmp(*this);
 				++(*this);
 				return tmp;
 			}
 			rbiter operator--(int) 
 			{
-				rbiter tmp(*this);
+				rbiter	tmp(*this);
 				--(*this);
 				return tmp;
 			}
 
 			// comparison operator
 			template <typename T>
-			bool operator==(const rbiter<T, node_type>& i) const 
+			bool	operator==(const rbiter<T, node_type>& ite) const 
 			{
-				return _cur == i.base();
+				return _cur == ite.base();
 			}
 			template <typename T>
-			bool operator!=(const rbiter<T, node_type>& i) const 
+			bool	operator!=(const rbiter<T, node_type>& ite) const 
 			{
-				return !(*this == i);
+				return !(*this == ite);
 			}
 
 			// utils
-			operator rbiter<const value_type, node_type>(void) const 
+			operator	rbiter<const value_type, node_type>(void) const 
 			{
 				return rbiter<const value_type, node_type>(_cur, _nil);
 			}
-			friend bool operator==(const rbiter& x, const rbiter& y) 
-			{
-				return x._cur == y._cur;
-			}
-			friend bool operator!=(const rbiter& x, const rbiter& y) 
-			{
-				return !(x == y);
-			}
+			friend bool	operator==(const rbiter& x, const rbiter& y)	{ return x._cur == y._cur;}
+			friend bool	operator!=(const rbiter& x, const rbiter& y)	{ return !(x == y);}
 	};
 
-	// rbtree
+	//============================ rbtree ============================//
 	template <typename T, class Key, class Comp, class Allocator>
 	class rbtree 
 	{
@@ -224,18 +218,16 @@ namespace ft
 			typedef rbnode<value_type>* 					node_pointer;
 			typedef rbiter<value_type, node_type>			iterator;
 			typedef rbiter<const value_type, node_type> 	const_iterator;
-
-			typedef Allocator 								allocator_type;
-			typedef typename allocator_type::template rebind<node_type>::other node_allocator;
-			typedef std::allocator_traits<node_allocator> 	node_traits;
-
 			typedef std::size_t 							size_type;
 			typedef std::ptrdiff_t 							difference_type;
 
+			typedef Allocator 													allocator_type;
+			typedef typename allocator_type::template rebind<node_type>::other	node_allocator;
+
 		private:
-			node_pointer	_nil;
 			node_pointer 	_begin;
 			node_pointer 	_end;
+			node_pointer	_nil;
 			compare_type 	_comp;
 			node_allocator 	_alloc;
 			size_type 		_size;
@@ -293,27 +285,23 @@ namespace ft
 
 			// size, max_size, empty
 			size_type	size(void) const 		{ return _size; }
+			size_type 	max_size(void) const 	{ return size_type(-1); }
 			bool 		empty(void) const 		{ return _size == 0; }
-			size_type 	max_size(void) const 
-			{ 
-				return std::min<size_type>(std::numeric_limits<size_type>::max(),
-										   node_traits::max_size(node_allocator()));
-			}
 
 			// modifiers: insert, erase
-			ft::pair<iterator, bool>	insert(const value_type& value) 
+			ft::pair<iterator, bool>	insert(const value_type& val) 
 			{
-				node_pointer ptr = findParent(value);
-				if (ptr != _end && isEqual(ptr->_val, value, _comp))
+				node_pointer ptr = findParent(val);
+				if (ptr != _end && isEqual(ptr->_val, val, _comp))
 					return ft::make_pair(iterator(ptr, _nil), RED);
-				return ft::make_pair(iterator(__insert(value, ptr), _nil), BLACK);
+				return ft::make_pair(iterator(__insert(val, ptr), _nil), BLACK);
 			}
-			iterator	insert(iterator position, const value_type& value) 
+			iterator	insert(iterator pos, const value_type& val) 
 			{
-				node_pointer ptr = findParent(value, position.base());
-				if (ptr != _end && isEqual(ptr->_val, value, _comp))
+				node_pointer ptr = findParent(val, pos.base());
+				if (ptr != _end && isEqual(ptr->_val, val, _comp))
 					return iterator(ptr, _nil);
-				return iterator(__insert(value, ptr), _nil);
+				return iterator(__insert(val, ptr), _nil);
 			}
 			template <class InputIterator>
 			void	insert(InputIterator first, InputIterator last) 
@@ -322,23 +310,23 @@ namespace ft
 					insert(*first);
 			}
 			
-			iterator	erase(iterator position) 
+			iterator	erase(iterator pos) 
 			{
 				if (_size == 0)
 					return iterator(_nil, _nil);
-				iterator tmp(position);
+				iterator tmp(pos);
 				++tmp;
-				if (position == begin())
+				if (pos == begin())
 					_begin = tmp.base();
 				--_size;
-				__remove(position.base());
-				destructNode(position.base());
+				__remove(pos.base());
+				destructNode(pos.base());
 				return tmp;
 			}
 			template <typename U>
-			size_type	erase(const U& value) 
+			size_type	erase(const U& val) 
 			{
-				iterator i(__find(value), _nil);
+				iterator i(__find(val), _nil);
 				if (i == end())
 					return 0;
 				if (i == begin()) 
@@ -369,44 +357,19 @@ namespace ft
 			}
 			void	clear(void) 
 			{
-				rbtree tmp(_comp, _alloc);
+				rbtree	tmp(_comp, _alloc);
 				swap(tmp);
 			}
 
-			//
-			iterator 		find(const key_type& key) 
-			{
-				return iterator(__find(key), _nil);
-			}
-			const_iterator 	find(const key_type& key) const 
-			{
-				return const_iterator(__find(key), _nil);
-			}
-			iterator 		lower_bound(const key_type& key) 
-			{
-				return iterator(__lower_bound(key), _nil);
-			}
-			const_iterator 	lower_bound(const key_type& key) const 
-			{
-				return const_iterator(__lower_bound(key), _nil);
-			}
-			iterator 		upper_bound(const key_type& key) 
-			{
-				return iterator(__upper_bound(key), _nil);
-			}
-			const_iterator 	upper_bound(const key_type& key) const 
-			{
-				return const_iterator(__upper_bound(key), _nil);
-			}
+			iterator 		find(const key_type& key) 				{ return iterator(__find(key), _nil); }
+			const_iterator 	find(const key_type& key) const 		{ return const_iterator(__find(key), _nil); }
+			iterator 		lower_bound(const key_type& key) 		{ return iterator(__lower_bound(key), _nil); }
+			const_iterator 	lower_bound(const key_type& key) const 	{ return const_iterator(__lower_bound(key), _nil); }
+			iterator 		upper_bound(const key_type& key) 		{ return iterator(__upper_bound(key), _nil); }
+			const_iterator 	upper_bound(const key_type& key) const	{ return const_iterator(__upper_bound(key), _nil); }
 			
-			ft::pair<iterator, iterator> 				equal_range(const key_type& key) 
-			{
-				return __equal(key);
-			}
-			ft::pair<const_iterator, const_iterator> 	equal_range(const key_type& key) const 
-			{
-				return __equal(key);
-			}
+			ft::pair<iterator, iterator> 				equal_range(const key_type& key) 		{ return __equal(key); }
+			ft::pair<const_iterator, const_iterator>	equal_range(const key_type& key) const	{ return __equal(key); }
 
 			// allocator
 			allocator_type	get_allocator(void) const	{ return _alloc; }
@@ -417,29 +380,29 @@ namespace ft
 			{
 				return _end->_left;
 			}
-			void 			setRoot(const node_pointer ptr) 
+			void	setRoot(const node_pointer ptr) 
 			{
 				ptr->_parent = _end;
 				_end->_left = ptr;
 			}
 
 			// node constructor & destructor
-			node_pointer 	constructNode(const value_type& value) 
+			node_pointer 	constructNode(const value_type& val) 
 			{
 				node_pointer ptr = _alloc.allocate(1);
-				_alloc.construct(ptr, value);
+				_alloc.construct(ptr, val);
 				ptr->_parent = _nil;
 				ptr->_left = _nil;
 				ptr->_right = _nil;
 				ptr->_color = RED;
 				return ptr;
 			}
-			void 			destructNode(node_pointer ptr) 
+			void 	destructNode(node_pointer ptr) 
 			{
 				_alloc.destroy(ptr);
 				_alloc.deallocate(ptr, 1);
 			}
-			void			destructAll(node_pointer ptr) 
+			void	destructAll(node_pointer ptr) 
 			{
 				if (ptr == _nil) {
 				return;
@@ -449,31 +412,31 @@ namespace ft
 				destructNode(ptr);
 			}
 
-			node_pointer 	findParent(const value_type& value, node_pointer position = NULL) 
+			node_pointer 	findParent(const value_type& val, node_pointer pos = NULL) 
 			{
-				if (position && position != _end) 
+				if (pos && pos != _end) 
 				{
-					if (_comp(value, position->_val) && position->_left == _nil) 
+					if (_comp(val, pos->_val) && pos->_left == _nil) 
 					{
-						iterator prev = iterator(position, _nil);
-						if (prev == begin() || _comp(*--prev, value))
-							return position;
+						iterator prev = iterator(pos, _nil);
+						if (prev == begin() || _comp(*--prev, val))
+							return pos;
 					} 
-					else if (position->_right == _nil) 
+					else if (pos->_right == _nil) 
 					{
-						iterator next = iterator(position, _nil);
-						if (next == end() || _comp(value, *++next))
-							return position;
+						iterator next = iterator(pos, _nil);
+						if (next == end() || _comp(val, *++next))
+							return pos;
 					}
 				}
-				node_pointer cur = getRoot();
-				node_pointer tmp = _end;
+				node_pointer	cur = getRoot();
+				node_pointer	tmp = _end;
 				for ( ; cur != _nil ; ) 
 				{
 					tmp = cur;
-					if (_comp(value, cur->_val))
+					if (_comp(val, cur->_val))
 						cur = cur->_left;
-					else if (_comp(cur->_val, value))
+					else if (_comp(cur->_val, val))
 						cur = cur->_right;
 					else
 						return cur;
@@ -481,12 +444,13 @@ namespace ft
 				return tmp;
 			}
 			
-			node_pointer __insert(const value_type& value, node_pointer parent) 
+			// insert
+			node_pointer	__insert(const value_type& val, node_pointer parent) 
 			{
-				node_pointer ptr = constructNode(value);
+				node_pointer	ptr = constructNode(val);
 				if (parent == _end)
 					setRoot(ptr);
-				else if (_comp(value, parent->_val))
+				else if (_comp(val, parent->_val))
 					parent->_left = ptr;
 				else
 					parent->_right = ptr;
@@ -498,139 +462,191 @@ namespace ft
 				_size++;
 				return ptr;
 			}
-			void		 __insertFix(node_pointer ptr) {
-				while (getColor(ptr->_parent) == RED) {
-				if (getDirection(ptr->_parent) == LEFT) 
+			
+			void	__insertFix(node_pointer ptr) 
+			{
+				while (getColor(ptr->_parent) == RED) 
 				{
-					node_pointer uncle = ptr->_parent->_parent->_right;
-					if (getColor(uncle) == RED) {
+					if (getDirection(ptr->_parent) == LEFT) 
+					{
+						node_pointer	uncle = ptr->_parent->_parent->_right;
+						__insertFix_uncle_right(ptr, uncle);
+					} 
+					else 
+					{
+						node_pointer	uncle = ptr->_parent->_parent->_left;
+						__insertFix_uncle_left(ptr, uncle);
+					}
+				}
+				getRoot()->_color = BLACK;
+			}
+
+			void	__insertFix_uncle_right(node_pointer ptr, node_pointer uncle) 
+			{
+				if (getColor(uncle) == RED) 
+				{
 					ptr->_parent->_color = BLACK;
 					uncle->_color = BLACK;
 					uncle->_parent->_color = RED;
 					ptr = uncle->_parent;
-					} else {
-					if (getDirection(ptr) == RIGHT) {
+				} 
+				else 
+				{
+					if (getDirection(ptr) == RIGHT) 
+					{
 						ptr = ptr->_parent;
 						__rotateLeft(ptr);
 					}
 					ptr->_parent->_color = BLACK;
 					ptr->_parent->_parent->_color = RED;
 					__rotateRight(ptr->_parent->_parent);
-					}
-				} 
-				else 
+				}
+			}
+
+			void	__insertFix_uncle_left(node_pointer ptr, node_pointer uncle) 
+			{
+				if (getColor(uncle) == RED) 
 				{
-					node_pointer uncle = ptr->_parent->_parent->_left;
-					if (getColor(uncle) == RED) {
 					ptr->_parent->_color = BLACK;
 					uncle->_color = BLACK;
 					uncle->_parent->_color = RED;
 					ptr = uncle->_parent;
-					} else {
-					if (getDirection(ptr) == LEFT) {
+				} 
+				else 
+				{
+					if (getDirection(ptr) == LEFT) 
+					{
 						ptr = ptr->_parent;
 						__rotateRight(ptr);
 					}
 					ptr->_parent->_color = BLACK;
 					ptr->_parent->_parent->_color = RED;
 					__rotateLeft(ptr->_parent->_parent);
-					}
-					}
 				}
-				getRoot()->_color = BLACK;
 			}
-			
+
+			// remove
 			void	__remove(node_pointer ptr) 
 			{
-				node_pointer recolor_node;
-				node_pointer fixup_node = ptr;
-				bool original_color = getColor(ptr);
-				if (ptr->_left == _nil) {
-				recolor_node = ptr->_right;
-				__transplant(ptr, ptr->_right);
-				} else if (ptr->_right == _nil) {
-				recolor_node = ptr->_left;
-				__transplant(ptr, ptr->_left);
-				} else {
-				fixup_node = getMinNode(ptr->_right, _nil);
-				original_color = getColor(fixup_node);
-				recolor_node = fixup_node->_right;
-				if (fixup_node->_parent == ptr) {
-					recolor_node->_parent = fixup_node;
-				} else {
-					__transplant(fixup_node, fixup_node->_right);
-					fixup_node->_right = ptr->_right;
-					fixup_node->_right->_parent = fixup_node;
+				node_pointer	recolor_node;
+				node_pointer	fixup_node = ptr;
+				bool 			origin_color = getColor(ptr);
+
+				if (ptr->_left == _nil) 
+				{
+					recolor_node = ptr->_right;
+					__transplant(ptr, ptr->_right);
+				} 
+				else if (ptr->_right == _nil) 
+				{
+					recolor_node = ptr->_left;
+					__transplant(ptr, ptr->_left);
+				} 
+				else 
+				{
+					fixup_node = getMinNode(ptr->_right, _nil);
+					origin_color = getColor(fixup_node);
+					recolor_node = fixup_node->_right;
+					if (fixup_node->_parent == ptr)
+						recolor_node->_parent = fixup_node;
+					else 
+					{
+						__transplant(fixup_node, fixup_node->_right);
+						fixup_node->_right = ptr->_right;
+						fixup_node->_right->_parent = fixup_node;
+					}
+					__transplant(ptr, fixup_node);
+					fixup_node->_left = ptr->_left;
+					fixup_node->_left->_parent = fixup_node;
+					fixup_node->_color = getColor(ptr);
 				}
-				__transplant(ptr, fixup_node);
-				fixup_node->_left = ptr->_left;
-				fixup_node->_left->_parent = fixup_node;
-				fixup_node->_color = getColor(ptr);
-				}
-				if (original_color) {
-				__removeFix(recolor_node);
-				}
+				if (origin_color)
+					__removeFix(recolor_node);
 			}
+
 			void 	__removeFix(node_pointer ptr) 
 			{
 				while (ptr != getRoot() && getColor(ptr) == BLACK) 
 				{
 					if (getDirection(ptr) == LEFT) 
 					{
-						node_pointer sibling = ptr->_parent->_right;
-						if (getColor(sibling) == RED) {
-						sibling->_color = BLACK;
-						ptr->_parent->_color = RED;
-						__rotateLeft(ptr->_parent);
-						sibling = ptr->_parent->_right;
-						}
-						if (getColor(sibling->_left) == BLACK && getColor(sibling->_right) == BLACK) {
-						sibling->_color = RED;
-						ptr = ptr->_parent;
-						} else if (getColor(sibling->_right) == BLACK) {
-						sibling->_left->_color = BLACK;
-						sibling->_color = RED;
-						__rotateRight(sibling);
-						sibling = ptr->_parent->_right;
-						}
-						if (getColor(sibling->_right) == RED) {
-						sibling->_color = getColor(ptr->_parent);
-						ptr->_parent->_color = BLACK;
-						sibling->_right->_color = BLACK;
-						__rotateLeft(ptr->_parent);
-						ptr = getRoot();
-						}
+						node_pointer	sib = ptr->_parent->_right;
+						ptr = __removeFix_sib_right(ptr, sib);
 					} 
 					else 
 					{
-						node_pointer sibling = ptr->_parent->_left;
-						if (getColor(sibling) == RED) {
-						sibling->_color = BLACK;
-						ptr->_parent->_color = RED;
-						__rotateRight(ptr->_parent);
-						sibling = ptr->_parent->_left;
-						}
-						if (getColor(sibling->_right) == BLACK && getColor(sibling->_left) == BLACK) {
-						sibling->_color = RED;
-						ptr = ptr->_parent;
-						} else if (getColor(sibling->_left) == BLACK) {
-						sibling->_right->_color = BLACK;
-						sibling->_color = RED;
-						__rotateLeft(sibling);
-						sibling = ptr->_parent->_left;
-						}
-						if (getColor(sibling->_left) == RED) {
-						sibling->_color = getColor(ptr->_parent);
-						ptr->_parent->_color = BLACK;
-						sibling->_left->_color = BLACK;
-						__rotateRight(ptr->_parent);
-						ptr = getRoot();
-						}
+						node_pointer	sib = ptr->_parent->_left;
+						ptr = __removeFix_sib_left(ptr, sib);
 					}
 				}
 				ptr->_color = BLACK;
 			}
 
+			node_pointer	__removeFix_sib_right(node_pointer ptr, node_pointer sib)
+			{
+				if (getColor(sib) == RED) 
+				{
+					sib->_color = BLACK;
+					ptr->_parent->_color = RED;
+					__rotateLeft(ptr->_parent);
+					sib = ptr->_parent->_right;
+				}
+				if (getColor(sib->_left) == BLACK && getColor(sib->_right) == BLACK) 
+				{
+					sib->_color = RED;
+					ptr = ptr->_parent;
+				} 
+				else if (getColor(sib->_right) == BLACK) 
+				{
+					sib->_left->_color = BLACK;
+					sib->_color = RED;
+					__rotateRight(sib);
+					sib = ptr->_parent->_right;
+				}
+				if (getColor(sib->_right) == RED) 
+				{
+					sib->_color = getColor(ptr->_parent);
+					ptr->_parent->_color = BLACK;
+					sib->_right->_color = BLACK;
+					__rotateLeft(ptr->_parent);
+					ptr = getRoot();
+				}
+				return ptr;
+			}
+
+			node_pointer 	__removeFix_sib_left(node_pointer ptr, node_pointer sib)
+			{
+				if (getColor(sib) == RED) 
+				{
+					sib->_color = BLACK;
+					ptr->_parent->_color = RED;
+					__rotateRight(ptr->_parent);
+					sib = ptr->_parent->_left;
+				}
+				if (getColor(sib->_right) == BLACK && getColor(sib->_left) == BLACK) 
+				{
+					sib->_color = RED;
+					ptr = ptr->_parent;
+				} 
+				else if (getColor(sib->_left) == BLACK) 
+				{
+					sib->_right->_color = BLACK;
+					sib->_color = RED;
+					__rotateLeft(sib);
+					sib = ptr->_parent->_left;
+				}
+				if (getColor(sib->_left) == RED) 
+				{
+					sib->_color = getColor(ptr->_parent);
+					ptr->_parent->_color = BLACK;
+					sib->_left->_color = BLACK;
+					__rotateRight(ptr->_parent);
+					ptr = getRoot();
+				}
+				return ptr;
+			}
+
+			// transplant
 			void 	__transplant(node_pointer former, node_pointer latter) 
 			{
 				if (former->_parent == _end)
@@ -641,6 +657,8 @@ namespace ft
 					former->_parent->_right = latter;
 				latter->_parent = former->_parent;
 			}
+
+			// rotate
 			void 	__rotateLeft(node_pointer ptr) 
 			{
 				node_pointer child = ptr->_right;
@@ -680,24 +698,26 @@ namespace ft
 
 			// find: find, lower_bound, upper_bound
 			template <typename U>
-			node_pointer __find(const U& value) const 
+			node_pointer	__find(const U& val) const 
 			{
-				node_pointer ptr = getRoot();
-				while (ptr != _nil) {
-				if (_comp(value, ptr->_val)) {
-					ptr = ptr->_left;
-				} else if (_comp(ptr->_val, value)) {
-					ptr = ptr->_right;
-				} else {
-					return ptr;
-				}
+				node_pointer	ptr = getRoot();
+
+				while (ptr != _nil) 
+				{
+					if (_comp(val, ptr->_val))
+						ptr = ptr->_left;
+					else if (_comp(ptr->_val, val))
+						ptr = ptr->_right;
+					else
+						return ptr;
 				}
 				return _end;
 			}
-			node_pointer __lower_bound(const key_type& key) const 
+			node_pointer	__lower_bound(const key_type& key) const 
 			{
-				node_pointer ptr = getRoot();
-				node_pointer tmp = _end;
+				node_pointer	ptr = getRoot();
+				node_pointer	tmp = _end;
+
 				while (ptr != _nil) {
 				if (!_comp(ptr->_val, key)) {
 					tmp = ptr;
@@ -708,10 +728,11 @@ namespace ft
 				}
 				return tmp;
 			}
-			node_pointer __upper_bound(const key_type& key) const 
+			node_pointer	__upper_bound(const key_type& key) const 
 			{
-				node_pointer ptr = getRoot();
-				node_pointer tmp = _end;
+				node_pointer	ptr = getRoot();
+				node_pointer	tmp = _end;
+
 				while (ptr != _nil)
 				{
 					if (_comp(key, ptr->_val)) 
@@ -726,18 +747,19 @@ namespace ft
 			}
 			
 			template <typename U>
-			ft::pair<iterator, iterator> __equal(const U& value) 
+			ft::pair<iterator, iterator>	__equal(const U& val) 
 			{
-				node_pointer ptr = getRoot();
-				node_pointer tmp = _end;
+				node_pointer	ptr = getRoot();
+				node_pointer	tmp = _end;
+
 				while (ptr != _nil) 
 				{
-					if (_comp(value, ptr->_val)) 
+					if (_comp(val, ptr->_val)) 
 					{
 						tmp = ptr;
 						ptr = ptr->_left;
 					} 
-					else if (_comp(ptr->_val, value))
+					else if (_comp(ptr->_val, val))
 						ptr = ptr->_right;
 					else 
 					{
@@ -749,27 +771,29 @@ namespace ft
 				return ft::make_pair(iterator(tmp, _nil), iterator(tmp, _nil));
 			}
 			template <typename U>
-			ft::pair<const_iterator, const_iterator> __equal(const U& value) const 
-		{
-			node_pointer ptr = getRoot();
-			node_pointer tmp = _end;
-			while (ptr != _nil) {
-				if (_comp(value, ptr->_val)) 
+			ft::pair<const_iterator, const_iterator>	__equal(const U& val) const 
+			{
+				node_pointer	ptr = getRoot();
+				node_pointer	tmp = _end;
+
+				while (ptr != _nil) 
 				{
-					tmp = ptr;
-					ptr = ptr->_left;
-				} 
-				else if (_comp(ptr->_val, value))
-					ptr = ptr->_right;
-				else 
-				{
-					if (ptr->_right != _nil)
-						tmp = getMinNode(ptr->_right, _nil);
-					return ft::make_pair(const_iterator(ptr, _nil), const_iterator(tmp, _nil));
+					if (_comp(val, ptr->_val)) 
+					{
+						tmp = ptr;
+						ptr = ptr->_left;
+					} 
+					else if (_comp(ptr->_val, val))
+						ptr = ptr->_right;
+					else 
+					{
+						if (ptr->_right != _nil)
+							tmp = getMinNode(ptr->_right, _nil);
+						return ft::make_pair(const_iterator(ptr, _nil), const_iterator(tmp, _nil));
+					}
 				}
+				return ft::make_pair(const_iterator(tmp, _nil), const_iterator(tmp, _nil));
 			}
-			return ft::make_pair(const_iterator(tmp, _nil), const_iterator(tmp, _nil));
-		}
 	};
 }  // namespace ft
 
