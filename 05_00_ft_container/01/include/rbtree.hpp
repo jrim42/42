@@ -31,10 +31,10 @@ namespace ft
 
 		// constructor & destructor
 		rbnode(void)
-			: _parent(ft::nil), _left(ft::nil), _right(ft::nil), 
+			: _parent(NULL), _left(NULL), _right(NULL), 
 			  _val(value_type()), _color(Color()) {}
 		rbnode(const value_type& value)
-			: _parent(ft::nil), _left(ft::nil), _right(ft::nil), 
+			: _parent(NULL), _left(NULL), _right(NULL), 
 			  _val(value), _color(Color()) {}
 		rbnode(const rbnode& ref)
 			: _parent(ref._parent), _left(ref._left), _right(ref._right),
@@ -138,7 +138,7 @@ namespace ft
 		public:
 			// constructor & destructor
 			rbiter(void) 
-				: _cur(ft::nil), _nil(ft::nil) {}
+				: _cur(NULL), _nil(NULL) {}
 			rbiter(node_pointer cur, node_pointer nil)
 				: _cur(cur), _nil(nil) {}
 			rbiter(const rbiter& i)
@@ -449,7 +449,7 @@ namespace ft
 				destructNode(ptr);
 			}
 
-			node_pointer 	findParent(const value_type& value, node_pointer position = ft::nil) 
+			node_pointer 	findParent(const value_type& value, node_pointer position = NULL) 
 			{
 				if (position && position != _end) 
 				{

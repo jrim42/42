@@ -2,8 +2,8 @@
 # define RANDOM_ACCESS_ITERATOR_HPP
 
 # include <iterator>
-# include "./iterator_traits.hpp"
 # include "./type_traits.hpp"
+# include "./iterator_traits.hpp"
 
 namespace ft 
 {
@@ -25,13 +25,15 @@ namespace ft
 
 		public:
 			// constructor & destructor
-			random_access_iterator(void): _ptr(ft::nil) {}
-			random_access_iterator(T* pointer) : _ptr(pointer) {}
+			random_access_iterator(void)
+				: _ptr(NULL) {}
+			random_access_iterator(T* pointer) 
+				: _ptr(pointer) {}
 			template <typename U>
-			random_access_iterator(const random_access_iterator<U>& ite) : _ptr(ite.base()) {}
+			random_access_iterator(const random_access_iterator<U>& ite) 
+				: _ptr(ite.base()) {}
 			~random_access_iterator(void) {}
 
-			// member functions
 			template <typename U>
 			random_access_iterator& operator=(const random_access_iterator<U>& ite) 
 			{
@@ -39,10 +41,11 @@ namespace ft
 				return *this;
 			}
 
-			iterator_type base(void) const 					{ return _ptr; }
-			pointer operator->(void) const 					{ return _ptr; }
-			reference operator*(void) const 				{ return *_ptr; }
-			reference operator[](difference_type n) const	{ return _ptr[n]; }
+			// member functions
+			iterator_type	base(void) const 						{ return _ptr; }
+			pointer 		operator->(void) const 					{ return _ptr; }
+			reference 		operator*(void) const 					{ return *_ptr; }
+			reference 		operator[](difference_type n) const		{ return _ptr[n]; }
 
 			// increment & decrement
 			random_access_iterator& operator++(void) 
