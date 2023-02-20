@@ -250,8 +250,8 @@ namespace ft
 			void	insert(const_iterator pos, iIter first, iIter last,
 						typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = NULL) 
 			{
-				size_type n = size_type(last - first);
-				difference_type diff = pos - begin();
+				size_type		n = size_type(last - first);
+				difference_type	diff = pos - begin();
 				if (_c_end == _end) 
 				{
 					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
@@ -262,8 +262,8 @@ namespace ft
 				pointer ptr = _begin + diff;
 				_construct(n);
 				std::copy_backward(ptr, _end - n, _end);
-				for (iIter i = first ; i != last ; i++, ptr++)
-					*ptr = *i;
+				for (iIter ite = first ; ite != last ; ite++, ptr++)
+					*ptr = *ite;
 			}
 
 			// erase(value)
