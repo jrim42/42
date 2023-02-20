@@ -161,7 +161,7 @@ namespace ft
 			reference 		operator*(void) const 	{ return _cur->_val; }
 
 			// increment & decrement
-			rbiter& operator++(void) 
+			rbiter&	operator++(void) 
 			{
 				_cur = getNextNode(_cur, _nil);
 				return *this;
@@ -448,6 +448,7 @@ namespace ft
 			node_pointer	__insert(const value_type& val, node_pointer parent) 
 			{
 				node_pointer	ptr = constructNode(val);
+
 				if (parent == _end)
 					setRoot(ptr);
 				else if (_comp(val, parent->_val))
@@ -470,59 +471,49 @@ namespace ft
 					if (getDirection(ptr->_parent) == LEFT) 
 					{
 						node_pointer	uncle = ptr->_parent->_parent->_right;
-						__insertFix_uncle_right(ptr, uncle);
+						if (getColor(uncle) == RED) 
+						{
+							ptr->_parent->_color = BLACK;
+							uncle->_color = BLACK;
+							uncle->_parent->_color = RED;
+							ptr = uncle->_parent;
+						} 
+						else 
+						{
+							if (getDirection(ptr) == RIGHT) 
+							{
+								ptr = ptr->_parent;
+								__rotateLeft(ptr);
+							}
+							ptr->_parent->_color = BLACK;
+							ptr->_parent->_parent->_color = RED;
+							__rotateRight(ptr->_parent->_parent);
+						}
 					} 
 					else 
 					{
 						node_pointer	uncle = ptr->_parent->_parent->_left;
-						__insertFix_uncle_left(ptr, uncle);
+						if (getColor(uncle) == RED) 
+						{
+							ptr->_parent->_color = BLACK;
+							uncle->_color = BLACK;
+							uncle->_parent->_color = RED;
+							ptr = uncle->_parent;
+						} 
+						else 
+						{
+							if (getDirection(ptr) == LEFT) 
+							{
+								ptr = ptr->_parent;
+								__rotateRight(ptr);
+							}
+							ptr->_parent->_color = BLACK;
+							ptr->_parent->_parent->_color = RED;
+							__rotateLeft(ptr->_parent->_parent);
+						}
 					}
 				}
 				getRoot()->_color = BLACK;
-			}
-
-			void	__insertFix_uncle_right(node_pointer ptr, node_pointer uncle) 
-			{
-				if (getColor(uncle) == RED) 
-				{
-					ptr->_parent->_color = BLACK;
-					uncle->_color = BLACK;
-					uncle->_parent->_color = RED;
-					ptr = uncle->_parent;
-				} 
-				else 
-				{
-					if (getDirection(ptr) == RIGHT) 
-					{
-						ptr = ptr->_parent;
-						__rotateLeft(ptr);
-					}
-					ptr->_parent->_color = BLACK;
-					ptr->_parent->_parent->_color = RED;
-					__rotateRight(ptr->_parent->_parent);
-				}
-			}
-
-			void	__insertFix_uncle_left(node_pointer ptr, node_pointer uncle) 
-			{
-				if (getColor(uncle) == RED) 
-				{
-					ptr->_parent->_color = BLACK;
-					uncle->_color = BLACK;
-					uncle->_parent->_color = RED;
-					ptr = uncle->_parent;
-				} 
-				else 
-				{
-					if (getDirection(ptr) == LEFT) 
-					{
-						ptr = ptr->_parent;
-						__rotateRight(ptr);
-					}
-					ptr->_parent->_color = BLACK;
-					ptr->_parent->_parent->_color = RED;
-					__rotateLeft(ptr->_parent->_parent);
-				}
 			}
 
 			// remove
@@ -571,79 +562,67 @@ namespace ft
 					if (getDirection(ptr) == LEFT) 
 					{
 						node_pointer	sib = ptr->_parent->_right;
-						ptr = __removeFix_sib_right(ptr, sib);
+						if (getColor(sib) == RED) 
+						{
+							sib->_color = BLACK;
+							ptr->_parent->_color = RED;
+							__rotateLeft(ptr->_parent);
+							sib = ptr->_parent->_right;
+						}
+						if (getColor(sib->_left) == BLACK && getColor(sib->_right) == BLACK) 
+						{
+							sib->_color = RED;
+							ptr = ptr->_parent;
+						} 
+						else if (getColor(sib->_right) == BLACK) 
+						{
+							sib->_left->_color = BLACK;
+							sib->_color = RED;
+							__rotateRight(sib);
+							sib = ptr->_parent->_right;
+						}
+						if (getColor(sib->_right) == RED) 
+						{
+							sib->_color = getColor(ptr->_parent);
+							ptr->_parent->_color = BLACK;
+							sib->_right->_color = BLACK;
+							__rotateLeft(ptr->_parent);
+							ptr = getRoot();
+						}
 					} 
 					else 
 					{
 						node_pointer	sib = ptr->_parent->_left;
-						ptr = __removeFix_sib_left(ptr, sib);
+						if (getColor(sib) == RED) 
+						{
+							sib->_color = BLACK;
+							ptr->_parent->_color = RED;
+							__rotateRight(ptr->_parent);
+							sib = ptr->_parent->_left;
+						}
+						if (getColor(sib->_right) == BLACK && getColor(sib->_left) == BLACK) 
+						{
+							sib->_color = RED;
+							ptr = ptr->_parent;
+						} 
+						else if (getColor(sib->_left) == BLACK) 
+						{
+							sib->_right->_color = BLACK;
+							sib->_color = RED;
+							__rotateLeft(sib);
+							sib = ptr->_parent->_left;
+						}
+						if (getColor(sib->_left) == RED) 
+						{
+							sib->_color = getColor(ptr->_parent);
+							ptr->_parent->_color = BLACK;
+							sib->_left->_color = BLACK;
+							__rotateRight(ptr->_parent);
+							ptr = getRoot();
+						}
 					}
 				}
 				ptr->_color = BLACK;
-			}
-
-			node_pointer	__removeFix_sib_right(node_pointer ptr, node_pointer sib)
-			{
-				if (getColor(sib) == RED) 
-				{
-					sib->_color = BLACK;
-					ptr->_parent->_color = RED;
-					__rotateLeft(ptr->_parent);
-					sib = ptr->_parent->_right;
-				}
-				if (getColor(sib->_left) == BLACK && getColor(sib->_right) == BLACK) 
-				{
-					sib->_color = RED;
-					ptr = ptr->_parent;
-				} 
-				else if (getColor(sib->_right) == BLACK) 
-				{
-					sib->_left->_color = BLACK;
-					sib->_color = RED;
-					__rotateRight(sib);
-					sib = ptr->_parent->_right;
-				}
-				if (getColor(sib->_right) == RED) 
-				{
-					sib->_color = getColor(ptr->_parent);
-					ptr->_parent->_color = BLACK;
-					sib->_right->_color = BLACK;
-					__rotateLeft(ptr->_parent);
-					ptr = getRoot();
-				}
-				return ptr;
-			}
-
-			node_pointer 	__removeFix_sib_left(node_pointer ptr, node_pointer sib)
-			{
-				if (getColor(sib) == RED) 
-				{
-					sib->_color = BLACK;
-					ptr->_parent->_color = RED;
-					__rotateRight(ptr->_parent);
-					sib = ptr->_parent->_left;
-				}
-				if (getColor(sib->_right) == BLACK && getColor(sib->_left) == BLACK) 
-				{
-					sib->_color = RED;
-					ptr = ptr->_parent;
-				} 
-				else if (getColor(sib->_left) == BLACK) 
-				{
-					sib->_right->_color = BLACK;
-					sib->_color = RED;
-					__rotateLeft(sib);
-					sib = ptr->_parent->_left;
-				}
-				if (getColor(sib->_left) == RED) 
-				{
-					sib->_color = getColor(ptr->_parent);
-					ptr->_parent->_color = BLACK;
-					sib->_left->_color = BLACK;
-					__rotateRight(ptr->_parent);
-					ptr = getRoot();
-				}
-				return ptr;
 			}
 
 			// transplant
