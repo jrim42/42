@@ -53,67 +53,7 @@ namespace ft
 			}
 			return *this;
 		}
-	};
-
-	template <class NodePtr>
-	bool	getDirection(const NodePtr& ptr)
-	{
-		if (ptr == ptr->_parent->_left)
-			return LEFT;
-		else
-			return RIGHT;
-	}
-
-	template <class NodePtr>
-	bool	getColor(const NodePtr& ptr) 
-	{
-		if (ptr->_color == BLACK)
-			return BLACK;
-		else
-			return RED;
-	}
-
-	template <class NodePtr>
-	NodePtr getMinNode(NodePtr ptr, NodePtr nil) 
-	{
-		while (ptr->_left != nil) 
-			ptr = ptr->_left;
-		return ptr;
-	}
-
-	template <class NodePtr>
-	NodePtr getMaxNode(NodePtr ptr, NodePtr nil) 
-	{
-		while (ptr->_right != nil) 
-			ptr = ptr->_right;
-		return ptr;
-	}
-
-	template <class NodePtr>
-	NodePtr getNextNode(NodePtr ptr, NodePtr nil) 
-	{
-		if (ptr->_right != nil) 
-			return getMinNode(ptr->_right, nil);
-		while (getDirection(ptr) == RIGHT) 
-			ptr = ptr->_parent;
-		return ptr->_parent;
-	}
-
-	template <class NodePtr>
-	NodePtr getPrevNode(NodePtr ptr, NodePtr nil) 
-	{
-		if (ptr->_left != nil) 
-			return getMaxNode(ptr->_left, nil);
-		while (getDirection(ptr) == LEFT) 
-			ptr = ptr->_parent;
-		return ptr->_parent;
-	}
-
-	template <typename U, typename V, class Comp>
-	bool isEqual(const U& u, const V& v, Comp comp) 
-	{
-		return !comp(u, v) && !comp(v, u);
-	}
+	}; // end of class rbnode
 
 	//============================ rbiter ============================//
 	template <typename U, typename V>
@@ -203,7 +143,7 @@ namespace ft
 			}
 			friend bool	operator==(const rbiter& x, const rbiter& y)	{ return x._cur == y._cur;}
 			friend bool	operator!=(const rbiter& x, const rbiter& y)	{ return !(x == y);}
-	};
+	}; // end of class rbiter
 
 	//============================ rbtree ============================//
 	template <typename T, class Key, class Comp, class Allocator>
@@ -773,7 +713,68 @@ namespace ft
 				}
 				return ft::make_pair(const_iterator(tmp, _nil), const_iterator(tmp, _nil));
 			}
-	};
+	}; // end of class rbtree
+
+	//============================ utils ============================//
+	template <class NodePtr>
+	bool	getDirection(const NodePtr& ptr)
+	{
+		if (ptr == ptr->_parent->_left)
+			return LEFT;
+		else
+			return RIGHT;
+	}
+
+	template <class NodePtr>
+	bool	getColor(const NodePtr& ptr) 
+	{
+		if (ptr->_color == BLACK)
+			return BLACK;
+		else
+			return RED;
+	}
+
+	template <class NodePtr>
+	NodePtr getMinNode(NodePtr ptr, NodePtr nil) 
+	{
+		while (ptr->_left != nil) 
+			ptr = ptr->_left;
+		return ptr;
+	}
+
+	template <class NodePtr>
+	NodePtr getMaxNode(NodePtr ptr, NodePtr nil) 
+	{
+		while (ptr->_right != nil) 
+			ptr = ptr->_right;
+		return ptr;
+	}
+
+	template <class NodePtr>
+	NodePtr getNextNode(NodePtr ptr, NodePtr nil) 
+	{
+		if (ptr->_right != nil) 
+			return getMinNode(ptr->_right, nil);
+		while (getDirection(ptr) == RIGHT) 
+			ptr = ptr->_parent;
+		return ptr->_parent;
+	}
+
+	template <class NodePtr>
+	NodePtr getPrevNode(NodePtr ptr, NodePtr nil) 
+	{
+		if (ptr->_left != nil) 
+			return getMaxNode(ptr->_left, nil);
+		while (getDirection(ptr) == LEFT) 
+			ptr = ptr->_parent;
+		return ptr->_parent;
+	}
+
+	template <typename U, typename V, class Comp>
+	bool isEqual(const U& u, const V& v, Comp comp) 
+	{
+		return !comp(u, v) && !comp(v, u);
+	}
 }  // namespace ft
 
 #endif
