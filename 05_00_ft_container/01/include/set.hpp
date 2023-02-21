@@ -4,43 +4,56 @@
 # include <functional>
 # include <memory>
 
-# include "./compare.hpp"
-# include "./pair.hpp"
 # include "./rbtree.hpp"
+# include "./compare.hpp"
 # include "./reverse_iterator.hpp"
 
 namespace ft 
 {
-	template <typename T, class Compare = std::less<T>, class Allocator = std::allocator<T> >
+	// template <typename Value>
+	// struct	KeyOfValue_set : public std::unary_function<Value, Value>
+	// { 
+	// 	const Value&	operator()(const Value& k) const	{ return k; } 
+	// };
+
+	template <typename Key, class Compare = std::less<Key>, class Allocator = std::allocator<Key> >
 	class set 
 	{
+		typedef ft::rbtree<Key, Key, Compare, Allocator>		_rbtree;
+		// typedef ft::rbtree<Key, Key, KeyOfValue_set<Key>, Allocator>		_rbtree;
+
 		public:
-			typedef T 				key_type;
-			typedef T 				value_type;
+			typedef Key 			key_type;
+			typedef Key 			value_type;
 			typedef Compare 		compare_type;
 			typedef Compare 		key_compare;
 			typedef Compare 		value_compare;
 
-			typedef Allocator 														allocator_type;
-			typedef typename allocator_type::template rebind<value_type>::other		type_allocator;
-			typedef std::allocator_traits<type_allocator> 							type_traits;
-			typedef typename type_traits::pointer 									pointer;
-			typedef typename type_traits::const_pointer 							const_pointer;
-			typedef value_type& 													reference;
-			typedef const value_type& 												const_reference;
+			// typedef typename _rbtree::allocator_type			allocator_type;
+			// typedef typename _rbtree::pointer					pointer;
+			// typedef typename _rbtree::const_pointer				const_pointer;
+			// typedef typename _rbtree::reference					reference;
+			// typedef typename _rbtree::const_reference			const_reference;
+			// typedef typename _rbtree::size_type					size_type;
+			// typedef typename _rbtree::difference_type			difference_type;
 
-			typedef std::size_t 													size_type;
-			typedef std::ptrdiff_t 													difference_type;
+			typedef Allocator									allocator_type;
+			typedef typename allocator_type::pointer         	pointer;
+			typedef typename allocator_type::const_pointer   	const_pointer;
+			typedef typename allocator_type::reference       	reference;
+			typedef typename allocator_type::const_reference 	const_reference;
+			typedef typename allocator_type::size_type       	size_type;
+			typedef typename allocator_type::difference_type 	difference_type;
 
-			typedef typename ft::rbtree<const value_type, key_type, value_compare, allocator_type>::iterator			iterator;
-			typedef typename ft::rbtree<const value_type, key_type, value_compare, allocator_type>::const_iterator 		const_iterator;
-			typedef ft::reverse_iterator<iterator> 																		reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> 																const_reverse_iterator;
+			typedef typename _rbtree::iterator					iterator;
+			typedef typename _rbtree::const_iterator 			const_iterator;
+			typedef ft::reverse_iterator<iterator> 				reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
 
 		private:
-			compare_type															_comp;
-			allocator_type 															_alloc;
-			ft::rbtree<const value_type, key_type, value_compare, allocator_type> 	_rbt;
+			compare_type		_comp;
+			allocator_type 		_alloc;
+			_rbtree				_rbt;
 
 		public:
 			// constructor & destructor
@@ -71,6 +84,11 @@ namespace ft
 				return *this;
 			}
 
+			// comp & allocator
+			key_compare		key_comp(void) const 		{ return _comp; }
+			value_compare 	value_comp(void) const 		{ return _comp; }
+			allocator_type 	get_allocator(void) const 	{ return _rbt.get_allocator(); }
+
 			// iterators
 			iterator				begin(void)			{ return _rbt.begin(); }
 			const_iterator			begin(void) const	{ return _rbt.begin(); }
@@ -91,18 +109,13 @@ namespace ft
 			iterator 					insert(iterator pos, const value_type& val) 	{ return _rbt.insert(pos, val); }
 			template <class iIter>
 			void						insert(iIter first, iIter last) 				{ _rbt.insert(first, last); }
-			void 		erase(iterator pos)												{ _rbt.erase(pos); }
-			void 		erase(iterator first, iterator last) 							{ _rbt.erase(first, last); }
-			size_type 	erase(const value_type& val) 									{ return _rbt.erase(val); }
-			void 		swap(set& s)													{ _rbt.swap(s._rbt); }
-			void 		clear(void)														{ _rbt.clear(); }
-
-			// comp & allocator
-			key_compare		key_comp(void) const 		{ return _comp; }
-			value_compare 	value_comp(void) const 		{ return _comp; }
-			allocator_type 	get_allocator(void) const 	{ return _rbt.get_allocator(); }
+			void 						erase(iterator pos)								{ _rbt.erase(pos); }
+			void 						erase(iterator first, iterator last) 			{ _rbt.erase(first, last); }
+			size_type 					erase(const value_type& val) 					{ return _rbt.erase(val); }
+			void 						swap(set& s)									{ _rbt.swap(s._rbt); }
+			void 						clear(void)										{ _rbt.clear(); }
 			
-			// 
+			// find, count, bound, equal
 			iterator 					find(const value_type& val) const 			{ return _rbt.find(val); }
 			size_type 					count(const value_type& val) const 			{ return !(find(val) == end()); }
 			iterator 					lower_bound(const value_type& val) const	{ return _rbt.lower_bound(val); }
@@ -111,51 +124,51 @@ namespace ft
 	}; // end of class set
 
 	// comparison operators
-	template <class T, class Compare, class Allocator>
-	bool operator==(const ft::set<T, Compare, Allocator>& x,
-					const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator==(const ft::set<Key, Compare, Allocator>& x,
+					const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin());
 	}
 
-	template <class T, class Compare, class Allocator>
-	bool operator!=(const ft::set<T, Compare, Allocator>& x,
-					const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator!=(const ft::set<Key, Compare, Allocator>& x,
+					const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return !(x == y);
 	}
 
-	template <class T, class Compare, class Allocator>
-	bool operator<(const ft::set<T, Compare, Allocator>& x,
-				   const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator<(const ft::set<Key, Compare, Allocator>& x,
+				   const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 
-	template <class T, class Compare, class Allocator>
-	bool operator<=(const ft::set<T, Compare, Allocator>& x,
-					const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator<=(const ft::set<Key, Compare, Allocator>& x,
+					const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return !(y < x);
 	}
 
-	template <class T, class Compare, class Allocator>
-	bool operator>(const ft::set<T, Compare, Allocator>& x,
-				   const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator>(const ft::set<Key, Compare, Allocator>& x,
+				   const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return y < x;
 	}
 
-	template <class T, class Compare, class Allocator>
-	bool operator>=(const ft::set<T, Compare, Allocator>& x,
-					const ft::set<T, Compare, Allocator>& y) 
+	template <class Key, class Compare, class Allocator>
+	bool operator>=(const ft::set<Key, Compare, Allocator>& x,
+					const ft::set<Key, Compare, Allocator>& y) 
 	{
 		return !(x < y);
 	}
 
-	template <typename T, class Compare, class Allocator>
-	void swap(ft::set<T, Compare, Allocator>& x,
-			  ft::set<T, Compare, Allocator>& y) 
+	template <typename Key, class Compare, class Allocator>
+	void swap(ft::set<Key, Compare, Allocator>& x,
+			  ft::set<Key, Compare, Allocator>& y) 
 	{
 		x.swap(y);
 	}

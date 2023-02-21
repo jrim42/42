@@ -24,19 +24,19 @@ namespace ft
 		typedef T		value_type;
 		typedef bool	Color;
 
+		value_type	_val;
+		Color		_color;
 		rbnode*		_parent;
 		rbnode*		_left;
 		rbnode*		_right;
-		value_type	_val;
-		Color		_color;
 
 		// constructor & destructor
 		rbnode(void)
 			: _parent(NULL), _left(NULL), _right(NULL), 
-			  _val(value_type()), _color(BLACK) {}
+			  _val(value_type()), _color(Color()) {}
 		rbnode(const value_type& val)
 			: _parent(NULL), _left(NULL), _right(NULL), 
-			  _val(val), _color(BLACK) {}
+			  _val(val), _color(Color()) {}
 		rbnode(const rbnode& ref)
 			: _parent(ref._parent), _left(ref._left), _right(ref._right),
 			  _val(ref._val), _color(ref._color) {}
@@ -61,16 +61,18 @@ namespace ft
 	class rbiter 
 	{
 		public:
+
 			typedef U 				value_type;
 			typedef value_type*		pointer;
 			typedef value_type&		reference;
 			typedef V* 				iterator_type;
 
-			typedef typename ft::iterator_traits<iterator_type>::difference_type 	difference_type;
-			typedef typename ft::iterator_traits<iterator_type>::value_type 		node_type;
-			typedef typename ft::iterator_traits<iterator_type>::pointer 			node_pointer;
-			typedef typename ft::iterator_traits<iterator_type>::reference 			node_reference;
-			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
+			typedef ft::iterator_traits<iterator_type>				_iterator_traits;
+			typedef typename _iterator_traits::iterator_category 	iterator_category;
+			typedef typename _iterator_traits::value_type 			node_type;
+			typedef typename _iterator_traits::pointer 				node_pointer;
+			typedef typename _iterator_traits::reference 			node_reference;
+			typedef typename _iterator_traits::difference_type 		difference_type;
 
 		private:
 			node_pointer _cur;
