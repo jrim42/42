@@ -2,15 +2,15 @@
 # define VECTOR_HPP
 
 # include <algorithm>
-# include <memory>
 # include <exception>
-# include <stdexcept>
 # include <iostream>
+# include <memory>
+# include <stdexcept>
 
 # include "./compare.hpp"
+# include "./iterator_traits.hpp"
 # include "./random_access_iterator.hpp"
 # include "./reverse_iterator.hpp"
-# include "./iterator_traits.hpp"
 # include "./type_traits"
 
 namespace ft
