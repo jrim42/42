@@ -5,49 +5,27 @@
 
 namespace ft
 {
-	// const class nullptr_t 
-	// {
-	// 	private:
-	// 		void operator&(void) const;
-
-	// 	public:
-	// 		template <typename T>
-	// 		operator T*(void) const { return 0; }
-
-	// 	template <typename T, typename U>
-	// 		operator T U::*(void) const { return 0; }
-	// } nil = {};
-
-	// enable_if
-	template <bool cond, typename T = void>
+	//=============================== enable_if ===============================//
+	template <bool Cond, typename T = void>
 	struct enable_if {};
 
 	template <typename T>
-	struct enable_if<true, T> 
-	{
-		typedef T type;
-	};
+	struct enable_if<true, T> 	{ typedef T type; };
 
-	// remove_cv (constant and volatile)
-	template <typename T>
-	struct remove_cv { typedef T type; };
+	//=============================== remove_cv ===============================//
+	template <typename T> struct remove_cv 						{ typedef T type; };
+	template <typename T> struct remove_cv<const T>				{ typedef T type; };
+	template <typename T> struct remove_cv<volatile T>			{ typedef T type; };
+	template <typename T> struct remove_cv<const volatile T>	{ typedef T type; }; 
 
-	template <typename T>
-	struct remove_cv<const T> { typedef T type; };
-
-	template <typename T>
-	struct remove_cv<volatile T> { typedef T type; };
-
-	template <typename T>
-	struct remove_cv<const volatile T> { typedef T type; }; 
-
+	//============================== is_integral ==============================//
 	// integral constant
 	template <typename T, T v>
 	struct integral_constant 
 	{
 		typedef T					   value_type;
 		typedef integral_constant	   type;
-		static const value_type		 value = v;
+		static const value_type		 	value = v;
 
 		operator value_type(void) const { return value; }
 	};
@@ -56,8 +34,7 @@ namespace ft
 	typedef integral_constant<bool, false>  false_type;
 
 	// is_integral_base
-	template <typename> 
-	struct is_integral_base : public false_type {};
+	template <typename> struct is_integral_base 					: public false_type {};
 		
 	template <> struct	is_integral_base<bool>						: public true_type {};
 	template <> struct	is_integral_base<char>						: public true_type {};
@@ -78,6 +55,6 @@ namespace ft
 	// is_integral
 	template <typename T>
 	struct is_integral : public is_integral_base<typename remove_cv<T>::type> {};
-} // namespace ft
+} // end of namespace ft
 
 #endif

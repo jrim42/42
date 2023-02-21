@@ -6,9 +6,7 @@
 
 namespace ft 
 {
-	// equal: 두 범위의 요소가 동일한지 검사하는 함수
-		// [first1, last1] 범위의 요소를 first2부터 시작하는 범위의 요소와 비교하고
-		// 두 범위의 모든 요소가 일치하면 true를 반환한다.
+	//=============================== equal ===============================//
 	template <class iIter1, class iIter2>
 	bool	equal(iIter1 first1, iIter1 last1, iIter2 first2) 
 	{
@@ -35,8 +33,7 @@ namespace ft
 		return true;
 	}
 
-	// lexicographical_compare: 사전식 순서로 비교해주는 함수
-		// [first1, last1]이 [first2, last2]보다 사전순으로 작을 경우 true를 반환한다.
+	//====================== lexicographical_compare ======================//
 	template <class iIter1, class iIter2>
 	bool	lexicographical_compare(iIter1 first1, iIter1 last1, iIter2 first2, iIter2 last2) 
 	{
