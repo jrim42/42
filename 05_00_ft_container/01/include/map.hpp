@@ -19,7 +19,7 @@ namespace ft
 		public:
 			typedef Key											key_type;
 			typedef T 											mapped_type;
-			typedef ft::pair<const Key, mapped_type>			value_type;
+			typedef ft::pair<const key_type, mapped_type>		value_type;
 			typedef Compare 									key_compare;
 
 			typedef Allocator									allocator_type;
@@ -40,7 +40,7 @@ namespace ft
 					value_compare(key_compare kc) : _comp(kc) {}
 					~value_compare(void) {}
 
-					// operator
+					// operator()
 					bool operator()(const value_type& x, const value_type& y) const
 					{
 						return _comp(x.first, y.first);
@@ -55,19 +55,20 @@ namespace ft
 					}
 			}; // end of class value_compare
 
-			typedef typename ft::rbtree<value_type, key_type, value_compare, allocator_type>::iterator 			iterator;
-			typedef typename ft::rbtree<value_type, key_type, value_compare, allocator_type>::const_iterator 	const_iterator;
-			typedef ft::reverse_iterator<iterator> 																reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> 														const_reverse_iterator;
+			typedef ft::rbtree<value_type, key_type, value_compare, allocator_type>		_rbtree;
+			typedef typename _rbtree::iterator 											iterator;
+			typedef typename _rbtree::const_iterator 									const_iterator;
+			typedef ft::reverse_iterator<iterator> 										reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> 								const_reverse_iterator;
 
 		private:
-			key_compare															_key_comp;
-			value_compare														_val_comp;
-			ft::rbtree<value_type, key_type, value_compare, allocator_type>		_rbt;
+			key_compare			_key_comp;
+			value_compare		_val_comp;
+			_rbtree				_rbt;
 
 		public:
-			map(const key_compare& comp = key_compare(),
-				const allocator_type& alloc = allocator_type())
+			explicit map(const key_compare& comp = key_compare(),
+						 const allocator_type& alloc = allocator_type())
 				: _key_comp(comp), _val_comp(comp), _rbt(_val_comp, alloc) {}
 			template <class iIter>
 			map(iIter first, iIter last,
@@ -111,7 +112,7 @@ namespace ft
 			mapped_type&	operator[](const key_type& key)
 			{
 				ft::pair<iterator, bool> p = insert(ft::make_pair(key, mapped_type()));
-				return p.first->second;
+    			return p.first->second;
 			}
 			mapped_type&	at(const key_type& key)
 			{

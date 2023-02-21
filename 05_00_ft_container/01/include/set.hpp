@@ -10,18 +10,10 @@
 
 namespace ft 
 {
-	// template <typename Value>
-	// struct	KeyOfValue_set : public std::unary_function<Value, Value>
-	// { 
-	// 	const Value&	operator()(const Value& k) const	{ return k; } 
-	// };
 
 	template <typename Key, class Compare = std::less<Key>, class Allocator = std::allocator<Key> >
 	class set 
 	{
-		typedef ft::rbtree<Key, Key, Compare, Allocator>		_rbtree;
-		// typedef ft::rbtree<Key, Key, KeyOfValue_set<Key>, Allocator>		_rbtree;
-
 		public:
 			typedef Key 			key_type;
 			typedef Key 			value_type;
@@ -29,26 +21,19 @@ namespace ft
 			typedef Compare 		key_compare;
 			typedef Compare 		value_compare;
 
-			// typedef typename _rbtree::allocator_type			allocator_type;
-			// typedef typename _rbtree::pointer					pointer;
-			// typedef typename _rbtree::const_pointer				const_pointer;
-			// typedef typename _rbtree::reference					reference;
-			// typedef typename _rbtree::const_reference			const_reference;
-			// typedef typename _rbtree::size_type					size_type;
-			// typedef typename _rbtree::difference_type			difference_type;
-
 			typedef Allocator									allocator_type;
+			typedef typename allocator_type::size_type       	size_type;
+			typedef typename allocator_type::difference_type 	difference_type;
 			typedef typename allocator_type::pointer         	pointer;
 			typedef typename allocator_type::const_pointer   	const_pointer;
 			typedef typename allocator_type::reference       	reference;
 			typedef typename allocator_type::const_reference 	const_reference;
-			typedef typename allocator_type::size_type       	size_type;
-			typedef typename allocator_type::difference_type 	difference_type;
 
-			typedef typename _rbtree::iterator					iterator;
-			typedef typename _rbtree::const_iterator 			const_iterator;
-			typedef ft::reverse_iterator<iterator> 				reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator> 		const_reverse_iterator;
+			typedef ft::rbtree<const value_type, key_type, value_compare, allocator_type>		_rbtree;
+			typedef typename _rbtree::iterator 													iterator;
+  			typedef typename _rbtree::const_iterator 											const_iterator;
+			typedef ft::reverse_iterator<iterator> 												reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator> 										const_reverse_iterator;
 
 		private:
 			compare_type		_comp;
@@ -61,10 +46,10 @@ namespace ft
 						 const allocator_type& alloc = allocator_type())
 				: _comp(comp), _alloc(alloc), _rbt(comp, alloc) {}
 			template <class iIter>
-			set(iIter first, iIter last, const compare_type& comp = compare_type(),
-				const allocator_type& alloc = allocator_type(),
-				typename ft::enable_if<!ft::is_integral<iIter>::val>::type* = NULL)
-				: _comp(comp), _alloc(alloc), _rbt(comp, alloc) 
+			set(iIter first, iIter last, 
+				const compare_type& comp = compare_type(),
+				const allocator_type& alloc = allocator_type())
+				: _comp(comp), _alloc(alloc), _rbt(comp, alloc)
 			{
 				insert(first, last);
 			}
@@ -77,9 +62,9 @@ namespace ft
 			{
 				if (this != &ref) 
 				{
+					_rbt = ref._rbt;
 					_comp = ref._comp;
 					_alloc = ref._alloc;
-					_rbt = ref._rbt;
 				}
 				return *this;
 			}
@@ -91,12 +76,12 @@ namespace ft
 
 			// iterators
 			iterator				begin(void)			{ return _rbt.begin(); }
-			const_iterator			begin(void) const	{ return _rbt.begin(); }
 			iterator 				end(void)			{ return _rbt.end(); }
+			const_iterator			begin(void) const	{ return _rbt.begin(); }
 			const_iterator 			end(void) const		{ return _rbt.end(); }
 			reverse_iterator 		rbegin(void)		{ return reverse_iterator(end()); }
-			const_reverse_iterator 	rbegin(void) const	{ return reverse_iterator(end()); }
 			reverse_iterator 		rend(void)			{ return reverse_iterator(begin()); }
+			const_reverse_iterator 	rbegin(void) const	{ return reverse_iterator(end()); }
 			const_reverse_iterator	rend(void) const	{ return reverse_iterator(begin()); }
 
 			// size: size, max_size, empty
@@ -116,11 +101,11 @@ namespace ft
 			void 						clear(void)										{ _rbt.clear(); }
 			
 			// find, count, bound, equal
-			iterator 					find(const value_type& val) const 			{ return _rbt.find(val); }
-			size_type 					count(const value_type& val) const 			{ return !(find(val) == end()); }
-			iterator 					lower_bound(const value_type& val) const	{ return _rbt.lower_bound(val); }
-			iterator 					upper_bound(const value_type& val) const	{ return _rbt.upper_bound(val); }
-			pair<iterator, iterator>	equal_range(const value_type& val) const	{ return _rbt.equal_range(val); }
+			iterator 						find(const value_type& val) const 			{ return _rbt.find(val); }
+			size_type 						count(const value_type& val) const 			{ return !(find(val) == end()); }
+			iterator 						lower_bound(const value_type& val) const	{ return _rbt.lower_bound(val); }
+			iterator 						upper_bound(const value_type& val) const	{ return _rbt.upper_bound(val); }
+			ft::pair<iterator, iterator>	equal_range(const value_type& val) const	{ return _rbt.equal_range(val); }
 	}; // end of class set
 
 	// comparison operators

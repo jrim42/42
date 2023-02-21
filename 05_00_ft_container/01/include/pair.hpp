@@ -17,14 +17,14 @@ namespace ft
 		pair(const first_type& x, const second_type& y) 
 			: first(x), second(y) {}
 		template <typename U1, typename U2>
-		pair(const pair<U1, U2>& p) 
-			: first(p.first), second(p.second) {}
-		pair& operator=(const pair& p) 
+		pair(const pair<U1, U2>& ref) 
+			: first(ref.first), second(ref.second) {}
+		pair& operator=(const pair& ref) 
 		{
-			if (this != &p) 
+			if (this != &ref) 
 			{
-				first = p.first;
-				second = p.second;
+				first = ref.first;
+				second = ref.second;
 			}
 			return (*this);
 		}
