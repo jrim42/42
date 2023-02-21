@@ -26,6 +26,7 @@ using std::endl;
 	#include <map>
 	#include <stack>
 	#include <vector>
+	#include <set>
 	#include <utility>
 	namespace ft = std;
 	#define NAMESPACE std
@@ -34,6 +35,7 @@ using std::endl;
 	#include "../include/map.hpp"
 	#include "../include/stack.hpp"
 	#include "../include/vector.hpp"
+	#include "../include/set.hpp"
 	#include "../include/utility.hpp"
 	#define NAMESPACE ft
     #define TYPE "ft"
