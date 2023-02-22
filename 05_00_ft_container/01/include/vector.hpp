@@ -194,10 +194,7 @@ namespace ft
 			void	push_back(const value_type& val)
 			{
 				if (_c_end == _end) 
-				{
-					size_type	capa = capacity() * 2 > 0 ? capacity() * 2 : 1;
-					reserve(capa);
-				}
+					reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
 				_construct(1, val);
 			}
 			void	pop_back(void)
@@ -211,10 +208,7 @@ namespace ft
 				difference_type	diff = pos - begin();
 
 				if (_c_end == _end) 
-				{
-					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
-					reserve(cap);
-				}
+					reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
 				if (capacity() < size() + 1) 
 					reserve(size() + 1);
 				pointer ptr = _begin + diff;
@@ -229,10 +223,7 @@ namespace ft
 				difference_type	diff =  pos - begin();
 
 				if (_c_end == _end) 
-				{
-					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
-					reserve(cap);
-				}
+					reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
 				if (capacity() < size() + sz)
 					reserve(size() + sz);
 				pointer ptr = _begin + diff;
