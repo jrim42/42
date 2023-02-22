@@ -5,8 +5,6 @@
 # include <memory>
 
 # include "./rbtree.hpp"
-# include "./compare.hpp"
-# include "./reverse_iterator.hpp"
 
 namespace ft 
 {
@@ -15,11 +13,11 @@ namespace ft
 	class set 
 	{
 		public:
-			typedef Key 			key_type;
-			typedef Key 			value_type;
-			typedef Compare 		compare_type;
-			typedef Compare 		key_compare;
-			typedef Compare 		value_compare;
+			typedef Key 										key_type;
+			typedef Key 										value_type;
+			typedef Compare 									compare_type;
+			typedef Compare 									key_compare;
+			typedef Compare 									value_compare;
 
 			typedef Allocator									allocator_type;
 			typedef typename allocator_type::size_type       	size_type;
@@ -74,7 +72,7 @@ namespace ft
 			value_compare 	value_comp(void) const 		{ return _comp; }
 			allocator_type 	get_allocator(void) const 	{ return _rbt.get_allocator(); }
 
-			// iterators
+			// iterators (const & non-const)
 			iterator				begin(void)			{ return _rbt.begin(); }
 			iterator 				end(void)			{ return _rbt.end(); }
 			const_iterator			begin(void) const	{ return _rbt.begin(); }
@@ -84,10 +82,10 @@ namespace ft
 			const_reverse_iterator 	rbegin(void) const	{ return reverse_iterator(end()); }
 			const_reverse_iterator	rend(void) const	{ return reverse_iterator(begin()); }
 
-			// size: size, max_size, empty
-			bool		empty(void) const 				{ return _rbt.empty(); }
+			// size, max_size, empty
 			size_type	size(void) const 				{ return _rbt.size(); }
 			size_type	max_size(void) const			{ return _rbt.max_size(); }
+			bool		empty(void) const 				{ return _rbt.empty(); }
 
 			// modifiers: insert, erase, swap, clear
 			ft::pair<iterator, bool>	insert(const value_type& val) 					{ return _rbt.insert(val); }
@@ -151,13 +149,13 @@ namespace ft
 		return !(x < y);
 	}
 
+	// swap
 	template <typename Key, class Compare, class Allocator>
 	void swap(ft::set<Key, Compare, Allocator>& x,
 			  ft::set<Key, Compare, Allocator>& y) 
 	{
 		x.swap(y);
 	}
-
 } // end of  namespace ft
 
 #endif

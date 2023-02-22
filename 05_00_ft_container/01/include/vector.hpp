@@ -8,10 +8,7 @@
 # include <stdexcept>
 
 # include "./compare.hpp"
-# include "./iterator_traits.hpp"
-# include "./random_access_iterator.hpp"
-# include "./reverse_iterator.hpp"
-# include "./type_traits"
+# include "./utility.hpp"
 
 namespace ft
 {
@@ -232,6 +229,7 @@ namespace ft
 			void	insert(iterator pos, size_type sz, const value_type& val)
 			{
 				difference_type	diff =  pos - begin();
+
 				if (_c_end == _end) 
 				{
 					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
@@ -247,23 +245,58 @@ namespace ft
 			}
 			// insert (iter)
 			template <class iIter>
-			void	insert(const_iterator pos, iIter first, iIter last,
-						typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = NULL) 
+			void	insert(iterator pos, iIter first, iIter last,
+						   typename ft::enable_if<!ft::is_integral<iIter>::value>::type* = NULL) 
 			{
-				size_type		n = size_type(last - first);
-				difference_type	diff = pos - begin();
-				if (_c_end == _end) 
+				size_type	n = size_type(last - first);
+
+				if (n > size_type(_c_end - _end)) 
 				{
-					size_type	cap = capacity() * 2 > 0 ? capacity() * 2 : 1;
-					reserve(cap);
+					const		size_type old_sz = size();
+					const		size_type sz = old_sz + std::max(old_sz, n);
+					pointer		new_begin = _alloc.allocate(sz);
+					pointer		new_end = new_begin;
+
+					try 
+					{
+						new_end = std::uninitialized_copy(_begin, pos.base(), new_begin);
+						new_end = std::uninitialized_copy(first, last, new_end);
+						new_end = std::uninitialized_copy(pos.base(), _end, new_end);
+					} 
+					catch (...) 
+					{
+						pointer	i = new_begin;
+						while (i != new_end)
+							_alloc.destroy(i++);
+						_alloc.deallocate(new_begin, sz);
+						throw ;
+					}
+					_destruct();
+					_begin = new_begin;
+					_end = new_end;
+					_c_end = new_begin + sz;
 				}
-				if (capacity() < size() + n)
-					reserve(size() + n);
-				pointer ptr = _begin + diff;
-				_construct(n);
-				std::copy_backward(ptr, _end - n, _end);
-				for (iIter ite = first ; ite != last ; ite++, ptr++)
-					*ptr = *ite;
+				else 
+				{
+					const size_type		diff = _end - pos.base();
+					pointer				old_end = _end;
+
+					if (diff > n) 
+					{
+						std::uninitialized_copy(_end - n, _end, _end);
+						_end += n;
+						std::copy_backward(pos.base(), old_end - n, old_end);
+						std::copy(first, last, pos);
+					} 
+					else 
+					{
+						std::uninitialized_copy(first + diff, last, _end);
+						_end += n - diff;
+						std::uninitialized_copy(pos.base(), old_end, _end);
+						_end += diff;
+						std::copy(first, first + diff, pos.base());
+					}
+				}
 			}
 
 			// erase(value)

@@ -13,13 +13,13 @@ namespace ft
 		public std::iterator<std::random_access_iterator_tag, T> 
 	{
 		public:
-			typedef T* 	iterator_type;
-			
-			typedef typename ft::iterator_traits<iterator_type>::value_type 		value_type;
-			typedef typename ft::iterator_traits<iterator_type>::difference_type 	difference_type;
-			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
-			typedef typename ft::iterator_traits<iterator_type>::pointer 			pointer;
-			typedef typename ft::iterator_traits<iterator_type>::reference 			reference;
+			typedef T* 												iterator_type;
+			typedef ft::iterator_traits<iterator_type>				_iterator_traits;
+			typedef typename _iterator_traits::value_type 			value_type;
+			typedef typename _iterator_traits::difference_type 		difference_type;
+			typedef typename _iterator_traits::iterator_category 	iterator_category;
+			typedef typename _iterator_traits::pointer 				pointer;
+			typedef typename _iterator_traits::reference 			reference;
 
 		private:
 			pointer	_ptr;
@@ -35,6 +35,7 @@ namespace ft
 				: _ptr(ite.base()) {}
 			~random_access_iterator(void) {}
 
+			// assignment operator
 			template <typename U>
 			random_access_iterator& operator=(const random_access_iterator<U>& ite) 
 			{
@@ -42,7 +43,7 @@ namespace ft
 				return *this;
 			}
 
-			// member functions
+			// accessors
 			iterator_type	base(void) const 						{ return _ptr; }
 			pointer 		operator->(void) const 					{ return _ptr; }
 			reference 		operator*(void) const 					{ return *_ptr; }

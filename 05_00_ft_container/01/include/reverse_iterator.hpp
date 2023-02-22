@@ -12,13 +12,13 @@ namespace ft
 			Iterator	_ite;
 		
 		public:
-			typedef Iterator	iterator_type;
-			
-			typedef typename ft::iterator_traits<iterator_type>::value_type 		value_type;
-			typedef typename ft::iterator_traits<iterator_type>::difference_type 	difference_type;
-			typedef typename ft::iterator_traits<iterator_type>::pointer 			pointer;
-			typedef typename ft::iterator_traits<iterator_type>::reference 			reference;
-			typedef typename ft::iterator_traits<iterator_type>::iterator_category 	iterator_category;
+			typedef Iterator										iterator_type;
+			typedef ft::iterator_traits<iterator_type>				_iterator_traits;
+			typedef typename _iterator_traits::value_type 			value_type;
+			typedef typename _iterator_traits::difference_type 		difference_type;
+			typedef typename _iterator_traits::iterator_category 	iterator_category;
+			typedef typename _iterator_traits::pointer 				pointer;
+			typedef typename _iterator_traits::reference 			reference;
 		
 			// constructor & destructor
 			reverse_iterator(void) 
@@ -30,6 +30,7 @@ namespace ft
 				: _ite(i.base()) {}
 			~reverse_iterator(void) {}
 
+			// assignment operator
 			template <class _Up>
 			reverse_iterator& operator=(const reverse_iterator<_Up>& i) 
 			{

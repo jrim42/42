@@ -4,11 +4,7 @@
 # include <functional>
 # include <memory>
 
-# include "./compare.hpp"
-# include "./pair.hpp"
-# include "./random_access_iterator.hpp"
 # include "./rbtree.hpp"
-# include "./reverse_iterator.hpp"
 
 namespace ft 
 {
@@ -41,15 +37,15 @@ namespace ft
 					~value_compare(void) {}
 
 					// operator()
-					bool operator()(const value_type& x, const value_type& y) const
+					bool	operator()(const value_type& x, const value_type& y) const
 					{
 						return _comp(x.first, y.first);
 					}
-					bool operator()(const value_type& x, const key_type& y) const 
+					bool	operator()(const value_type& x, const key_type& y) const 
 					{
 						return _comp(x.first, y);
 					}
-					bool operator()(const key_type& x, const value_type& y) const 
+					bool	operator()(const key_type& x, const value_type& y) const 
 					{
 						return _comp(x, y.first);
 					}
@@ -67,6 +63,7 @@ namespace ft
 			_rbtree				_rbt;
 
 		public:
+			// constructor & destructor
 			explicit map(const key_compare& comp = key_compare(),
 						 const allocator_type& alloc = allocator_type())
 				: _key_comp(comp), _val_comp(comp), _rbt(_val_comp, alloc) {}
@@ -82,6 +79,7 @@ namespace ft
 				: _key_comp(ref._key_comp), _val_comp(ref._val_comp), _rbt(ref._rbt) {}
 			~map(void) {}
 
+			// assignment operator
 			map&	operator=(const map& ref)
 			{
 				if (this != &ref)
@@ -93,6 +91,11 @@ namespace ft
 				return *this;
 			}
 
+			// comp & allocator
+			key_compare		key_comp(void) const						{ return _key_comp; }
+			value_compare 	value_comp(void) const						{ return _val_comp; }
+			allocator_type	get_allocator(void) const					{ return _rbt.get_allocator(); }
+			
 			// iterators (const & non-const)
 			iterator				begin(void)			{ return _rbt.begin(); };
 			iterator				end(void) 			{ return _rbt.end(); };
@@ -103,7 +106,7 @@ namespace ft
 			const_reverse_iterator	rbegin(void) const	{ return reverse_iterator(end()); };
 			const_reverse_iterator	rend(void) const	{ return reverse_iterator(begin()); };
 
-			// size
+			// size, max_size, empty
 			size_type	size(void) const		{ return _rbt.size(); }
 			size_type	max_size(void) const	{ return _rbt.max_size(); }
 			bool 		empty(void) const		{ return _rbt.empty(); }
@@ -131,33 +134,25 @@ namespace ft
 				return ite->second;
 			}
 
-			// compare: key_compare, value_compare
-			key_compare		key_comp(void) const	{ return _key_comp; }
-			value_compare 	value_comp(void) const	{ return _val_comp; }
-
-			// insert
+			// modifiers: insert, erase, swap, clear
 			ft::pair<iterator, bool>	insert(const value_type& val)	{ return _rbt.insert(val); }
 			iterator	insert(iterator pos, const value_type& val)		{ return _rbt.insert(pos, val); }
 			template <class iIter>
 			void		insert(iIter first, iIter last)					{ _rbt.insert(first, last); }
+			void		erase(iterator pos) 							{ _rbt.erase(pos); }
+			void		erase(iterator first, iterator last) 			{ _rbt.erase(first, last); }
+			size_type	erase(const key_type& key) 						{ return _rbt.erase(key); }
+			void		swap(map& m)									{ _rbt.swap(m._rbt); }
+			void		clear(void)										{ _rbt.clear(); }
 
-			// erase
-			void		erase(iterator pos) 					{ _rbt.erase(pos); }
-			void		erase(iterator first, iterator last) 	{ _rbt.erase(first, last); }
-			size_type	erase(const key_type& key) 				{ return _rbt.erase(key); }
-
-			// swap and clear
-			void	swap(map& m)	{ _rbt.swap(m._rbt); }
-			void	clear(void)		{ _rbt.clear(); }
-
-			// functions : find, count, bound, equal_range
-			iterator		find(const key_type& key)				{ return _rbt.find(key); }
-			const_iterator	find(const key_type& key) const			{ return _rbt.find(key); }
-			size_type		count(const key_type& key) const		{ return !(find(key) == end()); }
-			iterator		lower_bound(const key_type& key)		{ return _rbt.lower_bound(key); }
-			const_iterator	lower_bound(const key_type& key) const	{ return _rbt.lower_bound(key); }
-			iterator 		upper_bound(const key_type& key)		{ return _rbt.upper_bound(key); }
-			const_iterator	upper_bound(const key_type& key) const	{ return _rbt.upper_bound(key); }
+			// find, count, bound, equal
+			iterator		find(const key_type& key)					{ return _rbt.find(key); }
+			const_iterator	find(const key_type& key) const				{ return _rbt.find(key); }
+			size_type		count(const key_type& key) const			{ return !(find(key) == end()); }
+			iterator		lower_bound(const key_type& key)			{ return _rbt.lower_bound(key); }
+			const_iterator	lower_bound(const key_type& key) const		{ return _rbt.lower_bound(key); }
+			iterator 		upper_bound(const key_type& key)			{ return _rbt.upper_bound(key); }
+			const_iterator	upper_bound(const key_type& key) const		{ return _rbt.upper_bound(key); }
 		
 			ft::pair<iterator, iterator>				equal_range(const key_type& key) 
 			{
@@ -167,12 +162,9 @@ namespace ft
 			{
 				return _rbt.equal_range(key);
 			}
-
-			// allocator
-			allocator_type	get_allocator(void) const	{ return _rbt.get_allocator(); }
 	}; // end of class map
 
-	// comparison operator
+	// comparison operators
 	template <typename Key, typename T, class Compare, class Allocator>
 	bool operator==(const ft::map<Key, T, Compare, Allocator>& x,
 					const ft::map<Key, T, Compare, Allocator>& y) 
