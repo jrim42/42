@@ -32,12 +32,12 @@ namespace ft
 			}
 
 			// operators
-			reference		top(void)					{ return c.back(); }
-			const_reference	top(void) const				{ return c.back(); }
-			bool			empty(void) const			{ return c.empty(); }
-			size_type	   	size(void) const			{ return c.size(); }
-			void			push(const value_type& val)	{ c.push_back(val);}
-			void			pop(void)					{ c.pop_back(); }
+			reference		top(void)								{ return c.back(); }
+			const_reference	top(void) const							{ return c.back(); }
+			bool			empty(void) const						{ return c.empty(); }
+			size_type	   	size(void) const						{ return c.size(); }
+			void			push(const value_type& val)				{ c.push_back(val);}
+			void			pop(void)								{ c.pop_back(); }
 
 			friend bool	operator==(const stack& a, const stack& b)	{ return (a.c == b.c); }
 			friend bool	operator!=(const stack& a, const stack& b)	{ return (a.c != b.c); }
@@ -46,39 +46,6 @@ namespace ft
 			friend bool	operator<=(const stack& a, const stack& b)	{ return (a.c <= b.c); }
 			friend bool	operator>=(const stack& a, const stack& b)	{ return (a.c >= b.c); }
 	}; // end of class stack
-
-	/*
-	// boolean operators
-	template <class T, class Container>
-	inline bool operator==(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return (a.c == b.c); }
-	
-	template <class T, class Container>
-	inline bool operator<(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return (a.c < b.c); }
-
-	template <class T, class Container>
-	inline bool operator!=(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return !(a.c == b.c); }
-
-	template <class T, class Container>
-	inline bool operator>(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return (b.c < a.c); }
-	
-	template <class T, class Container>
-	inline bool operator>=(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return !(a.c < b.c); }
-	
-	template <class T, class Container>
-	inline bool operator<=(const ft::stack<T, Container>& a, 
-						   const ft::stack<T, Container>& b)  
-	{ return !(a.c > b.c); }
-	*/
 }  // end of namespace ft
 
 #endif

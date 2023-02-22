@@ -18,10 +18,8 @@ namespace ft
 		public:
 			typedef T		   										value_type;
 			typedef Allocator   									allocator_type;  
-
 			typedef typename std::size_t							size_type;
 			typedef typename std::ptrdiff_t	 						difference_type;
-
 			typedef value_type&								  		reference;
 			typedef const value_type&								const_reference;
 			typedef value_type*										pointer;
