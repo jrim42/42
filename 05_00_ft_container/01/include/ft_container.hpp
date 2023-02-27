@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_container.hpp                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/25 22:07:44 by jrim              #+#    #+#             */
+/*   Updated: 2023/02/25 22:11:56 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_CONTAINER_HPP
 # define FT_CONTAINER_HPP
 
@@ -22,7 +34,7 @@ const std::string RESET = "\033[0m";
 using std::cout;
 using std::endl;
 
-# if 0 //CREATE A REAL STL EXAMPLE
+# if 1 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>

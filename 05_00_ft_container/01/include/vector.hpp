@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/25 22:08:20 by jrim              #+#    #+#             */
+/*   Updated: 2023/02/25 22:08:21 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
@@ -85,21 +97,21 @@ namespace ft
 			}
 
 			// iterators
-			iterator				begin()		 	{ return iterator(_begin); }
-			iterator				end()		   	{ return iterator(_end); }
-			const_iterator			begin() const   { return const_iterator(_begin); }
-			const_iterator			end() const	 	{ return const_iterator(_end); }
-			reverse_iterator		rbegin()		{ return reverse_iterator(end()); }
-			reverse_iterator		rend()			{ return reverse_iterator(begin()); }
-			const_reverse_iterator  rbegin() const  { return const_reverse_iterator(end()); }
-			const_reverse_iterator  rend() const	{ return const_reverse_iterator(begin()); }
+			iterator				begin(void)		 	{ return iterator(_begin); }
+			iterator				end(void)		   	{ return iterator(_end); }
+			const_iterator			begin(void) const   { return const_iterator(_begin); }
+			const_iterator			end(void) const	 	{ return const_iterator(_end); }
+			reverse_iterator		rbegin(void)		{ return reverse_iterator(end()); }
+			reverse_iterator		rend(void)			{ return reverse_iterator(begin()); }
+			const_reverse_iterator  rbegin(void) const  { return const_reverse_iterator(end()); }
+			const_reverse_iterator  rend(void) const	{ return const_reverse_iterator(begin()); }
 
 			// size
-			size_type   size() const
+			size_type   size(void) const
 			{
 				return static_cast<size_type>(_end - _begin);
 			}
-			size_type   max_size() const
+			size_type   max_size(void) const
 			{
 				return std::min<size_type>(_alloc.max_size(), size_type(-1) / sizeof(value_type));
 			}
@@ -123,11 +135,11 @@ namespace ft
 					_end = _begin + sz;
 				}
 			}
-			size_type   capacity() const
+			size_type   capacity(void) const
 			{
 				return static_cast<size_type>(_c_end - _begin);
 			}
-			bool	empty() const
+			bool	empty(void) const
 			{
 				return (_begin == _end);
 			}
@@ -188,7 +200,8 @@ namespace ft
 			{
 				if (sz > capacity())
 					reserve(sz);
-				std::fill_n(_begin, sz, val);
+				for (size_type i = 0; i < sz; ++i)
+        			*(_begin + i) = val;
 				_end = _begin + sz;
 			}
 			void	push_back(const value_type& val)
@@ -211,7 +224,9 @@ namespace ft
 					reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
 				if (capacity() < size() + 1) 
 					reserve(size() + 1);
+
 				pointer ptr = _begin + diff;
+
 				_construct(1);
 				std::copy_backward(ptr, _end - 1, _end);
 				*ptr = val;
@@ -226,7 +241,9 @@ namespace ft
 					reserve(capacity() * 2 > 0 ? capacity() * 2 : 1);
 				if (capacity() < size() + sz)
 					reserve(size() + sz);
+
 				pointer ptr = _begin + diff;
+
 				_construct(sz);
 				std::copy_backward(ptr, _end - sz, _end);
 				for (size_type i = 0; i < sz; i++)
@@ -241,8 +258,8 @@ namespace ft
 
 				if (n > size_type(_c_end - _end)) 
 				{
-					const		size_type old_sz = size();
-					const		size_type sz = old_sz + std::max(old_sz, n);
+					const		size_type pre_sz = size();
+					const		size_type sz = pre_sz + std::max(pre_sz, n);
 					pointer		new_begin = _alloc.allocate(sz);
 					pointer		new_end = new_begin;
 
@@ -254,9 +271,10 @@ namespace ft
 					} 
 					catch (...) 
 					{
-						pointer	i = new_begin;
-						while (i != new_end)
-							_alloc.destroy(i++);
+						pointer	ptr = new_begin;
+
+						while (ptr != new_end)
+							_alloc.destroy(ptr++);
 						_alloc.deallocate(new_begin, sz);
 						throw ;
 					}
@@ -300,6 +318,7 @@ namespace ft
 			iterator	erase(iterator first, iterator last) 
 			{
 				pointer ptr = std::copy(last.base(), _end, first.base());
+				
 				while (ptr != _end)
 					_alloc.destroy(ptr++);
 				_end -= last - first;
@@ -311,20 +330,12 @@ namespace ft
 			{
 				if (this == &v)
 					return ;
-
-				pointer	tmp_begin = _begin;
-				pointer	tmp_end = _end;
-				pointer	tmp_c_end = _c_end;
-
-				_begin = v._begin;
-				_end = v._end;
-				_c_end = v._c_end;
-				v._begin = tmp_begin;
-				v._end = tmp_end;
-				v._c_end = tmp_c_end;
+				std::swap(_begin, v._begin);
+				std::swap(_end, v._end);
+				std::swap(_c_end, v._c_end);
 			}
 
-			void	clear()
+			void	clear(void)
 			{
 				_destruct(_begin);
 			}
@@ -423,7 +434,7 @@ namespace ft
 
 	// swap
 	template <typename T, class Allocator>
-	void swap(ft::vector<T, Allocator>& x,
+	void 	swap(ft::vector<T, Allocator>& x,
 			  ft::vector<T, Allocator>& y) 
 	{
 		x.swap(y);

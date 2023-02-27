@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/25 22:07:49 by jrim              #+#    #+#             */
+/*   Updated: 2023/02/25 22:07:49 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_HPP
 # define MAP_HPP
 
@@ -92,46 +104,33 @@ namespace ft
 			}
 
 			// comp & allocator
-			key_compare		key_comp(void) const						{ return _key_comp; }
-			value_compare 	value_comp(void) const						{ return _val_comp; }
-			allocator_type	get_allocator(void) const					{ return _rbt.get_allocator(); }
+			key_compare				key_comp(void) const			{ return _key_comp; }
+			value_compare 			value_comp(void) const			{ return _val_comp; }
+			allocator_type			get_allocator(void) const		{ return _rbt.get_allocator(); }
 			
 			// iterators (const & non-const)
-			iterator				begin(void)			{ return _rbt.begin(); };
-			iterator				end(void) 			{ return _rbt.end(); };
-			const_iterator			begin(void) const	{ return _rbt.begin(); };
-			const_iterator			end(void) const		{ return _rbt.end(); };
-			reverse_iterator		rbegin(void)		{ return reverse_iterator(end()); };
-			reverse_iterator		rend(void)			{ return reverse_iterator(begin()); };
-			const_reverse_iterator	rbegin(void) const	{ return reverse_iterator(end()); };
-			const_reverse_iterator	rend(void) const	{ return reverse_iterator(begin()); };
+			iterator				begin(void)						{ return _rbt.begin(); };
+			iterator				end(void) 						{ return _rbt.end(); };
+			const_iterator			begin(void) const				{ return _rbt.begin(); };
+			const_iterator			end(void) const					{ return _rbt.end(); };
+			reverse_iterator		rbegin(void)					{ return reverse_iterator(end()); };
+			reverse_iterator		rend(void)						{ return reverse_iterator(begin()); };
+			const_reverse_iterator	rbegin(void) const				{ return reverse_iterator(end()); };
+			const_reverse_iterator	rend(void) const				{ return reverse_iterator(begin()); };
 
 			// size, max_size, empty
-			size_type	size(void) const		{ return _rbt.size(); }
-			size_type	max_size(void) const	{ return _rbt.max_size(); }
-			bool 		empty(void) const		{ return _rbt.empty(); }
+			size_type				size(void) const				{ return _rbt.size(); }
+			size_type				max_size(void) const			{ return _rbt.max_size(); }
+			bool 					empty(void) const				{ return _rbt.empty(); }
 
 			// accessor
 			mapped_type&	operator[](const key_type& key)
 			{
-				ft::pair<iterator, bool> p = insert(ft::make_pair(key, mapped_type()));
-    			return p.first->second;
-			}
-			mapped_type&	at(const key_type& key)
-			{
-				iterator	ite = find(key);
-				
-				if (ite == end())
-					throw std::out_of_range("Error: ft::map: Out of Range");
-				return ite->second;
-			}
-			const mapped_type&	at(const key_type& key) const
-			{
-				iterator	ite = find(key);
-				
-				if (ite == end())
-					throw std::out_of_range("Error: ft::map: Out of Range");
-				return ite->second;
+				iterator ite = lower_bound(key);
+
+				if (ite == end() || key_comp()(key, (*ite).first))
+					ite = insert(ite, value_type(key, mapped_type()));
+				return (*ite).second;
 			}
 
 			// modifiers: insert, erase, swap, clear
@@ -162,6 +161,27 @@ namespace ft
 			{
 				return _rbt.equal_range(key);
 			}
+
+		// at() function is not available in the C++98 version of std::map 
+		/* to check at() by unit-test, change 'protected' into 'public'
+		protected:
+			mapped_type&	at(const key_type& key)
+			{
+				iterator	ite = find(key);
+				
+				if (ite == end())
+					throw std::out_of_range("Error: ft::map: Out of Range");
+				return ite->second;
+			}
+			const mapped_type&	at(const key_type& key) const
+			{
+				iterator	ite = find(key);
+				
+				if (ite == end())
+					throw std::out_of_range("Error: ft::map: Out of Range");
+				return ite->second;
+			}
+		*/
 	}; // end of class map
 
 	// comparison operators

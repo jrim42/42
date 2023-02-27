@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/25 22:08:10 by jrim              #+#    #+#             */
+/*   Updated: 2023/02/25 22:08:11 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SET_HPP
 #define SET_HPP
 
@@ -68,28 +80,28 @@ namespace ft
 			}
 
 			// comp & allocator
-			key_compare		key_comp(void) const 		{ return _comp; }
-			value_compare 	value_comp(void) const 		{ return _comp; }
-			allocator_type 	get_allocator(void) const 	{ return _rbt.get_allocator(); }
+			key_compare				key_comp(void) const 		{ return _comp; }
+			value_compare 			value_comp(void) const 		{ return _comp; }
+			allocator_type 			get_allocator(void) const 	{ return _rbt.get_allocator(); }
 
 			// iterators (const & non-const)
-			iterator				begin(void)			{ return _rbt.begin(); }
-			iterator 				end(void)			{ return _rbt.end(); }
-			const_iterator			begin(void) const	{ return _rbt.begin(); }
-			const_iterator 			end(void) const		{ return _rbt.end(); }
-			reverse_iterator 		rbegin(void)		{ return reverse_iterator(end()); }
-			reverse_iterator 		rend(void)			{ return reverse_iterator(begin()); }
-			const_reverse_iterator 	rbegin(void) const	{ return reverse_iterator(end()); }
-			const_reverse_iterator	rend(void) const	{ return reverse_iterator(begin()); }
+			iterator				begin(void)					{ return _rbt.begin(); }
+			iterator 				end(void)					{ return _rbt.end(); }
+			const_iterator			begin(void) const			{ return _rbt.begin(); }
+			const_iterator 			end(void) const				{ return _rbt.end(); }
+			reverse_iterator 		rbegin(void)				{ return reverse_iterator(end()); }
+			reverse_iterator 		rend(void)					{ return reverse_iterator(begin()); }
+			const_reverse_iterator 	rbegin(void) const			{ return reverse_iterator(end()); }
+			const_reverse_iterator	rend(void) const			{ return reverse_iterator(begin()); }
 
 			// size, max_size, empty
-			size_type	size(void) const 				{ return _rbt.size(); }
-			size_type	max_size(void) const			{ return _rbt.max_size(); }
-			bool		empty(void) const 				{ return _rbt.empty(); }
+			size_type				size(void) const 			{ return _rbt.size(); }
+			size_type				max_size(void) const		{ return _rbt.max_size(); }
+			bool					empty(void) const 			{ return _rbt.empty(); }
 
 			// modifiers: insert, erase, swap, clear
-			ft::pair<iterator, bool>	insert(const value_type& val) 					{ return _rbt.insert(val); }
 			iterator 					insert(iterator pos, const value_type& val) 	{ return _rbt.insert(pos, val); }
+			ft::pair<iterator, bool>	insert(const value_type& val) 					{ return _rbt.insert(val); }
 			template <class iIter>
 			void						insert(iIter first, iIter last) 				{ _rbt.insert(first, last); }
 			void 						erase(iterator pos)								{ _rbt.erase(pos); }

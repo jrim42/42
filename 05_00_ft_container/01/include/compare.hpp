@@ -1,5 +1,17 @@
-#ifndef ALGORITHM_HPP
-# define ALGORITHM_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compare.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrim <jrim@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/25 22:07:41 by jrim              #+#    #+#             */
+/*   Updated: 2023/02/25 22:07:42 by jrim             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef COMPARE_HPP
+# define COMPARE_HPP
 
 # include <cstdint>
 # include <stdexcept>
