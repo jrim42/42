@@ -2,7 +2,7 @@
 # define WARLOCK_HPP
 // #pragma once
 
-#include <iostream>
+# include <iostream>
 
 class Warlock
 {
