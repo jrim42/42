@@ -4,8 +4,7 @@
 
 # include <iostream>
 
-class Warlock
-{
+class Warlock {
     private:
         std::string name;
         std::string title;
