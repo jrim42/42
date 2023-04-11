@@ -32,7 +32,7 @@ class Warlock
 
         void    learnSpell(ASpell *aspell_ptr);
         void    forgetSpell(std::string name);
-        void    launchSpell(std::string name, ATarget const &atarget_ref);
+        void    launchSpell(std::string name, const ATarget &atarget_ref);
 };
 
 #endif
