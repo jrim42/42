@@ -20,8 +20,6 @@ void    Warlock::introduce() const {
                 << this->name << ", " << this->title << "!\n";
 }
 
-void Warlock::introduce() const { std::cout << this->name << ": I am " << this->name << ", " << this->title << "!\n";}
-
 void Warlock::learnSpell(ASpell* spell_ptr) {
 	if (spell_ptr)
 		arr.insert(std::pair<std::string, ASpell *>(spell_ptr->getName(), spell_ptr->clone()));
@@ -29,7 +27,7 @@ void Warlock::learnSpell(ASpell* spell_ptr) {
 
 void Warlock::forgetSpell(std::string spell_name) {
 	std::map<std::string, ASpell *>::iterator it = arr.find(spell_name);
-    
+
 	if (it != arr.end())
 		delete it->second;
 	arr.erase(spell_name);
