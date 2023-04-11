@@ -1,4 +1,5 @@
 #include "ATarget.hpp"
+#include "ASpell.hpp"
 
 // occf
 ATarget::ATarget() {}
