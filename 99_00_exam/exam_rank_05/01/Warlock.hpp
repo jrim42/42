@@ -1,38 +1,38 @@
 #ifndef WARLOCK_HPP
-# define WARLOCK_HPP
+#define WARLOCK_HPP
 // #pragma once
 
-# include <iostream>
-# include "ASpell.hpp"
-# include "ATarget.hpp"
-# include <map>
+#include <iostream>
+#include <map>
 
-class Warlock
-{
-    private:
-        std::string name;
-        std::string title;
+#include "ASpell.hpp"
+#include "ATarget.hpp"
 
-        Warlock();
-        Warlock(const Warlock &other);
+class Warlock {
+ private:
+  std::string name;
+  std::string title;
 
-        Warlock &operator=(const Warlock &other);
+  Warlock();
+  Warlock(const Warlock &other);
 
-        std::map<std::string, ASpell *> arr;
+  Warlock &operator=(const Warlock &other);
 
-    public:
-        Warlock(const std::string &name, const std::string &title);
-        ~Warlock();
+  std::map<std::string, ASpell *> arr;
 
-        const std::string   &getName() const;
-        const std::string   &getTitle() const;
-        void                setTitle(const std::string &title);
-        
-        void    introduce() const;
+ public:
+  Warlock(const std::string &name, const std::string &title);
+  ~Warlock();
 
-        void    learnSpell(ASpell *aspell_ptr);
-        void    forgetSpell(std::string name);
-        void    launchSpell(std::string name, const ATarget &atarget_ref);
+  const std::string &getName() const;
+  const std::string &getTitle() const;
+  void setTitle(const std::string &title);
+
+  void introduce() const;
+
+  void learnSpell(ASpell *aspell_ptr);
+  void forgetSpell(std::string name);
+  void launchSpell(std::string name, const ATarget &atarget_ref);
 };
 
 #endif
