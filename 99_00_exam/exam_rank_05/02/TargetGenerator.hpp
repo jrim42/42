@@ -6,10 +6,10 @@
 
 class TargetGenerator {
  private:
-  std::map<std::string, ATarget *> arr_target;
+  std::map<std::string, ATarget *> target_map;
 
-  TargetGenerator(TargetGenerator const &other);
-  TargetGenerator &operator=(TargetGenerator const &other);
+  TargetGenerator(TargetGenerator const &ref);
+  TargetGenerator &operator=(TargetGenerator const &ref);
 
  public:
   TargetGenerator();

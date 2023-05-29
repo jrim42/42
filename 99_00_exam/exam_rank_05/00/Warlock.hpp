@@ -10,9 +10,8 @@ class Warlock {
   std::string title;
 
   Warlock();
-  Warlock(const Warlock &other);
-
-  Warlock &operator=(const Warlock &other);
+  Warlock(const Warlock &ref);
+  Warlock &operator=(const Warlock &ref);
 
  public:
   Warlock(const std::string &name, const std::string &title);

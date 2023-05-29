@@ -26,4 +26,5 @@ int main() {
   richard.introduce();
   richard.launchSpell("Polymorph", *wall);
   richard.launchSpell("Fireball", *wall);
+  // system("leaks a.out | grep leaked");
 }

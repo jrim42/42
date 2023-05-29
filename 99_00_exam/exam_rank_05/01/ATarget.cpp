@@ -4,15 +4,13 @@
 
 // occf
 ATarget::ATarget() {}
-
 ATarget::ATarget(const std::string &type) { this->type = type; }
-
-ATarget::ATarget(const ATarget &other) { *this = other; }
+ATarget::ATarget(const ATarget &ref) { *this = ref; }
 
 ATarget::~ATarget() {}
 
-ATarget &ATarget::operator=(const ATarget &other) {
-  this->type = other.type;
+ATarget &ATarget::operator=(const ATarget &ref) {
+  this->type = ref.type;
   return (*this);
 }
 

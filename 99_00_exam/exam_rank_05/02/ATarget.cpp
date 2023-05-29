@@ -4,11 +4,11 @@ ATarget::ATarget() {}
 
 ATarget::ATarget(std::string const &type) { this->type = type;}
 
-ATarget::ATarget(ATarget const &other) { *this = other;}
+ATarget::ATarget(ATarget const &ref) { *this = ref;}
 
-ATarget &ATarget::operator=(ATarget const &other)
+ATarget &ATarget::operator=(ATarget const &ref)
 {
-    this->type = other.type;
+    this->type = ref.type;
     return (*this);
 }
 

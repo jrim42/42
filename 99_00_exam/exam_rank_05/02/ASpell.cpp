@@ -7,11 +7,11 @@ ASpell::ASpell(std::string const &name, std::string const &effects) {
   this->effects = effects;
 }
 
-ASpell::ASpell(ASpell const &other) { *this = other; }
+ASpell::ASpell(ASpell const &ref) { *this = ref; }
 
-ASpell &ASpell::operator=(ASpell const &other) {
-  this->name = other.name;
-  this->effects = other.effects;
+ASpell &ASpell::operator=(ASpell const &ref) {
+  this->name = ref.name;
+  this->effects = ref.effects;
   return (*this);
 }
 

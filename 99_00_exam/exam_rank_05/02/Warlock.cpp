@@ -21,12 +21,12 @@ void Warlock::introduce() const { std::cout << this->name << ": I am " << this->
 
 void Warlock::learnSpell(ASpell *aspell_ptr)
 {
-    book.learnSpell(aspell_ptr);
+    this->book.learnSpell(aspell_ptr);
 }
 
 void Warlock::forgetSpell(std::string name)
 {
-    book.forgetSpell(name);
+    this->book.forgetSpell(name);
 }
 
 void Warlock::launchSpell(std::string name, ATarget const &atarget_ref)
@@ -34,7 +34,7 @@ void Warlock::launchSpell(std::string name, ATarget const &atarget_ref)
     ATarget const *test = 0;
     if (test == &atarget_ref)
         return;
-    ASpell *temp = book.createSpell(name);
+    ASpell *temp = this->book.createSpell(name);
     if (temp)
         temp->launch(atarget_ref);
 }

@@ -23,6 +23,7 @@ All these functions can be called on a constant object.
 
 ASpell has a constructor that takes its name and its effects, in that order.
 
+---
 Now you will create an ATarget abstract class, in Coplien's form. It has a type
 attribute, which is a string, and its associated getter, getType, that return a
 reference to constant string.
@@ -43,20 +44,24 @@ It will display :
 <TYPE> is the ATarget's type, and <EFFECTS> is the return of the ASpell's
 getEffects function.
 
+---
 Finally, add to your ASpell class a launch function that takes a reference to
 constant ATarget.
 
 This one will simply call the getHitBySpell of the passed object, passing the
 current instance as parameter.
 
+---
 When all this is done, create an implementation of ASpell called Fwoosh. Its
 default constructor will set the name to "Fwoosh" and the effects to
 "fwooshed". You will, of course, implement the clone() method. In the case of
 Fwoosh, it will return a pointer to a new Fwoosh object.
 
+---
 In the same way, create a concrete ATarget called Dummy, the type of which
 is "Target Practice Dummy". You must also implement its clone() method.
 
+---
 Add to the Warlock the following member functions:
 
 * learnSpell, takes a pointer to ASpell, that makes the Warlock learn a spell

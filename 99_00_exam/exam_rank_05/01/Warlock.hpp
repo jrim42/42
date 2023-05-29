@@ -12,13 +12,14 @@ class Warlock {
  private:
   std::string name;
   std::string title;
+  // new attribute to store the spells
+  std::map<std::string, ASpell *> spell_map;
 
   Warlock();
-  Warlock(const Warlock &other);
+  Warlock(const Warlock &ref);
 
-  Warlock &operator=(const Warlock &other);
+  Warlock &operator=(const Warlock &ref);
 
-  std::map<std::string, ASpell *> arr;
 
  public:
   Warlock(const std::string &name, const std::string &title);

@@ -15,5 +15,7 @@ int main() {
 
   richard.forgetSpell("Fwoosh");
   richard.launchSpell("Fwoosh", bob);
+  // richard.forgetSpell("Fwoosh");
+
   delete fwoosh;
 }

@@ -10,19 +10,18 @@ ASpell::ASpell(const std::string &name, const std::string &effects) {
   this->effects = effects;
 }
 
-ASpell::ASpell(const ASpell &other) { *this = other; }
+ASpell::ASpell(const ASpell &ref) { *this = ref; }
 
 ASpell::~ASpell() {}
 
-ASpell &ASpell::operator=(const ASpell &other) {
-  this->name = other.name;
-  this->effects = other.effects;
+ASpell &ASpell::operator=(const ASpell &ref) {
+  this->name = ref.name;
+  this->effects = ref.effects;
   return (*this);
 }
 
 // getter
 const std::string &ASpell::getName() const { return (this->name); }
-
 const std::string &ASpell::getEffects() const { return (this->effects); }
 
 // utils

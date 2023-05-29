@@ -12,10 +12,10 @@ class ATarget {
  public:
   ATarget();
   ATarget(const std::string &type);
-  ATarget(const ATarget &other);
+  ATarget(const ATarget &ref);
   virtual ~ATarget();
 
-  ATarget &operator=(const ATarget &other);
+  ATarget &operator=(const ATarget &ref);
 
   const std::string &getType() const;
 

@@ -11,8 +11,8 @@ class ATarget {
  public:
   ATarget();
   ATarget(std::string const &type);
-  ATarget(ATarget const &other);
-  ATarget &operator=(ATarget const &other);
+  ATarget(ATarget const &ref);
+  ATarget &operator=(ATarget const &ref);
   virtual ~ATarget();
 
   std::string const &getType() const;

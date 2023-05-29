@@ -6,10 +6,10 @@
 
 class SpellBook {
  private:
-  std::map<std::string, ASpell *> arr_spell;
+  std::map<std::string, ASpell *> spell_map;
 
-  SpellBook(SpellBook const &other);
-  SpellBook &operator=(SpellBook const &other);
+  SpellBook(SpellBook const &ref);
+  SpellBook &operator=(SpellBook const &ref);
 
  public:
   SpellBook();
