@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASPELL_HPP
+#define ASPELL_HPP
 
 #include <iostream>
 
@@ -11,17 +12,17 @@ class ASpell {
 
  public:
   ASpell();
-  ASpell(std::string const &name, std::string const &effects);
-  ASpell(ASpell const &ref);
-  ASpell &operator=(ASpell const &ref);
+  ASpell(const std::string &name, const std::string &effects);
+  ASpell(const ASpell &ref);
+  ASpell &operator=(const ASpell &ref);
   virtual ~ASpell();
 
-  std::string const &getName() const;
-  std::string const &getEffects() const;
+  const std::string &getName() const;
+  const std::string &getEffects() const;
 
-  void launch(ATarget const &atarget_ref) const;
+  void launch(const ATarget &atarget_ref) const;
 
   virtual ASpell *clone() const = 0;
 };
 
-#include "ATarget.hpp"
+#endif

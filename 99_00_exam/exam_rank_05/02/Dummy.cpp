@@ -1,6 +1,8 @@
 #include "Dummy.hpp"
 
-Dummy::Dummy() : ATarget("Target Practice Dummy") {}
+// occf
+Dummy::Dummy(): ATarget("Target Practice Dummy") {}
 Dummy::~Dummy() {}
 
+// utils
 ATarget *Dummy::clone() const { return (new Dummy()); }

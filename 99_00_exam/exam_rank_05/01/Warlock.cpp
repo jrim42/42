@@ -1,5 +1,6 @@
 #include "Warlock.hpp"
 
+// occf
 Warlock::Warlock(const std::string &name, const std::string &title) {
   this->name = name;
   this->title = title;
@@ -8,11 +9,14 @@ Warlock::Warlock(const std::string &name, const std::string &title) {
 
 Warlock::~Warlock() { std::cout << this->name << ": My job here is done!\n"; }
 
+// getter
 const std::string &Warlock::getName() const { return (this->name); }
 const std::string &Warlock::getTitle() const { return (this->title); }
 
+// setter
 void Warlock::setTitle(const std::string &title) { this->title = title; }
 
+// utils
 void Warlock::introduce() const {
   std::cout << this->name << ": I am " << this->name << ", " << this->title
             << "!\n";

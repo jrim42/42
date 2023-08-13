@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ATARGET_HPP
+#define ATARGET_HPP
 
 #include <iostream>
 
@@ -10,16 +11,16 @@ class ATarget {
 
  public:
   ATarget();
-  ATarget(std::string const &type);
-  ATarget(ATarget const &ref);
-  ATarget &operator=(ATarget const &ref);
+  ATarget(const std::string &type);
+  ATarget(const ATarget &ref);
+  ATarget &operator=(const ATarget &ref);
   virtual ~ATarget();
 
-  std::string const &getType() const;
+  const std::string &getType() const;
 
-  void getHitBySpell(ASpell const &aspell_ref) const;
+  void getHitBySpell(const ASpell &aspell_ref) const;
 
   virtual ATarget *clone() const = 0;
 };
 
-#include "ASpell.hpp"
+#endif

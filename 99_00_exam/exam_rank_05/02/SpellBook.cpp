@@ -1,5 +1,6 @@
 #include "SpellBook.hpp"
 
+// occf
 SpellBook::SpellBook() {}
 
 SpellBook::~SpellBook() {
@@ -13,6 +14,7 @@ SpellBook::~SpellBook() {
   this->spell_map.clear();
 }
 
+// utils
 void SpellBook::learnSpell(ASpell *spell_ptr) {
   if (spell_ptr)
     // spell_map.insert(std::pair<std::string, ASpell *>(spell_ptr->getName(), spell_ptr->clone()));

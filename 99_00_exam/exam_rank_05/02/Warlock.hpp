@@ -16,7 +16,6 @@ class Warlock {
   Warlock(Warlock const &ref);
   Warlock &operator=(Warlock const &ref);
 
-
  public:
   Warlock(std::string const &name, std::string const &title);
   ~Warlock();
@@ -29,6 +28,6 @@ class Warlock {
   void introduce() const;
 
   void learnSpell(ASpell *aspell_ptr);
-  void forgetSpell(std::string name);
-  void launchSpell(std::string name, ATarget const &atarget_ref);
+  void forgetSpell(std::string spell_name);
+  void launchSpell(std::string spell_name, ATarget const &atarget_ref);
 };

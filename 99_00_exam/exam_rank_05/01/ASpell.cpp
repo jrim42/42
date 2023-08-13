@@ -1,5 +1,4 @@
 #include "ASpell.hpp"
-
 #include "ATarget.hpp"
 
 // occf
@@ -12,13 +11,13 @@ ASpell::ASpell(const std::string &name, const std::string &effects) {
 
 ASpell::ASpell(const ASpell &ref) { *this = ref; }
 
-ASpell::~ASpell() {}
-
 ASpell &ASpell::operator=(const ASpell &ref) {
   this->name = ref.name;
   this->effects = ref.effects;
   return (*this);
 }
+
+ASpell::~ASpell() {}
 
 // getter
 const std::string &ASpell::getName() const { return (this->name); }

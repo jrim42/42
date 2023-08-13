@@ -2,7 +2,6 @@
 
 // occf
 Fwoosh::Fwoosh() : ASpell("Fwoosh", "fwooshed") {}
-
 Fwoosh::~Fwoosh() {}
 
 // utils

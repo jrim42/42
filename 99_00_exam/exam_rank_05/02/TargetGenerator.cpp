@@ -1,5 +1,6 @@
 #include "TargetGenerator.hpp"
 
+// occf
 TargetGenerator::TargetGenerator() {}
 
 TargetGenerator::~TargetGenerator() {
@@ -13,6 +14,7 @@ TargetGenerator::~TargetGenerator() {
   this->target_map.clear();
 }
 
+// utils
 void TargetGenerator::learnTargetType(ATarget *target_ptr) {
   if (target_ptr)
     // target_map.insert(std::pair<std::string, ATarget *>(target_ptr->getType(), target_ptr->clone()));

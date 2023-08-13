@@ -14,17 +14,16 @@ class ASpell {
   ASpell();
   ASpell(const std::string &name, const std::string &effects);
   ASpell(const ASpell &ref);
-  // abstract class
+  ASpell &operator=(const ASpell &ref);
   virtual ~ASpell();
 
-  ASpell &operator=(const ASpell &ref);
-
+  // getters: don't forget double const
   const std::string &getName() const;
   const std::string &getEffects() const;
 
   void launch(const ATarget &atarget_ref) const;
 
-  // pure method
+  // pure method: 'vitrual' and '= 0'
   virtual ASpell *clone() const = 0;
 };
 
