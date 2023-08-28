@@ -1,8 +1,8 @@
-# Expected File
+## Expected File
 
 mini_serv.c
 
-# Allowed Functions
+## Allowed Functions
 
 <unistd.h>
 
@@ -34,7 +34,7 @@ malloc, realloc, free, calloc, atoi and exit
 - sprintf
 ```
 
-# Subject Text
+## Subject Text
 
 Write a program that will listen for client to connect on a certain port on 127.0.0.1 and will let clients to speak with each other. This program will take as first argument the port to bind to.
 
